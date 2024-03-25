@@ -4,7 +4,7 @@ function Footer() {
         <div className="container">
             <div className="row">
                 <div className="footer-col">
-                    <h4>Company </h4>
+                    <h4>Hotel </h4>
                     <ul>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Privacy/Policy</a></li>
@@ -16,11 +16,11 @@ function Footer() {
                 <div className="footer-col">
                     <h4>Contact us</h4>
                     <ul>
-                        <li><a href="#">hireme@work.com</a></li>
-                        <li><a href="#">+38344123123</a></li>
+                        <li><a href="#">info@hoteli.com</a></li>
+                        <li><a href="#">+44 10 3443 9821</a></li>
                         <li><a href="#">+44 20 3453 4521</a></li>
-                        <li><a href="#">550 W Jackson Blvd Suite #200</a></li>
-                        <li><a href="#">153 Shemsi Mramori, Prishtinë</a></li>
+                        <li><a href="#">Carrer de Sant Josep, 10, 07817 Sant Jordi de ses Salines, Ibiza, Spain</a></li>
+                    
                     </ul>
                 </div>
                 <div className="footer-col">
