@@ -1,9 +1,9 @@
 
-import Header from './Header/Header'
-import Footer from './Footer'
-import ExternalCSS from './externalCSS';
+import Header from './Header/Header.jsx'
+import Footer from './Footer/Footer.jsx'
+import ExternalCSS from './externalCSS'
 import './App.css'
-import './Footer.css'
+import './Footer/Footer.css'
 
 function App() {
 

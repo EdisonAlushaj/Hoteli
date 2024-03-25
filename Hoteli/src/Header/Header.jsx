@@ -14,7 +14,7 @@ function Header() {
             
             <li> 
                 <div className="dropdown">
-                    <p className="dropbtn">Services	▼ </p>
+                    <p className="dropbtn">SERVICES	▼ </p>
                             
                     <div className="dropdown-content">
                         <a href="#">Restaurant</a>

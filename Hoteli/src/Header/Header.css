@@ -36,6 +36,7 @@ Header{
   .dropbtn {
     border: none;
     cursor: pointer;
+    font-size: 1em;
   }
   
   .dropdown {
@@ -69,7 +70,7 @@ Header{
     list-style: none;
     display:inline-block ;
     margin: 0 20px;
-  position:relative;
+    position:relative;
   }
   
   Header ul li a{
