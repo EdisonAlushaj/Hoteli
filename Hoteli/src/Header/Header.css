@@ -29,6 +29,9 @@ Header{
     height: 4em;
     font-size: 1em;
     margin-left: -10em;
+    border: none;
+    background-color: #b07256;
+    color: #fff;
   } 
   .dropbtn {
     border: none;
@@ -80,7 +83,7 @@ Header{
     content: '';
     height: 3px;
     width: 0;
-    background: #009688;
+    background: #b07256;
     position: absolute;
     left:0;
     bottom: -10px;
