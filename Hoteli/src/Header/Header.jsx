@@ -1,4 +1,5 @@
 import './Header.css'
+import AboutUs from './About-us/about-us.jsx'
 
 function Header() {
   return (
@@ -10,7 +11,7 @@ function Header() {
 
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="src/About-us/about-us.jsx">About</a></li>
             
             <li> 
                 <div className="dropdown">

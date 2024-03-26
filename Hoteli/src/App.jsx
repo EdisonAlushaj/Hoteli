@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Header from './Header/Header.jsx';
 import Footer from './Footer/Footer.jsx';
 import ExternalCSS from './externalCSS';
-import Slider from './slider.jsx';
-import ImageSelector from './ImageSelector'; // Importimi i ImageSelector
+import Slider from './Slider/slider.jsx';
+import ImageSelector from './Slider/ImageSelector.jsx'; // Importimi i ImageSelector
 import './App.css';
 import './Footer/Footer.css';
 
