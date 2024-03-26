@@ -14,7 +14,7 @@ const Slider = () => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 6000); // Ndryshoni kohën e ndryshimit të imazheve sipas nevojës
+    }, 6000); 
     return () => clearInterval(interval);
   }, []);
 

@@ -1,4 +1,3 @@
-/* Slider.css */
 .slider {
   width: 100%;
   height: 40em;
@@ -20,25 +19,24 @@
   opacity: 1;
 }
 
-/* Stilizimi për butonat */
+
 .slider-buttons {
   position: absolute;
-  bottom: 20px; /* Vendosni pozicionin vertikal të butonave sipas nevojës */
+  bottom: 20px; 
   left: 50%;
   transform: translateX(-50%);
 }
 
 .slider-buttons button {
-  background-color: #fff; /* Ngjyra e sfondit të butonit */
-  color: #000; /* Ngjyra e tekstit të butonit */
-  border: none; /* Hiqni kufirin e butonit nëse është e nevojshme */
-  padding: 10px 20px; /* Vendosni hapësirën përmbi dhe në të djathtë të tekstit në buton */
-  margin: 0 5px; /* Vendosni margjinin midis butonave sipas nevojës */
-  cursor: pointer; /* Kursori të bëhet pointer kur kalon mbi butonin */
-  transition: background-color 0.3s ease; /* Tranzicioni i ngjyrës së sfondit kur kalon mbi butonin */
+  background-color: #fff; 
+  color: #000; 
+  border: none; 
+  padding: 10px 20px; 
+  margin: 0 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
 }
 
 .slider-buttons button.active {
-  background-color: #ccc; /* Ngjyra e sfondit e butonit kur është aktiv */
+  background-color: #ccc; 
 }
-
