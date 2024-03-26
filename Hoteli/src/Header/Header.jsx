@@ -1,5 +1,5 @@
 import './Header.css'
-import AboutUs from './About-us/about-us.jsx'
+// import AboutUs from './About-us/about-us.jsx'
 
 function Header() {
   return (

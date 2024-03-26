@@ -1,4 +1,3 @@
-// Slider.jsx
 import React, { useState, useEffect } from 'react';
 import './slideshow.css';
 import foto1 from './foto-1.jpg';
@@ -19,6 +18,22 @@ const Slider = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleButtonClick = (newIndex) => {
+    if (newIndex >= 0 && newIndex < images.length) {
+      setCurrentImageIndex(newIndex);
+    }
+  };
+
+  const handlePrevButtonClick = () => {
+    const newIndex = currentImageIndex === 0 ? images.length - 1 : currentImageIndex - 1;
+    setCurrentImageIndex(newIndex);
+  };
+
+  const handleNextButtonClick = () => {
+    const newIndex = currentImageIndex === images.length - 1 ? 0 : currentImageIndex + 1;
+    setCurrentImageIndex(newIndex);
+  };
+
   return (
     <div className="slider">
       {images.map((image, index) => (
@@ -29,6 +44,17 @@ const Slider = () => {
           className={index === currentImageIndex ? 'active' : ''}
         />
       ))}
+      <div className="slider-buttons">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            className={index === currentImageIndex ? 'active' : ''}
+            onClick={() => handleButtonClick(index)}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
