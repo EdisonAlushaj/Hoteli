@@ -8,7 +8,7 @@
     list-style: none;
   }
   
-  .footer{
+  footer{
       background-color: #fff;
       padding: 70px 0;
   }
@@ -17,13 +17,15 @@
       padding: 0 15px;
   }
   .footer-col h4{
-      margin-left: 40px;
       font-size: 18px;
       color: #000000;
       text-transform: capitalize;
       margin-bottom: 35px;
       font-weight: 500;
       position: relative;
+  }
+  #footer-title{
+    margin-left: 1.7em;
   }
   .footer-col h4::before{
       content: '';
@@ -68,7 +70,7 @@
   }
   .footer-col .social-links a:hover{
       color: #24262b;
-      background-color: #000000;
+      background-color: #928c8c;
       
   }
   @media screen and (max-width: 768px) {
