@@ -1,0 +1,18 @@
+/* Menu.css */
+.card {
+    margin-bottom: 30px;
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-text {
+    font-size: 16px;
+  }
+  
+  .text-muted {
+    font-size: 14px;
+  }
+  
