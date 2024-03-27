@@ -6,7 +6,7 @@ function Footer() {
             <div className="container">
                 <div className="row">
                     <div className="footer-col">
-                        <h4>Hotel </h4>
+                        <h4 id='footer-title'>Hotel </h4>
                         <ul>
                             <li><a href="#">About Us</a></li>
                             <li><a href="#">Privacy/Policy</a></li>
@@ -16,7 +16,7 @@ function Footer() {
                         </ul>
                     </div>
                     <div className="footer-col">
-                        <h4>Contact us</h4>
+                        <h4 id='footer-title'>Contact us</h4>
                         <ul>
                             <li><a href="#">info@hoteli.com</a></li>
                             <li><a href="#">+44 10 3443 9821</a></li>
