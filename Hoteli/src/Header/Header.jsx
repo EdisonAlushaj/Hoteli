@@ -1,17 +1,20 @@
 import './Header.css'
-// import AboutUs from './About-us/about-us.jsx'
+import logo from './Logo-removebg-preview.png'
+//import {Link} from "react-router-dom";
 
 function Header() {
   return (
     <header className="App-header">
 
-        <div className="logo">
+        {/* <div className="logo">
 
-        </div>
+        </div> */}
+
+        <img id='logo' src={logo} alt="logo-img" />
 
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="src/About-us/about-us.jsx">About</a></li>
+            <li><a href="#">About</a></li>
             
             <li> 
                 <div className="dropdown">
