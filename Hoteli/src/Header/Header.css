@@ -6,10 +6,10 @@ Header{
     align-items: center;
   }
   
-  .logo{
-    width: 8em;
+  #logo{
+    margin-top: -1em;
     height: 8em;
-    background-color: #9ea79e;
+    /* background-color: #9ea79e; */
   }
   
   Header ul{
