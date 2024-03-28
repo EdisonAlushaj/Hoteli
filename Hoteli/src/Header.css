@@ -1,10 +1,9 @@
 Header{
-    /* display: flex; */
+    display: flex;
     width: 100%;
     height: 8em;
     justify-content: space-around;
     align-items: center;
-    margin-top: 2em;
   }
   
   #logo{
@@ -28,7 +27,6 @@ Header{
     width: 12em;
     height: 4em;
     font-size: 1em;
-    margin-left: -10em;
     border: none;
     background-color: #b07256;
     color: #fff;
@@ -37,6 +35,7 @@ Header{
     border: none;
     cursor: pointer;
     font-size: 1em;
+    margin-bottom: 0;
   }
   
   .dropdown {
