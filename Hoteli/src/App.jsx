@@ -9,7 +9,7 @@ const Home = React.lazy(() => import("./Home"));
 const About = React.lazy(() => import("./About"));
 const Rooms = React.lazy(() => import("./Rooms"));
 const Contact = React.lazy(() => import("./Contact"));
-
+const Menu = React.lazy(() => import("./Menu"));
 class App extends Component {
   render() {
     return (
@@ -28,7 +28,7 @@ class App extends Component {
                       <p className="dropbtn">SERVICES ▼</p>
     
                       <div className="dropdown-content">
-                        <a href="#">Restaurant</a>
+                     <li><NavLink to="/Menu">Restaurant</NavLink></li> 
                         <a href="#">Spa</a>
                         <a href="#">Sauna</a>
                         <a href="#">Gym</a>
@@ -52,6 +52,7 @@ class App extends Component {
                   <Route exact path="/about" element={<About />}></Route>
                   <Route exact path="/Rooms" element={<Rooms />}></Route>
                   <Route exact path="/contact" element={<Contact />}></Route>
+                  <Route exact path="/Menu" element={<Menu />}></Route>
                 </Routes>
               </Suspense>
             </div>
