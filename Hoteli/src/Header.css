@@ -18,7 +18,7 @@ Header{
     display: inline-flex ;
     width: 40em;
     align-items: center;
-    margin-left: 30em;
+    margin-left: 28em;
   }
   Header li{
     margin-left: 3em;
@@ -30,6 +30,7 @@ Header{
     border: none;
     background-color: #b07256;
     color: #fff;
+    margin-left: -3em;
   } 
   .dropbtn {
     border: none;
