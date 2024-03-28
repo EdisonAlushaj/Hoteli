@@ -3,6 +3,7 @@
   height: 40em;
   position: relative;
   overflow: hidden;
+  margin-top: 0em;
 }
 
 .slider img {

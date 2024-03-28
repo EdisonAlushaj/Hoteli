@@ -1,14 +1,12 @@
-import React, { Component } from "react";
-import Slider from './Slider/slider.jsx'
+import React, { useState, useEffect } from 'react';
+import Slider from './Slider/slider.jsx';
 
-class Home extends Component {
-  render() {
-    return (
+function Home (){
+  return (
     <>
-    <Slider/>
+      <Slider />
     </>
-    );
-  }
-}
+  );
+};
 
 export default Home;
