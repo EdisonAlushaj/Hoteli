@@ -7,6 +7,14 @@ class About extends Component {
     return (
       <div>
         <h3>Hello About</h3>
+        <h3>Hello About</h3>
+        <h3>Hello About</h3>
+        <h3>Hello About</h3>
+        <h3>Hello About</h3>
+        <h3>Hello About</h3>
+        <h3>Hello About</h3>
+        <h3>Hello About</h3>
+        <h3>Hello About</h3><h3>Hello About</h3>
         
       </div>
     );
