@@ -22,7 +22,7 @@ class App extends Component {
                 <ul>
                   <li><NavLink to="/">Home</NavLink></li>
                   <li><NavLink to="/about">About</NavLink></li>
-    
+                  <li><NavLink to="/Rooms">Rooms</NavLink></li>
                   <li>
                     <div className="dropdown">
                       <p className="dropbtn">SERVICES ▼</p>
@@ -50,6 +50,7 @@ class App extends Component {
                 <Routes>
                   <Route exact path="/" element={<Home />}></Route>
                   <Route exact path="/about" element={<About />}></Route>
+                  <Route exact path="/Rooms" element={<Rooms />}></Route>
                   <Route exact path="/contact" element={<Contact />}></Route>
                 </Routes>
               </Suspense>
