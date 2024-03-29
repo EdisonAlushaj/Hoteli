@@ -41,11 +41,11 @@ const Contact = () => {
     return (
         <Container className="contact-container">
             <Row className="d-flex justify-content-center mt-5">
-              <h1>Contact Us</h1>
+              <h1 className="text-custom mb-5" style={{ fontSize: '4rem', fontFamily: 'Forum, sans-serif', color: '#b07256' }}>Contact Us</h1>
             <Col md={6}>
                     <div>
-                        <h2 style={{ fontFamily: 'Forum, sans-serif' }}>FAQs and House Rules</h2>
-                        <ul className="list-unstyled">
+                        <h2 style={{ fontFamily: 'Forum, sans-serif' }}><b>FAQs and House Rules</b></h2>
+                        <ul className="list-unstyled" style={{fontFamily: 'Forum, sans-serif', color: '#b07256'}}>
                             <li onClick={() => handleItemClick(1)} className="mb-3">
                                 <strong>What are the check-in and check-out times at the Hotel?</strong>
                                 <Badge bg={expandedItem === 1 ? 'danger' : 'success'} className="ms-2">{expandedItem === 1 ? '-' : '+'}</Badge>
@@ -95,7 +95,7 @@ const Contact = () => {
                     </div>
                 </Col>
               <Col md={6}>
-                    <h2 style={{ fontFamily: 'Forum, sans-serif' }}>Write us a message</h2>
+                    <h2 style={{ fontFamily: 'Forum, sans-serif' }}><b>Write us a message</b></h2>
                     {submitSuccess && <p className="text-success">Thank you! Your message has been submitted successfully.</p>}
                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                         <Form.Group controlId="formName" as={Col} md={6}>
