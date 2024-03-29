@@ -1,7 +1,7 @@
 import React, { Component, Suspense } from "react";
 import { Route, NavLink, Routes, HashRouter } from "react-router-dom";
 import './Header.css';
-import logo from './assets/Logo-removebg-preview.png';
+import logo from './assets/Logo2-transparent.png';
 import Slider from './Slider/slider.jsx'; // Import the Slider component
 import Footer from "./Footer/Footer.jsx";
 
@@ -28,7 +28,7 @@ class App extends Component {
                       <p className="dropbtn">SERVICES ▼</p>
     
                       <div className="dropdown-content">
-                     <li><NavLink to="/Menu">Restaurant</NavLink></li> 
+                     <NavLink to="/Menu">Restaurant</NavLink>
                         <a href="#">Spa</a>
                         <a href="#">Sauna</a>
                         <a href="#">Gym</a>
