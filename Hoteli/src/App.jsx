@@ -28,7 +28,7 @@ class App extends Component {
                       <p className="dropbtn">SERVICES ▼</p>
     
                       <div className="dropdown-content">
-                     <li><NavLink to="/Menu">Restaurant</NavLink></li> 
+                     <NavLink to="/Menu">Restaurant</NavLink>
                         <a href="#">Spa</a>
                         <a href="#">Sauna</a>
                         <a href="#">Gym</a>
