@@ -1,7 +1,7 @@
 import React, { Component, Suspense } from "react";
 import { Route, NavLink, Routes, HashRouter } from "react-router-dom";
 import './Header.css';
-import logo from './assets/Logo-removebg-preview.png';
+import logo from './assets/Logo2-transparent.png';
 import Slider from './Slider/slider.jsx'; // Import the Slider component
 import Footer from "./Footer/Footer.jsx";
 
