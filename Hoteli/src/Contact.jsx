@@ -27,7 +27,6 @@ const Contact = () => {
         if (form.checkValidity() === false) {
             e.stopPropagation();
         } else {
-            // Submit the form (You can implement this part based on your backend logic)
             console.log('Form submitted:', formData);
             setSubmitSuccess(true);
         }
@@ -48,7 +47,7 @@ const Contact = () => {
                         <h2 style={{ fontFamily: 'Forum, sans-serif' }}>FAQs and House Rules</h2>
                         <ul className="list-unstyled">
                             <li onClick={() => handleItemClick(1)} className="mb-3">
-                                <strong>What are the check-in and check-out times at Derand Hotel?</strong>
+                                <strong>What are the check-in and check-out times at the Hotel?</strong>
                                 <Badge bg={expandedItem === 1 ? 'danger' : 'success'} className="ms-2">{expandedItem === 1 ? '-' : '+'}</Badge>
                                 {expandedItem === 1 && (
                                     <p className="mt-2">
@@ -66,20 +65,20 @@ const Contact = () => {
                                 )}
                             </li>
                             <li onClick={() => handleItemClick(3)} className="mb-3">
-                                <strong>Does Derand Hotel have a restaurant?</strong>
+                                <strong>Does the Hotel have a restaurant?</strong>
                                 <Badge bg={expandedItem === 3 ? 'danger' : 'success'} className="ms-2">{expandedItem === 3 ? '-' : '+'}</Badge>
                                 {expandedItem === 3 && (
                                     <p className="mt-2">
-                                        Yes, Derand Hotel has a restaurant serving international cuisine.
+                                        Yes, the Hotel has a restaurant serving international cuisine.
                                     </p>
                                 )}
                             </li>
                             <li onClick={() => handleItemClick(4)} className="mb-3">
-                                <strong>How far is Derand Hotel from the center of Pristina?</strong>
+                                <strong>How far is the Hotel from the center of Ibiza?</strong>
                                 <Badge bg={expandedItem === 4 ? 'danger' : 'success'} className="ms-2">{expandedItem === 4 ? '-' : '+'}</Badge>
                                 {expandedItem === 4 && (
                                     <p className="mt-2">
-                                        Derand Hotel is approximately 2 kilometers from the center of Pristina.
+                                        The Hotel is approximately 2 kilometers from the center of Ibiza.
                                     </p>
                                 )}
                             </li>
@@ -88,7 +87,7 @@ const Contact = () => {
                                 <Badge bg={expandedItem === 5 ? 'danger' : 'success'} className="ms-2">{expandedItem === 5 ? '-' : '+'}</Badge>
                                 {expandedItem === 5 && (
                                     <p className="mt-2">
-                                        Pets are not allowed at Derand Hotel.
+                                        Pets are allowed at the Hotel.
                                     </p>
                                 )}
                             </li>
