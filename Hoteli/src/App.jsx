@@ -1,7 +1,7 @@
 import React, { Component, Suspense } from "react";
 import { Route, NavLink, Routes, HashRouter } from "react-router-dom";
 import './Header.css';
-import logo from './assets/Logo2-transparent.png';
+import logo from './assets/MeGusta-Horizontal-removebg-preview.png';
 import Slider from './Slider/slider.jsx'; // Import the Slider component
 import Footer from "./Footer/Footer.jsx";
 
@@ -18,7 +18,7 @@ class App extends Component {
           <header className="App-header">
             <div className="App">
               <div className="header-content-wrapper">
-                <img id='logo' src={logo} alt="logo-img" />
+                <img id='logo' src={logo} alt="logo-img" style={{height: "7em"}}/>
                 <ul>
                   <li><NavLink to="/">Home</NavLink></li>
                   <li><NavLink to="/about">About</NavLink></li>
