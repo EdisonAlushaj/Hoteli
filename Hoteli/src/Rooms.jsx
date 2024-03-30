@@ -26,7 +26,7 @@ const RoomMain = ({ imageUrls, title, description, capacity, size }) => {
   };
 
   return (
-    <div className="room-main container-fluid w-100 p-0 pb-5 m-0">
+    <div className="room-main container-fluid w-100 p-0 pb-5 m-0 gap-3">
       <div className="slider-main slider-container p-0">
         <Slider
           images={imageUrls}
@@ -36,7 +36,7 @@ const RoomMain = ({ imageUrls, title, description, capacity, size }) => {
         />
       </div>
 
-      <div className="room-text container-fluid border border-black border-opacity-25 d-flex flex-column justify-content-center align-items-start p-5" style={{ width: "35%", marginLeft: "2.5em"}}>
+      <div className="room-text container-fluid border border-black border-opacity-25 d-flex flex-column justify-content-center align-items-start p-5" style={{ width: "35%"}}>
         <p className="fs-1 w-75 text-start">{title}</p>
         <p className="text-sm-start">Capacity: {capacity}</p>
         <p className="text-start">Size: {size}</p>
