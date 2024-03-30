@@ -11,7 +11,7 @@ function Cover() {
                         <img src={fotoHome} className="img-fluid mb-4 mr-100" alt="Image" style={{ maxHeight: '20em', width: 'auto', marginLeft: '-10em',marginTop:'-3.5em' }} />
                     </div>  
                     <div className="col-md-6">
-                        <div className=" custom-bg-color text-center p-4 rounded" style={{backgroundColor: 'rgb(233 233 233)'}}>
+                        <div className=" custom-bg-color text-center p-4 rounded" style={{backgroundColor: '#E4E2D6'}}>
                             <h1 className="mb-4">HOTEL</h1>
                             <p className="mx-5 mb-4">Welcome to the heartbeat of Prishtina</p>
                             <p className="mx-5 mb-4">Perched majestically in the center of the city, our hotel stands as a testament to Ibiza’s rich tapestry of history and its dynamic future. A seamless blend of modern elegance and cherished traditions, our seven-story haven invites guests to experience the best of both worlds.</p>
