@@ -5,7 +5,7 @@ import Foto from './cover.jpg'
 function Cover() {
     return (
         <div className='d-flex justify-content-center align-items-center w-100'>
-            <div className="container-fluid d-flex align-items-center vh-100 bg-light w-100 p-3">
+            <div className="container-fluid d-flex align-items-center vh-100 w-100 p-3">
                 <div className="d-flex justify-content-center align-items-center">
                     <div className="col-md-6 d-flex justify-content-start align-items-center position-absolute">
                         <img src={fotoHome} className="img-fluid mb-4 mr-100" alt="Image" style={{ maxHeight: '20em', width: 'auto', marginLeft: '-10em',marginTop:'-3.5em' }} />
