@@ -52,7 +52,7 @@ function Menu() {
                     Traditional Spanish dish with a variety of fresh seafood and rice.
                   </Card.Text>
                   <Card.Text className="text-muted">$18.99</Card.Text>
-                  <Button variant="primary" onClick={() => addToOrder('Seafood Paella')}>
+                  <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
                     Add to Order
                   </Button>
                 </Card.Body>
