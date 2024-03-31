@@ -1,9 +1,35 @@
 import React, { useState } from "react";
 import Slider from "./SliderRoom";
-import CoverImg from "./assets/room-cover.jpg";
-import foto1 from "./assets/about.jpg";
-import foto2 from "./assets/about.jpg";
-import foto3 from "./assets/about.jpg";
+import CoverImg from "./RoomIMG/room-cover.jpg";
+import foto1 from "./RoomIMG/Room1-1.jpg";
+import foto2 from "./RoomIMG/Room1-2.jpg";
+import foto3 from "./RoomIMG/Room1-3.jpg";
+import foto4 from "./RoomIMG/Room1-4.jpg";
+import foto5 from "./RoomIMG/Room1-5.jpg";
+
+import foto6 from "./RoomIMG/Room2-1.jpg";
+import foto7 from "./RoomIMG/Room2-2.jpg";
+import foto8 from "./RoomIMG/Room2-3.jpg";
+import foto9 from "./RoomIMG/Room2-4.jpg";
+import foto10 from "./RoomIMG/Room2-5.jpg";
+
+import foto11 from "./RoomIMG/Room3-1.jpg";
+import foto12 from "./RoomIMG/Room3-2.jpg";
+import foto13 from "./RoomIMG/Room3-3.jpg";
+import foto14 from "./RoomIMG/Room3-4.jpg";
+import foto15 from "./RoomIMG/Room3-5.jpg";
+
+import foto16 from "./RoomIMG/Room4-1.jpg";
+import foto17 from "./RoomIMG/Room4-2.jpg";
+import foto18 from "./RoomIMG/Room4-3.jpg";
+import foto19 from "./RoomIMG/Room4-4.jpg";
+import foto20 from "./RoomIMG/Room4-5.jpg";
+
+import foto21 from "./RoomIMG/Room5-1.jpg";
+import foto22 from "./RoomIMG/Room5-2.jpg";
+import foto23 from "./RoomIMG/Room5-3.jpg";
+import foto24 from "./RoomIMG/Room5-4.jpg";
+import foto25 from "./RoomIMG/Room5-5.jpg";
 import "./Rooms.css";
 
 const RoomMain = ({ roomId, imageUrls, title, description, capacity, size }) => {
@@ -109,8 +135,11 @@ const LayoutTwo = ({ title, capacity, size, description, imageUrls, currentIndex
 };
 
 const Rooms = () => {
-  const superiorDoubleRoomImages = [foto1, foto2, foto3];
-  const standardDoubleRoomImages = [foto2, foto3, foto1];
+  const superiorDoubleRoomImages = [foto1, foto2, foto3, foto4, foto5];
+  const superiorTwinRoomImages = [foto6, foto7, foto8, foto9, foto10];
+  const deluxeDoubleRoomImages = [foto11, foto12, foto13, foto14, foto15];
+  const premiumDoubleRoomImages = [foto16, foto17, foto18, foto19, foto20];
+  const juniorSuiteImages = [foto21, foto22, foto23, foto24, foto25];
 
   return (
     <>
@@ -125,7 +154,7 @@ const Rooms = () => {
       {/* Replace the existing Room-main divs with the new RoomMain component */}
       <RoomMain
         roomId={1}
-        title="Hello"
+        title="Superior Double Room"
         description="Experience understated luxury inour Superior Double Bed Room. Elegantly designed with a harmonious blend of comfort and style, this space boasts a plush double bed, premium amenities, and a captivating view."
         capacity="1-2 PERSONS"
         size="22M2"
@@ -134,29 +163,38 @@ const Rooms = () => {
 
       <RoomMain
         roomId={2}
-        title="Standard Double Room"
+        title="Superior Twin Room"
         description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
         capacity="1-2 PERSONS"
         size="20M2"
-        imageUrls={standardDoubleRoomImages}
+        imageUrls={superiorTwinRoomImages}
       />
 
       <RoomMain
         roomId={3}
-        title="Standard Double Room"
+        title="Deluxe Double Room"
         description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
         capacity="1-2 PERSONS"
         size="20M2"
-        imageUrls={standardDoubleRoomImages}
+        imageUrls={deluxeDoubleRoomImages}
       />
 
       <RoomMain
         roomId={4}
-        title="Standard Double Room"
+        title="Premium Double Room"
         description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
         capacity="1-2 PERSONS"
         size="20M2"
-        imageUrls={standardDoubleRoomImages}
+        imageUrls={premiumDoubleRoomImages}
+      />
+
+      <RoomMain
+        roomId={5}
+        title="Junior Suite"
+        description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
+        capacity="1-2 PERSONS"
+        size="20M2"
+        imageUrls={juniorSuiteImages}
       />
     </>
   );

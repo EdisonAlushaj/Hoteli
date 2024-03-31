@@ -7,7 +7,7 @@ import Footer from "./Footer/Footer.jsx";
 
 const Home = React.lazy(() => import("./Home"));
 const About = React.lazy(() => import("./About"));
-const Rooms = React.lazy(() => import("./Rooms"));
+const Rooms = React.lazy(() => import("./Rooms/Rooms"));
 const Contact = React.lazy(() => import("./Contact"));
 const Menu = React.lazy(() => import("./Menu"));
 class App extends Component {
