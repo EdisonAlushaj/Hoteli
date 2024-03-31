@@ -111,7 +111,7 @@ function Menu() {
                   >
                     <option value="">Select payment method</option>
                     <option value="card-online">Card - Online</option>
-                    <option value="cash-at-door">Cash - At Door</option>
+                    <option value="cash-at-delivery">Cash - At Delivery</option>
                   </Form.Control>
                 </Form.Group>
               </Form>
