@@ -7,7 +7,8 @@ import Reservation from './Reservation';
 function Menu() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [showReservation, setShowReservation] = useState(false);
-  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryLocation, setDeliveryLocation] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
 
   const addToOrder = (itemName) => {
@@ -22,11 +23,13 @@ function Menu() {
   const submitOrder = () => {
     console.log('Order submitted:', {
       items: selectedItems,
-      deliveryAddress,
+      deliveryLocation,
+      deliveryNumber,
       paymentMethod,
     });
     setSelectedItems([]);
-    setDeliveryAddress('');
+    setDeliveryLocation('');
+    setDeliveryNumber('');
     setPaymentMethod('');
   };
 
@@ -73,15 +76,32 @@ function Menu() {
                 ))}
               </ul>
               <Form>
-                <Form.Group controlId="formDeliveryAddress">
-                  <Form.Label>Delivery Address</Form.Label>
+                <Form.Group controlId="formDeliveryLocation">
+                  <Form.Label>Delivery Location</Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder="Enter delivery address"
-                    value={deliveryAddress}
-                    onChange={(e) => setDeliveryAddress(e.target.value)}
-                  />
+                    as="select"
+                    value={deliveryLocation}
+                    onChange={(e) => setDeliveryLocation(e.target.value)}
+                  >
+                    <option value="">Select delivery location</option>
+                    <option value="Room">Room</option>
+                    <option value="Pool Shezlong">Pool Shezlong</option>
+                   
+                  </Form.Control>
                 </Form.Group>
+                {deliveryLocation && (
+                  <Form.Group controlId="formDeliveryNumber">
+                    <Form.Label>
+                      {deliveryLocation === 'Room' ? 'Room Number' : 'Shezlong Number'}
+                    </Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder={`Enter ${deliveryLocation} number`}
+                      value={deliveryNumber}
+                      onChange={(e) => setDeliveryNumber(e.target.value)}
+                    />
+                  </Form.Group>
+                )}
                 <Form.Group controlId="formPaymentMethod">
                   <Form.Label>Payment Method</Form.Label>
                   <Form.Control
