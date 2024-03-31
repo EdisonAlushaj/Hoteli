@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
     return (
-        <footer className="bg-dark text-light py-5 mt-auto"> {/* Use mt-auto to push footer to the bottom */}
+        <footer className="bg-dark text-light py-5 mt-auto" style={{marginTop:'2em'}}> {/* Use mt-auto to push footer to the bottom */}
             <div className="container">
                 <div className="row">
                     <div className="col-md-4">
