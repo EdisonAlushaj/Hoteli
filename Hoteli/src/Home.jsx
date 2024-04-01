@@ -10,7 +10,7 @@ function Home (){
       <Slider />
       <Cover />
       
-      <Slider3D />
+      <SlideR />
     </>
   );
 };
