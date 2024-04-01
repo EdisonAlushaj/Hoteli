@@ -7,6 +7,19 @@
     margin-bottom: 7em;
 }
 
+.room-text {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #b07256;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.room-text:hover {
+    background-color: #b07256;
+    color: #fff;
+    border-color: #fff;
+}
+
 .slider-main{
     width: 60%;
     margin-left: 0;

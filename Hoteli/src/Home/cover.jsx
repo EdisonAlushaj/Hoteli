@@ -12,12 +12,12 @@ function Cover() {
                     </div>  
                     <div className="col-md-6">
                         <div className=" custom-bg-color text-center p-4 rounded" style={{backgroundColor: '#E4E2D6'}}>
-                            <h1 className="mb-4">HOTEL</h1>
-                            <p className="mx-5 mb-4">Welcome to the heartbeat of Prishtina</p>
-                            <p className="mx-5 mb-4">Perched majestically in the center of the city, our hotel stands as a testament to Ibiza’s rich tapestry of history and its dynamic future. A seamless blend of modern elegance and cherished traditions, our seven-story haven invites guests to experience the best of both worlds.</p>
-                            <p className="mx-5 mb-4">Our commitment is to offer you unparalleled luxury with a touch of Ibiza’s soul. Every member of our dedicated team embodies this promise, ensuring that each moment of your stay is imbued with warmth, comfort, and authenticity.</p>
-                            <p className="mx-5 mb-4">Join us in the heart of Ibiza, and let us take you on a journey where the city’s storied past and vibrant present come alive in every detail.</p>
-                            <p className="mx-5 mb-4">Welcome to Derand Hotel, where tradition, modernity, and luxury converge.</p>
+                            <h1 className="mb-4">HOTEL ME GUSTA</h1>
+                            <p className="mx-5 mb-4">Step into the vibrant pulse of Ibiza</p>
+                            <p className="mx-5 mb-4">Nestled prominently in the heart of the city, our Hotel Me Gusta stands as a symbol of Ibiza’s rich history and its exciting future. Seamlessly blending contemporary sophistication with cherished customs, our seven-story sanctuary invites guests to savor the best of both worlds.</p>
+                            <p className="mx-5 mb-4">We are dedicated to providing you with unmatched opulence infused with the spirit of Ibiza. Each member of our devoted team embodies this commitment, ensuring that every moment of your stay exudes hospitality, coziness, and genuine character.</p>
+                            <p className="mx-5 mb-4">Embark on a journey with us in the heart of Ibiza, where the city’s illustrious past and lively present are alive in every aspect.</p>
+                            <p className="mx-5 mb-4">Welcome to Hotel Me Gusta, where heritage, contemporary flair, and indulgence intersect.</p>
                             <button className="btn w-49 btn-block rounded-0 bg-#b07256 text-white bg-hover-transparent" style={{ backgroundColor: '#b07256', color: 'white'}}>SEE MORE</button>
                         </div>
                     </div>
