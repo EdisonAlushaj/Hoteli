@@ -34,6 +34,8 @@ class App extends Component {
                         <a href="#">Gym</a>
                         <a href="#">Pool</a>
                         <a href="#">Activities</a>
+                        
+                     <NavLink to="/Login">Login</NavLink>
                       </div>
                     </div>
                   </li>
