@@ -15,7 +15,7 @@ html{
     font-size: 62.5%;
     scroll-behavior: smooth;
 }
-@media (min-width:1440px){
+/* @media (min-width:1440px){
     html{
         zoom:1.5;
     }
@@ -29,7 +29,7 @@ html{
     html{
         zoom:2.5;
     }
-}
+} */
 ::-webkit-scrollbar-thumb{
     border-radius: 1rem;
     background: #797979;

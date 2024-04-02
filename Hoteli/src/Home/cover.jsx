@@ -13,7 +13,7 @@ function Cover() {
                     <div className="col-md-6">
                         <div className=" custom-bg-color text-center p-4 rounded" style={{backgroundColor: '#E4E2D6'}}>
                             <h1 className="mb-4">HOTEL ME GUSTA</h1>
-                            <p className="mx-5 mb-4">Step into the vibrant pulse of Ibiza</p>
+                            <p className="mx-5 mb-4">Step  into the vibrant pulse of Ibiza</p>
                             <p className="mx-5 mb-4">Nestled prominently in the heart of the city, our Hotel Me Gusta stands as a symbol of Ibiza’s rich history and its exciting future. Seamlessly blending contemporary sophistication with cherished customs, our seven-story sanctuary invites guests to savor the best of both worlds.</p>
                             <p className="mx-5 mb-4">We are dedicated to providing you with unmatched opulence infused with the spirit of Ibiza. Each member of our devoted team embodies this commitment, ensuring that every moment of your stay exudes hospitality, coziness, and genuine character.</p>
                             <p className="mx-5 mb-4">Embark on a journey with us in the heart of Ibiza, where the city’s illustrious past and lively present are alive in every aspect.</p>
