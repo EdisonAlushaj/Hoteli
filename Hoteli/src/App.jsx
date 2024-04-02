@@ -10,6 +10,7 @@ const About = React.lazy(() => import("./About"));
 const Rooms = React.lazy(() => import("./Rooms/Rooms"));
 const Contact = React.lazy(() => import("./Contact"));
 const Menu = React.lazy(() => import("./Menu"));
+const Login = React.lazy(() => import("./login-register/login"));
 class App extends Component {
   render() {
     return (
@@ -35,7 +36,7 @@ class App extends Component {
                         <a href="#">Pool</a>
                         <a href="#">Activities</a>
                         
-                     <NavLink to="/Login">Login</NavLink>
+                     <NavLink to="/login">Login</NavLink>
                       </div>
                     </div>
                   </li>
@@ -55,6 +56,7 @@ class App extends Component {
                   <Route exact path="/Rooms" element={<Rooms />}></Route>
                   <Route exact path="/contact" element={<Contact />}></Route>
                   <Route exact path="/Menu" element={<Menu />}></Route>
+                  <Route exact path="/login" element={<Login />}></Route>
                 </Routes>
               </Suspense>
             </div>
