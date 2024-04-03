@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './slideshow.css';
 import foto1 from './foto1.jpg';
 import foto2 from './foto2.jpg';
-import foto3 from './foto3.jpeg';
+import foto3 from './foto3.jpg';
 
 const TextOverlay = ({ text, top, left, style }) => {
   return (
@@ -25,35 +25,36 @@ const Slider = () => {
         padding: '10px',
         left: '60%',
         top: '30%',
-   
+        fontSize: '47px',
       },
     },
     {
       src: foto2,
       text: "Enjoy refreshing drinks at Ibiza Drinks Bar.",
       style: {
-        backgroundColor: '#ffcc99',
-        color: '#333',
+      
+        color: '#F5F5F5',
         borderRadius: '5px',
         padding: '10px',
-        left: '60%',
+        left: '50%',
         top: '30%',
-        width: '12em',
-        height: '15em',
+        width: '14em',
+        height: '17em',
+        fontSize: '47px',
       },
     },
     {
       src: foto3,
       text: "Indulge in a selection of coffee and sweet treats.",
       style: {
-        backgroundColor: '#ffcc99',
-        color: '#333',
+        color: '#F5F5F5',
         borderRadius: '5px',
         padding: '10px',
-        left: '45%',
+        left: '50%',
         top: '30%',
-        width: '25em',
+        width: '12em',
         height: '15em',
+        fontSize: '50px',
       },
     },
   ];
