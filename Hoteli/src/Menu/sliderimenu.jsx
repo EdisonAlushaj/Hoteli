@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './slideshow.css';
 import foto1 from './foto1.jpg';
 import foto2 from './foto2.jpg';
@@ -6,20 +6,18 @@ import foto3 from './foto3.jpg';
 
 const TextOverlay = ({ text, top, left, style }) => {
   return (
-    <div className="text-overlay" style={{ top, left, ...style , height:'3.5em'}}>
+    <div className="text-overlay" style={{ top, left, ...style }}>
       <p>{text}</p>
     </div>
   );
 };
 
-
-const Slider = () => {
+const Slider = ({ onMenuChange }) => {
   const imagesWithText = [
     {
       src: foto1,
       text: "Traditional Spanish dish with a variety of fresh seafood and rice.",
       style: {
-      
         color: '#F5F5F5',
         borderRadius: '5px',
         padding: '10px',
@@ -32,7 +30,6 @@ const Slider = () => {
       src: foto2,
       text: "Enjoy refreshing drinks at Ibiza Drinks Bar.",
       style: {
-      
         color: '#F5F5F5',
         borderRadius: '5px',
         padding: '10px',
@@ -61,45 +58,25 @@ const Slider = () => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === imagesWithText.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handlePrevButtonClick = () => {
-    const newIndex = currentImageIndex === 0 ? imagesWithText.length - 1 : currentImageIndex - 1;
-    setCurrentImageIndex(newIndex);
-  };
-
-  const handleNextButtonClick = () => {
-    const newIndex = currentImageIndex === imagesWithText.length - 1 ? 0 : currentImageIndex + 1;
-    setCurrentImageIndex(newIndex);
+  const handleMenuButtonClick = (index) => {
+    setCurrentImageIndex(index);
+    onMenuChange(index);
   };
 
   return (
     <div className="slider">
-      <button className="prev" onClick={handlePrevButtonClick}>
-        {currentImageIndex === 0 ? '' : ''}
-      </button>
       {imagesWithText.map(({ src, text, style }, index) => (
         <div key={index}>
           <img src={src} alt={`Slide ${index + 1}`} className={index === currentImageIndex ? 'active' : ''} />
           {currentImageIndex === index && <TextOverlay text={text} top="80%" left="10%" style={style} />}
         </div>
       ))}
-      <button className="next" onClick={handleNextButtonClick}>
-        {currentImageIndex === 1 ? 'Drinks' : ''}
-      </button>
       <div className="slider-buttons">
         {imagesWithText.map((_, index) => (
           <button
             key={index}
             className={index === currentImageIndex ? 'active' : ''}
-            onClick={() => setCurrentImageIndex(index)}
+            onClick={() => handleMenuButtonClick(index)}
           >
             {index === 2 ? 'Coffee & More' : index === 0 ? 'Food' : 'Drinks'}
           </button>
