@@ -36,8 +36,8 @@ function MenuDrinks() {
         <Container fluid style={{ backgroundColor: '#f6f5dc' }}>
             <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Forum, sans-serif', color: '#b07256' }}>Menu</h1>
             <Row className="mt-5">
-                <Col md={8}>
-                    <Row>
+                <Col >
+                <Row md={4}>
                         <Col>
                             <Card>
                                 <Card.Img variant="top" src="food_item_1.jpg" />
@@ -47,7 +47,7 @@ function MenuDrinks() {
                                         Traditional Spanish dish with a variety of fresh seafood and rice.
                                     </Card.Text>
                                     <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder("Seafood Paella")}>
+                                    <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
                                         Add to Order
                                     </Button>
                                 </Card.Body>

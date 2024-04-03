@@ -7,7 +7,7 @@ import MenuCoffee from '/src/Menu/menucoffe.jsx';
 import MenuDrinks from '/src/Menu/menudrinks.jsx';
 import MenuFood from '/src/Menu/menufood.jsx';
 import Reservation from './Reservation.jsx';
-
+import rezervimimg from './reserviminew.jpg';
 function Menu() {
   const [showReservation, setShowReservation] = useState(false);
   const [activeMenu, setActiveMenu] = useState(<MenuFood />);
@@ -37,10 +37,13 @@ function Menu() {
       <Slider onMenuChange={handleMenuChange} />
       <Container fluid style={{ backgroundColor: '#f6f5dc' }}>
         <Row>{activeMenu}</Row>
+        <img src={rezervimimg} alt=""  style={{width: '100%', height: '', objectFit: ''}}/>
         <Row className="mt-5">
           <Col>
             {/* Reservation Button */}
+              
             <Button variant="info" onClick={toggleReservation}>
+
               Make Reservation
             </Button>
             {showReservation && <Reservation />}
