@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Container, Row, Button} from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Menu.css';
 import Slider from '/src/Menu/sliderimenu.jsx'; 
 import MenuCoffee from '/src/Menu/menucoffe.jsx';
 import MenuDrinks from '/src/Menu/menudrinks.jsx';
 import MenuFood from '/src/Menu/menufood.jsx';
-
 import Reservation from './Reservation.jsx';
 
 function Menu() {
