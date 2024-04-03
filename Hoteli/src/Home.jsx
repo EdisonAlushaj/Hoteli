@@ -11,10 +11,8 @@ function Home() {
     <>
       <Slider />
       <Cover />
-
-      <SlideR />
       <Container style={{}}>
-        <p style={{ fontFamily: 'Roboto Slab, serif', fontSize: '6em', width: '4.3em', color: '#ccc1bd'}} className='mb-5'>Amenities</p>
+        <p style={{ fontFamily: 'Roboto Slab, serif', fontSize: '6em', width: '4.3em'}} id='Titulli' className='mb-5'>Amenities</p>
         <Row className="align-items-start">
           <Col>
             <h2 style={{fontFamily: 'Roboto Slab, serif'}} className='mb-4'>Reception 24/7</h2>
@@ -40,6 +38,7 @@ function Home() {
           </Col>
         </Row>
       </Container>
+      <SlideR />
     </>
   );
 };

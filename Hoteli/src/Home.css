@@ -1,0 +1,7 @@
+#Titulli{
+    color: #ccc1bd;
+}
+::selection {
+    background-color: #ccc1bd; /* Ngjyra e sfondit kur selektohet */
+    color: white; /* Ngjyra e tekstit kur selektohet */
+}
