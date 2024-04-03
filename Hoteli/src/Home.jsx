@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Slider from './Slider/slider.jsx';
 import Cover from './Home/cover.jsx';
-
-import SlideR from './3DSlide.jsx'
+import SlideR from './3DSlide.jsx';
+import './Home.css';
 
 function Home() {
+
   return (
     <>
       <Slider />
       <Cover />
 
       <SlideR />
-      <Container style={{marginLeft:'2em'}}>
-        <h1 style={{ fontFamily: 'Roboto Slab, serif', fontSize: '6em' }} className='mb-5'>Amenities</h1>
+      <Container style={{}}>
+        <p style={{ fontFamily: 'Roboto Slab, serif', fontSize: '6em', width: '4.3em', color: '#ccc1bd'}} className='mb-5'>Amenities</p>
         <Row className="align-items-start">
           <Col>
             <h2 style={{fontFamily: 'Roboto Slab, serif'}} className='mb-4'>Reception 24/7</h2>
