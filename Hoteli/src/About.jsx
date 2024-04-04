@@ -26,7 +26,19 @@ class About extends Component {
             </Col>
           </Row>
         </div>
-      
+        <div className="d-flex justify-content-around align-items-center" style={{marginTop:'5em', marginBottom:'3em'}}>
+          <Row>
+            <Col xs={5} md={6} className="" style={{marginLeft:'-5em'}}>
+              <img src={Foto1} alt="Image" className="w-100" style={{ height: '30em' }} />
+            </Col>
+            <Col xs={12} md={4} style={{  width: '25em', marginLeft: '12em',marginTop:'3em'  }}>
+              <div style={{marginLeft:'2em'}}>
+                <h1>Our Mission</h1>
+                <p>Our hotel, a distinguished accommodation center, aims to provide an excellent experience for every visitor. Located in a splendid setting in the heart of [location], our mission is to offer a warm and welcoming environment, ensuring that every guest feels greeted and cared for. With a continuous commitment to excellent service and attention to detail, we strive to make each visitor's stay memorable. Our dedicated team is here to ensure that every request is addressed with care and to create an exceptional experience for all who choose to stay with us.</p>
+              </div>
+            </Col>
+          </Row>
+        </div>
 
       </>
     );
