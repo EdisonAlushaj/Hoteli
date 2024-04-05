@@ -4,13 +4,16 @@ import Slider from './Slider/slider.jsx';
 import Cover from './Home/cover.jsx';
 import SlideR from './3DSlide.jsx';
 import './Home.css';
+import BookImg from './Rooms/RoomIMG/Room1-1.jpg'
 
 function Home() {
 
   return (
     <>
       <Slider />
+      
       <Cover />
+
       <Container style={{}}>
         <p style={{ fontFamily: 'Roboto Slab, serif', fontSize: '6em', width: '4.3em'}} id='Titulli' className='mb-5'>Amenities</p>
         <Row className="align-items-start">
@@ -38,7 +41,16 @@ function Home() {
           </Col>
         </Row>
       </Container>
+
       <SlideR />
+
+      <div className=' d-flex justify-content-center align-items-center'>
+        <div className='d-flex justify-content-center align-items-center' style={{position: 'absolute', width: '90%'}}>
+          <button className='btn' style={{color: '#fff', backgroundColor: '#b07256', borderRadius: '0', width: '10em', height: '3em', fontSize: '1.2em'}}>BOOK NOW</button>
+        </div>
+
+        <img src={BookImg} alt="Booking img" className='BookingIMG'/>
+      </div>
     </>
   );
 };

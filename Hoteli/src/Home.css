@@ -5,3 +5,9 @@
     background-color: #ccc1bd; /* Ngjyra e sfondit kur selektohet */
     color: white; /* Ngjyra e tekstit kur selektohet */
 }
+
+.BookingIMG{
+    width: 100%;
+    height: 40em;
+    object-fit: cover;
+}
