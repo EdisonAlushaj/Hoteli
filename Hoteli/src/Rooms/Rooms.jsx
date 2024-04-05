@@ -94,7 +94,7 @@ const LayoutOne = ({ title, capacity, size, description, imageUrls, currentIndex
       </div>
 
       <div className="room-text container-fluid border border-black border-opacity-25 d-flex flex-column justify-content-center align-items-start p-5" style={{ width: "35%" }}>
-        <p className="fs-1 w-75 text-start">{title}</p>
+        <p className="w-75 text-start" style={{fontSize: '2.5em'}}>{title}</p>
         <p className="text-sm-start">Capacity: {capacity}</p>
         <p className="text-start">Size: {size}</p>
         <p className="text-xl-start">{description}</p>
@@ -112,7 +112,7 @@ const LayoutTwo = ({ title, capacity, size, description, imageUrls, currentIndex
   return (
     <div className="room-main container-fluid w-100 p-0 pb-5 m-0 gap-3">
       <div className="room-text container-fluid border border-black border-opacity-25 d-flex flex-column justify-content-center align-items-start p-5" style={{ width: "35%" }}>
-        <p className="fs-1 w-75 text-start">{title}</p>
+        <p className="fs-1 w-75 text-start"  style={{fontSize: '2.5em'}}>{title}</p>
         <p className="text-sm-start">Capacity: {capacity}</p>
         <p className="text-start">Size: {size}</p>
         <p className="text-xl-start">{description}</p>
@@ -144,7 +144,7 @@ const Rooms = () => {
   return (
     <>
       <div className="cover d-flex justify-content-center align-items-center">
-        <p className="text-center fs-1 position-absolute" style={{ color: "#fff" }}>
+        <p className="text-center position-absolute" style={{ fontFamily: 'Roboto Slab, serif', fontSize: '5em', color: '#fff'}}>
           Rooms
         </p>
 

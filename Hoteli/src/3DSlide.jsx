@@ -22,7 +22,7 @@ function Slide() {
         <>
 
             <div className="container">
-                <div className="heading">Hotel Gallery</div>
+                <div className="heading"><p style={{ fontFamily: 'Roboto Slab, serif', fontSize: '5em', color: '#ccc1bd'}}>Hotel Gallery</p></div>
                 <Swiper
                     effect={'coverflow'}
                     grabCursor={true}
