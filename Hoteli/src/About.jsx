@@ -15,7 +15,7 @@ const About = () => {
       <div className="h">
         <img src={Foto} className="w-100" style={{ height: '30em', objectFit: "cover" }} alt="Cover Image" />
       </div>
-      <h1 className="h1 text-center animated-heading" id="h1" style={{ color: '#b07256' }}>About Us</h1>
+      <h1 className="h1 text-start animated-heading" data="About Us" id="h1" style={{ color: '#b07256',marginLeft:'2.5em' }}>About Us</h1>
       <div className="d-flex justify-content-around align-items-center" style={{ marginTop: '3em' }}>
         <Row>
           <Col xs={5} md={6} className="" style={{ width: '25em', marginLeft: '10em' }}>
@@ -42,8 +42,9 @@ const About = () => {
           </Col>
         </Row>
       </div>
-      <button className="btn btn-circle"><NavLink to="/Rooms" className="text-decoration-none">Rooms</NavLink></button>
-      <button className="btn btn-circle"><NavLink to="/Menu" className="text-decoration-none">Restaurant</NavLink></button>
+      <NavLink to="/Rooms" className="text-decoration-none"> <button className="btn btn-circle">Rooms</button></NavLink>
+      <NavLink to="/Menu" className="text-decoration-none"><button className="btn btn-circle">Restaurant</button></NavLink>
+
     </>
   );
 }
