@@ -5,7 +5,7 @@ import Foto1 from './image/foto-1.jpg';
 import { Row, Col } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import './About-us/about-us.css';
-import 'animate.css'; // Import animate.css
+
 
 const About = () => {
 

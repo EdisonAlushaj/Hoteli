@@ -43,7 +43,7 @@ function Menu() {
       <Slider onMenuChange={handleMenuChange} />
       <Container fluid style={{ backgroundColor: '#f6f5dc', position: 'relative' }}>
         <Row>{activeMenu}</Row>
-        <img src={rezervimimg} alt="" style={{ width: '100%', height: '50em', objectFit: '' }} />
+        <img src={rezervimimg} alt="" style={{ width: '100%', height: '48em', objectFit: 'cover' }} />
         <Button onClick={toggleReservation} style={{ 
           position: 'relative', 
           bottom: '13em', 
