@@ -70,6 +70,9 @@ function Register() {
                         Create your account
                       </h5>
                       <div className="form-outline mb-4">
+                      <label className="form-label" htmlFor="name">
+                          Name
+                        </label>
                         <input
                           type="text"
                           id="name"
@@ -77,11 +80,11 @@ function Register() {
                           value={name}
                           onChange={handleNameChange}
                         />
-                        <label className="form-label" htmlFor="name">
-                          Name
-                        </label>
                       </div>
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-4">  
+                      <label className="form-label" htmlFor="email">
+                          Email address
+                        </label>
                         <input
                           type="email"
                           id="email"
@@ -89,11 +92,11 @@ function Register() {
                           value={email}
                           onChange={handleEmailChange}
                         />
-                        <label className="form-label" htmlFor="email">
-                          Email address
-                        </label>
                       </div>
                       <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="password">
+                          Password
+                        </label>
                         <input
                           type="password"
                           id="password"
@@ -101,9 +104,6 @@ function Register() {
                           value={password}
                           onChange={handlePasswordChange}
                         />
-                        <label className="form-label" htmlFor="password">
-                          Password
-                        </label>
                       </div>
                       <div className="pt-1 mb-4">
                         <button className="btn btn-dark btn-lg btn-block" type="button" onClick={handleSubmit}>
