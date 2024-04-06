@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import loginfoto from './loginfoto.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
+import { NavLink} from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -44,7 +45,7 @@ function Login() {
                     src={loginfoto}
                     alt="login form"
                     className="img-fluid"
-                    style={{ borderRadius: '1rem 0 0 1rem', maxHeight: '100%', maxWidth: '100%' }} // Adjusted styles
+                    style={{ borderRadius: '1rem 0 0 1rem', maxHeight: '100%', maxWidth: '100%' }} 
                   />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -55,7 +56,7 @@ function Login() {
                         <div className="col-md-6 col-lg-5 d-none d-md-block"><img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }}/></div>
                       </div>
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
-                        Sign into your account
+                        Log into your account
                       </h5>
                       <div className="form-outline mb-4">
                         <input
@@ -91,7 +92,7 @@ function Login() {
                         Forgot password?
                       </a>
                       <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                        Don't have an account? <a href="#!" style={{ color: '#393f81' }}>Register here</a>
+                        Don't have an account? <NavLink to="/register" className="text-decoration-none"> <button style={{ color: '#393f81' }}>Register here</button></NavLink>
                       </p>
                       <a href="#!" className="small text-muted">
                         Terms of use.

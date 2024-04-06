@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import loginfoto from './loginfoto.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
+import { NavLink} from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ function Register() {
   };
 
   return (
-    <section className="vh-100" style={{ backgroundColor: '#9A616D' }}>
+    <section style={{ backgroundColor: '#b07256' }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
@@ -42,7 +43,7 @@ function Register() {
                 <div className="col-md-6 col-lg-5 d-none d-md-block">
                   <img
                     src={loginfoto}
-                    alt="register form"
+                    alt="login form"
                     className="img-fluid"
                     style={{ borderRadius: '1rem 0 0 1rem', maxHeight: '100%', maxWidth: '100%' }} 
                   />
@@ -55,7 +56,7 @@ function Register() {
                         <div className="col-md-6 col-lg-5 d-none d-md-block"><img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }}/></div>
                       </div>
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
-                        Register your account
+                        Sign into your account
                       </h5>
                       <div className="form-outline mb-4">
                         <input
@@ -91,7 +92,7 @@ function Register() {
                         Forgot password?
                       </a>
                       <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                        Already have an account? <a href="#!" style={{ color: '#393f81' }}>Register here</a>
+                        Already have an account? <NavLink to="/login" className="text-decoration-none"> <button style={{ color: '#393f81' }}>Log in</button></NavLink>
                       </p>
                       <a href="#!" className="small text-muted">
                         Terms of use.

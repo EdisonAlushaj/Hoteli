@@ -11,6 +11,7 @@ const Rooms = React.lazy(() => import("./Rooms/Rooms"));
 const Contact = React.lazy(() => import("./Contact"));
 const Menu = React.lazy(() => import("./Menu/Menu"));
 const Login = React.lazy(() => import("./login-register/login"));
+const Register = React.lazy(() => import("./login-register/register"));
 
 const MainLayout = () => {
   return (
@@ -70,6 +71,7 @@ class App extends Component {
             </Route>
             {/* Do not wrap the login route with MainLayout */}
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
           </Routes>
         </HashRouter>
       </div>
