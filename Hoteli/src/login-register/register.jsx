@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import loginfoto from './loginfoto.jpg';
+import fotoRegister from './fotoRegister.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
 import { NavLink} from "react-router-dom";
 
 function Register() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -17,6 +22,11 @@ function Register() {
   };
 
   const handleSubmit = () => {
+    if (!name.trim()) {
+      setErrorMessage('Name is required.');
+      return;
+    }
+
     if (!email.trim()) {
       setErrorMessage('Email is required.');
       return;
@@ -27,6 +37,7 @@ function Register() {
       return;
     }
 
+    console.log('Name:', name);
     console.log('Email:', email);
     console.log('Password:', password);
 
@@ -34,18 +45,18 @@ function Register() {
   };
 
   return (
-    <section style={{ backgroundColor: '#b07256' }}>
-      <div className="container py-5 h-100">
+    <section style={{ backgroundColor: '#b07256'}}>
+      <div className="container py-5 h-100 w-75">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
             <div className="card" style={{ borderRadius: '1rem' }}>
               <div className="row g-0">
                 <div className="col-md-6 col-lg-5 d-none d-md-block">
                   <img
-                    src={loginfoto}
+                    src={fotoRegister}
                     alt="login form"
                     className="img-fluid"
-                    style={{ borderRadius: '1rem 0 0 1rem', maxHeight: '100%', maxWidth: '100%' }} 
+                    style={{ borderRadius: '1rem 0 0 0', maxHeight: '100%', maxWidth: '100%' }} 
                   />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -56,29 +67,41 @@ function Register() {
                         <div className="col-md-6 col-lg-5 d-none d-md-block"><img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }}/></div>
                       </div>
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
-                        Sign into your account
+                        Create your account
                       </h5>
                       <div className="form-outline mb-4">
                         <input
+                          type="text"
+                          id="name"
+                          className="form-control form-control-lg"
+                          value={name}
+                          onChange={handleNameChange}
+                        />
+                        <label className="form-label" htmlFor="name">
+                          Name
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
                           type="email"
-                          id="form2Example17"
+                          id="email"
                           className="form-control form-control-lg"
                           value={email}
                           onChange={handleEmailChange}
                         />
-                        <label className="form-label" htmlFor="form2Example17">
+                        <label className="form-label" htmlFor="email">
                           Email address
                         </label>
                       </div>
                       <div className="form-outline mb-4">
                         <input
                           type="password"
-                          id="form2Example27"
+                          id="password"
                           className="form-control form-control-lg"
                           value={password}
                           onChange={handlePasswordChange}
                         />
-                        <label className="form-label" htmlFor="form2Example27">
+                        <label className="form-label" htmlFor="password">
                           Password
                         </label>
                       </div>
@@ -92,7 +115,7 @@ function Register() {
                         Forgot password?
                       </a>
                       <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                        Already have an account? <NavLink to="/login" className="text-decoration-none"> <button style={{ color: '#393f81' }}>Log in</button></NavLink>
+                        Already have an account? <NavLink to="/login" className="text-decoration-none"><button className="btn btn-dark btn-sm btn-block">Log in here</button></NavLink>
                       </p>
                       <a href="#!" className="small text-muted">
                         Terms of use.

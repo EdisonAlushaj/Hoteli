@@ -45,7 +45,7 @@ function Login() {
                     src={loginfoto}
                     alt="login form"
                     className="img-fluid"
-                    style={{ borderRadius: '1rem 0 0 1rem', maxHeight: '100%', maxWidth: '100%' }} 
+                    style={{ borderRadius: '1rem 0 0 0', maxHeight: '100%', maxWidth: '100%' }} 
                   />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -92,7 +92,7 @@ function Login() {
                         Forgot password?
                       </a>
                       <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                        Don't have an account? <NavLink to="/register" className="text-decoration-none"> <button style={{ color: '#393f81' }}>Register here</button></NavLink>
+                        Don't have an account? <NavLink to="/register"><button className="btn btn-dark btn-sm btn-block">Register here</button></NavLink>
                       </p>
                       <a href="#!" className="small text-muted">
                         Terms of use.
