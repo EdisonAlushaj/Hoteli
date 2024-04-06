@@ -15,14 +15,9 @@ function Reservation() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
-
     if (name === "guests" && parseInt(value) < 1) {
-
       return;
     }
-  
-    // Update vlerën e formës
     setFormData({ ...formData, [name]: value });
   };
 
@@ -33,7 +28,6 @@ function Reservation() {
     } else {
       setError('');
       console.log('Form submitted:', formData);
-   
       setFormData({
         name: '',
         email: '',
@@ -45,10 +39,12 @@ function Reservation() {
     }
   };
 
-  return (
-    <Form onSubmit={handleSubmit}>
-      {error && <Alert variant="danger">{error}</Alert>}
+  return (<div className='d-flex justify-content-center align-items-center flex-column'>
+    <Form  style={{width:'35em',border:'1px solid black', borderRadius:'20px',padding:'20px', background:'#E4E2D6', fontFamily: 'Roboto Slab, serif', marginBottom:"3em"}} onSubmit={handleSubmit}>
+      {error && <Alert variant="danger" style={{ marginBottom: '15px' }}>{error}</Alert>}
+      <h1 className='text-center' style={{color:'#999f81'}}>Fill your table reservation</h1>
       <Form.Group controlId="formName">
+        
         <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
@@ -56,6 +52,7 @@ function Reservation() {
           name="name"
           value={formData.name}
           onChange={handleInputChange}
+          style={{ marginBottom: '15px' }}
         />
       </Form.Group>
 
@@ -67,6 +64,7 @@ function Reservation() {
           name="email"
           value={formData.email}
           onChange={handleInputChange}
+          style={{ marginBottom: '15px' }}
         />
       </Form.Group>
 
@@ -79,6 +77,7 @@ function Reservation() {
               name="date"
               value={formData.date}
               onChange={handleInputChange}
+              style={{ width:'10em', marginBottom: '15px' }}
             />
           </Form.Group>
         </Col>
@@ -90,6 +89,7 @@ function Reservation() {
               name="time"
               value={formData.time}
               onChange={handleInputChange}
+              style={{ marginBottom: '15px' }}
             />
           </Form.Group>
         </Col>
@@ -102,6 +102,7 @@ function Reservation() {
           name="guests"
           value={formData.guests}
           onChange={handleInputChange}
+          style={{ marginBottom: '15px' }}
         />
       </Form.Group>
 
@@ -114,13 +115,17 @@ function Reservation() {
           name="specialRequests"
           value={formData.specialRequests}
           onChange={handleInputChange}
+          style={{ marginBottom: '15px' }}
         />
       </Form.Group>
-
-      <Button variant="primary" type="submit">
+      <div className='d-flex justify-content-center align-items-center flex-column'>
+      <Button  type="submit" style={{background:'#999f81', border:'none',width:'12em'}}>
+     
         Submit
       </Button>
+      </div>
     </Form>
+    </div>
   );
 }
 
