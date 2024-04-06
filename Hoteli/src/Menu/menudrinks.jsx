@@ -33,8 +33,8 @@ function MenuDrinks() {
     };
 
     return (
-        <Container fluid style={{ backgroundColor: '#f6f5dc' }}>
-            <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Forum, sans-serif', color: '#b07256' }}>Menu</h1>
+        <Container fluid style={{ backgroundColor: '#d9bfbf' }}>
+            <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#603939' }}>Menu</h1>
             <Row className="mt-5">
                 <Col >
                 <Row md={4}>
@@ -47,7 +47,7 @@ function MenuDrinks() {
                                         Traditional Spanish dish with a variety of fresh seafood and rice.
                                     </Card.Text>
                                     <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
+                                    <Button variant="primary" onClick={() => addToOrder(`${document.querySelector('.card-title').innerText} - ${document.querySelector('.text-muted').innerText}`)}>
                                         Add to Order
                                     </Button>
                                 </Card.Body>
@@ -69,8 +69,8 @@ function MenuDrinks() {
                                         </Button>
                                     </li>
                                 ))}
-                            </ul>
-                            <Form>
+                            </ul><hr /><div className='d-flex  align-items-center flex-column'>
+                            <Form style={{borderTop:'1px solid marron', borderRadius:'20px',padding:'20px', fontFamily: 'Roboto Slab, serif',width:'22em'}}>
                                 <Form.Group controlId="formDeliveryLocation">
                                     <Form.Label>Delivery Location</Form.Label>
                                     <Form.Control
@@ -112,6 +112,7 @@ function MenuDrinks() {
                             <Button variant="success" onClick={submitOrder}>
                                 Submit Order
                             </Button>
+                        </div>
                         </div>
                     </Col>
                 )}
