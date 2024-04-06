@@ -59,6 +59,9 @@ function Login() {
                         Log into your account
                       </h5>
                       <div className="form-outline mb-4">
+                      <label className="form-label" htmlFor="form2Example17">
+                          Email address
+                        </label>
                         <input
                           type="email"
                           id="form2Example17"
@@ -66,11 +69,11 @@ function Login() {
                           value={email}
                           onChange={handleEmailChange}
                         />
-                        <label className="form-label" htmlFor="form2Example17">
-                          Email address
-                        </label>
                       </div>
                       <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="form2Example27">
+                          Password
+                        </label>
                         <input
                           type="password"
                           id="form2Example27"
@@ -78,9 +81,6 @@ function Login() {
                           value={password}
                           onChange={handlePasswordChange}
                         />
-                        <label className="form-label" htmlFor="form2Example27">
-                          Password
-                        </label>
                       </div>
                       <div className="pt-1 mb-4">
                         <button className="btn btn-dark btn-lg btn-block" type="button" onClick={handleSubmit}>
