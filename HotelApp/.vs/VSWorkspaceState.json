@@ -5,6 +5,6 @@
     "\\hotelapp.client\\src",
     "\\HotelApp.Server"
   ],
-  "SelectedNode": "\\HotelApp.Server\\Program.cs",
+  "SelectedNode": "\\HotelApp.Server\\appsettings.Development.json",
   "PreviewInSolutionExplorer": false
 }
