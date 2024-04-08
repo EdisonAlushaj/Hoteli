@@ -33,10 +33,10 @@ function MenuDrinks() {
     };
 
     return (
-        <Container fluid style={{ backgroundColor: '#d9bfbf' }}>
-            <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#603939' }}>Menu</h1>
+        <Container fluid style={{ backgroundColor: '#d1d1e0' }}>
+            <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b' }}>Menu</h1>
             <Row className="mt-5">
-                <Col >
+                <Col>
                 <Row md={4}>
                         <Col>
                             <Card>
@@ -69,7 +69,9 @@ function MenuDrinks() {
                                         </Button>
                                     </li>
                                 ))}
-                            </ul><hr /><div className='d-flex  align-items-center flex-column'>
+                            </ul>
+                            <hr />
+                            <div className='d-flex  align-items-center flex-column'>
                             <Form style={{borderTop:'1px solid marron', borderRadius:'20px',padding:'20px', fontFamily: 'Roboto Slab, serif',width:'22em'}}>
                                 <Form.Group controlId="formDeliveryLocation">
                                     <Form.Label>Delivery Location</Form.Label>
