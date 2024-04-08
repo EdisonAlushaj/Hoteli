@@ -1,2 +1,0 @@
-C:\Users\ediso\OneDrive\Desktop\HotelApp\hotelapp.client\obj\Debug\hotelapp.client.esproj.CoreCompileInputs.cache
-C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelApp\hotelapp.client\obj\Debug\hotelapp.client.esproj.CoreCompileInputs.cache
