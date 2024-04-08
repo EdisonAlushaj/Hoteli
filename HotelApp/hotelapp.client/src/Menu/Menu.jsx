@@ -43,7 +43,10 @@ function Menu() {
       <Slider onMenuChange={handleMenuChange} />
       <Container fluid style={{position: 'relative' }}>
         <Row>{activeMenu}</Row>
+        </Container>
+        <div className=''>
         <img src={rezervimimg} alt="" style={{ width:'100%', height: '48em',  margin:'0' }} />
+       
         <Button onClick={toggleReservation} style={{ 
           position: 'relative', 
           bottom: '13em', 
@@ -63,7 +66,7 @@ function Menu() {
         <div ref={reservationWrapperRef}> 
           {showReservation && <Reservation />}
         </div>
-      </Container>
+        </div>
     </>
   );
 }
