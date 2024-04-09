@@ -1,2 +1,2 @@
-const baseURL = 'https://localhost:44389';
-export const urlWeather = `${baseURL}/WeatherForecast`;
+const baseURL = 'https://localhost:44316';
+export const api = `${baseURL}/`;

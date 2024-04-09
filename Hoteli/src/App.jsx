@@ -1,11 +1,11 @@
-import React, { Component, Suspense, useEffect } from "react";
+import React, { Component, Suspense, useEffect, useState } from "react";
 import { Route, NavLink, Routes, HashRouter, Outlet} from "react-router-dom";
 import './Header.css';
 import axios from 'axios';
 import logo from './assets/MeGusta-Horizontal-removebg-preview.png';
 import Slider from './Slider/slider.jsx'; // Import the Slider component
 import Footer from "./Footer/Footer.jsx";
-import { urlWeather } from "../endpoints.js";
+import { api } from "../endpoints.js";
 
 const Home = React.lazy(() => import("./Home"));
 const About = React.lazy(() => import("./About"));
@@ -16,14 +16,12 @@ const Login = React.lazy(() => import("./login-register/login"));
 const Register = React.lazy(() => import("./login-register/register"));
 
 const MainLayout = () => {
+  const [data, setData] = useState(null);
+
   useEffect(() => {
-    axios.get(urlWeather)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+      axios.get(api)
+          .then(response => setData(response.data))
+          .catch(error => console.error('Error fetching data:', error));
   }, []);
   return (
     <div>
