@@ -16,12 +16,14 @@ const Login = React.lazy(() => import("./login-register/login"));
 const Register = React.lazy(() => import("./login-register/register"));
 
 const MainLayout = () => {
-  const [data, setData] = useState(null);
-
   useEffect(() => {
-      axios.get(api)
-          .then(response => setData(response.data))
-          .catch(error => console.error('Error fetching data:', error));
+    axios.get(api)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   }, []);
   return (
     <div>
