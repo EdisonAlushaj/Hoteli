@@ -1,0 +1,23 @@
+@HotelBackend_HostAddress = https://localhost:7189
+
+GET {{HotelBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{HotelBackend_HostAddress}}/weatherforecast
+
+###
+
+GET {{HotelBackend_HostAddress}}/api/superhero
+
+###
+
+POST {{HotelBackend_HostAddress}}/api/superhero
+Content-Type: application/json
+
+{
+  //SuperHero
+}
+
+###
