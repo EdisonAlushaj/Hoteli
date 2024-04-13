@@ -34,6 +34,8 @@ const Dashboard = () => {
                             </td>
                             <td>100</td>
                             <td>/</td>
+                            <td><button className="btn btn-rounded btn-primary">Edit</button></td>
+                            <td><button className="btn btn-rounded btn-danger">Delete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
@@ -47,6 +49,8 @@ const Dashboard = () => {
                             </td>
                             <td>120</td>
                             <td>/</td>
+                            <td><button className="btn btn-rounded btn-primary">Edit</button></td>
+                            <td><button className="btn btn-rounded btn-danger">Delete</button></td>
                         </tr>
                         <tr>
                             <th scope="row">3</th>
@@ -59,6 +63,8 @@ const Dashboard = () => {
                             </td>
                             <td>110</td>
                             <td>/</td>
+                            <td><button className="btn btn-rounded btn-primary">Edit</button></td>
+                            <td><button className="btn btn-rounded btn-danger">Delete</button></td>
                         </tr>
                      </tbody>
                 </table>
@@ -82,9 +88,14 @@ const Dashboard = () => {
                         <tr>
                             <th scope="row">1</th>
                             <td>Seafood Paella</td>
-                            <td>Traditional Spanish dish with a variety of fresh seafood and rice.</td>
+                            <td style={{width: '65%'}}>Traditional Spanish dish with a variety of fresh seafood and rice, 
+                                paella is known for its aromatic flavors and vibrant colors, making it 
+                                a beloved culinary delight enjoyed by locals and visitors alike.
+                            </td>
                             <td>18.99$</td>
                             <td>/</td>
+                            <td><button className="btn btn-rounded btn-primary">Edit</button></td>
+                            <td><button className="btn btn-rounded btn-danger">Delete</button></td>
                         </tr>
                      </tbody>
                 </table>
@@ -112,6 +123,8 @@ const Dashboard = () => {
                                 and frothed milk, topped with a dusting of cocoa or cinnamon</td>
                             <td>5$</td>
                             <td>/</td>
+                            <td><button className="btn btn-rounded btn-primary">Edit</button></td>
+                            <td><button className="btn btn-rounded btn-danger">Delete</button></td>
                         </tr>
                      </tbody>
                 </table>
