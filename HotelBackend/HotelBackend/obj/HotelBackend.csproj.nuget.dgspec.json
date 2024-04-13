@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj": {}
+    "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj": {
+    "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
+        "projectUniqueName": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
         "projectName": "HotelBackend",
-        "projectPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
-        "packagesPath": "C:\\Users\\Elez Kadrijaj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\obj\\",
+        "projectPath": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
+        "packagesPath": "C:\\Users\\ediso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Elez Kadrijaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ediso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

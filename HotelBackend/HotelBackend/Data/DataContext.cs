@@ -9,7 +9,6 @@ namespace HotelBackend.Data
         {
 
         }
-        }
 
         public DbSet<SuperHero> SuperHeroes { get; set; }
     }
