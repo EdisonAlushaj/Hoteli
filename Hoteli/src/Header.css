@@ -15,9 +15,9 @@ Header{
     display: flex;
     list-style: none;
     display: inline-flex ;
-    width: 40em;
+    width: 45em;
     align-items: center;
-    margin-left: 18em;
+    margin-left: 10em;
   }
   Header li{
     margin-left: 3em;

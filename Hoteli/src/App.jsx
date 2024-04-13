@@ -1,4 +1,4 @@
-import React, { Component, Suspense, useEffect, useState } from "react";
+import React, { Component, Suspense, useEffect } from "react";
 import { Route, NavLink, Routes, HashRouter, Outlet} from "react-router-dom";
 import './Header.css';
 import axios from 'axios';
@@ -14,6 +14,7 @@ const Contact = React.lazy(() => import("./Contact"));
 const Menu = React.lazy(() => import("./Menu/Menu"));
 const Login = React.lazy(() => import("./login-register/login"));
 const Register = React.lazy(() => import("./login-register/register"));
+const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
 
 const MainLayout = () => {
   useEffect(() => {
@@ -53,6 +54,7 @@ const MainLayout = () => {
                 </div>
               </li>
               <li><NavLink to="/contact">Contact</NavLink></li>
+              <li><NavLink to="/dashboard">Dashboard</NavLink></li>
             </ul>
             <button id="booking-btn">BOOK NOW</button>
           </div>
@@ -79,6 +81,7 @@ class App extends Component {
               <Route exact path="/Rooms" element={<Rooms />}></Route>
               <Route exact path="/contact" element={<Contact />}></Route>
               <Route exact path="/Menu" element={<Menu />}></Route>
+              <Route exact path="/dashboard" element={<Dashboard />}></Route>
             </Route>
             {/* Do not wrap the login route with MainLayout */}
             <Route path="/login" element={<Login />}></Route>
