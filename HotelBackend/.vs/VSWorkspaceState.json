@@ -4,7 +4,8 @@
     "\\HotelBackend",
     "\\HotelBackend\\bin",
     "\\HotelBackend\\Controllers",
-    "\\HotelBackend\\Data"
+    "\\HotelBackend\\Data",
+    "\\HotelBackend\\Entities"
   ],
   "SelectedNode": "\\HotelBackend.sln",
   "PreviewInSolutionExplorer": false
