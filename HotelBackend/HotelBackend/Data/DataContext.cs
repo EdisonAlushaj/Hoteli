@@ -11,5 +11,6 @@ namespace HotelBackend.Data
         }
 
         public DbSet<SuperHero> SuperHeroes { get; set; }
+        public DbSet<Room> Rooms { get; set; }
     }
 }

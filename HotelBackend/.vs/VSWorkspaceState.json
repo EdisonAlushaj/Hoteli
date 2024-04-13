@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\HotelBackend",
     "\\HotelBackend\\bin",
-    "\\HotelBackend\\Controllers"
+    "\\HotelBackend\\Controllers",
+    "\\HotelBackend\\Data"
   ],
   "SelectedNode": "\\HotelBackend.sln",
   "PreviewInSolutionExplorer": false
