@@ -55,10 +55,10 @@ const Dashboard = () =>{
                 </div>
                 <ul className="sidebar-nav">
                     <li className="sidebar-item">
-                        <a href="javascript:void(0)" className="sidebar-link">
+                        <NavLink to="#" className="sidebar-link">
                             <i className="lni lni-user"></i>
                             <span>Staff</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="sidebar-item">
                     <NavLink to="#" className="sidebar-link"  onClick={toggleRoomsTable}>
@@ -67,17 +67,16 @@ const Dashboard = () =>{
                         </NavLink>
                     </li>
                     <li className="sidebar-item">
-                    <NavLink
-                                to="#"
-                                className="sidebar-link collapsed has-dropdown"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#auth"
-                                aria-expanded="false"
-                                aria-controls="auth"
-                            >
-                                <i className="lni lni-protection"></i>
-                                <span>Menu</span>
-                            </NavLink>
+                        <NavLink
+                            to="#"
+                            className="sidebar-link collapsed has-dropdown"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#auth"
+                            aria-expanded="false"
+                            aria-controls="auth">
+                            <i className="lni lni-protection"></i>
+                            <span>Menu</span>
+                        </NavLink>
                         <ul id="auth" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li className="sidebar-item">
                             <NavLink to="#" className="sidebar-link" onClick={toggleFoodMenuTable}>Foods</NavLink>
@@ -91,29 +90,29 @@ const Dashboard = () =>{
                         </ul>
                     </li>
                     <li className="sidebar-item">
-                        <a href="javascript:void(0)" className="sidebar-link">
+                        <NavLink to="#" className="sidebar-link">
                             <i className="lni lni-agenda"></i>
                             <span>About</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="sidebar-item">
-                        <a href="javascript:void(0)" className="sidebar-link">
+                        <NavLink to="#" className="sidebar-link">
                             <i className="lni lni-popup"></i>
                             <span>Slider</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="sidebar-item">
-                        <a href="javascript:void(0)" className="sidebar-link">
+                        <NavLink to="#" className="sidebar-link">
                             <i className="lni lni-cog"></i>
                             <span>ContactUs</span>
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
                 <div className="sidebar-footer">
-                    <a href="javascript:void(0)" className="sidebar-link">
+                    <NavLink to="#" className="sidebar-link">
                         <i className="lni lni-exit"></i>
                         <span>Logout</span>
-                    </a>
+                    </NavLink>
                 </div>
             </aside>
             <div className="main">
