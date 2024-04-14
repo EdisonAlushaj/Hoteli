@@ -7,6 +7,7 @@ const Dashboard = () => {
     const [showFoodMenuTable, setShowFoodMenuTable] = useState(false);
     const [showRoomsTable, setShowRoomsTable] = useState(false);
     const [showCafeMenuTable, setShowCafeMenuTable] = useState(false);
+    const [showDrinksMenuTable, setShowDrinksMenuTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -22,6 +23,10 @@ const Dashboard = () => {
 
     const toggleCafeMenuTable = () => {
         setShowCafeMenuTable(!showCafeMenuTable);
+    };
+
+    const toggleDrinksMenuTable = () => {
+        setShowDrinksMenuTable(!showDrinksMenuTable);
     };
 
     useEffect(() => {
@@ -85,7 +90,7 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={toggleCafeMenuTable}>Cafe&Sweets</NavLink>
                                 </li>
                                 <li className="sidebar-item">
-                                    <NavLink to="#" className="sidebar-link">Drinks</NavLink>
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleDrinksMenuTable}>Drinks</NavLink>
                                 </li>
                             </ul>
                         </li>
@@ -243,7 +248,7 @@ const Dashboard = () => {
                                                 <thead>
                                                     <tr className="highlight" style={{ color: '#fff', textAlign: 'left' }}>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Id</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Food Name</th>
+                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Name</th>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Description</th>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Price</th>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Image</th>
@@ -256,6 +261,45 @@ const Dashboard = () => {
                                                         <td>A rich and creamy coffee beverage made with equal parts espresso, steamed milk,
                                                             and frothed milk, topped with a dusting of cocoa or cinnamon</td>
                                                         <td>5$</td>
+                                                        <td>/</td>
+                                                        <td><button className="btn btn-rounded btn-primary">Edit</button></td>
+                                                        <td><button className="btn btn-rounded btn-danger">Delete</button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showDrinksMenuTable && (
+                                <div className="mb-3">
+                                    <div className='d-flex flex-row align-items-center'>
+                                        <h3 className="fw-bold fs-4 my-3">Drinks Menu</h3>
+                                        <button className="btn btn-rounded btn-success ms-3">Add</button>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <table className="table table-striped">
+                                                <thead>
+                                                    <tr className="highlight" style={{ color: '#fff', textAlign: 'left' }}>
+                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Id</th>
+                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Drink Name</th>
+                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Description</th>
+                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Price</th>
+                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Image</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Sunset Spritz</td>
+                                                        <td>The reminiscent of the vibrant sunsets for which Ibiza is famous, 
+                                                            with the Aperol providing a hint of bitterness, the Prosecco adding effervescence, 
+                                                            and the Elderflower liqueur lending a floral sweetness.
+                                                            </td>
+                                                        <td>20$</td>
                                                         <td>/</td>
                                                         <td><button className="btn btn-rounded btn-primary">Edit</button></td>
                                                         <td><button className="btn btn-rounded btn-danger">Delete</button></td>
