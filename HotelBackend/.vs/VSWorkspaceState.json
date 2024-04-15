@@ -7,6 +7,6 @@
     "\\HotelBackend\\Data",
     "\\HotelBackend\\Entities"
   ],
-  "SelectedNode": "\\HotelBackend\\Data\\DataContext.cs",
+  "SelectedNode": "\\HotelBackend\\Controllers\\MenuCafeController.cs",
   "PreviewInSolutionExplorer": false
 }
