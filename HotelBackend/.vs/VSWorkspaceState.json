@@ -7,6 +7,6 @@
     "\\HotelBackend\\Data",
     "\\HotelBackend\\Entities"
   ],
-  "SelectedNode": "\\HotelBackend\\Controllers",
+  "SelectedNode": "\\HotelBackend\\Data\\DataContext.cs",
   "PreviewInSolutionExplorer": false
 }
