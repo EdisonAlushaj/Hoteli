@@ -3,10 +3,11 @@
     "",
     "\\HotelBackend",
     "\\HotelBackend\\bin",
+    "\\HotelBackend\\bin\\Debug",
     "\\HotelBackend\\Controllers",
     "\\HotelBackend\\Data",
     "\\HotelBackend\\Entities"
   ],
-  "SelectedNode": "\\HotelBackend\\Controllers\\MenuCafeController.cs",
+  "SelectedNode": "\\HotelBackend.sln",
   "PreviewInSolutionExplorer": false
 }
