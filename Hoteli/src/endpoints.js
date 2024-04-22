@@ -4,3 +4,5 @@ export const api = `${baseURL}/`;
 
 //Room endpoint
 export const RoomEndPoint = `https://localhost:7189/api/Room`;
+
+export const UsersEndPoint = `https://localhost:7189/api/Users`;

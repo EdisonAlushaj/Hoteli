@@ -2,18 +2,9 @@ import React, { useState } from 'react';
 import fotoRegister from './fotoRegister.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
 import { NavLink } from "react-router-dom";
-<<<<<<< Updated upstream
-
-function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(''); 
-=======
 import axios from 'axios';
 
 function Register() {
->>>>>>> Stashed changes
   const [errorMessage, setErrorMessage] = useState('');
 
   const [FullName, setFullName] = useState('');
@@ -29,20 +20,14 @@ function Register() {
     setEmail(event.target.value);
   };
 
+  const handleContactNumberChange = (event) => {
+    setContactNumber(event.target.value);
+  };
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-<<<<<<< Updated upstream
-  const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    if (!name.trim()) {
-      setErrorMessage('Name is required.');
-      return;
-=======
   const handleRegister = () => {
     const url = 'https://localhost:7189/api/Users'; // Updated URL to match your API
     const data = {
@@ -50,7 +35,6 @@ function Register() {
       "Email": Email,
       "ContactNumber": ContactNumber,
       "Password": Password,
->>>>>>> Stashed changes
     }
 
     axios.post(url, data)
@@ -65,32 +49,12 @@ function Register() {
       });
   }
 
-<<<<<<< Updated upstream
-    if (!password.trim()) {
-      setErrorMessage('Password is required.');
-      return;
-    }
-
-    if (!phoneNumber.trim()) {
-      setErrorMessage('Phone number is required.');
-      return;
-    }
-
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Phone Number:', phoneNumber);
-
-    setErrorMessage('');
-  };
-=======
   const clear = () => {
     setFullName('');
     setEmail('');
     setContactNumber('');
     setPassword('');
   }
->>>>>>> Stashed changes
 
   return (
     <section style={{ backgroundColor: '#b07256'}}>
@@ -119,15 +83,9 @@ function Register() {
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
                         Create your account
                       </h5>
-<<<<<<< Updated upstream
-                      <div className="form-outline mb-3">
-                        <label className="form-label" htmlFor="name">
-                          Full Name
-=======
                       <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="name">
                           Name
->>>>>>> Stashed changes
                         </label>
                         <input
                           type="text"
@@ -137,11 +95,7 @@ function Register() {
                           onChange={handleFullNameChange}
                         />
                       </div>
-<<<<<<< Updated upstream
-                      <div className="form-outline mb-3">  
-=======
                       <div className="form-outline mb-4">  
->>>>>>> Stashed changes
                         <label className="form-label" htmlFor="email">
                           Email address
                         </label>
@@ -153,7 +107,19 @@ function Register() {
                           onChange={handleEmailChange}
                         />
                       </div>
-                      <div className="form-outline mb-3">
+                      <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="contactNumber">
+                          Contact Number
+                        </label>
+                        <input
+                          type="text"
+                          id="contactNumber"
+                          className="form-control form-control-lg"
+                          value={ContactNumber}
+                          onChange={handleContactNumberChange}
+                        />
+                      </div>
+                      <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="password">
                           Password
                         </label>
@@ -163,18 +129,6 @@ function Register() {
                           className="form-control form-control-lg"
                           value={Password}
                           onChange={handlePasswordChange}
-                        />
-                      </div>
-                      <div className="form-outline mb-3">
-                        <label className="form-label" htmlFor="phoneNumber">
-                          Contact Number
-                        </label>
-                        <input
-                          type="text"
-                          id="phoneNumber"
-                          className="form-control form-control-lg"
-                          value={phoneNumber}
-                          onChange={handlePhoneNumberChange}
                         />
                       </div>
                       <div className="pt-1 mb-4">
