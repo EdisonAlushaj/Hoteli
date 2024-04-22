@@ -10,35 +10,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const RoomCrud2 = () => {
-    const empdata = [
-        {
-            Id: 1,
-            RoomName: 'Room1',
-            Capacity: 2,
-            Size: 22,
-            Description: 'Description1',
-            Price: 100,
-            Image: 'image1',
-        },
-        {
-            Id: 2,
-            RoomName: 'Room2',
-            Capacity: 2,
-            Size: 23,
-            Description: 'Description32',
-            Price: 100,
-            Image: 'image2',
-        },
-        {
-            Id: 3,
-            RoomName: 'Room3',
-            Capacity: 3,
-            Size: 23,
-            Description: 'Description3',
-            Price: 100,
-            Image: 'image3',
-        },
-    ];
 
     const [show, setShow] = useState(false);
 
