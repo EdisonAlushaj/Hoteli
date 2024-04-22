@@ -42,8 +42,7 @@
               "RelativeToolTip": "HotelBackend\\Data\\DataContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-22T12:27:51.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-22T12:27:51.037Z"
             },
             {
               "$type": "Document",
@@ -53,7 +52,7 @@
               "RelativeDocumentMoniker": "HotelBackend\\Program.cs",
               "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Program.cs",
               "RelativeToolTip": "HotelBackend\\Program.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAACgAAAAAAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAC4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-22T10:03:19.737Z",
               "EditorCaption": ""
@@ -68,8 +67,7 @@
               "RelativeToolTip": "HotelBackend\\Entities\\Room.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-20T22:48:59.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-20T22:48:59.311Z"
             }
           ]
         }
