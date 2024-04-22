@@ -5,7 +5,7 @@ import axios from 'axios';
 import logo from './assets/MeGusta-Horizontal-removebg-preview.png';
 import Slider from './Slider/slider.jsx'; // Import the Slider component
 import Footer from "./Footer/Footer.jsx";
-import { api } from "../endpoints.js";
+//import { api } from "../endpoints.js";
 
 const Home = React.lazy(() => import("./Home"));
 const About = React.lazy(() => import("./About"));
@@ -17,15 +17,15 @@ const Register = React.lazy(() => import("./login-register/register"));
 const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
 
 const MainLayout = () => {
-  useEffect(() => {
-    axios.get(api)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(api)
+  //     .then(response => {
+  //       console.log(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []);
   return (
     <div>
 

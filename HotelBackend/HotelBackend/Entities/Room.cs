@@ -3,7 +3,7 @@
     public class Room
     {
         public int Id { get; set; }
-        public required string RoomName { get; set; }
+        public required string RoomName { get; set; } 
         public string Capacity { get; set; } = string.Empty;
         public double Size { get; set; }
         public string Description { get; set; } = string.Empty;

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import './dashboard.css';
+import RoomCrud from './Crud-Functions/RoomCrud.jsx'
+import RoomCrud2 from './Crud-Functions/RoomCrud2.jsx'
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
     const [showFoodMenuTable, setShowFoodMenuTable] = useState(false);
     const [showRoomsTable, setShowRoomsTable] = useState(false);
     const [showCafeMenuTable, setShowCafeMenuTable] = useState(false);
-    const [showDrinksMenuTable, setShowDrinksMenuTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -25,26 +26,7 @@ const Dashboard = () => {
         setShowCafeMenuTable(!showCafeMenuTable);
     };
 
-    const toggleDrinksMenuTable = () => {
-        setShowDrinksMenuTable(!showDrinksMenuTable);
-    };
-
-    useEffect(() => {
-        const bootstrapScript = document.createElement('script');
-        bootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js';
-        bootstrapScript.integrity = 'sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL';
-        bootstrapScript.crossOrigin = 'anonymous';
-        document.body.appendChild(bootstrapScript);
-
-        const customScript = document.createElement('script');
-        customScript.src = 'script.js';
-        document.body.appendChild(customScript);
-
-        return () => {
-            document.body.removeChild(bootstrapScript);
-            document.body.removeChild(customScript);
-        };
-    }, []);
+   
 
     return (
         <>
@@ -90,7 +72,7 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={toggleCafeMenuTable}>Cafe&Sweets</NavLink>
                                 </li>
                                 <li className="sidebar-item">
-                                    <NavLink to="#" className="sidebar-link" onClick={toggleDrinksMenuTable}>Drinks</NavLink>
+                                    <NavLink to="#" className="sidebar-link">Drinks</NavLink>
                                 </li>
                             </ul>
                         </li>
@@ -125,75 +107,7 @@ const Dashboard = () => {
                         <h3 className="fw-bold fs-4 mb-3 text-center">Dashboard</h3>
                         <div className="container-fluid">
                             {showRoomsTable && (
-                                <div className="mb-3">
-                                    <div className='d-flex flex-row align-items-center'>
-                                        <h3 className="fw-bold fs-4 my-3">Rooms</h3>
-                                        <button className="btn btn-rounded btn-success ms-3">Add</button>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <table className="table table-striped">
-                                                <thead>
-                                                    <tr className="highlight" style={{ color: '#fff', textAlign: 'left' }}>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Id</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Room Name</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Capacity</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Size</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Description</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Price</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Image</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Superior Double Room</td>
-                                                        <td>1-2</td>
-                                                        <td>22m2</td>
-                                                        <td>Experience understated luxury inour Superior Double Bed Room.
-                                                            Elegantly designed with a harmonious blend of comfort and style,
-                                                            this space boasts a plush double bed, premium amenities, and a captivating
-                                                            view.
-                                                        </td>
-                                                        <td>100</td>
-                                                        <td>/</td>
-                                                        <td><button className="btn btn-rounded btn-primary">Edit</button></td>
-                                                        <td><button className="btn btn-rounded btn-danger">Delete</button></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>Deluxe Double Room</td>
-                                                        <td>2-3</td>
-                                                        <td>20m2</td>
-                                                        <td>Experience the essence of comfort in our Standard Double Room.
-                                                            Tastefully designed with a cozy ambiance, this space offers a
-                                                            comfortable double bed, essential amenities, and a serene atmosphere
-                                                            to unwind.
-                                                        </td>
-                                                        <td>120</td>
-                                                        <td>/</td>
-                                                        <td><button className="btn btn-rounded btn-primary">Edit</button></td>
-                                                        <td><button className="btn btn-rounded btn-danger">Delete</button></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>Junior Suite</td>
-                                                        <td>2-3</td>
-                                                        <td>21m2</td>
-                                                        <td>Experience the essence of comfort in our Standard Double Room.
-                                                            Tastefully designed with a cozy ambiance, this space offers a
-                                                            comfortable double bed, essential amenities, and a serene atmosphere to unwind.
-                                                        </td>
-                                                        <td>110</td>
-                                                        <td>/</td>
-                                                        <td><button className="btn btn-rounded btn-primary">Edit</button></td>
-                                                        <td><button className="btn btn-rounded btn-danger">Delete</button></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                <RoomCrud2/>
                             )}
                         </div>
                         <div className="container-fluid">
@@ -248,7 +162,7 @@ const Dashboard = () => {
                                                 <thead>
                                                     <tr className="highlight" style={{ color: '#fff', textAlign: 'left' }}>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Id</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Name</th>
+                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Food Name</th>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Description</th>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Price</th>
                                                         <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Image</th>
@@ -272,49 +186,11 @@ const Dashboard = () => {
                                 </div>
                             )}
                         </div>
-                        <div className="container-fluid">
-                            {showDrinksMenuTable && (
-                                <div className="mb-3">
-                                    <div className='d-flex flex-row align-items-center'>
-                                        <h3 className="fw-bold fs-4 my-3">Drinks Menu</h3>
-                                        <button className="btn btn-rounded btn-success ms-3">Add</button>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <table className="table table-striped">
-                                                <thead>
-                                                    <tr className="highlight" style={{ color: '#fff', textAlign: 'left' }}>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Id</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Drink Name</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Description</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Price</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Image</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Sunset Spritz</td>
-                                                        <td>The reminiscent of the vibrant sunsets for which Ibiza is famous, 
-                                                            with the Aperol providing a hint of bitterness, the Prosecco adding effervescence, 
-                                                            and the Elderflower liqueur lending a floral sweetness.
-                                                            </td>
-                                                        <td>20$</td>
-                                                        <td>/</td>
-                                                        <td><button className="btn btn-rounded btn-primary">Edit</button></td>
-                                                        <td><button className="btn btn-rounded btn-danger">Delete</button></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
                     </main>
                 </div>
             </div>
         </>
+
     );
 };
 
