@@ -2,16 +2,27 @@ import React, { useState } from 'react';
 import fotoRegister from './fotoRegister.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
 import { NavLink } from "react-router-dom";
+<<<<<<< Updated upstream
 
 function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState(''); 
+=======
+import axios from 'axios';
+
+function Register() {
+>>>>>>> Stashed changes
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
+  const [FullName, setFullName] = useState('');
+  const [Email, setEmail] = useState('');
+  const [ContactNumber, setContactNumber] = useState('');
+  const [Password, setPassword] = useState('');
+
+  const handleFullNameChange = (event) => {
+    setFullName(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -22,6 +33,7 @@ function Register() {
     setPassword(event.target.value);
   };
 
+<<<<<<< Updated upstream
   const handlePhoneNumberChange = (event) => {
     setPhoneNumber(event.target.value);
   };
@@ -30,13 +42,30 @@ function Register() {
     if (!name.trim()) {
       setErrorMessage('Name is required.');
       return;
+=======
+  const handleRegister = () => {
+    const url = 'https://localhost:7189/api/Users'; // Updated URL to match your API
+    const data = {
+      "FullName": FullName,
+      "Email": Email,
+      "ContactNumber": ContactNumber,
+      "Password": Password,
+>>>>>>> Stashed changes
     }
 
-    if (!email.trim()) {
-      setErrorMessage('Email is required.');
-      return;
-    }
+    axios.post(url, data)
+      .then((result) => {
+        // Handle success
+        clear();
+        alert('User has been registered.'); // Changed to alert for simplicity
+      })
+      .catch((error) => {
+        // Handle error
+        setErrorMessage('Failed to register user.');
+      });
+  }
 
+<<<<<<< Updated upstream
     if (!password.trim()) {
       setErrorMessage('Password is required.');
       return;
@@ -54,6 +83,14 @@ function Register() {
 
     setErrorMessage('');
   };
+=======
+  const clear = () => {
+    setFullName('');
+    setEmail('');
+    setContactNumber('');
+    setPassword('');
+  }
+>>>>>>> Stashed changes
 
   return (
     <section style={{ backgroundColor: '#b07256'}}>
@@ -75,24 +112,36 @@ function Register() {
                     <form>
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <i className="fas fa-cubes fa-2x me-3" style={{ color: '#ff6219' }}></i>
-                        <div className="col-md-6 col-lg-5 d-none d-md-block"><img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }}/></div>
+                        <div className="col-md-6 col-lg-5 d-none d-md-block">
+                          <img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }} alt="logo" />
+                        </div>
                       </div>
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
                         Create your account
                       </h5>
+<<<<<<< Updated upstream
                       <div className="form-outline mb-3">
                         <label className="form-label" htmlFor="name">
                           Full Name
+=======
+                      <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="name">
+                          Name
+>>>>>>> Stashed changes
                         </label>
                         <input
                           type="text"
                           id="name"
                           className="form-control form-control-lg"
-                          value={name}
-                          onChange={handleNameChange}
+                          value={FullName}
+                          onChange={handleFullNameChange}
                         />
                       </div>
+<<<<<<< Updated upstream
                       <div className="form-outline mb-3">  
+=======
+                      <div className="form-outline mb-4">  
+>>>>>>> Stashed changes
                         <label className="form-label" htmlFor="email">
                           Email address
                         </label>
@@ -100,7 +149,7 @@ function Register() {
                           type="email"
                           id="email"
                           className="form-control form-control-lg"
-                          value={email}
+                          value={Email}
                           onChange={handleEmailChange}
                         />
                       </div>
@@ -112,7 +161,7 @@ function Register() {
                           type="password"
                           id="password"
                           className="form-control form-control-lg"
-                          value={password}
+                          value={Password}
                           onChange={handlePasswordChange}
                         />
                       </div>
@@ -129,7 +178,7 @@ function Register() {
                         />
                       </div>
                       <div className="pt-1 mb-4">
-                        <button className="btn btn-dark btn-lg btn-block" type="button" onClick={handleSubmit}>
+                        <button className="btn btn-dark btn-lg btn-block" type="button" onClick={handleRegister}>
                           Register
                         </button>
                       </div>

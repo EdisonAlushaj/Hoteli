@@ -17,5 +17,7 @@ namespace HotelBackend.Data
         public DbSet<AboutContent> AboutContents { get; set; }
         public DbSet<MenuCafe> MenuCafes { get; set; }
         public DbSet<MenuDrink> MenuDrinks { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

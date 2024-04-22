@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\Controllers",
+    "\\Data",
+    "\\Entities",
+    "\\Migrations",
+    "\\obj"
   ],
-  "SelectedNode": "\\Controllers\\MenuCafeController.cs",
   "PreviewInSolutionExplorer": false
 }
