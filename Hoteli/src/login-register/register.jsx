@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import fotoRegister from './fotoRegister.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(''); 
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleNameChange = (event) => {
@@ -19,6 +20,10 @@ function Register() {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handlePhoneNumberChange = (event) => {
+    setPhoneNumber(event.target.value);
   };
 
   const handleSubmit = () => {
@@ -37,9 +42,15 @@ function Register() {
       return;
     }
 
+    if (!phoneNumber.trim()) {
+      setErrorMessage('Phone number is required.');
+      return;
+    }
+
     console.log('Name:', name);
     console.log('Email:', email);
     console.log('Password:', password);
+    console.log('Phone Number:', phoneNumber);
 
     setErrorMessage('');
   };
@@ -69,9 +80,9 @@ function Register() {
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
                         Create your account
                       </h5>
-                      <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="name">
-                          Name
+                      <div className="form-outline mb-3">
+                        <label className="form-label" htmlFor="name">
+                          Full Name
                         </label>
                         <input
                           type="text"
@@ -81,8 +92,8 @@ function Register() {
                           onChange={handleNameChange}
                         />
                       </div>
-                      <div className="form-outline mb-4">  
-                      <label className="form-label" htmlFor="email">
+                      <div className="form-outline mb-3">  
+                        <label className="form-label" htmlFor="email">
                           Email address
                         </label>
                         <input
@@ -93,7 +104,7 @@ function Register() {
                           onChange={handleEmailChange}
                         />
                       </div>
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-3">
                         <label className="form-label" htmlFor="password">
                           Password
                         </label>
@@ -103,6 +114,18 @@ function Register() {
                           className="form-control form-control-lg"
                           value={password}
                           onChange={handlePasswordChange}
+                        />
+                      </div>
+                      <div className="form-outline mb-3">
+                        <label className="form-label" htmlFor="phoneNumber">
+                          Contact Number
+                        </label>
+                        <input
+                          type="text"
+                          id="phoneNumber"
+                          className="form-control form-control-lg"
+                          value={phoneNumber}
+                          onChange={handlePhoneNumberChange}
                         />
                       </div>
                       <div className="pt-1 mb-4">
