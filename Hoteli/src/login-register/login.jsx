@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import loginfoto from './loginfoto.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Added state for login status
+
+  // Simulated user data (you can replace this with your actual user data logic)
+
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -15,23 +19,49 @@ function Login() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
-  const handleSubmit = () => {
-    if (!email.trim()) {
-      setErrorMessage('Email is required.');
+  const handleSubmit = async () => {
+    if (!email.trim() || !password.trim()) {
+      setErrorMessage('Email and password are required.');
       return;
     }
-
-    if (!password.trim()) {
-      setErrorMessage('Password is required.');
-      return;
+  
+    try {
+      const response = await fetch('https://localhost:7189/api/Login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (!response.ok) {
+        // If response is not okay (e.g., 401 Unauthorized), handle it
+        if (response.status === 401) {
+          setErrorMessage('Invalid email or password.');
+        } else {
+          // For other non-JSON errors, show a generic message
+          setErrorMessage('Login failed.');
+        }
+        return;
+      }
+  
+      // If response is okay, parse JSON
+      const user = await response.json();
+      setErrorMessage('');
+      setIsLoggedIn(true);
+      console.log('Logged in as:', user.email);
+    } catch (error) {
+      console.error('Login error:', error);
+      setErrorMessage('Login failed.');
     }
-
-    console.log('Email:', email);
-    console.log('Password:', password);
-
-    setErrorMessage('');
   };
+  
+
+  if (isLoggedIn) {
+    // If user is logged in, you can redirect to a different page or perform any action
+    // For now, we'll just render a message
+    return <p>You are logged in!</p>;
+  }
 
   return (
     <section style={{ backgroundColor: '#b07256' }}>
@@ -45,7 +75,7 @@ function Login() {
                     src={loginfoto}
                     alt="login form"
                     className="img-fluid"
-                    style={{ borderRadius: '1rem 0 0 0', maxHeight: '100%', maxWidth: '100%' }} 
+                    style={{ borderRadius: '1rem 0 0 0', maxHeight: '100%', maxWidth: '100%' }}
                   />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -59,7 +89,7 @@ function Login() {
                         Log into your account
                       </h5>
                       <div className="form-outline mb-4">
-                      <label className="form-label" htmlFor="form2Example17">
+                        <label className="form-label" htmlFor="form2Example17">
                           Email address
                         </label>
                         <input
