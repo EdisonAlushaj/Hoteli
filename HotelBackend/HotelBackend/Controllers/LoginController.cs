@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace HotelBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowReactApp")] // Ensure this policy name matches the one you defined
     public class LoginController : ControllerBase
     {
         private readonly DataContext _context;
@@ -36,7 +38,9 @@ namespace HotelBackend.Controllers
 
             return Ok(user);
         }
-        public class LoginRequest
+    }
+
+    public class LoginRequest
     {
         public string Email { get; set; }
         public string Password { get; set; }

@@ -1,7 +1,10 @@
 using HotelBackend.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
-var builder = WebApplication.CreateBuilder(args);
+
+
+    var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -20,7 +23,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         builder =>
         {
-            builder.WithOrigins("http://localhost:5176")
+            builder.WithOrigins("http://localhost:5173")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
