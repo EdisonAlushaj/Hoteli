@@ -63,7 +63,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Rooms.ToListAsync()); ;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<Room>>> DeleteRoom(int id)
         {
             var dbRoom = await _context.Rooms.FindAsync(id);

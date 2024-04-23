@@ -16,7 +16,7 @@ const RoomCrud2 = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [Id, setId] = useState('')
+    const [id, setid] = useState('')
     const [roomName, setRoomName] = useState('')
     const [capacity, setCapacity] = useState('')
     const [size, setSize] = useState('')
@@ -24,7 +24,7 @@ const RoomCrud2 = () => {
     const [price, setPrice] = useState('')
     const [image, setImage] = useState('')
 
-    const [editId, setEditId] = useState('')
+    const [editid, setEditid] = useState('')
     const [editRoomName, setEditRoomName] = useState('')
     const [editCapacity, setEditCapacity] = useState('')
     const [editSize, setEditSize] = useState('')
@@ -56,7 +56,19 @@ const RoomCrud2 = () => {
     }
 
     const handelDelete = (id) => {
-        alert(id);
+        if(window,confirm("Are you sure to delete this room.") == true){
+            axios.delete(`https://localhost:7189/api/Room/${id}`)
+            .then((result)=>{
+                if(result.status == 200)
+                {
+                    toast.success('Room has been deleted');
+                    getData();
+                }
+            })
+            .catch((error)=>{
+                toast.error(error);
+            })
+        }
     }
 
     const handleUpdate = () => {
@@ -71,7 +83,7 @@ const RoomCrud2 = () => {
             "size": size,
             "description": description,
             "price": price,
-            "image": image
+            "image": image,
         }
 
         axios.post(url, data)
@@ -96,7 +108,7 @@ const RoomCrud2 = () => {
         setEditDescription('');
         setEditPrice('');
         setEditImage('');
-        setEditId('');
+        setEditid('');
     }
 
     return (
@@ -106,8 +118,8 @@ const RoomCrud2 = () => {
                 <Container>
                     <Row>
                         <Col>
-                            <input type="text" className='form-control' placeholder='Enter Id'
-                                value={Id} onChange={(e) => setId(e.target.value)}
+                            <input type="text" className='form-control' placeholder='Enter id'
+                                value={id} onChange={(e) => setid(e.target.value)}
                             />
                         </Col>
                         <Col>
@@ -151,7 +163,7 @@ const RoomCrud2 = () => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>id</th>
                             <th>Room Name</th>
                             <th>Capacity</th>
                             <th>Size</th>
@@ -165,8 +177,8 @@ const RoomCrud2 = () => {
                             data && data.length > 0 ?
                                 data.map((item, index) => {
                                     return (
-                                        <tr key={index}>
-                                            <td>{index+1}</td>
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
                                             <td>{item.roomName}</td>
                                             <td>{item.capacity}</td>
                                             <td>{item.size}</td>
@@ -174,8 +186,8 @@ const RoomCrud2 = () => {
                                             <td>{item.price}</td>
                                             <td>{item.image}</td>
                                             <td className='d-flex flex-row justify-content-evenly'>
-                                                <button className="btn btn-rounded btn-primary" onClick={() => handelEdit(item.Id)}>Edit</button>
-                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.Id)}>Delete</button>
+                                                <button className="btn btn-rounded btn-primary" onClick={() => handelEdit(item.id)}>Edit</button>
+                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.id)}>Delete</button> 
                                             </td>
                                         </tr>
                                     )
@@ -194,8 +206,8 @@ const RoomCrud2 = () => {
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Id'
-                                    value={editId} onChange={(e) => setEditId(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter id'
+                                    value={editid} onChange={(e) => setEditid(e.target.value)}
                                 />
                             </Col>
                             <Col>
