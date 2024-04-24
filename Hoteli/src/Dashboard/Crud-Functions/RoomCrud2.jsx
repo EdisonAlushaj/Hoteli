@@ -16,7 +16,7 @@ const RoomCrud2 = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [id, setid] = useState('')
+    const [Id, setId] = useState('')
     const [roomName, setRoomName] = useState('')
     const [capacity, setCapacity] = useState('')
     const [size, setSize] = useState('')
@@ -24,7 +24,7 @@ const RoomCrud2 = () => {
     const [price, setPrice] = useState('')
     const [image, setImage] = useState('')
 
-    const [editid, setEditid] = useState('')
+    const [editId, setEditId] = useState('')
     const [editRoomName, setEditRoomName] = useState('')
     const [editCapacity, setEditCapacity] = useState('')
     const [editSize, setEditSize] = useState('')
@@ -50,10 +50,49 @@ const RoomCrud2 = () => {
             })
     }
 
-    const handelEdit = (id) => {
-        //alert(id);
+    // const handelEdit = (id) => {
+    //     //alert(id);
+    //     handleShow();
+    // }
+    async function editStudent(employes){
         handleShow();
+        setRoomName(employes.roomName);
+        setCapacity(employes.capacity);
+        setSize(employes.size);
+        setDescription(employes.description);
+        setEditPrice(employes.price);
+        setEditImage(employes.image);
+    
+        setId(employes.id);
     }
+    async function Load(){
+        const result =await axios.get("https://localhost:7189/api/Room");
+        setRoomName(result.data);
+        console.log(result.data);
+    }
+    
+    async function update(event) {
+        event.preventDefault();
+        try {
+            await axios.patch(`https://localhost:7189/api/Room/UpdateRoom/${Id}`, {
+                id: Id,
+                roomName: editRoomName,
+                capacity: editCapacity,
+                size: editSize,
+                description: editDescription,
+                price: editPrice,
+                image: editImage,
+            });
+            alert("Room updated successfully");
+            handleClose(); // Close the modal after successful update
+            // Optionally, you can reload the data to reflect the updated room
+            getData();
+        } catch (error) {
+            console.error("Error updating room:", error);
+            // Handle error, show error message, etc.
+        }
+    }
+    
 
     const handelDelete = (id) => {
         if(window,confirm("Are you sure to delete this room.") == true){
@@ -70,10 +109,9 @@ const RoomCrud2 = () => {
             })
         }
     }
+    // const handleUpdate = () => {
 
-    const handleUpdate = () => {
-
-    }
+    // }
 
     const handleSave = () => {
         const url = 'https://localhost:7189/api/Room';
@@ -83,7 +121,7 @@ const RoomCrud2 = () => {
             "size": size,
             "description": description,
             "price": price,
-            "image": image,
+            "image": image
         }
 
         axios.post(url, data)
@@ -108,7 +146,7 @@ const RoomCrud2 = () => {
         setEditDescription('');
         setEditPrice('');
         setEditImage('');
-        setEditid('');
+        setEditId('');
     }
 
     return (
@@ -118,8 +156,8 @@ const RoomCrud2 = () => {
                 <Container>
                     <Row>
                         <Col>
-                            <input type="text" className='form-control' placeholder='Enter id'
-                                value={id} onChange={(e) => setid(e.target.value)}
+                            <input type="text" className='form-control' placeholder='Enter Id'
+                                value={Id} onChange={(e) => setId(e.target.value)}
                             />
                         </Col>
                         <Col>
@@ -163,7 +201,7 @@ const RoomCrud2 = () => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>id</th>
+                            <th>Id</th>
                             <th>Room Name</th>
                             <th>Capacity</th>
                             <th>Size</th>
@@ -177,8 +215,8 @@ const RoomCrud2 = () => {
                             data && data.length > 0 ?
                                 data.map((item, index) => {
                                     return (
-                                        <tr key={item.id}>
-                                            <td>{item.id}</td>
+                                        <tr key={index}>
+                                            <td>{index+1}</td>
                                             <td>{item.roomName}</td>
                                             <td>{item.capacity}</td>
                                             <td>{item.size}</td>
@@ -186,8 +224,10 @@ const RoomCrud2 = () => {
                                             <td>{item.price}</td>
                                             <td>{item.image}</td>
                                             <td className='d-flex flex-row justify-content-evenly'>
-                                                <button className="btn btn-rounded btn-primary" onClick={() => handelEdit(item.id)}>Edit</button>
-                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.id)}>Delete</button> 
+                                                <button className="btn btn-rounded btn-primary" onClick={() => editStudent(item)}>Edit</button>
+
+                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.id)}>Delete</button>
+
                                             </td>
                                         </tr>
                                     )
@@ -206,8 +246,8 @@ const RoomCrud2 = () => {
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter id'
-                                    value={editid} onChange={(e) => setEditid(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Id'
+                                    value={editId} onChange={(e) => setEditId(e.target.value)}
                                 />
                             </Col>
                             <Col>
@@ -249,7 +289,7 @@ const RoomCrud2 = () => {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleUpdate}>
+                        <Button variant="primary" onClick={update}>
                             Update
                         </Button>
                     </Modal.Footer>

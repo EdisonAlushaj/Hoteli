@@ -44,23 +44,13 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Rooms.ToListAsync()); ;
         }
 
-        [HttpPut()]
-        public async Task<ActionResult<List<Room>>> UpdateRoom(Room updatedRoom)
+        [HttpPatch]
+        [Route("UpdateRoom/{id}")]
+        public async Task<Room> UpdateRoom(Room objRoom)
         {
-            var dbRoom = await _context.Rooms.FindAsync(updatedRoom.Id);
-            if (dbRoom == null)
-                return NotFound("Hero not found");
-
-            dbRoom.RoomName = updatedRoom.RoomName;
-            dbRoom.Capacity = updatedRoom.Capacity;
-            dbRoom.Size = updatedRoom.Size;
-            dbRoom.Description = updatedRoom.Description;
-            dbRoom.Price = updatedRoom.Price;
-            dbRoom.Image = updatedRoom.Image;
-
+            _context.Entry(objRoom).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
-            return Ok(await _context.Rooms.ToListAsync()); ;
+            return objRoom;
         }
 
         [HttpDelete("{id}")]
