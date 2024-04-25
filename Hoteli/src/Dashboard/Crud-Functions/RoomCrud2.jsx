@@ -11,10 +11,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const RoomCrud2 = () => {
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
+    const [showAdd, setShowAdd] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleCloseAdd = () => setShowAdd(false);
+    const handleShowAdd = () => setShowAdd(true);
 
     const [Id, setId] = useState('')
     const [roomName, setRoomName] = useState('')
@@ -35,7 +39,6 @@ const RoomCrud2 = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        // setData(empdata);
         getData();
     }, []);
 
@@ -50,27 +53,23 @@ const RoomCrud2 = () => {
             })
     }
 
-    // const handelEdit = (id) => {
-    //     //alert(id);
-    //     handleShow();
-    // }
-    async function editStudent(employes){
+    async function editStudent(employes) {
         handleShow();
-        setRoomName(employes.roomName);
-        setCapacity(employes.capacity);
-        setSize(employes.size);
-        setDescription(employes.description);
+        setEditRoomName(employes.roomName);
+        setEditCapacity(employes.capacity);
+        setEditSize(employes.size);
+        setEditDescription(employes.description);
         setEditPrice(employes.price);
         setEditImage(employes.image);
-    
+
         setId(employes.id);
     }
-    async function Load(){
-        const result =await axios.get("https://localhost:7189/api/Room");
+    async function Load() {
+        const result = await axios.get("https://localhost:7189/api/Room");
         setRoomName(result.data);
         console.log(result.data);
     }
-    
+
     async function update(event) {
         event.preventDefault();
         try {
@@ -83,37 +82,33 @@ const RoomCrud2 = () => {
                 price: editPrice,
                 image: editImage,
             });
-            alert("Room updated successfully");
-            handleClose(); // Close the modal after successful update
-            // Optionally, you can reload the data to reflect the updated room
+            toast.success('Room updated successfully');
+            handleClose();
             getData();
+            clear();
         } catch (error) {
             console.error("Error updating room:", error);
-            // Handle error, show error message, etc.
         }
     }
-    
+
 
     const handelDelete = (id) => {
-        if(window,confirm("Are you sure to delete this room.") == true){
+        if (window, confirm("Are you sure to delete this room.") == true) {
             axios.delete(`https://localhost:7189/api/Room/${id}`)
-            .then((result)=>{
-                if(result.status == 200)
-                {
-                    toast.success('Room has been deleted');
-                    getData();
-                }
-            })
-            .catch((error)=>{
-                toast.error(error);
-            })
+                .then((result) => {
+                    if (result.status == 200) {
+                        toast.success('Room has been deleted');
+                        getData();
+                    }
+                })
+                .catch((error) => {
+                    toast.error(error);
+                })
         }
     }
-    // const handleUpdate = () => {
-
-    // }
 
     const handleSave = () => {
+        handleShowAdd();
         const url = 'https://localhost:7189/api/Room';
         const data = {
             "roomName": roomName,
@@ -125,11 +120,12 @@ const RoomCrud2 = () => {
         }
 
         axios.post(url, data)
-        .then((result) => {
-            getData();
-            clear();
-            toast.success('Room has been added.');
-        })
+            .then((result) => {
+                getData();
+                clear();
+                toast.success('Room has been added.');
+                handleCloseAdd();
+            })
     }
 
     const clear = () => {
@@ -152,8 +148,8 @@ const RoomCrud2 = () => {
     return (
         <>
             <Fragment>
-                <ToastContainer/>
-                <Container>
+                <ToastContainer />
+                {/* <Container>
                     <Row>
                         <Col>
                             <input type="text" className='form-control' placeholder='Enter Id'
@@ -194,9 +190,14 @@ const RoomCrud2 = () => {
                             <button className='btn btn-primary' onClick={() => handleSave()}>Submit</button>
                         </Col>
                     </Row>
-                </Container>
+                </Container> */}
 
-                <br /><br />
+                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
+                    <p style={{fontSize: "2em", margin: "0"}}><b>Room Table</b></p>
+                    <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
+                </div>
+
+                <br />
 
                 <Table striped bordered hover>
                     <thead>
@@ -216,7 +217,7 @@ const RoomCrud2 = () => {
                                 data.map((item, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{index+1}</td>
+                                            <td>{index + 1}</td>
                                             <td>{item.roomName}</td>
                                             <td>{item.capacity}</td>
                                             <td>{item.size}</td>
@@ -239,17 +240,69 @@ const RoomCrud2 = () => {
                     </tbody>
                 </Table>
 
+                {/* Add Room */}
+                <Modal show={showAdd} onHide={handleCloseAdd}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add Room</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Row>
+                            <Col>
+                                <input type="text" className='form-control' placeholder='Enter Room Name'
+                                    value={roomName} onChange={(e) => setRoomName(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
+                                <input type="text" className='form-control' placeholder='Enter Capacity'
+                                    value={capacity} onChange={(e) => setCapacity(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
+                                <input type="text" className='form-control' placeholder='Enter Size'
+                                    value={size} onChange={(e) => setSize(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                        <br />
+                        <Row>
+                            <Col>
+                                <input type="text" className='form-control' placeholder='Enter Description'
+                                    value={description} onChange={(e) => setDescription(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                        <br />
+                        <Row>
+
+                            <Col>
+                                <input type="text" className='form-control' placeholder='Enter Price'
+                                    value={price} onChange={(e) => setPrice(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
+                                <input type="text" className='form-control' placeholder='Enter Image'
+                                    value={image} onChange={(e) => setImage(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseAdd}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={handleSave}>
+                            Add
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                {/* Update Room */}
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Update Room</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col>
-                                <input type="text" className='form-control' placeholder='Enter Id'
-                                    value={editId} onChange={(e) => setEditId(e.target.value)}
-                                />
-                            </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Room Name'
                                     value={editRoomName} onChange={(e) => setEditRoomName(e.target.value)}
@@ -267,6 +320,15 @@ const RoomCrud2 = () => {
                             </Col>
 
                         </Row>
+                        <br />
+                        <Row>
+                            <Col>
+                                <input type="text" className='form-control' placeholder='Enter Description'
+                                    value={editDescription} onChange={(e) => setEditDescription(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                        <br />
                         <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Description'
