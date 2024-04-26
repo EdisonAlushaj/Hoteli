@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
+import {RoomEndPoint} from'../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -43,7 +44,7 @@ const RoomCrud2 = () => {
     }, []);
 
     const getData = () => {
-        axios.get('https://localhost:7189/api/Room')
+        axios.get(RoomEndPoint)
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -65,7 +66,7 @@ const RoomCrud2 = () => {
         setId(employes.id);
     }
     async function Load() {
-        const result = await axios.get("https://localhost:7189/api/Room");
+        const result = await axios.get(RoomEndPoint);
         setRoomName(result.data);
         console.log(result.data);
     }
@@ -73,7 +74,7 @@ const RoomCrud2 = () => {
     async function update(event) {
         event.preventDefault();
         try {
-            await axios.patch(`https://localhost:7189/api/Room/UpdateRoom/${Id}`, {
+            await axios.patch(`${RoomEndPoint}/UpdateRoom/${Id}`, {
                 id: Id,
                 roomName: editRoomName,
                 capacity: editCapacity,
@@ -94,7 +95,7 @@ const RoomCrud2 = () => {
 
     const handelDelete = (id) => {
         if (window, confirm("Are you sure to delete this room.") == true) {
-            axios.delete(`https://localhost:7189/api/Room/${id}`)
+            axios.delete(`${RoomEndPoint}/${id}`)
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('Room has been deleted');
@@ -109,7 +110,7 @@ const RoomCrud2 = () => {
 
     const handleSave = () => {
         handleShowAdd();
-        const url = 'https://localhost:7189/api/Room';
+        const url = RoomEndPoint;
         const data = {
             "roomName": roomName,
             "capacity": capacity,
