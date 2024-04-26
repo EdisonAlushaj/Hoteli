@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import './dashboard.css';
 import RoomCrud from './Crud-Functions/RoomCrud.jsx'
 import RoomCrud2 from './Crud-Functions/RoomCrud2.jsx'
+import MenuCafeCrud from './Crud-Functions/MenuCafeCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -151,39 +152,7 @@ const Dashboard = () => {
                         </div>
                         <div className="container-fluid">
                             {showCafeMenuTable && (
-                                <div className="mb-3">
-                                    <div className='d-flex flex-row align-items-center'>
-                                        <h3 className="fw-bold fs-4 my-3">Cafe&Sweets Menu</h3>
-                                        <button className="btn btn-rounded btn-success ms-3">Add</button>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <table className="table table-striped">
-                                                <thead>
-                                                    <tr className="highlight" style={{ color: '#fff', textAlign: 'left' }}>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Id</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Food Name</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Description</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Price</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Image</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Cappuccino</td>
-                                                        <td>A rich and creamy coffee beverage made with equal parts espresso, steamed milk,
-                                                            and frothed milk, topped with a dusting of cocoa or cinnamon</td>
-                                                        <td>5$</td>
-                                                        <td>/</td>
-                                                        <td><button className="btn btn-rounded btn-primary">Edit</button></td>
-                                                        <td><button className="btn btn-rounded btn-danger">Delete</button></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                <MenuCafeCrud/>
                             )}
                         </div>
                     </main>
