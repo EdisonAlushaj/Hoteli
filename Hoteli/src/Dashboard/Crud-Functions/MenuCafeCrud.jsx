@@ -51,10 +51,10 @@ const MenuCafeCrud = () => {
 
     async function editMenuCafe(cafes) {
         handleShow();
-        setEditCafeName(cafes.roomName);
-        setEditCafeDescription(cafes.description);
-        setEditCafePrice(cafes.price);
-        setEditCafeImage(cafes.image);
+        setEditCafeName(cafes.cafeName);
+        setEditCafeDescription(cafes.cafeDescription);
+        setEditCafePrice(cafes.cafePrice);
+        setEditCafeImage(cafes.cafeImage);
         setId(cafes.id);
     }
     async function Load() {

@@ -92,7 +92,6 @@ const RoomCrud2 = () => {
         }
     }
 
-
     const handelDelete = (id) => {
         if (window, confirm("Are you sure to delete this room.") == true) {
             axios.delete(`${RoomEndPoint}/${id}`)
