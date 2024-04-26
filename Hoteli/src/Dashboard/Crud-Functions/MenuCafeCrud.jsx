@@ -186,12 +186,12 @@ const MenuCafeCrud = () => {
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Room Name'
+                                <input type="text" className='form-control' placeholder='Enter Cafe Name'
                                     value={cafeName} onChange={(e) => setCafeName(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Description'
+                                <input type="text" className='form-control' placeholder='Enter Cafe Description'
                                     value={cafeDescription} onChange={(e) => setCafeDescription(e.target.value)}
                                 />
                             </Col>
@@ -199,12 +199,12 @@ const MenuCafeCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Price'
+                                <input type="text" className='form-control' placeholder='Enter Cafe Price'
                                     value={cafePrice} onChange={(e) => setCafePrice(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Image'
+                                <input type="text" className='form-control' placeholder='Enter Cafe Image'
                                     value={cafeImage} onChange={(e) => setCafeImage(e.target.value)}
                                 />
                             </Col>
