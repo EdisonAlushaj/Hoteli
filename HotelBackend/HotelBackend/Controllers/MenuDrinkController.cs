@@ -44,25 +44,16 @@ namespace HotelBackend.Controllers
             return Ok(await _context.MenuDrinks.ToListAsync()); ;
         }
 
-        [HttpPut()]
-        public async Task<ActionResult<List<MenuDrink>>> UpdateDrink(MenuDrink updatedDrink)
+        [HttpPatch]
+        [Route("UpdateDrink/{id}")]
+        public async Task<MenuDrink> UpdateDrink(MenuDrink objDrink)
         {
-            var dbDrink = await _context.MenuDrinks.FindAsync(updatedDrink.Id);
-            if (dbDrink == null)
-                return NotFound("Drink not found");
-
-            dbDrink.DrinkName = updatedDrink.DrinkName;
-            dbDrink.DrinkDescription = updatedDrink.DrinkDescription;
-            dbDrink.DrinkPrice = updatedDrink.DrinkPrice;
-            dbDrink.DrinkImage = updatedDrink.DrinkImage;
-
-
+            _context.Entry(objDrink).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
-            return Ok(await _context.MenuDrinks.ToListAsync()); ;
+            return objDrink;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<MenuDrink>>> DeleteDrink(int id)
         {
             var dbDrink = await _context.MenuDrinks.FindAsync(id);

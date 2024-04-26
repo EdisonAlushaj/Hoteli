@@ -45,25 +45,16 @@ namespace HotelBackend.Controllers
             return Ok(await _context.MenuCafes.ToListAsync()); ;
         }
 
-        [HttpPut()]
-        public async Task<ActionResult<List<MenuCafe>>> UpdateCafe(MenuCafe updatedCafe)
+        [HttpPatch]
+        [Route("UpdateCafe/{id}")]
+        public async Task<MenuCafe> UpdateCafe(MenuCafe objCafe)
         {
-            var dbCafe = await _context.MenuCafes.FindAsync(updatedCafe.Id);
-            if (dbCafe == null)
-                return NotFound("Cafe not found");
-
-            dbCafe.CafeName = updatedCafe.CafeName;
-            dbCafe.CafeDescription = updatedCafe.CafeDescription;
-            dbCafe.CafePrice = updatedCafe.CafePrice;
-            dbCafe.CafeImage = updatedCafe.CafeImage;
-
-
+            _context.Entry(objCafe).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
-            return Ok(await _context.MenuCafes.ToListAsync()); ;
+            return objCafe;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<MenuCafe>>> DeleteCafe(int id)
         {
             var dbCafe = await _context.MenuCafes.FindAsync(id);

@@ -33,7 +33,7 @@ namespace HotelBackend.Controllers
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
-                return NotFound("user not found");
+                return NotFound("User not found");
             return Ok(user);
         }
 
@@ -46,21 +46,30 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Users.ToListAsync()); ;
         }
 
-        [HttpPut()]
-        public async Task<ActionResult<List<User>>> UpdateUser(User updatedUser)
+        //[HttpPut()]
+        //public async Task<ActionResult<List<User>>> UpdateUser(User updatedUser)
+        //{
+        //    var dbUser = await _context.Users.FindAsync(updatedUser.Id);
+        //    if (dbUser == null)
+        //        return NotFound("Hero not found");
+        //
+        //    dbUser.FullName = updatedUser.FullName;
+        //    dbUser.Email = updatedUser.Email;
+        //    dbUser.ContactNumber = updatedUser.ContactNumber;
+        //    dbUser.Password = updatedUser.Password;
+        //   
+        //    await _context.SaveChangesAsync();
+        //
+        //    return Ok(await _context.Users.ToListAsync()); ;
+        //}
+
+        [HttpPatch]
+        [Route("UpdateUser/{id}")]
+        public async Task<User> UpdateUser(User objUser)
         {
-            var dbUser = await _context.Users.FindAsync(updatedUser.Id);
-            if (dbUser == null)
-                return NotFound("Hero not found");
-
-            dbUser.FullName = updatedUser.FullName;
-            dbUser.Email = updatedUser.Email;
-            dbUser.ContactNumber = updatedUser.ContactNumber;
-            dbUser.Password = updatedUser.Password;
-           
+            _context.Entry(objUser).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
-            return Ok(await _context.Users.ToListAsync()); ;
+            return objUser;
         }
 
         [HttpDelete]

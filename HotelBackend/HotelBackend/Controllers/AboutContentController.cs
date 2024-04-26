@@ -35,32 +35,24 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Room>>> AddRoom(Room room)
+        public async Task<ActionResult<List<AboutContent>>> AddAbout(AboutContent about)
         {
-            _context.Rooms.Add(room);
-            await _context.SaveChangesAsync();
-
-            return Ok(await _context.Rooms.ToListAsync()); ;
-        }
-
-        [HttpPut()]
-        public async Task<ActionResult<List<AboutContent>>> UpdateAbout(AboutContent updatedAbout)
-        {
-            var dbAbout = await _context.AboutContents.FindAsync(updatedAbout.Id);
-            if (dbAbout == null)
-                return NotFound("About not found");
-
-            dbAbout.Description = updatedAbout.Description;
-            dbAbout.Image = updatedAbout.Image;
-            
-            
-
+            _context.AboutContents.Add(about);
             await _context.SaveChangesAsync();
 
             return Ok(await _context.AboutContents.ToListAsync()); ;
         }
 
-        [HttpDelete]
+        [HttpPatch]
+        [Route("UpdateAbout/{id}")]
+        public async Task<AboutContent> UpdateAbout(AboutContent objAbout)
+        {
+            _context.Entry(objAbout).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return objAbout;
+        }
+
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<AboutContent>>> DeleteAbout(int id)
         {
             var dbAbout = await _context.AboutContents.FindAsync(id);
