@@ -1,11 +1,9 @@
 import React, { Component, Suspense, useEffect } from "react";
-import { Route, NavLink, Routes, HashRouter, Outlet} from "react-router-dom";
+import { Route, NavLink, Routes, HashRouter, Outlet } from "react-router-dom";
 import './Header.css';
-import axios from 'axios';
 import logo from './assets/MeGusta-Horizontal-removebg-preview.png';
-import Slider from './Slider/slider.jsx'; // Import the Slider component
 import Footer from "./Footer/Footer.jsx";
-//import { api } from "../endpoints.js";
+import AppRoutes from "./AppRoutes.jsx";
 
 const Home = React.lazy(() => import("./Home"));
 const About = React.lazy(() => import("./About"));
@@ -16,7 +14,7 @@ const Login = React.lazy(() => import("./login-register/login"));
 const Register = React.lazy(() => import("./login-register/register"));
 const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
 
-const MainLayout = () => {
+export const MainLayout = () => {
   // useEffect(() => {
   //   axios.get(api)
   //     .then(response => {
@@ -73,20 +71,10 @@ class App extends Component {
     return (
       <div className="app-wrapper">
         <HashRouter>
-          <Routes>
-            {/* Add MainLayout wrapper to the routes */}
-            <Route path="/" element={<MainLayout />}>
-              <Route exact path="/" element={<Home />}></Route>
-              <Route exact path="/about" element={<About />}></Route>
-              <Route exact path="/Rooms" element={<Rooms />}></Route>
-              <Route exact path="/contact" element={<Contact />}></Route>
-              <Route exact path="/Menu" element={<Menu />}></Route>
-              <Route exact path="/dashboard" element={<Dashboard />}></Route>
-            </Route>
-            {/* Do not wrap the login route with MainLayout */}
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-          </Routes>
+          <Suspense fallback={<div>Loading...</div>}>
+            <AppRoutes />
+          </Suspense>
+          <Footer />
         </HashRouter>
       </div>
     );
