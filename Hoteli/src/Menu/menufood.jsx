@@ -18,13 +18,13 @@ function MenuFood() {
                 throw new Error('Failed to fetch data');
             }
             const data = await response.json();
-            setFoodItems(data); // Update foodItems state with fetched data
+            setFoodItems(data);
         } catch (error) {
             console.error('Error fetching food items:', error);
         }
     };
     useEffect(() => {
-        fetchFoodItems(); // Fetch food items when component mounts
+        fetchFoodItems(); 
     }, []);
     const addToOrder = (itemName) => {
         setSelectedItems([...selectedItems, itemName]);

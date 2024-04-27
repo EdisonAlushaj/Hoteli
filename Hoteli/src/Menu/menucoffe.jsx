@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Menu.css';
@@ -9,6 +9,23 @@ function MenuCoffe() {
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [cafeItems, setCafeItems] = useState([]);
+
+    const fetchCafeItems = async () => {
+        try {
+            const response = await fetch('https://localhost:7189/api/MenuCafe');
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            setCafeItems(data); 
+        } catch (error) {
+            console.error('Error fetching food items:', error);
+        }
+    };
+    useEffect(() => {
+        fetchCafeItems(); 
+    }, []);
 
     const addToOrder = (itemName) => {
         setSelectedItems([...selectedItems, itemName]);
@@ -37,99 +54,24 @@ function MenuCoffe() {
             <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#b07256' }}>Menu</h1>
             <Row className="mt-5">
                 <Col >
-                    <Row md={4}>
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>KAfe</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>KAfe</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>KAfe</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>KAfe</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>KAfe</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(document.querySelector('.card-title').innerText)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>KAfe</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(`${document.querySelector('.card-title').innerText} - ${document.querySelector('.text-muted').innerText}`)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        {/* Add more food items here */}
+                <Row md={4}>
+                        {cafeItems.map((cafeItem, index) => (
+                            <Col key={index}>
+                                <Card>
+                                    <Card.Img variant="top" src={cafeItem.cafeImage} />
+                                    <Card.Body>
+                                        <Card.Title style={{ color: '#6b4d38' }}>{cafeItem.cafeName}</Card.Title>
+                                        <Card.Text>
+                                            {cafeItem.cafeDescription}
+                                        </Card.Text>
+                                        <Card.Text className="text-muted">${cafeItem.foodPrice}</Card.Text>
+                                        <Button variant="primary" onClick={() => addToOrder(`${cafeItem.cafeName} - ${cafeItem.cafePrice}`)}>
+                                            Add to Order
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
                     </Row>
                  
                 </Col>
