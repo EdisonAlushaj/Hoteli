@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Menu.css';
@@ -9,7 +9,23 @@ function MenuFood() {
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [foodItems, setFoodItems] = useState([]);
 
+    const fetchFoodItems = async () => {
+        try {
+            const response = await fetch('https://localhost:7189/api/MenuFood');
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            setFoodItems(data); // Update foodItems state with fetched data
+        } catch (error) {
+            console.error('Error fetching food items:', error);
+        }
+    };
+    useEffect(() => {
+        fetchFoodItems(); // Fetch food items when component mounts
+    }, []);
     const addToOrder = (itemName) => {
         setSelectedItems([...selectedItems, itemName]);
     };
@@ -38,22 +54,23 @@ function MenuFood() {
             <Row className="mt-5">
                 <Col>
                 <Row md={4}>
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>Seafood Paella</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(`${document.querySelector('.card-title').innerText} - ${document.querySelector('.text-muted').innerText}`)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        {/* Add more food items here */}
+                        {foodItems.map((foodItem, index) => (
+                            <Col key={index}>
+                                <Card>
+                                    <Card.Img variant="top" src={foodItem.foodImage} />
+                                    <Card.Body>
+                                        <Card.Title style={{ color: '#6b4d38' }}>{foodItem.foodName}</Card.Title>
+                                        <Card.Text>
+                                            {foodItem.foodDescription}
+                                        </Card.Text>
+                                        <Card.Text className="text-muted">${foodItem.foodPrice}</Card.Text>
+                                        <Button variant="primary" onClick={() => addToOrder(`${foodItem.foodName} - ${foodItem.foodPrice}`)}>
+                                            Add to Order
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
                     </Row>
                 </Col>
                 {selectedItems.length > 0 && (
