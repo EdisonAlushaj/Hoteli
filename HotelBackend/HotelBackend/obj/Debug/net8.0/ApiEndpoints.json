@@ -21,68 +21,16 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.AboutContentController",
-    "Method": "AddRoom",
+    "Method": "AddAbout",
     "RelativePath": "api/AboutContent",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "room",
-        "Type": "HotelBackend.Entities.Room",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Room, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.AboutContentController",
-    "Method": "UpdateAbout",
-    "RelativePath": "api/AboutContent",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "updatedAbout",
+        "Name": "about",
         "Type": "AboutContent",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[AboutContent, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.AboutContentController",
-    "Method": "DeleteAbout",
-    "RelativePath": "api/AboutContent",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -114,6 +62,63 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[AboutContent, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.AboutContentController",
+    "Method": "DeleteAbout",
+    "RelativePath": "api/AboutContent/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[AboutContent, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.AboutContentController",
+    "Method": "UpdateAbout",
+    "RelativePath": "api/AboutContent/UpdateAbout/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objAbout",
+        "Type": "AboutContent",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AboutContent",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -197,15 +202,15 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.MenuCafeController",
-    "Method": "UpdateCafe",
-    "RelativePath": "api/MenuCafe",
-    "HttpMethod": "PUT",
+    "Method": "GetCafe",
+    "RelativePath": "api/MenuCafe/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "updatedCafe",
-        "Type": "HotelBackend.Entities.MenuCafe",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -224,7 +229,7 @@
   {
     "ContainingType": "HotelBackend.Controllers.MenuCafeController",
     "Method": "DeleteCafe",
-    "RelativePath": "api/MenuCafe",
+    "RelativePath": "api/MenuCafe/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -232,7 +237,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -249,21 +254,26 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.MenuCafeController",
-    "Method": "GetCafe",
-    "RelativePath": "api/MenuCafe/{id}",
-    "HttpMethod": "GET",
+    "Method": "UpdateCafe",
+    "RelativePath": "api/MenuCafe/UpdateCafe/{id}",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "objCafe",
+        "Type": "HotelBackend.Entities.MenuCafe",
+        "IsRequired": true
+      },
+      {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.MenuCafe, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HotelBackend.Entities.MenuCafe",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -321,15 +331,15 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.MenuDrinkController",
-    "Method": "UpdateDrink",
-    "RelativePath": "api/MenuDrink",
-    "HttpMethod": "PUT",
+    "Method": "GetDrink",
+    "RelativePath": "api/MenuDrink/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "updatedDrink",
-        "Type": "HotelBackend.Entities.MenuDrink",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -348,7 +358,7 @@
   {
     "ContainingType": "HotelBackend.Controllers.MenuDrinkController",
     "Method": "DeleteDrink",
-    "RelativePath": "api/MenuDrink",
+    "RelativePath": "api/MenuDrink/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -356,7 +366,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -373,21 +383,26 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.MenuDrinkController",
-    "Method": "GetDrink",
-    "RelativePath": "api/MenuDrink/{id}",
-    "HttpMethod": "GET",
+    "Method": "UpdateDrink",
+    "RelativePath": "api/MenuDrink/UpdateDrink/{id}",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "objDrink",
+        "Type": "HotelBackend.Entities.MenuDrink",
+        "IsRequired": true
+      },
+      {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.MenuDrink, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HotelBackend.Entities.MenuDrink",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -445,15 +460,15 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.MenuFoodController",
-    "Method": "UpdateFood",
-    "RelativePath": "api/MenuFood",
-    "HttpMethod": "PUT",
+    "Method": "GetFood",
+    "RelativePath": "api/MenuFood/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "updatedFood",
-        "Type": "HotelBackend.Entities.MenuFood",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -472,7 +487,7 @@
   {
     "ContainingType": "HotelBackend.Controllers.MenuFoodController",
     "Method": "DeleteFood",
-    "RelativePath": "api/MenuFood",
+    "RelativePath": "api/MenuFood/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -480,7 +495,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -497,21 +512,26 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.MenuFoodController",
-    "Method": "GetFood",
-    "RelativePath": "api/MenuFood/{id}",
-    "HttpMethod": "GET",
+    "Method": "UpdateFood",
+    "RelativePath": "api/MenuFood/UpdateFood/{id}",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "objFood",
+        "Type": "HotelBackend.Entities.MenuFood",
+        "IsRequired": true
+      },
+      {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.MenuFood, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HotelBackend.Entities.MenuFood",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -569,15 +589,15 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.RoomController",
-    "Method": "UpdateRoom",
-    "RelativePath": "api/Room",
-    "HttpMethod": "PUT",
+    "Method": "GetRoom",
+    "RelativePath": "api/Room/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "updatedRoom",
-        "Type": "HotelBackend.Entities.Room",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -596,7 +616,7 @@
   {
     "ContainingType": "HotelBackend.Controllers.RoomController",
     "Method": "DeleteRoom",
-    "RelativePath": "api/Room",
+    "RelativePath": "api/Room/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -604,7 +624,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -621,21 +641,26 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.RoomController",
-    "Method": "GetRoom",
-    "RelativePath": "api/Room/{id}",
-    "HttpMethod": "GET",
+    "Method": "UpdateRoom",
+    "RelativePath": "api/Room/UpdateRoom/{id}",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "objRoom",
+        "Type": "HotelBackend.Entities.Room",
+        "IsRequired": true
+      },
+      {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Room, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HotelBackend.Entities.Room",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -817,32 +842,6 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.UsersController",
-    "Method": "UpdateUser",
-    "RelativePath": "api/Users",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "updatedUser",
-        "Type": "HotelBackend.Entities.User",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.User, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.UsersController",
     "Method": "DeleteUser",
     "RelativePath": "api/Users",
     "HttpMethod": "DELETE",
@@ -884,6 +883,37 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.User, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.UsersController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/Users/UpdateUser/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objUser",
+        "Type": "HotelBackend.Entities.User",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.User",
         "MediaTypes": [
           "text/plain",
           "application/json",

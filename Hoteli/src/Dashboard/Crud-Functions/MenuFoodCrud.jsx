@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {MenuCafeEndPoint} from'../../endpoints';
+import {MenuFoodEndPoint} from'../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const MenuCafeCrud = () => {
+const MenuFoodCrud = () => {
 
     const [show, setShow] = useState(false)
     const [showAdd, setShowAdd] = useState(false);
@@ -21,16 +21,16 @@ const MenuCafeCrud = () => {
     const handleShowAdd = () => setShowAdd(true);
 
     const [Id, setId] = useState('')
-    const [cafeName, setCafeName] = useState('')
-    const [cafeDescription, setCafeDescription] = useState('')
-    const [cafePrice, setCafePrice] = useState('')
-    const [cafeImage, setCafeImage] = useState('')
+    const [foodName, setFoodName] = useState('')
+    const [foodDescription, setFoodDescription] = useState('')
+    const [foodPrice, setFoodPrice] = useState('')
+    const [foodImage, setFoodImage] = useState('')
 
     const [editId, setEditId] = useState('')
-    const [editCafeName, setEditCafeName] = useState('')
-    const [editCafeDescription, setEditCafeDescription] = useState('')
-    const [editCafePrice, setEditCafePrice] = useState('')
-    const [editCafeImage, setEditCafeImage] = useState('')
+    const [editFoodName, setEditFoodName] = useState('')
+    const [editFoodDescription, setEditFoodDescription] = useState('')
+    const [editFoodPrice, setEditFoodPrice] = useState('')
+    const [editFoodImage, setEditFoodImage] = useState('')
 
     const [data, setData] = useState([]);
 
@@ -39,7 +39,7 @@ const MenuCafeCrud = () => {
     }, []);
 
     const getData = () => {
-        axios.get(MenuCafeEndPoint)
+        axios.get(MenuFoodEndPoint)
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -49,46 +49,46 @@ const MenuCafeCrud = () => {
             })
     }
 
-    async function editMenuCafe(cafes) {
+    async function editMenuFood(cafes) {
         handleShow();
-        setEditCafeName(cafes.cafeName);
-        setEditCafeDescription(cafes.cafeDescription);
-        setEditCafePrice(cafes.cafePrice);
-        setEditCafeImage(cafes.cafeImage);
+        setEditFoodName(cafes.foodName);
+        setEditFoodDescription(cafes.foodDescription);
+        setEditFoodPrice(cafes.foodPrice);
+        setEditFoodImage(cafes.foodImage);
         setId(cafes.id);
     }
     async function Load() {
-        const result = await axios.get(MenuCafeEndPoint);
-        setCafeName(result.data);
+        const result = await axios.get(MenuFoodEndPoint);
+        setFoodName(result.data);
         console.log(result.data);
     }
 
     async function update(event) {
         event.preventDefault();
         try {
-            await axios.patch(`${MenuCafeEndPoint}/UpdateCafe/${Id}`, {
+            await axios.patch(`${MenuFoodEndPoint}/UpdateFood/${Id}`, {
                 id: Id,
-                cafeName: editCafeName,
-                cafeDescription: editCafeDescription,
-                cafePrice: editCafePrice,
-                cafeImage: editCafeImage,
+                foodName: editFoodName,
+                foodDescription: editFoodDescription,
+                foodPrice: editFoodPrice,
+                foodImage: editFoodImage,
             });
-            toast.success('MenuCafe updated successfully');
+            toast.success('MenuFood updated successfully');
             handleClose();
             getData();
             clear();
         } catch (error) {
-            console.error("Error updating MenuCafe:", error);
+            console.error("Error updating MenuFood:", error);
         }
     }
 
 
     const handelDelete = (id) => {
-        if (window, confirm("Are you sure to delete this coffee.") == true) {
-            axios.delete(`${MenuCafeEndPoint}/${id}`)
+        if (window, confirm("Are you sure to delete this room.") == true) {
+            axios.delete(`${MenuFoodEndPoint}/${id}`)
                 .then((result) => {
                     if (result.status == 200) {
-                        toast.success('MenuCafe has been deleted');
+                        toast.success('MenuFood has been deleted');
                         getData();
                     }
                 })
@@ -100,33 +100,33 @@ const MenuCafeCrud = () => {
 
     const handleSave = () => {
         handleShowAdd();
-        const url = MenuCafeEndPoint;
+        const url = MenuFoodEndPoint;
         const data = {
-            "cafeName": cafeName,
-            "cafeDescription": cafeDescription,
-            "cafePrice": cafePrice,
-            "cafeImage": cafeImage
+            "foodName": foodName,
+            "foodDescription": foodDescription,
+            "foodPrice": foodPrice,
+            "foodImage": foodImage
         }
 
         axios.post(url, data)
             .then((result) => {
                 getData();
                 clear();
-                toast.success('MenuCafe has been added.');
+                toast.success('Food has been added.');
                 handleCloseAdd();
             })
     }
 
     const clear = () => {
-        setCafeName('');
-        setCafeDescription('');
-        setCafePrice('');
-        setCafeImage('');
+        setFoodName('');
+        setFoodDescription('');
+        setFoodPrice('');
+        setFoodImage('');
 
-        setEditCafeName('');
-        setEditCafeDescription('');
-        setEditCafePrice('');
-        setEditCafeImage('');
+        setEditFoodName('');
+        setEditFoodDescription('');
+        setEditFoodPrice('');
+        setEditFoodImage('');
         setEditId('');
     }
 
@@ -135,7 +135,7 @@ const MenuCafeCrud = () => {
             <Fragment>
                 <ToastContainer />
                 <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Coffee&Sweets Table</b></p>
+                    <p style={{fontSize: "2em", margin: "0"}}><b>Food Table</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 
@@ -145,10 +145,10 @@ const MenuCafeCrud = () => {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Cafe Name</th>
-                            <th>Cafe Description</th>
-                            <th>Cafe Price</th>
-                            <th>Cafe Image</th>
+                            <th>Food Name</th>
+                            <th>Food Description</th>
+                            <th>Food Price</th>
+                            <th>Food Image</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -158,12 +158,12 @@ const MenuCafeCrud = () => {
                                     return (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
-                                            <td>{item.cafeName}</td>
-                                            <td>{item.cafeDescription}</td>
-                                            <td>{item.cafePrice}</td>
-                                            <td>{item.cafeImage}</td>
+                                            <td>{item.foodName}</td>
+                                            <td>{item.foodDescription}</td>
+                                            <td>{item.foodPrice}</td>
+                                            <td>{item.foodImage}</td>
                                             <td className='d-flex flex-row justify-content-evenly'>
-                                                <button className="btn btn-rounded btn-primary" onClick={() => editMenuCafe(item)}>Edit</button>
+                                                <button className="btn btn-rounded btn-primary" onClick={() => editMenuFood(item)}>Edit</button>
 
                                                 <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.id)}>Delete</button>
 
@@ -181,31 +181,31 @@ const MenuCafeCrud = () => {
                 {/* Add MenuCafe */}
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add MenuCafe</Modal.Title>
+                        <Modal.Title>Add MenuFood</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Cafe Name'
-                                    value={cafeName} onChange={(e) => setCafeName(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Food Name'
+                                    value={foodName} onChange={(e) => setFoodName(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Cafe Description'
-                                    value={cafeDescription} onChange={(e) => setCafeDescription(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Food Description'
+                                    value={foodDescription} onChange={(e) => setFoodDescription(e.target.value)}
                                 />
                             </Col>
                         </Row>
                         <br />
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Cafe Price'
-                                    value={cafePrice} onChange={(e) => setCafePrice(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Food Price'
+                                    value={foodPrice} onChange={(e) => setFoodPrice(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Cafe Image'
-                                    value={cafeImage} onChange={(e) => setCafeImage(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Food Image'
+                                    value={foodImage} onChange={(e) => setFoodImage(e.target.value)}
                                 />
                             </Col>
                         </Row>
@@ -220,21 +220,21 @@ const MenuCafeCrud = () => {
                     </Modal.Footer>
                 </Modal>
 
-                {/* Update MenuCafe */}
+                {/* Update MenuFood */}
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Update Cafe</Modal.Title>
+                        <Modal.Title>Update Food</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Cafe Name'
-                                    value={editCafeName} onChange={(e) => setEditCafeName(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Food Name'
+                                    value={editFoodName} onChange={(e) => setEditFoodName(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Description'
-                                    value={editCafeDescription} onChange={(e) => setEditCafeDescription(e.target.value)}
+                                    value={editFoodDescription} onChange={(e) => setEditFoodDescription(e.target.value)}
                                 />
                             </Col>
                         </Row>
@@ -242,12 +242,12 @@ const MenuCafeCrud = () => {
                         <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Price'
-                                    value={editCafePrice} onChange={(e) => setEditCafePrice(e.target.value)}
+                                    value={editFoodPrice} onChange={(e) => setEditFoodPrice(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Image'
-                                    value={editCafeImage} onChange={(e) => setEditCafeImage(e.target.value)}
+                                    value={editFoodImage} onChange={(e) => setEditFoodImage(e.target.value)}
                                 />
                             </Col>
                         </Row>
@@ -266,4 +266,4 @@ const MenuCafeCrud = () => {
     );
 };
 
-export default MenuCafeCrud;
+export default MenuFoodCrud;

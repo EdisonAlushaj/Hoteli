@@ -4,6 +4,7 @@ import './dashboard.css';
 import RoomCrud from './Crud-Functions/RoomCrud.jsx'
 import RoomCrud2 from './Crud-Functions/RoomCrud2.jsx'
 import MenuCafeCrud from './Crud-Functions/MenuCafeCrud.jsx';
+import MenuFoodCrud from './Crud-Functions/MenuFoodCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -67,10 +68,10 @@ const Dashboard = () => {
                             </NavLink>
                             <ul id="auth" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                                 <li className="sidebar-item">
-                                    <NavLink to="#" className="sidebar-link" onClick={toggleFoodMenuTable}>Foods</NavLink>
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleFoodMenuTable}>Food</NavLink>
                                 </li>
                                 <li className="sidebar-item">
-                                    <NavLink to="#" className="sidebar-link" onClick={toggleCafeMenuTable}>Cafe&Sweets</NavLink>
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleCafeMenuTable}>Coffee&Sweets</NavLink>
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link">Drinks</NavLink>
@@ -113,41 +114,7 @@ const Dashboard = () => {
                         </div>
                         <div className="container-fluid">
                             {showFoodMenuTable && (
-                                <div className="mb-3">
-                                    <div className='d-flex flex-row align-items-center'>
-                                        <h3 className="fw-bold fs-4 my-3">Food Menu</h3>
-                                        <button className="btn btn-rounded btn-success ms-3">Add</button>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <table className="table table-striped">
-                                                <thead>
-                                                    <tr className="highlight" style={{ color: '#fff', textAlign: 'left' }}>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Id</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Food Name</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Description</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Price</th>
-                                                        <th scope="col" style={{ backgroundColor: '#b07256', color: '#fff' }}>Image</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Seafood Paella</td>
-                                                        <td style={{ width: '65%' }}>Traditional Spanish dish with a variety of fresh seafood and rice,
-                                                            paella is known for its aromatic flavors and vibrant colors, making it
-                                                            a beloved culinary delight enjoyed by locals and visitors alike.
-                                                        </td>
-                                                        <td>18.99$</td>
-                                                        <td>/</td>
-                                                        <td><button className="btn btn-rounded btn-primary">Edit</button></td>
-                                                        <td><button className="btn btn-rounded btn-danger">Delete</button></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                            <MenuFoodCrud/>
                             )}
                         </div>
                         <div className="container-fluid">
