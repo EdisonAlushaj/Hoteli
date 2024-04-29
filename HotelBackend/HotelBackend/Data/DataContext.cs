@@ -19,5 +19,14 @@ namespace HotelBackend.Data
         public DbSet<MenuDrink> MenuDrinks { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>()
+                .Property(r => r.Salary)
+                .HasColumnType("decimal(18, 2)"); 
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
