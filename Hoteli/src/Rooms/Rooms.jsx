@@ -138,11 +138,11 @@ const LayoutTwo = ({ title, capacity, size, description, imageUrls, currentIndex
 };
 
 const Rooms = () => {
-  const superiorDoubleRoomImages = [foto1, foto2, foto3, foto4, foto5];
-  const superiorTwinRoomImages = [foto6, foto7, foto8, foto9, foto10];
-  const deluxeDoubleRoomImages = [foto11, foto12, foto13, foto14, foto15];
-  const premiumDoubleRoomImages = [foto16, foto17, foto18, foto19, foto20];
-  const juniorSuiteImages = [foto21, foto22, foto23, foto24, foto25];
+  // const superiorDoubleRoomImages = [foto1, foto2, foto3, foto4, foto5];
+  // const superiorTwinRoomImages = [foto6, foto7, foto8, foto9, foto10];
+  // const deluxeDoubleRoomImages = [foto11, foto12, foto13, foto14, foto15];
+  // const premiumDoubleRoomImages = [foto16, foto17, foto18, foto19, foto20];
+  // const juniorSuiteImages = [foto21, foto22, foto23, foto24, foto25];
 
   const [roomsItems, setRooms] = useState([]);
 
