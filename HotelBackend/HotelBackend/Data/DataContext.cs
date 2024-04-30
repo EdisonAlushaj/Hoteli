@@ -31,5 +31,6 @@ namespace HotelBackend.Data
         }
 
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Table> Tables { get; set; }
     }
 }

@@ -4745,19 +4745,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Hp\\.nuget\\packages\\": {}
+    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
+      "projectUniqueName": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
       "projectName": "HotelBackend",
-      "projectPath": "C:\\Users\\Hp\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
-      "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hp\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\obj\\",
+      "projectPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
+      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4830,7 +4830,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
