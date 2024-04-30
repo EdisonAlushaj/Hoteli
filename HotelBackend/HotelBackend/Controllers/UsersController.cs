@@ -46,23 +46,6 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Users.ToListAsync()); ;
         }
 
-        //[HttpPut()]
-        //public async Task<ActionResult<List<User>>> UpdateUser(User updatedUser)
-        //{
-        //    var dbUser = await _context.Users.FindAsync(updatedUser.Id);
-        //    if (dbUser == null)
-        //        return NotFound("Hero not found");
-        //
-        //    dbUser.FullName = updatedUser.FullName;
-        //    dbUser.Email = updatedUser.Email;
-        //    dbUser.ContactNumber = updatedUser.ContactNumber;
-        //    dbUser.Password = updatedUser.Password;
-        //   
-        //    await _context.SaveChangesAsync();
-        //
-        //    return Ok(await _context.Users.ToListAsync()); ;
-        //}
-
         [HttpPatch]
         [Route("UpdateUser/{id}")]
         public async Task<User> UpdateUser(User objUser)
@@ -77,7 +60,7 @@ namespace HotelBackend.Controllers
         {
             var dbUser = await _context.Users.FindAsync(id);
             if (dbUser == null)
-                return NotFound("Room not found");
+                return NotFound("User not found");
 
             _context.Users.Remove(dbUser);
 

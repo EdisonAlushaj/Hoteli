@@ -21,6 +21,7 @@ namespace HotelBackend.Data
         public DbSet<User> Users { get; set; }
 
         public DbSet<Role> Roles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>()
@@ -28,5 +29,7 @@ namespace HotelBackend.Data
                 .HasColumnType("decimal(18, 2)"); 
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<UserRole> UserRoles { get; set; }
     }
 }
