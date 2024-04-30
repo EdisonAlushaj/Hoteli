@@ -2,8 +2,6 @@
 using HotelBackend.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelBackend.Controllers
@@ -20,57 +18,77 @@ namespace HotelBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<UserRole>>> GetAllUserRoles()
+        public async Task<ActionResult<IEnumerable<UserRole>>> GetUserRole()
         {
-            var userRoles = await _context.UserRoles.ToListAsync();
+            var userRoles = await _context.UserRoles
+                                        .Include(ur => ur.User)
+                                        .Include(ur => ur.Role)
+                                        .ToListAsync();
+
+            if (userRoles == null || userRoles.Count == 0)
+                return NotFound("No user roles found");
+
             return Ok(userRoles);
         }
 
-        [HttpGet("{userId}/{roleId}")]
-        public async Task<ActionResult<UserRole>> GetUserRole(int userId, int roleId)
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserRole>> GetUserRoleById(int id)
         {
-            var userRole = await _context.UserRoles
-                .FirstOrDefaultAsync(ur => ur.UserId == userId && ur.RoleId == roleId);
+            var userRole = await _context.UserRoles.FindAsync(id);
 
             if (userRole == null)
                 return NotFound("UserRole not found");
 
             return Ok(userRole);
         }
+
         [HttpPost]
-        public async Task<ActionResult<UserRole>> AddUserRole(UserRole userRole)
+        public async Task<ActionResult<UserRole>> AddUserRole(int userId, int roleId)
         {
-            // Check if the user exists
-            var user = await _context.Users.FindAsync(userRole.UserId);
-            if (user == null)
+            var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
+            if (!userExists)
             {
                 return NotFound("User not found");
             }
 
-            // If the user already has a role assigned, check if the role exists
-            if (userRole.RoleId != null)
+            var roleExists = await _context.Roles.AnyAsync(r => r.Id == roleId);
+            if (!roleExists)
             {
-                var role = await _context.Roles.FindAsync(userRole.RoleId);
-                if (role == null)
-                {
-                    return NotFound("Role not found");
-                }
+                return NotFound("Role not found");
             }
 
-            // If the user already has a role assigned or if no role is specified, proceed to add the user-role association
+            var existingUserRole = await _context.UserRoles.FirstOrDefaultAsync(ur => ur.UserId == userId && ur.RoleId == roleId);
+            if (existingUserRole != null)
+            {
+                return Conflict("User-Role association already exists");
+            }
+
+            var user = await _context.Users.FindAsync(userId);
+            var role = await _context.Roles.FindAsync(roleId);
+
+            var userRole = new UserRole
+            {
+                UserId = userId,
+                RoleId = roleId,
+                User = user,
+                Role = role
+            };
+
             _context.UserRoles.Add(userRole);
             await _context.SaveChangesAsync();
 
+            // Return the newly created user-role with user and role populated
             return CreatedAtAction(nameof(GetUserRole), new { userId = userRole.UserId, roleId = userRole.RoleId }, userRole);
         }
 
 
 
-        [HttpDelete("{userId}/{roleId}")]
-        public async Task<ActionResult<UserRole>> DeleteUserRole(int userId, int roleId)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserRole>> DeleteUserRole(int id)
         {
-            var userRole = await _context.UserRoles
-                .FirstOrDefaultAsync(ur => ur.UserId == userId && ur.RoleId == roleId);
+            var userRole = await _context.UserRoles.FindAsync(id);
 
             if (userRole == null)
                 return NotFound("UserRole not found");
@@ -79,11 +97,6 @@ namespace HotelBackend.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(userRole);
-        }
-
-        private bool UserRoleExists(int userId, int roleId)
-        {
-            return _context.UserRoles.Any(ur => ur.UserId == userId && ur.RoleId == roleId);
         }
     }
 }
