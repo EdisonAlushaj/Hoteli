@@ -8,7 +8,9 @@ const SliderRoom = ({ images, onNext, onPrev, currentIndex }) => {
     React.useEffect(() => {
         const translateValue = -currentIndex * 100 + '%';
         slides.current.style.transform = `translateX(${translateValue})`;
-    }, [currentIndex]);
+    
+        console.log('Images:', images);
+    }, [currentIndex, images]);
 
     return (
         <div className="container-fluid p-0 w-100 position-relative">

@@ -74,7 +74,6 @@ class App extends Component {
           <Suspense fallback={<div>Loading...</div>}>
             <AppRoutes />
           </Suspense>
-          <Footer />
         </HashRouter>
       </div>
     );

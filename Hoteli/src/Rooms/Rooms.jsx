@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "./SliderRoom";
 import CoverImg from "./RoomIMG/room-cover.jpg";
+import { RoomEndPoint } from '../endpoints';
+
 import foto1 from "./RoomIMG/Room1-1.jpg";
 import foto2 from "./RoomIMG/Room1-2.jpg";
 import foto3 from "./RoomIMG/Room1-3.jpg";
@@ -32,9 +34,10 @@ import foto24 from "./RoomIMG/Room5-4.jpg";
 import foto25 from "./RoomIMG/Room5-5.jpg";
 import "./Rooms.css";
 
-const RoomMain = ({ roomId, imageUrls, title, description, capacity, size }) => {
+const RoomMain = ({row, roomId, imageUrls, title, description, capacity, size }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
+
 
   const handleNextClick = () => {
     if (currentIndex < imageUrls.length - 1) {
@@ -53,7 +56,7 @@ const RoomMain = ({ roomId, imageUrls, title, description, capacity, size }) => 
   };
   return (
     <>
-      {roomId % 2 === 1 ? (
+      {row % 2 === 1 ? (
         <LayoutOne
           title={title}
           capacity={capacity}
@@ -94,7 +97,7 @@ const LayoutOne = ({ title, capacity, size, description, imageUrls, currentIndex
       </div>
 
       <div className="room-text container-fluid border border-black border-opacity-25 d-flex flex-column justify-content-center align-items-start p-5" style={{ width: "35%" }}>
-        <p className="w-75 text-start" style={{fontSize: '2.5em'}}>{title}</p>
+        <p className="w-75 text-start" style={{ fontSize: '2.5em' }}>{title}</p>
         <p className="text-sm-start">Capacity: {capacity}</p>
         <p className="text-start">Size: {size}</p>
         <p className="text-xl-start">{description}</p>
@@ -112,7 +115,7 @@ const LayoutTwo = ({ title, capacity, size, description, imageUrls, currentIndex
   return (
     <div className="room-main container-fluid w-100 p-0 pb-5 m-0 gap-3">
       <div className="room-text container-fluid border border-black border-opacity-25 d-flex flex-column justify-content-center align-items-start p-5" style={{ width: "35%" }}>
-        <p className="w-75 text-start"  style={{fontSize: '2.5em'}}>{title}</p>
+        <p className="w-75 text-start" style={{ fontSize: '2.5em' }}>{title}</p>
         <p className="text-sm-start">Capacity: {capacity}</p>
         <p className="text-start">Size: {size}</p>
         <p className="text-xl-start">{description}</p>
@@ -141,61 +144,48 @@ const Rooms = () => {
   const premiumDoubleRoomImages = [foto16, foto17, foto18, foto19, foto20];
   const juniorSuiteImages = [foto21, foto22, foto23, foto24, foto25];
 
+  const [roomsItems, setRooms] = useState([]);
+
+  const fetchRooms = async () => {
+    try {
+      const response = await fetch('https://localhost:7189/api/Room');
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const data = await response.json();
+      setRooms(data);
+    } catch (error) {
+      console.error('Error fetching food items:', error);
+    }
+  };
+  useEffect(() => {
+    fetchRooms();
+  }, []);
+
   return (
     <>
       <div className="cover d-flex justify-content-center align-items-center">
-        <p className="text-center position-absolute" style={{ fontFamily: 'Roboto Slab, serif', fontSize: '5em', color: '#fff'}}>
+        <p className="text-center position-absolute" style={{ fontFamily: 'Roboto Slab, serif', fontSize: '5em', color: '#fff' }}>
           Rooms
         </p>
 
         <img src={CoverImg} className="img-fluid d-block" alt="Cover Image" />
       </div>
+      {
+        roomsItems.map((roomItem, index) => (
+          <RoomMain
+            key={index}
+            row = {index+1}
+            roomId={roomItem.Id}
+            title={roomItem.roomName}
+            description={roomItem.description}
+            capacity={roomItem.capacity}
+            size={roomItem.size}
+            imageUrls={[roomItem.image]}
+          />
+        ))
+      }
 
-      {/* Replace the existing Room-main divs with the new RoomMain component */}
-      <RoomMain
-        roomId={1}
-        title="Superior Double Room"
-        description="Experience understated luxury inour Superior Double Bed Room. Elegantly designed with a harmonious blend of comfort and style, this space boasts a plush double bed, premium amenities, and a captivating view."
-        capacity="1-2 PERSONS"
-        size="22M2"
-        imageUrls={superiorDoubleRoomImages}
-      />
-
-      <RoomMain
-        roomId={2}
-        title="Superior Twin Room"
-        description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
-        capacity="1-2 PERSONS"
-        size="20M2"
-        imageUrls={superiorTwinRoomImages}
-      />
-
-      <RoomMain
-        roomId={3}
-        title="Deluxe Double Room"
-        description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
-        capacity="1-2 PERSONS"
-        size="20M2"
-        imageUrls={deluxeDoubleRoomImages}
-      />
-
-      <RoomMain
-        roomId={4}
-        title="Premium Double Room"
-        description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
-        capacity="1-2 PERSONS"
-        size="20M2"
-        imageUrls={premiumDoubleRoomImages}
-      />
-
-      <RoomMain
-        roomId={5}
-        title="Junior Suite"
-        description="Experience the essence of comfort in our Standard Double Room. Tastefully designed with a cozy ambiance, this space offers a comfortable double bed, essential amenities, and a serene atmosphere to unwind."
-        capacity="1-2 PERSONS"
-        size="20M2"
-        imageUrls={juniorSuiteImages}
-      />
     </>
   );
 };
