@@ -34,5 +34,6 @@ namespace HotelBackend.Data
         public DbSet<Table> Tables { get; set; }
         public DbSet<Activities> Activities { get; set; }
         public DbSet<Hall> Halls { get; set; }
+        public DbSet<GymEquipment> GymEquipments { get; set; }
     }
 }

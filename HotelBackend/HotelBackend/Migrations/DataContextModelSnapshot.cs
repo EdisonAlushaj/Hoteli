@@ -79,6 +79,34 @@ namespace HotelBackend.Migrations
                     b.ToTable("Activities");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.GymEquipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GymEqName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Works")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GymEquipments");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
                 {
                     b.Property<int>("Id")
