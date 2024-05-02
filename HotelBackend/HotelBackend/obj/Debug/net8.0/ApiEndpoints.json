@@ -1053,157 +1053,8 @@
     ]
   },
   {
-    "ContainingType": "HotelBackend.Controllers.TableReservationController",
-    "Method": "GetTableReservation",
-    "RelativePath": "api/TableReservation",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HotelBackend.Entities.TableReservation, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.TableReservationController",
-    "Method": "AddTableReservation",
-    "RelativePath": "api/TableReservation",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "FullName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Establishment",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "maxGuests",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "reservationDateTime",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "specialRequests",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "HotelBackend.Entities.TableReservation",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.TableReservationController",
-    "Method": "GetTableReservationById",
-    "RelativePath": "api/TableReservation/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "HotelBackend.Entities.TableReservation",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.TableReservationController",
-    "Method": "DeleteTableReservation",
-    "RelativePath": "api/TableReservation/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.TableReservation, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.TableReservationController",
-    "Method": "UpdateTableReservation",
-    "RelativePath": "api/TableReservation/UpdateTableReservation/{id}",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "objTableReservation",
-        "Type": "HotelBackend.Entities.TableReservation",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "HotelBackend.Entities.TableReservation",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
     "ContainingType": "HotelBackend.Controllers.UserRoleController",
-    "Method": "GetUserRole",
+    "Method": "GetAllUserRoles",
     "RelativePath": "api/UserRole",
     "HttpMethod": "GET",
     "IsController": true,
@@ -1211,7 +1062,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HotelBackend.Entities.UserRole, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.UserRole, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1230,14 +1081,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "roleId",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "userRole",
+        "Type": "HotelBackend.Entities.UserRole",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -1254,14 +1100,19 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.UserRoleController",
-    "Method": "GetUserRoleById",
-    "RelativePath": "api/UserRole/{id}",
+    "Method": "GetUserRole",
+    "RelativePath": "api/UserRole/{userId}/{roleId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -1281,13 +1132,18 @@
   {
     "ContainingType": "HotelBackend.Controllers.UserRoleController",
     "Method": "DeleteUserRole",
-    "RelativePath": "api/UserRole/{id}",
+    "RelativePath": "api/UserRole/{userId}/{roleId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleId",
         "Type": "System.Int32",
         "IsRequired": true
       }

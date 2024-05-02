@@ -19,10 +19,8 @@ namespace HotelBackend.Data
         public DbSet<MenuDrink> MenuDrinks { get; set; }
 
         public DbSet<User> Users { get; set; }
-      
 
-          
-            public DbSet<Role> Roles { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,19 +28,9 @@ namespace HotelBackend.Data
                 .Property(r => r.Salary)
                 .HasColumnType("decimal(18, 2)"); 
             base.OnModelCreating(modelBuilder);
-
-     
-            modelBuilder.Entity<TableReservation>()
-                .HasOne(tr => tr.User)
-                .WithMany(u => u.TableReservations)
-                .HasForeignKey(tr => tr.FullName);
-     
-
-    }
+        }
 
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Table> Tables { get; set; }
-        public DbSet<TableReservation> TableReservations{ get; set; }
-
     }
 }
