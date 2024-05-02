@@ -129,6 +129,264 @@
     ]
   },
   {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesController",
+    "Method": "GetAllActivities",
+    "RelativePath": "api/Activities",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Activities, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesController",
+    "Method": "AddActivities",
+    "RelativePath": "api/Activities",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Activities",
+        "Type": "HotelBackend.Entities.Activities",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Activities, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesController",
+    "Method": "GetActivities",
+    "RelativePath": "api/Activities/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Activities, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesController",
+    "Method": "DeleteActivities",
+    "RelativePath": "api/Activities/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Activities, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesController",
+    "Method": "UpdateActivities",
+    "RelativePath": "api/Activities/UpdateActivities/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objActivities",
+        "Type": "HotelBackend.Entities.Activities",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.Activities",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.HallController",
+    "Method": "GetAllHalls",
+    "RelativePath": "api/Hall",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Hall, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.HallController",
+    "Method": "AddHall",
+    "RelativePath": "api/Hall",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "hall",
+        "Type": "HotelBackend.Entities.Hall",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Hall, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.HallController",
+    "Method": "GetHall",
+    "RelativePath": "api/Hall/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Hall, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.HallController",
+    "Method": "DeleteHall",
+    "RelativePath": "api/Hall/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Hall, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.HallController",
+    "Method": "UpdateHall",
+    "RelativePath": "api/Hall/UpdateHall/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objHall",
+        "Type": "HotelBackend.Entities.Hall",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.Hall",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.LoginController",
     "Method": "Login",
     "RelativePath": "api/Login",
@@ -1054,7 +1312,7 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.UserRoleController",
-    "Method": "GetAllUserRoles",
+    "Method": "GetUserRole",
     "RelativePath": "api/UserRole",
     "HttpMethod": "GET",
     "IsController": true,
@@ -1062,7 +1320,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.UserRole, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HotelBackend.Entities.UserRole, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1081,9 +1339,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userRole",
-        "Type": "HotelBackend.Entities.UserRole",
-        "IsRequired": true
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -1100,19 +1363,14 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.UserRoleController",
-    "Method": "GetUserRole",
-    "RelativePath": "api/UserRole/{userId}/{roleId}",
+    "Method": "GetUserRoleById",
+    "RelativePath": "api/UserRole/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "roleId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -1132,18 +1390,13 @@
   {
     "ContainingType": "HotelBackend.Controllers.UserRoleController",
     "Method": "DeleteUserRole",
-    "RelativePath": "api/UserRole/{userId}/{roleId}",
+    "RelativePath": "api/UserRole/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "roleId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }

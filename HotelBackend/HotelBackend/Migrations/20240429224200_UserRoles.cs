@@ -35,6 +35,10 @@ namespace HotelBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            // Drop the existing index if it exists
+            migrationBuilder.Sql("IF EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_UserRoles_RoleId' AND object_id = OBJECT_ID('UserRoles')) " +
+                                 "DROP INDEX IX_UserRoles_RoleId ON UserRoles");
+
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
                 table: "UserRoles",
