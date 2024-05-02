@@ -295,6 +295,30 @@ namespace HotelBackend.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Spa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Spas");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.SuperHero", b =>
                 {
                     b.Property<int>("Id")
