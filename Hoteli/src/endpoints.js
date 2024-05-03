@@ -7,3 +7,5 @@ export const RoomEndPoint = `https://localhost:7189/api/Room`;
 export const MenuCafeEndPoint = `https://localhost:7189/api/MenuCafe`;
 //MenuFood endpoint
 export const MenuFoodEndPoint = `https://localhost:7189/api/MenuFood`;
+
+export const MenuDrinkEndPoint = `https://localhost:7189/api/MenuDrink`;

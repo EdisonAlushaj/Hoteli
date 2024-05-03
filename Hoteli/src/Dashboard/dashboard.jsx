@@ -5,12 +5,15 @@ import RoomCrud from './Crud-Functions/RoomCrud.jsx'
 import RoomCrud2 from './Crud-Functions/RoomCrud2.jsx'
 import MenuCafeCrud from './Crud-Functions/MenuCafeCrud.jsx';
 import MenuFoodCrud from './Crud-Functions/MenuFoodCrud.jsx';
+import MenuDrinkCrud from './Crud-Functions/MenuDrinkCrud.jsx'
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
     const [showFoodMenuTable, setShowFoodMenuTable] = useState(false);
     const [showRoomsTable, setShowRoomsTable] = useState(false);
     const [showCafeMenuTable, setShowCafeMenuTable] = useState(false);
+    const [showDrinkMenuTable, setShowDrinkMenuTable] = useState(false);
+
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -26,6 +29,9 @@ const Dashboard = () => {
 
     const toggleCafeMenuTable = () => {
         setShowCafeMenuTable(!showCafeMenuTable);
+    };
+    const toggleDrinkMenuTable = () => {
+        setShowDrinkMenuTable(!showDrinkMenuTable);
     };
 
    
@@ -74,7 +80,7 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={toggleCafeMenuTable}>Coffee&Sweets</NavLink>
                                 </li>
                                 <li className="sidebar-item">
-                                    <NavLink to="#" className="sidebar-link">Drinks</NavLink>
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleDrinkMenuTable}>Drinks</NavLink>
                                 </li>
                             </ul>
                         </li>
@@ -120,6 +126,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showCafeMenuTable && (
                                 <MenuCafeCrud/>
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showDrinkMenuTable && (
+                                <MenuDrinkCrud/>
                             )}
                         </div>
                     </main>

@@ -60,8 +60,12 @@ function Login() {
   if (isLoggedIn) {
     // If user is logged in, you can redirect to a different page or perform any action
     // For now, we'll just render a message
-    return <p>You are logged in!</p>;
+    <section className="container-fluid bg-dark py-5">
+       <NavLink to="/Rooms" className="text-decoration-none"> </NavLink>
+    </section>
+    
   }
+  
 
   return (
     <section style={{ backgroundColor: '#b07256' }}>
