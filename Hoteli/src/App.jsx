@@ -10,8 +10,8 @@ const About = React.lazy(() => import("./About"));
 const Rooms = React.lazy(() => import("./Rooms/Rooms"));
 const Contact = React.lazy(() => import("./Contact"));
 const Menu = React.lazy(() => import("./Menu/Menu"));
-const Login = React.lazy(() => import("./login-register/login"));
-const Register = React.lazy(() => import("./login-register/register"));
+const Login = React.lazy(() => import("./login.jsx"));
+const Register = React.lazy(() => import("./register.jsx"));
 const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
 
 export const MainLayout = () => {
@@ -74,7 +74,7 @@ class App extends Component {
           <Suspense fallback={<div>Loading...</div>}>
             <AppRoutes />
           </Suspense>
-          <Footer />
+          {/* <Footer /> */}
         </HashRouter>
       </div>
     );

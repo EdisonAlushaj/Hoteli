@@ -6,8 +6,8 @@ import About from "./About";
 import Rooms from "./Rooms/Rooms";
 import Contact from "./Contact";
 import Menu from "./Menu/Menu";
-import Login from "./login-register/login";
-import Register from "./login-register/register";
+import Login from "./login.jsx";
+import Register from "./register.jsx";
 import Dashboard from "./Dashboard/dashboard";
 
 const AppRoutes = () => (

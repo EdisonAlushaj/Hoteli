@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import Slider from './Slider/slider.jsx';
 import Cover from './Home/cover.jsx';
 import SlideR from './3DSlide.jsx';
@@ -7,6 +9,7 @@ import './Home.css';
 import BookImg from './Rooms/RoomIMG/Room1-1.jpg'
 
 function Home() {
+
 
   return (
     <>

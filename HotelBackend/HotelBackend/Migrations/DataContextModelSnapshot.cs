@@ -79,7 +79,7 @@ namespace HotelBackend.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.GymEquipment", b =>
+            modelBuilder.Entity("HotelBackend.Entities.GymE", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,12 +99,9 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Works")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
-                    b.ToTable("GymEquipments");
+                    b.ToTable("GymEs");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
