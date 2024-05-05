@@ -28,6 +28,12 @@ namespace HotelBackend.Data
                 .Property(r => r.Salary)
                 .HasColumnType("decimal(18, 2)"); 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Pool>()
+                 .HasOne<Hall>() 
+                 .WithMany()
+                 .HasForeignKey(p => p.HallId)
+                 .IsRequired();
         }
 
         public DbSet<UserRole> UserRoles { get; set; }
@@ -37,5 +43,7 @@ namespace HotelBackend.Data
         public DbSet<GymE> GymEs { get; set; }
         public DbSet<Spa> Spas { get; set; }
         public DbSet<Gym> Gymss { get; set; }
+        public DbSet<Pool> Pools { get; set; }
+        
     }
 }

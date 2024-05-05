@@ -238,6 +238,38 @@ namespace HotelBackend.Migrations
                     b.ToTable("MenuFoods");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberofGuests")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PoolArea")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallId");
+
+                    b.ToTable("Pools");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -449,6 +481,17 @@ namespace HotelBackend.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Hall", "Hall")
+                        .WithMany("Pools")
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hall");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.UserRole", b =>
                 {
                     b.HasOne("HotelBackend.Entities.Role", "Role")
@@ -466,6 +509,11 @@ namespace HotelBackend.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
+                {
+                    b.Navigation("Pools");
                 });
 #pragma warning restore 612, 618
         }

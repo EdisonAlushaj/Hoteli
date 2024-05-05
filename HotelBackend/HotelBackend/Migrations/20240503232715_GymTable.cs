@@ -1,17 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
 namespace HotelBackend.Migrations
 {
-    /// <inheritdoc />
     public partial class GymTable : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "GymEquipments");
+            migrationBuilder.Sql(@"IF OBJECT_ID('dbo.GymEquipments', 'U') IS NOT NULL
+                                      DROP TABLE dbo.GymEquipments;");
 
             migrationBuilder.CreateTable(
                 name: "GymEs",
@@ -29,7 +25,6 @@ namespace HotelBackend.Migrations
                 });
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

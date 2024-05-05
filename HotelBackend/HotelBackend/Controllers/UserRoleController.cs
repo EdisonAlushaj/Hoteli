@@ -79,7 +79,6 @@ namespace HotelBackend.Controllers
             _context.UserRoles.Add(userRole);
             await _context.SaveChangesAsync();
 
-            // Return the newly created user-role with user and role populated
             return CreatedAtAction(nameof(GetUserRole), new { userId = userRole.UserId, roleId = userRole.RoleId }, userRole);
         }
 
