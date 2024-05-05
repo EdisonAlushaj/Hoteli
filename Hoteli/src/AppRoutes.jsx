@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import {MainLayout} from "./App.jsx";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { MainLayout } from "./App.jsx";
 import Home from "./Home";
 import About from "./About";
 import Rooms from "./Rooms/Rooms";
@@ -12,16 +12,17 @@ import Dashboard from "./Dashboard/dashboard";
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<MainLayout />}>
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/about" element={<About />} />
-      <Route exact path="/rooms" element={<Rooms />} />
-      <Route exact path="/contact" element={<Contact />} />
-      <Route exact path="/menu" element={<Menu />} />
-      <Route exact path="/dashboard" element={<Dashboard />} />
-    </Route>
+    <Route path="/" element={<Navigate to="/login" />} />
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
+    <Route path="/dashboard" element={<Dashboard />} />
+    <Route path="/" element={<MainLayout />}>
+      <Route path="/home" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/rooms" element={<Rooms />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/menu" element={<Menu />} />
+    </Route>
   </Routes>
 );
 

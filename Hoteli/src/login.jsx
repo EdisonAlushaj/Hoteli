@@ -18,11 +18,19 @@ function Login() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(items)
-    }).then((result) => {
+    })
+   .then((result) => {
       result.json().then((resp) => {
         console.warn(resp);
-        navigate("/");
+        if (resp.role === 'admin') {
+          navigate("/dashboard");
+        } else {
+          navigate("/home");
+        }
       });
+    })
+   .catch((error) => {
+      console.error('Error fetching data:', error);
     });
   }
 
