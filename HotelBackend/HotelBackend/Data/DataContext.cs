@@ -34,12 +34,6 @@ namespace HotelBackend.Data
                  .WithMany()
                  .HasForeignKey(p => p.HallId)
                  .IsRequired();
-
-            modelBuilder.Entity<GymE>()
-                             .HasOne<Gym>()
-                             .WithMany()
-                             .HasForeignKey(p => p.GymId)
-                             .IsRequired();
         }
 
         public DbSet<UserRole> UserRoles { get; set; }

@@ -125,16 +125,11 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GymId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GymId");
 
                     b.ToTable("GymEs");
                 });
@@ -486,22 +481,15 @@ namespace HotelBackend.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.GymE", b =>
-                {
-                    b.HasOne("HotelBackend.Entities.Gym", null)
-                        .WithMany()
-                        .HasForeignKey("GymId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
                 {
-                    b.HasOne("HotelBackend.Entities.Hall", null)
-                        .WithMany()
+                    b.HasOne("HotelBackend.Entities.Hall", "Hall")
+                        .WithMany("Pools")
                         .HasForeignKey("HallId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Hall");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.UserRole", b =>
@@ -521,6 +509,11 @@ namespace HotelBackend.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
+                {
+                    b.Navigation("Pools");
                 });
 #pragma warning restore 612, 618
         }

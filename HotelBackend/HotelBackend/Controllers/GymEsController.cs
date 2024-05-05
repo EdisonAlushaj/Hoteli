@@ -36,12 +36,12 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<GymE>> AddPool(GymE gymE)
+        public async Task<ActionResult<List<GymE>>> AddGymE(GymE gymE)
         {
             _context.GymEs.Add(gymE);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetGymE), new { id = gymE.Id }, gymE);
+            return Ok(await _context.GymEs.ToListAsync()); ;
         }
 
         [HttpPatch]
