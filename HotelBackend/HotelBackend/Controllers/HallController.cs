@@ -35,7 +35,7 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Hall>> PostHall(Hall hall)
+        public async Task<ActionResult<Hall>> AddHall(Hall hall)
         {
             _context.Halls.Add(hall);
             await _context.SaveChangesAsync();
