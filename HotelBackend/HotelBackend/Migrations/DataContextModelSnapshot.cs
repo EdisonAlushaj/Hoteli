@@ -79,7 +79,7 @@ namespace HotelBackend.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.Gym", b =>
+            modelBuilder.Entity("HotelBackend.Entities.Fitnes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,9 +87,12 @@ namespace HotelBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("GymName")
+                    b.Property<string>("FitnesName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -106,7 +109,9 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gymss");
+                    b.HasIndex("HallId");
+
+                    b.ToTable("Fitness");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.GymE", b =>
@@ -481,15 +486,22 @@ namespace HotelBackend.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
+            modelBuilder.Entity("HotelBackend.Entities.Fitnes", b =>
                 {
-                    b.HasOne("HotelBackend.Entities.Hall", "Hall")
-                        .WithMany("Pools")
+                    b.HasOne("HotelBackend.Entities.Hall", null)
+                        .WithMany()
                         .HasForeignKey("HallId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Hall");
+            modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Hall", null)
+                        .WithMany()
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.UserRole", b =>
@@ -509,11 +521,6 @@ namespace HotelBackend.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
-                {
-                    b.Navigation("Pools");
                 });
 #pragma warning restore 612, 618
         }
