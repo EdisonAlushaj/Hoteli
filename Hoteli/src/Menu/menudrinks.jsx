@@ -33,8 +33,8 @@ function MenuDrinks() {
     };
 
     return (
-        <Container fluid style={{ backgroundColor: '#d1d1e0' }}>
-            <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b' }}>Menu</h1>
+        <Container fluid style={{ backgroundColor: '#d9bfbf' }}>
+            <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#603939' }}>Menu</h1>
             <Row className="mt-5">
                 <Col>
                 <Row md={4}>
