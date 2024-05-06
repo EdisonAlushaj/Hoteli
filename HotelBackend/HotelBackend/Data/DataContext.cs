@@ -21,7 +21,8 @@ namespace HotelBackend.Data
         public DbSet<User> Users { get; set; }
 
         public DbSet<Role> Roles { get; set; }
-
+        public DbSet<Pool> Pools { get; set; }
+        public DbSet<Shezlong> Shezlongs { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>()
@@ -34,6 +35,10 @@ namespace HotelBackend.Data
                  .WithMany()
                  .HasForeignKey(p => p.HallId)
                  .IsRequired();
+            modelBuilder.Entity<Shezlong>()
+                  .HasOne(s => s.Pool)
+                  .WithMany(p => p.Shezlongs)
+                  .HasForeignKey(s => s.PoolId);
 
             modelBuilder.Entity<Fitnes>()
                  .HasOne<Hall>()
@@ -55,7 +60,6 @@ namespace HotelBackend.Data
         public DbSet<FitnesEquipmet> FitnesEquipmets { get; set; }
         public DbSet<Spa> Spas { get; set; }
         public DbSet<Fitnes> Fitness { get; set; }
-        public DbSet<Pool> Pools { get; set; }
-        
+    
     }
 }

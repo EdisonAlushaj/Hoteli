@@ -13,6 +13,6 @@ namespace HotelBackend.Entities
         public string PoolArea { get; set; }
         public int NumberofGuests { get; set; }
         public int HallId { get; set; }
-
+        public List<Shezlong> Shezlongs { get; set; }
     }
 }

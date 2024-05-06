@@ -364,6 +364,24 @@ namespace HotelBackend.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Shezlong", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PoolId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PoolId");
+
+                    b.ToTable("Shezlongs");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Spa", b =>
                 {
                     b.Property<int>("Id")
@@ -522,6 +540,17 @@ namespace HotelBackend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Shezlong", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Pool", "Pool")
+                        .WithMany("Shezlongs")
+                        .HasForeignKey("PoolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pool");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.UserRole", b =>
                 {
                     b.HasOne("HotelBackend.Entities.Role", "Role")
@@ -539,6 +568,11 @@ namespace HotelBackend.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
+                {
+                    b.Navigation("Shezlongs");
                 });
 #pragma warning restore 612, 618
         }
