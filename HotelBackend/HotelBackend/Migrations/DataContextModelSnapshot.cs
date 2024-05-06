@@ -114,7 +114,7 @@ namespace HotelBackend.Migrations
                     b.ToTable("Fitness");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.GymE", b =>
+            modelBuilder.Entity("HotelBackend.Entities.FitnesEquipmet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,6 +126,9 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FitnesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("GymEqName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -136,7 +139,9 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GymEs");
+                    b.HasIndex("FitnesId");
+
+                    b.ToTable("FitnesEquipmets");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
@@ -458,6 +463,10 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -491,6 +500,15 @@ namespace HotelBackend.Migrations
                     b.HasOne("HotelBackend.Entities.Hall", null)
                         .WithMany()
                         .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.FitnesEquipmet", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Fitnes", null)
+                        .WithMany()
+                        .HasForeignKey("FitnesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

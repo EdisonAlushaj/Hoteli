@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240503232715_GymTable")]
-    partial class GymTable
+    [Migration("20240506084204_FitnesEquipments")]
+    partial class FitnesEquipments
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,7 +82,42 @@ namespace HotelBackend.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.GymE", b =>
+            modelBuilder.Entity("HotelBackend.Entities.Fitnes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FitnesName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PriceDaily")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PriceMonthly")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PriceOffers")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallId");
+
+                    b.ToTable("Fitness");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.FitnesEquipmet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,6 +129,9 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FitnesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("GymEqName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -104,7 +142,9 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GymEs");
+                    b.HasIndex("FitnesId");
+
+                    b.ToTable("FitnesEquipmets");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
@@ -209,6 +249,38 @@ namespace HotelBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MenuFoods");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberofGuests")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PoolArea")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallId");
+
+                    b.ToTable("Pools");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Role", b =>
@@ -394,6 +466,10 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -420,6 +496,33 @@ namespace HotelBackend.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Fitnes", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Hall", null)
+                        .WithMany()
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.FitnesEquipmet", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Fitnes", null)
+                        .WithMany()
+                        .HasForeignKey("FitnesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Hall", null)
+                        .WithMany()
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.UserRole", b =>

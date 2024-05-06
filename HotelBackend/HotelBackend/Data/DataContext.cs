@@ -40,13 +40,19 @@ namespace HotelBackend.Data
                  .WithMany()
                  .HasForeignKey(p => p.HallId)
                  .IsRequired();
+
+            modelBuilder.Entity<FitnesEquipmet>()
+                             .HasOne<Fitnes>()
+                             .WithMany()
+                             .HasForeignKey(p => p.FitnesId)
+                             .IsRequired();
         }
 
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Activities> Activities { get; set; }
         public DbSet<Hall> Halls { get; set; }
-        public DbSet<GymE> GymEs { get; set; }
+        public DbSet<FitnesEquipmet> FitnesEquipmets { get; set; }
         public DbSet<Spa> Spas { get; set; }
         public DbSet<Fitnes> Fitness { get; set; }
         public DbSet<Pool> Pools { get; set; }
