@@ -280,53 +280,45 @@ namespace HotelBackend.Migrations
                     b.ToTable("Pools");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.Role", b =>
+            modelBuilder.Entity("HotelBackend.Entities.Roli", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
 
-                    b.Property<string>("Address")
+                    b.Property<string>("RoleContractType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContractType")
+                    b.Property<string>("RoleDepartment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Department")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmergencyProceduresTraining")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime?>("RoleEndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LanguageSkills")
+                    b.Property<string>("RoleLanguageSkills")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("RoleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Salary")
+                    b.Property<decimal>("RoleSalary")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime>("RoleStartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UniformRequirements")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("RoleUniformRequirements")
+                        .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("RoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Rolis");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Room", b =>
@@ -457,46 +449,42 @@ namespace HotelBackend.Migrations
                     b.ToTable("Tables");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.User", b =>
+            modelBuilder.Entity("HotelBackend.Entities.Userr", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
-                    b.Property<string>("ContactNumber")
+                    b.Property<string>("UserContactNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("UserEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("UserFullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("UserPassword")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("UserId");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
+                    b.ToTable("Userrs");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.UserRole", b =>
+            modelBuilder.Entity("HotelBackend.Entities.UsersRoles", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UsersId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -504,13 +492,17 @@ namespace HotelBackend.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UsersRolesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasIndex("RoleId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsersRolesId"));
 
-                    b.HasIndex("UserId");
+                    b.HasKey("UsersId", "RolesId");
 
-                    b.ToTable("UserRoles");
+                    b.HasIndex("RolesId");
+
+                    b.ToTable("UsersRoless");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Fitnes", b =>
@@ -551,28 +543,38 @@ namespace HotelBackend.Migrations
                     b.Navigation("Pool");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.UserRole", b =>
+            modelBuilder.Entity("HotelBackend.Entities.UsersRoles", b =>
                 {
-                    b.HasOne("HotelBackend.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                    b.HasOne("HotelBackend.Entities.Roli", "Roles")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBackend.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                    b.HasOne("HotelBackend.Entities.Userr", "Userr")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.Navigation("Roles");
 
-                    b.Navigation("User");
+                    b.Navigation("Userr");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
                 {
                     b.Navigation("Shezlongs");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Roli", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Userr", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

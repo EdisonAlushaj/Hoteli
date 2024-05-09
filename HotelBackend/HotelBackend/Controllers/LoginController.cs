@@ -21,17 +21,17 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> Login(LoginRequest loginRequest)
+        public async Task<ActionResult<Userr>> Login(LoginRequest loginRequest)
         {
             Console.WriteLine("Received login request for email: " + loginRequest.Email);
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+            var user = await _context.Userrs.FirstOrDefaultAsync(u => u.UserEmail == loginRequest.Email);
 
             if (user == null)
             {
                 return NotFound("User not found");
             }
 
-            if (user.Password != loginRequest.Password)
+            if (user.UserPassword != loginRequest.Password)
             {
                 return Unauthorized("Invalid credentials");
             }
