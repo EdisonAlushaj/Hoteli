@@ -29,22 +29,20 @@ function Register() {
   };
 
   const handleRegister = () => {
-    const url = 'https://localhost:7189/api/Users'; // Updated URL to match your API
+    const url = 'https://localhost:7189/api/Userr';
     const data = {
-      "FullName": FullName,
-      "Email": Email,
-      "ContactNumber": ContactNumber,
-      "Password": Password,
+      "UserFullName": FullName,
+      "UserEmail": Email,
+      "UserContactNumber": ContactNumber,
+      "UserPassword": Password,
     }
 
     axios.post(url, data)
       .then((result) => {
-        // Handle success
         clear();
-        alert('User has been registered.'); // Changed to alert for simplicity
+        alert('User has been registered.');
       })
       .catch((error) => {
-        // Handle error
         setErrorMessage('Failed to register user.');
       });
   }
