@@ -356,6 +356,36 @@ namespace HotelBackend.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Sauna", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallId");
+
+                    b.ToTable("Saunas");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Shezlong", b =>
                 {
                     b.Property<int>("Id")
@@ -532,6 +562,15 @@ namespace HotelBackend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Sauna", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Hall", null)
+                        .WithMany()
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Shezlong", b =>
                 {
                     b.HasOne("HotelBackend.Entities.Pool", "Pool")
@@ -546,13 +585,13 @@ namespace HotelBackend.Migrations
             modelBuilder.Entity("HotelBackend.Entities.UsersRoles", b =>
                 {
                     b.HasOne("HotelBackend.Entities.Roli", "Roles")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HotelBackend.Entities.Userr", "Userr")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -565,16 +604,6 @@ namespace HotelBackend.Migrations
             modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
                 {
                     b.Navigation("Shezlongs");
-                });
-
-            modelBuilder.Entity("HotelBackend.Entities.Roli", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("HotelBackend.Entities.Userr", b =>
-                {
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

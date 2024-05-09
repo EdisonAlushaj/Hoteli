@@ -46,6 +46,12 @@ namespace HotelBackend.Data
                  .HasForeignKey(p => p.FitnesId)
                  .IsRequired();
 
+            modelBuilder.Entity<Sauna>()
+                 .HasOne<Hall>()
+                 .WithMany()
+                 .HasForeignKey(p => p.HallId)
+                 .IsRequired();
+
             modelBuilder.Entity<Roli>()
                 .Property(r => r.RoleSalary)
                 .HasColumnType("decimal(18, 2)");
@@ -71,6 +77,6 @@ namespace HotelBackend.Data
         public DbSet<FitnesEquipmet> FitnesEquipmets { get; set; }
         public DbSet<Spa> Spas { get; set; }
         public DbSet<Fitnes> Fitness { get; set; }
-    
+        public DbSet<Sauna> Saunas { get; set; }
     }
 }
