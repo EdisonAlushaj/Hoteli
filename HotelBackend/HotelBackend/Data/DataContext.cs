@@ -79,13 +79,18 @@ namespace HotelBackend.Data
                 .WithMany()
                 .HasForeignKey(tr => tr.UserId);
 
-            // Configure the relationship with compatible foreign key properties
             modelBuilder.Entity<TableReservation>()
                 .HasOne(tr => tr.Table)
                 .WithMany()
-                .HasForeignKey(tr => tr.Id); // Use compatible foreign key properties
+                .HasForeignKey(tr => tr.Id); 
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<RoomBooking>()
+                 .HasOne<Room>()
+                 .WithMany()
+                 .HasForeignKey(p => p.RoomId)
+                 .IsRequired();
         }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Activities> Activities { get; set; }
@@ -94,5 +99,6 @@ namespace HotelBackend.Data
         public DbSet<Spa> Spas { get; set; }
         public DbSet<Fitnes> Fitness { get; set; }
         public DbSet<Sauna> Saunas { get; set; }
+        public DbSet<RoomBooking> RoomBookings { get; set; }
     }
 }
