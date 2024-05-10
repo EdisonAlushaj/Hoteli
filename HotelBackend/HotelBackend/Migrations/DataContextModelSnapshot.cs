@@ -479,6 +479,44 @@ namespace HotelBackend.Migrations
                     b.ToTable("Tables");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.TableReservation", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Establishment")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxGuests")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReservationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("ReservationTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("SpecialRequests")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("TableReservationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TableReservationId"));
+
+                    b.HasKey("UserId", "Id");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("TableReservations");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Userr", b =>
                 {
                     b.Property<int>("UserId")
@@ -580,6 +618,25 @@ namespace HotelBackend.Migrations
                         .IsRequired();
 
                     b.Navigation("Pool");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.TableReservation", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBackend.Entities.Userr", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Table");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.UsersRoles", b =>
