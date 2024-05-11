@@ -8,6 +8,7 @@ import MenuDrinkCrud from './Crud-Functions/MenuDrinkCrud.jsx';
 import TableCrud from './Crud-Functions/TableCrud.jsx';
 import UsersCrud from './Crud-Functions/UsersCrud.jsx';
 import RolesCrud from './Crud-Functions/RolesCrud.jsx';
+import TableReservation from './Crud-Functions/TableReservation.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -18,7 +19,7 @@ const Dashboard = () => {
     const [showTableTable, setShowTableTable] = useState(false);
     const [showUsersTable, setShowUsersTable] = useState(false);
     const [showRolesTable, setShowRolesTable] = useState(false);
-
+    const [showTableReservationTable, setShowTableReservationTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -44,6 +45,10 @@ const Dashboard = () => {
     const toggleRolesTable = () => {
         setShowRolesTable(!showRolesTable);
     };
+    const toggleTableReservationTable = () => {
+        setShowTableReservationTable(!showTableReservationTable);
+    };
+    
 
 
 
@@ -114,6 +119,9 @@ const Dashboard = () => {
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleTableTable}>Tables</NavLink>
                                 </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleTableReservationTable}>Table Reservation</NavLink>
+                                </li>
                             </ul>
                         </li>
                         <li className="sidebar-item">
@@ -178,6 +186,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showTableTable && (
                                 <TableCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showTableReservationTable && (
+                                <TableReservation />
                             )}
                         </div>
                     </main>
