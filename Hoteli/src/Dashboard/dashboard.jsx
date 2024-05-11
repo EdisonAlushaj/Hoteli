@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import './dashboard.css';
-import RoomCrud from './Crud-Functions/RoomCrud.jsx'
 import RoomCrud2 from './Crud-Functions/RoomCrud2.jsx'
 import MenuCafeCrud from './Crud-Functions/MenuCafeCrud.jsx';
 import MenuFoodCrud from './Crud-Functions/MenuFoodCrud.jsx';
-import MenuDrinkCrud from './Crud-Functions/MenuDrinkCrud.jsx'
+import MenuDrinkCrud from './Crud-Functions/MenuDrinkCrud.jsx';
+import TableCrud from './Crud-Functions/TableCrud.jsx';
+import UsersCrud from './Crud-Functions/UsersCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -13,6 +14,8 @@ const Dashboard = () => {
     const [showRoomsTable, setShowRoomsTable] = useState(false);
     const [showCafeMenuTable, setShowCafeMenuTable] = useState(false);
     const [showDrinkMenuTable, setShowDrinkMenuTable] = useState(false);
+    const [showTableTable, setShowTableTable] = useState(false);
+    const [showUsersTable, setShowUsersTable] = useState(false);
 
 
     const toggleSidebar = () => {
@@ -33,6 +36,12 @@ const Dashboard = () => {
     const toggleDrinkMenuTable = () => {
         setShowDrinkMenuTable(!showDrinkMenuTable);
     };
+    const toggleTableTable = () => {
+        setShowTableTable(!showTableTable);
+    };
+    const toggleUsersTable = () => {
+        setShowUsersTable(!showUsersTable);
+    };
 
    
 
@@ -50,9 +59,9 @@ const Dashboard = () => {
                     </div>
                     <ul className="sidebar-nav">
                         <li className="sidebar-item">
-                            <NavLink to="#" className="sidebar-link">
+                            <NavLink to="#" className="sidebar-link" onClick={toggleUsersTable}>
                                 <i className="lni lni-user"></i>
-                                <span>Staff</span>
+                                <span>Users</span>
                             </NavLink>
                         </li>
                         <li className="sidebar-item">
@@ -81,6 +90,9 @@ const Dashboard = () => {
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleDrinkMenuTable}>Drinks</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleTableTable}>Tables</NavLink>
                                 </li>
                             </ul>
                         </li>
@@ -131,6 +143,16 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showDrinkMenuTable && (
                                 <MenuDrinkCrud/>
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showTableTable && (
+                                <TableCrud/>
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showUsersTable && (
+                                <UsersCrud/>
                             )}
                         </div>
                     </main>

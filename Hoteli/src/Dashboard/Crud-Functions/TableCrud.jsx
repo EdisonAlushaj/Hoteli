@@ -64,7 +64,7 @@ const TableCrud = () => {
     async function update(event) {
         event.preventDefault();
         try {
-            await axios.patch(`${TableEndPoint}/UpdateFood/${Id}`, {
+            await axios.patch(`${TableEndPoint}/UpdateTable/${Id}`, {
                 id: Id,
                 TableNumber: editTableNumber,
                 MaxGuests: editMaxGuests,
@@ -110,7 +110,7 @@ const TableCrud = () => {
             .then((result) => {
                 getData();
                 clear();
-                toast.success('Food has been added.');
+                toast.success('Table has been added.');
                 handleCloseAdd();
             })
     }
@@ -143,10 +143,9 @@ const TableCrud = () => {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Food Name</th>
-                            <th>Food Description</th>
-                            <th>Food Price</th>
-                            <th>Food Image</th>
+                            <th>TableNumber</th>
+                            <th>MaxGuests</th>
+                            <th>Establishment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -159,7 +158,6 @@ const TableCrud = () => {
                                             <td>{item.TableNumber}</td>
                                             <td>{item.MaxGuests}</td>
                                             <td>{item.Establishment}</td>
-                                            <td>{item.foodImage}</td>
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editTable(item)}>Edit</button>
 
@@ -176,7 +174,6 @@ const TableCrud = () => {
                     </tbody>
                 </Table>
 
-                {/* Add MenuCafe */}
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Table</Modal.Title>
@@ -184,12 +181,12 @@ const TableCrud = () => {
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Food Name'
+                                <input type="text" className='form-control' placeholder='Enter Table Number'
                                     value={TableNumber} onChange={(e) => setTableNumber(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Food Description'
+                                <input type="text" className='form-control' placeholder='Enter Table MaxGuests'
                                     value={MaxGuests} onChange={(e) => setMaxGuests(e.target.value)}
                                 />
                             </Col>
@@ -197,7 +194,7 @@ const TableCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Food Price'
+                                <input type="text" className='form-control' placeholder='Enter Establishment'
                                     value={Establishment} onChange={(e) => setEstablishment(e.target.value)}
                                 />
                             </Col>
@@ -217,17 +214,17 @@ const TableCrud = () => {
                 {/* Update Table */}
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Update Food</Modal.Title>
+                        <Modal.Title>Update Table</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Food Name'
+                                <input type="text" className='form-control' placeholder='Enter Table Number'
                                     value={editTableNumber} onChange={(e) => setEditTableNumber(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Description'
+                                <input type="text" className='form-control' placeholder='Enter MaxGuests'
                                     value={editMaxGuests} onChange={(e) => setEditMaxGuests(e.target.value)}
                                 />
                             </Col>
@@ -235,7 +232,7 @@ const TableCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Price'
+                                <input type="text" className='form-control' placeholder='Enter Establishment'
                                     value={editEstablishment} onChange={(e) => setEditEstablishment(e.target.value)}
                                 />
                             </Col>
