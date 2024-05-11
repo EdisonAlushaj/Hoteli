@@ -356,30 +356,6 @@ namespace HotelBackend.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("HotelBackend.Entities.RoomBooking", b =>
-                {
-                    b.Property<int>("RoomBookingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomBookingId"));
-
-                    b.Property<bool>("Availability")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DataEBooking")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoomBookingId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("RoomBookings");
-                });
-
             modelBuilder.Entity("HotelBackend.Entities.Sauna", b =>
                 {
                     b.Property<int>("Id")
@@ -622,17 +598,6 @@ namespace HotelBackend.Migrations
                         .HasForeignKey("HallId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HotelBackend.Entities.RoomBooking", b =>
-                {
-                    b.HasOne("HotelBackend.Entities.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Sauna", b =>
