@@ -7,6 +7,7 @@ import MenuFoodCrud from './Crud-Functions/MenuFoodCrud.jsx';
 import MenuDrinkCrud from './Crud-Functions/MenuDrinkCrud.jsx';
 import TableCrud from './Crud-Functions/TableCrud.jsx';
 import UsersCrud from './Crud-Functions/UsersCrud.jsx';
+import RolesCrud from './Crud-Functions/RolesCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -16,20 +17,18 @@ const Dashboard = () => {
     const [showDrinkMenuTable, setShowDrinkMenuTable] = useState(false);
     const [showTableTable, setShowTableTable] = useState(false);
     const [showUsersTable, setShowUsersTable] = useState(false);
+    const [showRolesTable, setShowRolesTable] = useState(false);
 
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
     };
-
     const toggleRoomsTable = () => {
         setShowRoomsTable(!showRoomsTable);
     };
-
     const toggleFoodMenuTable = () => {
         setShowFoodMenuTable(!showFoodMenuTable);
     };
-
     const toggleCafeMenuTable = () => {
         setShowCafeMenuTable(!showCafeMenuTable);
     };
@@ -42,8 +41,11 @@ const Dashboard = () => {
     const toggleUsersTable = () => {
         setShowUsersTable(!showUsersTable);
     };
+    const toggleRolesTable = () => {
+        setShowRolesTable(!showRolesTable);
+    };
 
-   
+
 
     return (
         <>
@@ -59,11 +61,29 @@ const Dashboard = () => {
                     </div>
                     <ul className="sidebar-nav">
                         <li className="sidebar-item">
-                            <NavLink to="#" className="sidebar-link" onClick={toggleUsersTable}>
+                            <NavLink
+                                to="#"
+                                className="sidebar-link collapsed has-dropdown"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#staff"
+                                aria-expanded="false"
+                                aria-controls="staff">
                                 <i className="lni lni-user"></i>
                                 <span>Users</span>
                             </NavLink>
+                            <ul id="staff" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleUsersTable}>Users</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleRolesTable}>Roles</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={null}>User&Roles</NavLink>
+                                </li>
+                            </ul>
                         </li>
+
                         <li className="sidebar-item">
                             <NavLink to="#" className="sidebar-link" onClick={toggleRoomsTable}>
                                 <i className="lni lni-agenda"></i>
@@ -126,33 +146,38 @@ const Dashboard = () => {
                     <main className="content px-3 py-4">
                         <h3 className="fw-bold fs-4 mb-3 text-center">Dashboard</h3>
                         <div className="container-fluid">
+                            {showUsersTable && (
+                                <UsersCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showRolesTable && (
+                                <RolesCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
                             {showRoomsTable && (
-                                <RoomCrud2/>
+                                <RoomCrud2 />
                             )}
                         </div>
                         <div className="container-fluid">
                             {showFoodMenuTable && (
-                            <MenuFoodCrud/>
+                                <MenuFoodCrud />
                             )}
                         </div>
                         <div className="container-fluid">
                             {showCafeMenuTable && (
-                                <MenuCafeCrud/>
+                                <MenuCafeCrud />
                             )}
                         </div>
                         <div className="container-fluid">
                             {showDrinkMenuTable && (
-                                <MenuDrinkCrud/>
+                                <MenuDrinkCrud />
                             )}
                         </div>
                         <div className="container-fluid">
                             {showTableTable && (
-                                <TableCrud/>
-                            )}
-                        </div>
-                        <div className="container-fluid">
-                            {showUsersTable && (
-                                <UsersCrud/>
+                                <TableCrud />
                             )}
                         </div>
                     </main>

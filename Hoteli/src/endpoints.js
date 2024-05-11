@@ -13,3 +13,5 @@ export const MenuDrinkEndPoint = `https://localhost:7189/api/MenuDrink`;
 export const TableEndPoint = `https://localhost:7189/api/Table`;
 
 export const UsersEndPoint = `https://localhost:7189/api/Userr`;
+
+export const RolesEndPoint = `https://localhost:7189/api/Roli`;
