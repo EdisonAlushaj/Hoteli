@@ -221,7 +221,7 @@ const Pool = () => {
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Department'
+                                <input type="text" className='form-control' placeholder='Enter Number Of Guests'
                                     value={numberofGuests} onChange={(e) => setNumberofGuests(e.target.value)}
                                 />
                             </Col>
@@ -281,7 +281,7 @@ const Pool = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="checkbox" className='form-control' placeholder='Enter HallId'
+                                <input type="number" className='form-control' placeholder='Enter HallId'
                                     value={editHallId} onChange={(e) => setEditHallId(e.target.value)}
                                 />
                          

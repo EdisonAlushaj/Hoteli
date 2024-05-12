@@ -9,6 +9,9 @@ import TableCrud from './Crud-Functions/TableCrud.jsx';
 import UsersCrud from './Crud-Functions/UsersCrud.jsx';
 import RolesCrud from './Crud-Functions/RolesCrud.jsx';
 import TableReservation from './Crud-Functions/TableReservation.jsx';
+import Hall from './Crud-Functions/Hall.jsx';
+import Pool from './Crud-Functions/Pool.jsx';
+import SpaCrud from './Crud-Functions/SpaCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -20,6 +23,11 @@ const Dashboard = () => {
     const [showUsersTable, setShowUsersTable] = useState(false);
     const [showRolesTable, setShowRolesTable] = useState(false);
     const [showTableReservationTable, setShowTableReservationTable] = useState(false);
+    const [showHallTable, setShowHallTable] = useState(false);
+    const [showPoolTable, setShowPoolTable] = useState(false);
+    const [showSpaCrudTable, setShowSpaCrudTable] = useState(false);
+    const [showSaunaTable, setShowSaunaTable] = useState(false);
+    const [showActivitiesTable, setShowActivitiesTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -47,6 +55,21 @@ const Dashboard = () => {
     };
     const toggleTableReservationTable = () => {
         setShowTableReservationTable(!showTableReservationTable);
+    };
+    const toggleHallTable = () => {
+        setShowHallTable(!showHallTable);
+    };
+    const togglePoolTable = () => {
+        setShowPoolTable(!showPoolTable);
+    };
+    const toggleSpaTable = () => {
+        setShowSpaCrudTable(!showSpaCrudTable);
+    };
+    const toggleSaunaTable = () => {
+        setShowSaunaTable(!showSaunaTable);
+    };
+    const toggleActivitiesTable = () => {
+        setShowActivitiesTable(!showActivitiesTable);
     };
     
 
@@ -125,6 +148,36 @@ const Dashboard = () => {
                             </ul>
                         </li>
                         <li className="sidebar-item">
+                            <NavLink
+                                to="#"
+                                className="sidebar-link collapsed has-dropdown"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#servicesDropdown"
+                                aria-expanded="false"
+                                aria-controls="servicesDropdown">
+                                <i className="lni lni-protection"></i>
+                                <span>Services</span>
+                            </NavLink>
+                            <ul id="servicesDropdown" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleHallTable}>Hall</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={togglePoolTable}>Pool</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleSpaTable}>Spa</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleSaunaTable}>Sauna</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleActivitiesTable}>Activities</NavLink>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li className="sidebar-item">
                             <NavLink to="#" className="sidebar-link">
                                 <i className="lni lni-agenda"></i>
                                 <span>About</span>
@@ -191,6 +244,21 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showTableReservationTable && (
                                 <TableReservation />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showHallTable && (
+                                <Hall />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showPoolTable && (
+                                <Pool />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showSpaCrudTable && (
+                                <SpaCrud />
                             )}
                         </div>
                     </main>

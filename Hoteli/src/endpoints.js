@@ -1,11 +1,10 @@
 const baseURL = 'https://localhost:7189';
 export const api = `${baseURL}/`;
 
-//Room endpoint
 export const RoomEndPoint = `https://localhost:7189/api/Room`;
-//MenuCafe endpoint
+
 export const MenuCafeEndPoint = `https://localhost:7189/api/MenuCafe`;
-//MenuFood endpoint
+
 export const MenuFoodEndPoint = `https://localhost:7189/api/MenuFood`;
 
 export const MenuDrinkEndPoint = `https://localhost:7189/api/MenuDrink`;
@@ -18,3 +17,8 @@ export const TableReservationsEndPoint = `https://localhost:7189/api/TableReserv
 
 export const RolesEndPoint = `https://localhost:7189/api/Roli`;
 
+export const HallEndPoint = `https://localhost:7189/api/Hall`;
+
+export const PoolEndPoint = `https://localhost:7189/api/Pool`;
+
+export const SpaEndPoint = `https://localhost:7189/api/Spa`;

@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const MenuFoodCrud = () => {
+const SpaCrud = () => {
 
     const [show, setShow] = useState(false)
     const [showAdd, setShowAdd] = useState(false);
@@ -24,12 +24,14 @@ const MenuFoodCrud = () => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
+    const [hallId, setHallId] = useState('')
 
 
     const [editId, setEditId] = useState('')
     const [editName, setEditName] = useState('')
     const [editPrice, setEditPrice] = useState('')
     const [editDescription, setEditDescription] = useState('')
+    const [editHallId, setEditHallId] = useState('')
 
 
     const [data, setData] = useState([]);
@@ -54,7 +56,7 @@ const MenuFoodCrud = () => {
         setEditName(cafes.name);
         setEditPrice(cafes.price);
         setEditDescription(cafes.description);
-    
+        setEditHallId(cafes.hallId);
      
         setId(cafes.id);
     }
@@ -71,7 +73,8 @@ const MenuFoodCrud = () => {
                 id: Id,
                 name: editName,
                 foodPrice: editPrice,
-                description: editDescription
+                description: editDescription,
+                hallId: editHallId
             });
             toast.success('Spa updated successfully');
             handleClose();
@@ -104,7 +107,8 @@ const MenuFoodCrud = () => {
         const data = {
             "name": name,
             "price": price,
-            "description": description
+            "description": description,
+            "hallId": hallId
         }
 
         axios.post(url, data)
@@ -120,10 +124,12 @@ const MenuFoodCrud = () => {
         setName('');
         setPrice('');
         setDescription('');
+        setHallId('');
       
         setEditName('');
         setEditPrice('');
         setEditDescription('');
+        setEditHallId('');
      
         setEditId('');
     }
@@ -133,7 +139,7 @@ const MenuFoodCrud = () => {
             <Fragment>
                 <ToastContainer />
                 <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Food Table</b></p>
+                    <p style={{fontSize: "2em", margin: "0"}}><b>Spa Table</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 
@@ -143,10 +149,10 @@ const MenuFoodCrud = () => {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Food Name</th>
-                            <th>Food Description</th>
-                            <th>Food Price</th>
-                            <th>Food Image</th>
+                            <th>Spa Name</th>
+                            <th>Spa Price</th>
+                            <th>Spa Description</th>
+                            <th>Hall Id</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -159,6 +165,7 @@ const MenuFoodCrud = () => {
                                             <td>{item.name}</td>
                                             <td>{item.price}</td>
                                             <td>{item.description}</td>
+                                            <td>{item.hallId}</td>
                                             
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editSpa(item)}>Edit</button>
@@ -176,10 +183,9 @@ const MenuFoodCrud = () => {
                     </tbody>
                 </Table>
 
-                {/* Add MenuCafe */}
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add MenuFood</Modal.Title>
+                        <Modal.Title>Add Spa</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
@@ -189,7 +195,7 @@ const MenuFoodCrud = () => {
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Spa Price'
+                                <input type="number" className='form-control' placeholder='Enter Spa Price'
                                     value={price} onChange={(e) => setPrice(e.target.value)}
                                 />
                             </Col>
@@ -197,9 +203,14 @@ const MenuFoodCrud = () => {
                         </Row>
                         <br />
                         <Row>
-                        <Col>
+                            <Col>
                                 <input type="text" className='form-control' placeholder='Enter Spa Description'
                                     value={description} onChange={(e) => setDescription(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
+                                <input type="number" className='form-control' placeholder='Enter Hall Id'
+                                    value={hallId} onChange={(e) => setHallId(e.target.value)}
                                 />
                             </Col>
                       
@@ -222,12 +233,12 @@ const MenuFoodCrud = () => {
                     <Modal.Body>
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Food Name'
+                                <input type="text" className='form-control' placeholder='Enter Spa Name'
                                     value={editName} onChange={(e) => setEditName(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Price'
+                                <input type="number" className='form-control' placeholder='Enter Price'
                                     value={editPrice} onChange={(e) => setEditPrice(e.target.value)}
                                 />
                             </Col>
@@ -235,9 +246,14 @@ const MenuFoodCrud = () => {
                         </Row>
                         <br />
                         <Row>
-                        <Col>
+                            <Col>
                                 <input type="text" className='form-control' placeholder='Enter Description'
                                     value={editDescription} onChange={(e) => setEditDescription(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
+                                <input type="number" className='form-control' placeholder='Enter Hall Id'
+                                    value={editHallId} onChange={(e) => setEditHallId(e.target.value)}
                                 />
                             </Col>
                         
@@ -257,4 +273,4 @@ const MenuFoodCrud = () => {
     );
 };
 
-export default MenuFoodCrud;
+export default SpaCrud;

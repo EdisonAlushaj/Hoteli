@@ -32,7 +32,7 @@ namespace HotelBackend.Data
 
             modelBuilder.Entity<Shezlong>()
                   .HasOne(s => s.Pool)
-                  .WithMany(p => p.Shezlongs)
+                  .WithMany()
                   .HasForeignKey(s => s.PoolId);
 
             modelBuilder.Entity<Fitnes>()

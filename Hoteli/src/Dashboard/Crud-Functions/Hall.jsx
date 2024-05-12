@@ -181,7 +181,7 @@ const Hall= () => {
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Food Description'
+                                <input type="text" className='form-control' placeholder='Enter Floor'
                                     value={floor} onChange={(e) => setFloor(e.target.value)}
                                 />
                             </Col>
