@@ -25,7 +25,7 @@ const UsersCrud = () => {
     const [roleContractType, setRoleContractType] = useState('')
     const [roleSalary, setRoleSalary] = useState('')
     const [roleDepartment, setRoleDepartment] = useState('')
-    const [roleUniformRequirements, setRoleUniformRequirements] = useState('')
+    const [roleUniformRequirements, setRoleUniformRequirements] = useState(false);
     const [roleLanguageSkills, setRoleLanguageSkills] = useState('')
     const [roleStartDate, setRoleStartDate] = useState('')
     const [roleEndDate, setRoleEndDate] = useState('')
@@ -35,7 +35,7 @@ const UsersCrud = () => {
     const [editRoleContractType, setEditRoleContractType] = useState('')
     const [editRoleSalary, setEditRoleSalary] = useState('')
     const [editRoleDepartment, setEditRoleDepartment] = useState('')
-    const [editRoleUniformRequirements, setEditRoleUniformRequirements] = useState('')
+    const [editRoleUniformRequirements, setEditRoleUniformRequirements] = useState(false)
     const [editRoleLanguageSkills, setEditRoleLanguageSkills] = useState('')
     const [editRoleStartDate, setEditRoleStartDate] = useState('')
     const [editRoleEndDate, setEditRoleEndDate] = useState('')
@@ -68,7 +68,7 @@ const UsersCrud = () => {
         setEditRoleLanguageSkills(roles.roleLanguageSkills);
         setEditRoleStartDate(roles.roleStartDate);
         setEditRoleEndDate(roles.roleEndDate);
-        setId(roles.id);
+        setId(roles.roleId);
     }
     async function Load() {
         const result = await axios.get(RolesEndPoint);
@@ -196,14 +196,14 @@ const UsersCrud = () => {
                                             <td>{item.roleContractType}</td>
                                             <td>{item.roleSalary}</td>
                                             <td>{item.roleDepartment}</td>
-                                            <td>{item.roleUniformRequirements}</td>
+                                            <td>{item.roleUniformRequirements == true ? 'Required' : 'Not Required'}</td>
                                             <td>{item.roleLanguageSkills}</td>
                                             <td>{item.roleStartDate}</td>
                                             <td>{item.roleEndDate}</td>
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editRole(item)}>Edit</button>
 
-                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.id)}>Delete</button>
+                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.roleId)}>Delete</button>
 
                                             </td>
                                         </tr>
@@ -249,8 +249,9 @@ const UsersCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="checkbox" className='form-control' placeholder='Enter Uniform Requirements'
-                                    value={roleUniformRequirements} onChange={(e) => setRoleUniformRequirements(e.target.value)}
+                                <input type="checkbox"
+                                    checked={roleUniformRequirements}
+                                    onChange={(e) => setRoleUniformRequirements(e.target.checked)}
                                 />
                             </Col>
                             <Col>
@@ -316,12 +317,9 @@ const UsersCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="checkbox" className='form-control' placeholder='Enter Uniform Requirements'
-                                    value={editRoleUniformRequirements} onChange={(e) => setEditRoleUniformRequirements(e.target.value)}
-                                />
-                                <input
-                                    type="checkbox" className='form-control' placeholder='Enter Uniform Requirements'
-                                    checked={editRoleUniformRequirements} onChange={(e) => setEditRoleUniformRequirements(!editRoleUniformRequirements)}
+                                <input type="checkbox"
+                                    checked={editRoleUniformRequirements}
+                                    onChange={(e) => setEditRoleUniformRequirements(e.target.checked)}
                                 />
                             </Col>
                             <Col>

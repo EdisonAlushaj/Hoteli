@@ -53,7 +53,7 @@ namespace HotelBackend.Controllers
             return objUser;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<Userr>>> DeleteUser(int id)
         {
             var dbUser = await _context.Userrs.FindAsync(id);

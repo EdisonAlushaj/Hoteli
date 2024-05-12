@@ -55,7 +55,7 @@ namespace HotelBackend.Controllers
             return objRole;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<Roli>>> DeleteRole(int id)
         {
             var dbRole = await _context.Rolis.FindAsync(id);

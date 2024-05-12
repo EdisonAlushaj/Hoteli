@@ -14,7 +14,6 @@ export const TableEndPoint = `https://localhost:7189/api/Table`;
 
 export const UsersEndPoint = `https://localhost:7189/api/Userr`;
 
-
 export const TableReservationsEndPoint = `https://localhost:7189/api/TableReservations`;
 
 export const RolesEndPoint = `https://localhost:7189/api/Roli`;

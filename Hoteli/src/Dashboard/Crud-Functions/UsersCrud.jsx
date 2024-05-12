@@ -21,10 +21,10 @@ const UsersCrud = () => {
     const handleShowAdd = () => setShowAdd(true);
 
     const [Id, setId] = useState('')
-    const [UserFullName, setUserFullName] = useState('')
-    const [UserEmail, setUserEmail] = useState('')
-    const [UserContactNumber, setUserContactNumber] = useState('')
-    const [UserPassword, setUserPassword] = useState('')
+    const [userFullName, setUserFullName] = useState('')
+    const [userEmail, setUserEmail] = useState('')
+    const [userContactNumber, setUserContactNumber] = useState('')
+    const [userPassword, setUserPassword] = useState('')
 
     const [editId, setEditId] = useState('')
     const [editUserFullName, setEditUserFullName] = useState('')
@@ -51,11 +51,11 @@ const UsersCrud = () => {
 
     async function editUser(cafes) {
         handleShow();
-        setEditUserFullName(cafes.UserFullName);
-        setEditUserEmail(cafes.UserEmail);
-        setEditUserContactNumber(cafes.UserContactNumber);
-        setEditUserPassword(cafes.UserPassword);
-        setId(cafes.id);
+        setEditUserFullName(cafes.userFullName);
+        setEditUserEmail(cafes.userEmail);
+        setEditUserContactNumber(cafes.userContactNumber);
+        setEditUserPassword(cafes.userPassword);
+        setId(cafes.userId);
     }
     async function Load() {
         const result = await axios.get(UsersEndPoint);
@@ -67,11 +67,11 @@ const UsersCrud = () => {
         event.preventDefault();
         try {
             await axios.patch(`${UsersEndPoint}/UpdateUser/${Id}`, {
-                UserId: Id,
-                UserFullName: editUserFullName,
-                UserEmail: editUserEmail,
-                UserContactNumber: editUserContactNumber,
-                UserPassword: editUserPassword,
+                userId: Id,
+                userFullName: editUserFullName,
+                userEmail: editUserEmail,
+                userContactNumber: editUserContactNumber,
+                userPassword: editUserPassword,
             });
             toast.success('User updated successfully');
             handleClose();
@@ -102,10 +102,10 @@ const UsersCrud = () => {
         handleShowAdd();
         const url = UsersEndPoint;
         const data = {
-            "UserFullName": UserFullName,
-            "UserEmail": UserEmail,
-            "UserContactNumber": UserContactNumber,
-            "UserPassword": UserPassword
+            "userFullName": userFullName,
+            "userEmail": userEmail,
+            "userContactNumber": userContactNumber,
+            "userPassword": userPassword
         }
 
         axios.post(url, data)
@@ -158,15 +158,14 @@ const UsersCrud = () => {
                                     return (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
-                                            <td>{item.UserFullName}</td>
-                                            <td>{item.UserEmail}</td>
-                                            <td>{item.UserContactNumber}</td>
-                                            <td>{item.UserPassword}</td>
+                                            <td>{item.userFullName}</td>
+                                            <td>{item.userEmail}</td>
+                                            <td>{item.userContactNumber}</td>
+                                            <td>{item.userPassword}</td>
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editUser(item)}>Edit</button>
 
-                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.id)}>Delete</button>
-
+                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.userId)}>Delete</button>
                                             </td>
                                         </tr>
                                     )
@@ -174,7 +173,6 @@ const UsersCrud = () => {
                                 :
                                 'Loading...'
                         }
-
                     </tbody>
                 </Table>
 
@@ -186,12 +184,12 @@ const UsersCrud = () => {
                         <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter User Full Name'
-                                    value={UserFullName} onChange={(e) => setUserFullName(e.target.value)}
+                                    value={userFullName} onChange={(e) => setUserFullName(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter User Email'
-                                    value={UserEmail} onChange={(e) => setUserEmail(e.target.value)}
+                                    value={userEmail} onChange={(e) => setUserEmail(e.target.value)}
                                 />
                             </Col>
                         </Row>
@@ -199,12 +197,12 @@ const UsersCrud = () => {
                         <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter User Contact Number'
-                                    value={UserContactNumber} onChange={(e) => setUserContactNumber(e.target.value)}
+                                    value={userContactNumber} onChange={(e) => setUserContactNumber(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter User Password'
-                                    value={UserPassword} onChange={(e) => setUserPassword(e.target.value)}
+                                    value={userPassword} onChange={(e) => setUserPassword(e.target.value)}
                                 />
                             </Col>
                         </Row>
