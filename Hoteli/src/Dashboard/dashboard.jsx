@@ -12,6 +12,7 @@ import TableReservation from './Crud-Functions/TableReservation.jsx';
 import Hall from './Crud-Functions/Hall.jsx';
 import Pool from './Crud-Functions/Pool.jsx';
 import SpaCrud from './Crud-Functions/SpaCrud.jsx';
+import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -259,6 +260,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showSpaCrudTable && (
                                 <SpaCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showActivitiesTable && (
+                                <ActivitiesCrud />
                             )}
                         </div>
                     </main>
