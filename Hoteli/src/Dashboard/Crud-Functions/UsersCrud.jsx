@@ -84,7 +84,7 @@ const UsersCrud = () => {
 
 
     const handelDelete = (id) => {
-        if (window, confirm("Are you sure to delete this user.") == true) {
+        if (window.confirm("Are you sure to delete this user.") == true) {
             axios.delete(`${UsersEndPoint}/${id}`)
                 .then((result) => {
                     if (result.status == 200) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {TableEndPoint} from'../../endpoints';
+import { TableEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -20,16 +20,16 @@ const TableCrud = () => {
     const handleCloseAdd = () => setShowAdd(false);
     const handleShowAdd = () => setShowAdd(true);
 
-    const [Id, setId] = useState('')
-    const [TableNumber, setTableNumber] = useState('')
-    const [MaxGuests, setMaxGuests] = useState('')
-    const [Establishment, setEstablishment] = useState('')
-   
+    const [id, setId] = useState('')
+    const [tableNumber, setTableNumber] = useState('')
+    const [maxGuests, setMaxGuests] = useState('')
+    const [establishment, setEstablishment] = useState('')
+
     const [editId, setEditId] = useState('')
     const [editTableNumber, setEditTableNumber] = useState('')
     const [editMaxGuests, setEditMaxGuests] = useState('')
     const [editEstablishment, setEditEstablishment] = useState('')
-   
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -49,10 +49,10 @@ const TableCrud = () => {
 
     async function editTable(cafes) {
         handleShow();
-        setEditTableNumber(cafes.TableNumber);
-        setEditMaxGuests(cafes.MaxGuests);
-        setEditEstablishment(cafes.Establishment);
-       
+        setEditTableNumber(cafes.tableNumber);
+        setEditMaxGuests(cafes.maxGuests);
+        setEditEstablishment(cafes.establishment);
+
         setId(cafes.id);
     }
     async function Load() {
@@ -64,12 +64,12 @@ const TableCrud = () => {
     async function update(event) {
         event.preventDefault();
         try {
-            await axios.patch(`${TableEndPoint}/UpdateTable/${Id}`, {
-                id: Id,
-                TableNumber: editTableNumber,
-                MaxGuests: editMaxGuests,
-                Establishment: editEstablishment,
-              
+            await axios.patch(`${TableEndPoint}/UpdateTable/${id}`, {
+                id: id,
+                tableNumber: editTableNumber,
+                maxGuests: editMaxGuests,
+                establishment: editEstablishment,
+
             });
             toast.success('Table updated successfully');
             handleClose();
@@ -82,7 +82,7 @@ const TableCrud = () => {
 
 
     const handelDelete = (id) => {
-        if (window, confirm("Are you sure to delete this room.") == true) {
+        if (window.confirm("Are you sure to delete this room.") == true) {
             axios.delete(`${TableEndPoint}/${id}`)
                 .then((result) => {
                     if (result.status == 200) {
@@ -100,10 +100,10 @@ const TableCrud = () => {
         handleShowAdd();
         const url = TableEndPoint;
         const data = {
-            "TableNumber": TableNumber,
-            "MaxGuests": MaxGuests,
-            "Establishment": Establishment,
-            
+            "tableNumber": tableNumber,
+            "maxGuests": maxGuests,
+            "establishment": establishment,
+
         }
 
         axios.post(url, data)
@@ -119,12 +119,12 @@ const TableCrud = () => {
         setTableNumber('');
         setMaxGuests('');
         setEstablishment('');
-    
+
 
         setEditTableNumber('');
         setEditMaxGuests('');
         setEditEstablishment('');
-        
+
         setEditId('');
     }
 
@@ -132,8 +132,8 @@ const TableCrud = () => {
         <>
             <Fragment>
                 <ToastContainer />
-                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Tables Table</b></p>
+                <div className='d-flex justify-content-evenly ' style={{ width: "20em", height: "3em", alignItems: "center" }}>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Tables Table</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 
@@ -155,9 +155,9 @@ const TableCrud = () => {
                                     return (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
-                                            <td>{item.TableNumber}</td>
-                                            <td>{item.MaxGuests}</td>
-                                            <td>{item.Establishment}</td>
+                                            <td>{item.tableNumber}</td>
+                                            <td>{item.maxGuests}</td>
+                                            <td>{item.establishment}</td>
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editTable(item)}>Edit</button>
 
@@ -182,23 +182,28 @@ const TableCrud = () => {
                         <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Table Number'
-                                    value={TableNumber} onChange={(e) => setTableNumber(e.target.value)}
+                                    value={tableNumber} onChange={(e) => setTableNumber(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Table MaxGuests'
-                                    value={MaxGuests} onChange={(e) => setMaxGuests(e.target.value)}
+                                    value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)}
                                 />
                             </Col>
                         </Row>
                         <br />
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Establishment'
-                                    value={Establishment} onChange={(e) => setEstablishment(e.target.value)}
-                                />
+                                {/* <input type="text" className='form-control' placeholder='Enter Establishment'
+                                    value={establishment} onChange={(e) => setEstablishment(e.target.value)}
+                                /> */}
+                                <select className='form-control' value={establishment} onChange={(e) => setEstablishment(e.target.value)}>
+                                    <option value="Restaurant">Restaurant</option>
+                                    <option value="Bar">Bar</option>
+                                    <option value="Cafe">Cafe</option>
+                                </select>
                             </Col>
-                       
+
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
@@ -232,11 +237,15 @@ const TableCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Establishment'
+                                {/* <input type="text" className='form-control' placeholder='Enter Establishment'
                                     value={editEstablishment} onChange={(e) => setEditEstablishment(e.target.value)}
-                                />
+                                /> */}
+                                <select className='form-control' value={editEstablishment} onChange={(e) => setEditEstablishment(e.target.value)}>
+                                    <option value="Restaurant">Restaurant</option>
+                                    <option value="Bar">Bar</option>
+                                    <option value="Cafe">Cafe</option>
+                                </select>
                             </Col>
-                         
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
