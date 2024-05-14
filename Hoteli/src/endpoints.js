@@ -24,3 +24,5 @@ export const PoolEndPoint = `https://localhost:7189/api/Pool`;
 export const SpaEndPoint = `https://localhost:7189/api/Spa`;
 
 export const ActivitiesEndPoint = `https://localhost:7189/api/Activities`;
+
+export const ShezlongEndPoints = `https://localhost:7189/api/Shezlong`;

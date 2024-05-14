@@ -13,6 +13,7 @@ import Hall from './Crud-Functions/Hall.jsx';
 import Pool from './Crud-Functions/Pool.jsx';
 import SpaCrud from './Crud-Functions/SpaCrud.jsx';
 import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
+import ShezlongCrud from './Crud-Functions/ShezlongCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -29,6 +30,7 @@ const Dashboard = () => {
     const [showSpaCrudTable, setShowSpaCrudTable] = useState(false);
     const [showSaunaTable, setShowSaunaTable] = useState(false);
     const [showActivitiesTable, setShowActivitiesTable] = useState(false);
+    const [showShezlongTable, setShowShezlongTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -71,6 +73,9 @@ const Dashboard = () => {
     };
     const toggleActivitiesTable = () => {
         setShowActivitiesTable(!showActivitiesTable);
+    };
+    const toggleShezlong = () => {
+        setShowShezlongTable(!showShezlongTable);
     };
     
 
@@ -173,6 +178,9 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={toggleSaunaTable}>Sauna</NavLink>
                                 </li>
                                 <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleShezlong}>Shezlong</NavLink>
+                                </li>
+                                <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleActivitiesTable}>Activities</NavLink>
                                 </li>
                             </ul>
@@ -260,6 +268,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showSpaCrudTable && (
                                 <SpaCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showShezlongTable && (
+                                <ShezlongCrud />
                             )}
                         </div>
                         <div className="container-fluid">
