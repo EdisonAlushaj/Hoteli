@@ -58,7 +58,7 @@ namespace HotelBackend.Data
                 .HasColumnType("decimal(18, 2)");
 
             modelBuilder.Entity<UsersRoles>()
-            .HasKey(ur => new { ur.UsersId, ur.RolesId });
+            .HasKey(ur => new { ur.UsersRolesId });
 
             modelBuilder.Entity<UsersRoles>()
                 .HasOne(ur => ur.Userr)

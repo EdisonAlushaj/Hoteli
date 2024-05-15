@@ -4,6 +4,7 @@ using HotelBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240515114740_UserROle-Foreign-Keys")]
+    partial class UserROleForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -551,23 +554,19 @@ namespace HotelBackend.Migrations
 
             modelBuilder.Entity("HotelBackend.Entities.UsersRoles", b =>
                 {
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UsersRolesId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsersRolesId"));
 
-                    b.Property<int>("RolesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UsersRolesId");
-
-                    b.HasIndex("RolesId");
-
-                    b.HasIndex("UsersId");
+                    b.HasKey("UsersId", "RolesId");
 
                     b.ToTable("UsersRoless");
                 });
@@ -636,25 +635,6 @@ namespace HotelBackend.Migrations
                     b.Navigation("Table");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HotelBackend.Entities.UsersRoles", b =>
-                {
-                    b.HasOne("HotelBackend.Entities.Roli", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HotelBackend.Entities.Userr", "Userr")
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Roles");
-
-                    b.Navigation("Userr");
                 });
 #pragma warning restore 612, 618
         }

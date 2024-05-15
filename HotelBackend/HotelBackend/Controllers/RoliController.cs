@@ -44,8 +44,6 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Rolis.ToListAsync()); ;
         }
 
-
-
         [HttpPatch]
         [Route("UpdateRole/{id}")]
         public async Task<Roli> UpdateRole(Roli objRole)

@@ -64,22 +64,18 @@ namespace HotelBackend.Controllers
                 return Conflict("User-Role association already exists");
             }
 
-            var user = await _context.Userrs.FindAsync(userId);
-            var role = await _context.Rolis.FindAsync(roleId);
-
             var userRole = new UsersRoles
             {
                 UsersId = userId,
-                RolesId = roleId,
-                Userr = user,
-                Roles = role
+                RolesId = roleId
             };
 
             _context.UsersRoless.Add(userRole);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUserRole), new { userId = userRole.UsersId, roleId = userRole.RolesId }, userRole);
+            return CreatedAtAction(nameof(GetUserRoleById), new { id = userRole.UsersRolesId }, userRole);
         }
+
 
 
 
@@ -89,12 +85,13 @@ namespace HotelBackend.Controllers
             var userRole = await _context.UsersRoless.FindAsync(id);
 
             if (userRole == null)
-                return NotFound("UserRole not found");
+                return NotFound("User Role not found");
 
             _context.UsersRoless.Remove(userRole);
             await _context.SaveChangesAsync();
 
-            return Ok(userRole);
+            return Ok(await _context.UsersRoless.ToListAsync());
         }
+
     }
 }

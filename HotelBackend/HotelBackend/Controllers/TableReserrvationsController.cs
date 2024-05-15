@@ -3,6 +3,7 @@ using HotelBackend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace HotelBackend.Controllers
 {
@@ -43,12 +44,8 @@ namespace HotelBackend.Controllers
             return Ok(TableReservation);
         }
         [HttpPost]
-        public async Task<ActionResult<TableReservation>> AddTableReservation(int userId, int tableId, DateTime reservationDate,
-    TimeSpan reservationTime,
-    int maxGuests,
-    string specialRequests,
-    EstablishmentType establishment)
-        {
+        public async Task<ActionResult<TableReservation>> AddTableReservation(int userId, int tableId, DateTime reservationDate, TimeSpan reservationTime, int maxGuests, string specialRequests, EstablishmentType establishment)
+        { 
             // Check if the user exists
             var userExists = await _context.Userrs.AnyAsync(u => u.UserId == userId);
             if (!userExists)
@@ -91,10 +88,10 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpDelete("{TableReservationId}")]
-        public async Task<ActionResult<TableReservation>> DeleteTableReservation(int TableReservationId)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<List<TableReservation>>> DeleteTableReservation(int id)
         {
-            var TableReservation = await _context.TableReservations.FindAsync(TableReservationId);
+            var TableReservation = await _context.TableReservations.FindAsync(id);
 
             if (TableReservation == null)
                 return NotFound("TableReservation not found");
