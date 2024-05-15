@@ -258,6 +258,52 @@
     ]
   },
   {
+    "ContainingType": "HotelBackend.Controllers.ContactUsController",
+    "Method": "GetAllContactRequests",
+    "RelativePath": "api/ContactUs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ContactRequest, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ContactUsController",
+    "Method": "Contact",
+    "RelativePath": "api/ContactUs",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "contactRequest",
+        "Type": "ContactRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ContactRequest",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.FitnesController",
     "Method": "GetAllFitness",
     "RelativePath": "api/Fitnes",
@@ -1234,16 +1280,16 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.RoliController",
-    "Method": "DeleteRole",
-    "RelativePath": "api/Roli",
-    "HttpMethod": "DELETE",
+    "Method": "GetRole",
+    "RelativePath": "api/Roli/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -1260,9 +1306,9 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.RoliController",
-    "Method": "GetRole",
+    "Method": "DeleteRole",
     "RelativePath": "api/Roli/{id}",
-    "HttpMethod": "GET",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -2162,21 +2208,21 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.TableReservationsController",
-    "Method": "GetTableReservationById",
-    "RelativePath": "api/TableReservations/{TableReservationId}",
-    "HttpMethod": "GET",
+    "Method": "DeleteTableReservation",
+    "RelativePath": "api/TableReservations/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "TableReservationId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "HotelBackend.Entities.TableReservation",
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.TableReservation, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2188,9 +2234,9 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.TableReservationsController",
-    "Method": "DeleteTableReservation",
+    "Method": "GetTableReservationById",
     "RelativePath": "api/TableReservations/{TableReservationId}",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -2260,16 +2306,16 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.UserrController",
-    "Method": "DeleteUser",
-    "RelativePath": "api/Userr",
-    "HttpMethod": "DELETE",
+    "Method": "GetUser",
+    "RelativePath": "api/Userr/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -2286,9 +2332,9 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.UserrController",
-    "Method": "GetUser",
+    "Method": "DeleteUser",
     "RelativePath": "api/Userr/{id}",
-    "HttpMethod": "GET",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using HotelBackend.Entities;
+using HotelBackend.Controllers;
 
 namespace HotelBackend.Data
 {
@@ -20,6 +21,7 @@ namespace HotelBackend.Data
         public DbSet<Userr> Userrs { get; set; }
         public DbSet<UsersRoles> UsersRoless { get; set; }
         public DbSet<Pool> Pools { get; set; }
+        public DbSet<ContactRequest> ContactRequests { get; set; }
         public DbSet<Shezlong> Shezlongs { get; set; }
         public DbSet<TableReservation> TableReservations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
