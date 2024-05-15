@@ -12,6 +12,7 @@ import TableReservation from './Crud-Functions/TableReservation.jsx';
 import Hall from './Crud-Functions/Hall.jsx';
 import Pool from './Crud-Functions/Pool.jsx';
 import SpaCrud from './Crud-Functions/SpaCrud.jsx';
+import SaunaCrud from './Crud-Functions/SaunaCrud.jsx';
 import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
 import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx'; 
 import ShezlongCrud from './Crud-Functions/ShezlongCrud.jsx';
@@ -277,6 +278,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showSpaCrudTable && (
                                 <SpaCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showSaunaTable && (
+                                <SaunaCrud />
                             )}
                         </div>
                         <div className="container-fluid">

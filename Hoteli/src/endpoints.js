@@ -28,3 +28,5 @@ export const ActivitiesEndPoint = `https://localhost:7189/api/Activities`;
 export const UserRoleEndPoint = `https://localhost:7189/api/UsersRoles`;
 
 export const ShezlongEndPoints = `https://localhost:7189/api/Shezlong`;
+
+export const SaunaEndPoint = `https://localhost:7189/api/Sauna`;
