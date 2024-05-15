@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Badge } from 'react-bootstrap';
+import axios from 'axios';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -20,15 +21,20 @@ const Contact = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
 
         if (form.checkValidity() === false) {
             e.stopPropagation();
         } else {
-            console.log('Form submitted:', formData);
-            setSubmitSuccess(true);
+            try {
+                const response = await axios.post('https://localhost:7189/api/ContactUs', formData);
+                console.log('Form submitted:', response.data);
+                setSubmitSuccess(true);
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
         }
 
         setValidated(true);
@@ -37,7 +43,6 @@ const Contact = () => {
     const handleItemClick = (index) => {
         setExpandedItem(expandedItem === index ? null : index);
     };
-
     return (
         <Container className="contact-container">
             <Row className="d-flex justify-content-center mt-2">
