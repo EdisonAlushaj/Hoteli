@@ -16,6 +16,7 @@ import SaunaCrud from './Crud-Functions/SaunaCrud.jsx';
 import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
 import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx'; 
 import ShezlongCrud from './Crud-Functions/ShezlongCrud.jsx';
+import ContactUs from './Crud-Functions/ContactUs.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -34,6 +35,7 @@ const Dashboard = () => {
     const [showActivitiesTable, setShowActivitiesTable] = useState(false);
     const [showUserRoleTable, setShowUserRoleTable] = useState(false);
     const [showShezlongTable, setShowShezlongTable] = useState(false);
+    const [showContactTable, setShowContactTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -83,7 +85,9 @@ const Dashboard = () => {
     const toggleShezlong = () => {
         setShowShezlongTable(!showShezlongTable);
     };
-
+    const toggleContactTable = () => {
+        setShowContactTable(!showContactTable);
+    };
 
 
     return (
@@ -122,7 +126,12 @@ const Dashboard = () => {
                                 </li>
                             </ul>
                         </li>
-
+                        <li className="sidebar-item">
+                            <NavLink to="#" className="sidebar-link" onClick={toggleContactTable}>
+                                <i className="lni lni-agenda"></i>
+                                <span>Contact</span>
+                            </NavLink>
+                        </li>
                         <li className="sidebar-item">
                             <NavLink to="#" className="sidebar-link" onClick={toggleRoomsTable}>
                                 <i className="lni lni-agenda"></i>
@@ -293,6 +302,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showActivitiesTable && (
                                 <ActivitiesCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showContactTable && (
+                                <ContactUs />
                             )}
                         </div>
                     </main>
