@@ -17,6 +17,7 @@ import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
 import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx'; 
 import ShezlongForm from './Crud-Functions/ShezlongForm.jsx';
 import ContactUs from './Crud-Functions/ContactUs.jsx';
+import ShezlongReservation from './Crud-Functions/ShezlongReservationCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -36,6 +37,7 @@ const Dashboard = () => {
     const [showUserRoleTable, setShowUserRoleTable] = useState(false);
     const [showShezlongTable, setShowShezlongTable] = useState(false);
     const [showContactTable, setShowContactTable] = useState(false);
+    const[showShezlongReservationTable,setShowShezlongReservationTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -88,7 +90,9 @@ const Dashboard = () => {
     const toggleContactTable = () => {
         setShowContactTable(!showContactTable);
     };
-
+    const toggleShezlongReservation = () => {
+        setShowShezlongReservationTable(!showShezlongReservationTable);
+    };
 
     return (
         <>
@@ -194,6 +198,10 @@ const Dashboard = () => {
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleShezlong}>Shezlong</NavLink>
                                 </li>
+
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleShezlongReservation}>Shezlong Reservation</NavLink>
+                                </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleActivitiesTable}>Activities</NavLink>
                                 </li>
@@ -297,6 +305,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showShezlongTable && (
                                 <ShezlongForm />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showShezlongReservationTable && (
+                                <ShezlongReservation />
                             )}
                         </div>
                         <div className="container-fluid">

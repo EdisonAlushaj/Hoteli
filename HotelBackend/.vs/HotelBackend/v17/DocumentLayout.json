@@ -1,66 +1,66 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\",
+  "WorkspaceRootPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\pool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\pool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\pool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\shezlongreservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\shezlongreservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\shezlongreservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\shezlongreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\shezlongreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\shezlongreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\usersrolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\usersrolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\usersrolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\shezlong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\shezlong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\shezlong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\userr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\userr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\userr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\usersroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\usersroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\usersroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\userrcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\userrcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\userrcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\poolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\poolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\poolcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\hall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\hall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\hall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\shezlongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\shezlongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\shezlongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\roomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\lenovo\\desktop\\hoteli\\hotelbackend\\hotelbackend\\migrations\\20240506133814_shezlong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\migrations\\20240506133814_shezlong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\migrations\\20240506133814_shezlong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\migrations\\20240516124756_shezlongreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\migrations\\20240516124756_shezlongreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,167 +70,153 @@
       "DocumentGroups": [
         {
           "DockedWidth": 141,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "PoolController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\PoolController.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\PoolController.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\PoolController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\PoolController.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\PoolController.cs",
               "RelativeToolTip": "HotelBackend\\Controllers\\PoolController.cs",
               "ViewState": "AQIAAB4AAAAAAAAAAAAYwC8AAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-16T11:12:08.295Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "20240516124756_ShezlongReservation.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
-              "RelativeToolTip": "HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T12:47:56.41Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UsersRoles.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\UsersRoles.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\UsersRoles.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\UsersRoles.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\UsersRoles.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T12:09:33.685Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "ShezlongReservationController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongReservationController.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongReservationController.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\ShezlongReservationController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongReservationController.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongReservationController.cs",
               "RelativeToolTip": "HotelBackend\\Controllers\\ShezlongReservationController.cs",
               "ViewState": "AQIAACkAAAAAAAAAAAAmwDsAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T12:01:31.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T12:01:31.402Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ShezlongReservation.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\ShezlongReservation.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\ShezlongReservation.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Entities\\ShezlongReservation.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\ShezlongReservation.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\ShezlongReservation.cs",
               "RelativeToolTip": "HotelBackend\\Entities\\ShezlongReservation.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:57:14.603Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:57:14.603Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "UsersRolesController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UsersRolesController.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UsersRolesController.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\UsersRolesController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UsersRolesController.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UsersRolesController.cs",
               "RelativeToolTip": "HotelBackend\\Controllers\\UsersRolesController.cs",
               "ViewState": "AQIAACUAAAAAAAAAAAAjwDYAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:56:36.374Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:56:36.374Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "DataContext.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Data\\DataContext.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
               "RelativeToolTip": "HotelBackend\\Data\\DataContext.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAA2wEcAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T09:21:57.117Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T09:21:57.117Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Shezlong.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Shezlong.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Entities\\Shezlong.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Shezlong.cs",
+              "RelativeToolTip": "HotelBackend\\Entities\\Shezlong.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T09:21:52.099Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Shezlong.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Shezlong.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\Shezlong.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Shezlong.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\Shezlong.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T09:21:52.099Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "Userr.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Userr.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Userr.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Entities\\Userr.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Userr.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Userr.cs",
               "RelativeToolTip": "HotelBackend\\Entities\\Userr.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAwB0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:53:00.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:53:00.227Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Pool.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Pool.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Pool.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Entities\\Pool.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Pool.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Pool.cs",
               "RelativeToolTip": "HotelBackend\\Entities\\Pool.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAkwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-16T11:00:20.222Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UserrController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UserrController.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Controllers\\UserrController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UserrController.cs",
-              "RelativeToolTip": "HotelBackend\\Controllers\\UserrController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwEIAAAA9AAAA",
+              "DocumentIndex": 7,
+              "Title": "UsersRoles.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\UsersRoles.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Entities\\UsersRoles.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\UsersRoles.cs",
+              "RelativeToolTip": "HotelBackend\\Entities\\UsersRoles.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:52:44.334Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T12:09:33.685Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
+              "Title": "20240516124756_ShezlongReservation.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
+              "RelativeToolTip": "HotelBackend\\Migrations\\20240516124756_ShezlongReservation.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T12:47:56.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserrController.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UserrController.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Controllers\\UserrController.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\UserrController.cs",
+              "RelativeToolTip": "HotelBackend\\Controllers\\UserrController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwEIAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T11:52:44.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "RoomController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\RoomController.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\RoomController.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\RoomController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\RoomController.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\RoomController.cs",
               "RelativeToolTip": "HotelBackend\\Controllers\\RoomController.cs",
               "ViewState": "AQIAACsAAAAAAAAAAAAkwC4AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -238,37 +224,35 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "Hall.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Hall.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Hall.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Entities\\Hall.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Hall.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Hall.cs",
               "RelativeToolTip": "HotelBackend\\Entities\\Hall.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T11:00:14.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T11:00:14.733Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "ShezlongController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongController.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongController.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\ShezlongController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongController.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ShezlongController.cs",
               "RelativeToolTip": "HotelBackend\\Controllers\\ShezlongController.cs",
               "ViewState": "AQIAAFAAAAAAAAAAAAAkwGgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T09:25:21.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T09:25:21.856Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "20240506133814_Shezlong.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240506133814_Shezlong.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240506133814_Shezlong.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240506133814_Shezlong.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240506133814_Shezlong.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240506133814_Shezlong.cs",
               "RelativeToolTip": "HotelBackend\\Migrations\\20240506133814_Shezlong.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAwwC0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

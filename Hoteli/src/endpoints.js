@@ -30,3 +30,6 @@ export const UserRoleEndPoint = `https://localhost:7189/api/UsersRoles`;
 export const ShezlongEndPoints = `https://localhost:7189/api/Shezlong`;
 
 export const SaunaEndPoint = `https://localhost:7189/api/Sauna`;
+
+export const ShezlongReservationEndPoints = `https://localhost:7189/api/ShezlongReservation`;
+
