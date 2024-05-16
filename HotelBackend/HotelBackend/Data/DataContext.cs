@@ -33,7 +33,7 @@ namespace HotelBackend.Data
                  .IsRequired();
 
             modelBuilder.Entity<Shezlong>()
-                  .HasOne(s => s.Pool)
+                  .HasOne<Pool>()
                   .WithMany()
                   .HasForeignKey(s => s.PoolId);
 

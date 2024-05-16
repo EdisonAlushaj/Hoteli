@@ -15,7 +15,7 @@ import SpaCrud from './Crud-Functions/SpaCrud.jsx';
 import SaunaCrud from './Crud-Functions/SaunaCrud.jsx';
 import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
 import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx'; 
-import ShezlongCrud from './Crud-Functions/ShezlongCrud.jsx';
+import ShezlongForm from './Crud-Functions/ShezlongForm.jsx';
 import ContactUs from './Crud-Functions/ContactUs.jsx';
 
 const Dashboard = () => {
@@ -296,7 +296,7 @@ const Dashboard = () => {
                         </div>
                         <div className="container-fluid">
                             {showShezlongTable && (
-                                <ShezlongCrud />
+                                <ShezlongForm />
                             )}
                         </div>
                         <div className="container-fluid">

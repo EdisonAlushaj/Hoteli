@@ -44,17 +44,50 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetShezlong), new { id = shezlong.Id }, shezlong);
         }
 
-
         [HttpPatch]
         [Route("UpdateShezlong/{id}")]
-        public async Task<Shezlong> UpdateShezlong(Shezlong objShezlong)
+        public async Task<IActionResult> UpdateShezlong(int id, Shezlong updatedShezlong)
         {
-            _context.Entry(objShezlong).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return objShezlong;
+            var existingShezlong = await _context.Shezlongs.FindAsync(id);
+
+            if (existingShezlong == null)
+            {
+                return NotFound("Shezlong not found");
+            }
+
+            // Update the properties of the existing entity
+            existingShezlong.PoolId = updatedShezlong.PoolId; // Assuming poolId is the property you want to update
+
+            try
+            {
+                // Attempt to save changes
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // If another user has modified the same entity, handle concurrency conflict
+                if (!_context.Shezlongs.Any(e => e.Id == id))
+                {
+                    return NotFound("Shezlong not found");
+                }
+                else
+                {
+                    // Reload the entity from the database to get the latest values
+                    _context.Entry(existingShezlong).Reload();
+                    // You can implement custom logic here, like merging changes or throwing an error
+                    // For simplicity, let's return a conflict status with the updated entity
+                    return Conflict(existingShezlong);
+                }
+            }
+
+            // Return the updated entity
+            return Ok(existingShezlong);
         }
 
+
+
         [HttpDelete("{id}")]
+
         public async Task<ActionResult<List<Shezlong>>> DeleteShezlong(int id)
         {
             var dbShezlong = await _context.Shezlongs.FindAsync(id);
