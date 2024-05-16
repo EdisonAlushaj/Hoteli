@@ -432,6 +432,32 @@ namespace HotelBackend.Migrations
                     b.ToTable("Shezlongs");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.ShezlongReservation", b =>
+                {
+                    b.Property<int>("ReservationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
+
+                    b.Property<DateTime>("ReservationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ShezlongId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReservationId");
+
+                    b.HasIndex("ShezlongId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ShezlongReservations");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Spa", b =>
                 {
                     b.Property<int>("Id")
@@ -638,13 +664,30 @@ namespace HotelBackend.Migrations
 
             modelBuilder.Entity("HotelBackend.Entities.Shezlong", b =>
                 {
-                    b.HasOne("HotelBackend.Entities.Pool", "Pool")
+                    b.HasOne("HotelBackend.Entities.Pool", null)
                         .WithMany()
                         .HasForeignKey("PoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Pool");
+            modelBuilder.Entity("HotelBackend.Entities.ShezlongReservation", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Shezlong", "Shezlong")
+                        .WithMany()
+                        .HasForeignKey("ShezlongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBackend.Entities.Userr", "Userr")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Shezlong");
+
+                    b.Navigation("Userr");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.TableReservation", b =>

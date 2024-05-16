@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using HotelBackend.Entities;
-using HotelBackend.Controllers;
+﻿using HotelBackend.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBackend.Data
 {
@@ -20,6 +19,7 @@ namespace HotelBackend.Data
         public DbSet<Roli> Rolis { get; set; }
         public DbSet<Userr> Userrs { get; set; }
         public DbSet<UsersRoles> UsersRoless { get; set; }
+        public DbSet<ShezlongReservation> ShezlongReservations { get; set; }
         public DbSet<Pool> Pools { get; set; }
         public DbSet<ContactRequest> ContactRequests { get; set; }
         public DbSet<Shezlong> Shezlongs { get; set; }
@@ -27,7 +27,7 @@ namespace HotelBackend.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pool>()
-                 .HasOne<Hall>() 
+                 .HasOne<Hall>()
                  .WithMany()
                  .HasForeignKey(p => p.HallId)
                  .IsRequired();
@@ -72,6 +72,19 @@ namespace HotelBackend.Data
                 .WithMany()
                 .HasForeignKey(ur => ur.RolesId);
 
+            modelBuilder.Entity<ShezlongReservation>()
+          .HasKey(sr => new { sr.ReservationId });
+
+            modelBuilder.Entity<ShezlongReservation>()
+                .HasOne(sr => sr.Userr)
+                .WithMany()
+                .HasForeignKey(sr => sr.UserId);
+
+            // Configure the relationship between ShezlongReservation and Shezlong
+            modelBuilder.Entity<ShezlongReservation>()
+                .HasOne(sr => sr.Shezlong)
+                .WithMany()
+                .HasForeignKey(sr => sr.ShezlongId);
 
             modelBuilder.Entity<TableReservation>()
         .HasKey(ur => new { ur.UserId, ur.Id });
