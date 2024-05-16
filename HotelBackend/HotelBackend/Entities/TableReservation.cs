@@ -31,8 +31,8 @@ namespace HotelBackend.Entities
 
         [MaxLength(500, ErrorMessage = "Special requests cannot exceed 500 characters")]
         public string SpecialRequests { get; set; }
-       [JsonConverter(typeof(JsonStringEnumConverter))]
-       public EstablishmentType Establishment { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public EstablishmentType Establishment { get; set; }
 
         public int Id { get; set; }
         public Table Table { get; set; }

@@ -87,7 +87,7 @@ namespace HotelBackend.Data
                 .HasForeignKey(sr => sr.ShezlongId);
 
             modelBuilder.Entity<TableReservation>()
-        .HasKey(ur => new { ur.UserId, ur.Id });
+        .HasKey(ur => new { ur.TableReservationId });
 
             modelBuilder.Entity<TableReservation>()
                 .HasOne(tr => tr.User)

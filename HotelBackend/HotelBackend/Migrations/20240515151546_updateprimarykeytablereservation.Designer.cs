@@ -4,6 +4,7 @@ using HotelBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240515151546_updateprimarykeytablereservation")]
+    partial class updateprimarykeytablereservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,31 +44,6 @@ namespace HotelBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AboutContents");
-                });
-
-            modelBuilder.Entity("ContactRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContactRequests");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Activities", b =>
@@ -389,9 +367,6 @@ namespace HotelBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Cost")
-                        .HasColumnType("float");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -403,9 +378,9 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("image")
+                    b.Property<byte[]>("image")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -430,32 +405,6 @@ namespace HotelBackend.Migrations
                     b.HasIndex("PoolId");
 
                     b.ToTable("Shezlongs");
-                });
-
-            modelBuilder.Entity("HotelBackend.Entities.ShezlongReservation", b =>
-                {
-                    b.Property<int>("ReservationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
-
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ShezlongId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ReservationId");
-
-                    b.HasIndex("ShezlongId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ShezlongReservations");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Spa", b =>
@@ -666,30 +615,13 @@ namespace HotelBackend.Migrations
 
             modelBuilder.Entity("HotelBackend.Entities.Shezlong", b =>
                 {
-                    b.HasOne("HotelBackend.Entities.Pool", null)
+                    b.HasOne("HotelBackend.Entities.Pool", "Pool")
                         .WithMany()
                         .HasForeignKey("PoolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("HotelBackend.Entities.ShezlongReservation", b =>
-                {
-                    b.HasOne("HotelBackend.Entities.Shezlong", "Shezlong")
-                        .WithMany()
-                        .HasForeignKey("ShezlongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HotelBackend.Entities.Userr", "Userr")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Shezlong");
-
-                    b.Navigation("Userr");
+                    b.Navigation("Pool");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.TableReservation", b =>

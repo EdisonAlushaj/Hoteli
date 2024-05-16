@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotelBackend.Controllers
 {
@@ -19,33 +20,38 @@ namespace HotelBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TableReservation>>> GetTableReservation()
+        public async Task<ActionResult<IEnumerable<TableReservation>>> GetTableReservations()
         {
-            var TableReservation = await _context.TableReservations
-                                        .Include(ur => ur.User)
-                                        .Include(ur => ur.Table)
-                                        .ToListAsync();
+            var tableReservations = await _context.TableReservations
+                .Include(ur => ur.User)
+                .Include(ur => ur.Table)
+                .ToListAsync();
 
-            if (TableReservation == null || TableReservation.Count == 0)
-                return NotFound("No user roles found");
+            if (tableReservations.Count == 0)
+            {
+                return NotFound();
+            }
 
-            return Ok(TableReservation);
+            return Ok(tableReservations);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TableReservation>> GetTableReservationById(int id)
+        {
+            var tableReservation = await _context.TableReservations.FindAsync(id);
+
+            if (tableReservation == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(tableReservation);
         }
 
 
-
-        [HttpGet("{TableReservationId}")]
-        public async Task<ActionResult<TableReservation>> GetTableReservationById(int TableReservationId)
-        {
-            var TableReservation = await _context.TableReservations.FindAsync(TableReservationId);
-
-            if (TableReservation == null)
-                return NotFound("TableReservation not found");
-            return Ok(TableReservation);
-        }
         [HttpPost]
         public async Task<ActionResult<TableReservation>> AddTableReservation(int userId, int tableId, DateTime reservationDate, TimeSpan reservationTime, int maxGuests, string specialRequests, EstablishmentType establishment)
-        { 
+        {
             // Check if the user exists
             var userExists = await _context.Userrs.AnyAsync(u => u.UserId == userId);
             if (!userExists)
@@ -84,22 +90,24 @@ namespace HotelBackend.Controllers
             await _context.SaveChangesAsync();
 
             // Return the newly created table reservation
-            return CreatedAtAction(nameof(GetTableReservation), new { userId = tableReservation.UserId, tableId = tableReservation.Id }, tableReservation);
+            return CreatedAtAction(nameof(GetTableReservations), new { id = tableReservation.TableReservationId }, tableReservation);
         }
 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<TableReservation>>> DeleteTableReservation(int id)
+        public async Task<IActionResult> DeleteTableReservation(int id)
         {
-            var TableReservation = await _context.TableReservations.FindAsync(id);
+            var tableReservation = await _context.TableReservations.FindAsync(id);
 
-            if (TableReservation == null)
-                return NotFound("TableReservation not found");
+            if (tableReservation == null)
+            {
+                return NotFound();
+            }
 
-            _context.TableReservations.Remove(TableReservation);
+            _context.TableReservations.Remove(tableReservation);
             await _context.SaveChangesAsync();
 
-            return Ok(TableReservation);
+            return NoContent();
         }
     }
 }
