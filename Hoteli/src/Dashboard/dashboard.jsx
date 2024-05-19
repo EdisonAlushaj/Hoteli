@@ -14,12 +14,13 @@ import Pool from './Crud-Functions/Pool.jsx';
 import SpaCrud from './Crud-Functions/SpaCrud.jsx';
 import SaunaCrud from './Crud-Functions/SaunaCrud.jsx';
 import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
-import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx'; 
+import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx';
 import ShezlongForm from './Crud-Functions/ShezlongForm.jsx';
 import ContactUs from './Crud-Functions/ContactUs.jsx';
 import ShezlongReservation from './Crud-Functions/ShezlongReservationCrud.jsx';
 import Fitnes from './Crud-Functions/Fitnes.jsx';
 import FitnessEquipments from './Crud-Functions/FitnessEquipments.jsx';
+import AboutCrud from './Crud-Functions/AboutCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -39,9 +40,10 @@ const Dashboard = () => {
     const [showUserRoleTable, setShowUserRoleTable] = useState(false);
     const [showShezlongTable, setShowShezlongTable] = useState(false);
     const [showContactTable, setShowContactTable] = useState(false);
-    const [showShezlongReservationTable,setShowShezlongReservationTable] = useState(false);
-    const [showFitnesTable,setShowFitnesTable] = useState(false);
-    const [showFitnesEquipmentsTable,setShowFitnesEquipmentsTable] = useState(false);
+    const [showShezlongReservationTable, setShowShezlongReservationTable] = useState(false);
+    const [showFitnesTable, setShowFitnesTable] = useState(false);
+    const [showFitnesEquipmentsTable, setShowFitnesEquipmentsTable] = useState(false);
+    const [showAboutTable, setShowAboutTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -103,6 +105,9 @@ const Dashboard = () => {
     const toggleFintesEquipmentsTable = () => {
         setShowFitnesEquipmentsTable(!showFitnesEquipmentsTable);
     };
+    const toggleAboutTable = () => {
+        setShowAboutTable(!showAboutTable);
+    };
 
     return (
         <>
@@ -142,7 +147,7 @@ const Dashboard = () => {
                         </li>
                         <li className="sidebar-item">
                             <NavLink to="#" className="sidebar-link" onClick={toggleContactTable}>
-                                <i className="lni lni-agenda"></i>
+                                <i className="lni lni-cog"></i>
                                 <span>Contact</span>
                             </NavLink>
                         </li>
@@ -225,7 +230,7 @@ const Dashboard = () => {
                         </li>
 
                         <li className="sidebar-item">
-                            <NavLink to="#" className="sidebar-link">
+                            <NavLink to="#" className="sidebar-link" onClick={toggleAboutTable}>
                                 <i className="lni lni-agenda"></i>
                                 <span>About</span>
                             </NavLink>
@@ -234,12 +239,6 @@ const Dashboard = () => {
                             <NavLink to="#" className="sidebar-link">
                                 <i className="lni lni-popup"></i>
                                 <span>Slider</span>
-                            </NavLink>
-                        </li>
-                        <li className="sidebar-item">
-                            <NavLink to="#" className="sidebar-link">
-                                <i className="lni lni-cog"></i>
-                                <span>ContactUs</span>
                             </NavLink>
                         </li>
                     </ul>
@@ -266,6 +265,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showUserRoleTable && (
                                 <UserRoleCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showContactTable && (
+                                <ContactUs />
                             )}
                         </div>
                         <div className="container-fluid">
@@ -344,8 +348,8 @@ const Dashboard = () => {
                             )}
                         </div>
                         <div className="container-fluid">
-                            {showContactTable && (
-                                <ContactUs />
+                            {showAboutTable && (
+                                <AboutCrud />
                             )}
                         </div>
                     </main>
