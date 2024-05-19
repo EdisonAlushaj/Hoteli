@@ -18,6 +18,7 @@ import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx';
 import ShezlongForm from './Crud-Functions/ShezlongForm.jsx';
 import ContactUs from './Crud-Functions/ContactUs.jsx';
 import ShezlongReservation from './Crud-Functions/ShezlongReservationCrud.jsx';
+import Fitnes from './Crud-Functions/Fitnes.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -37,7 +38,8 @@ const Dashboard = () => {
     const [showUserRoleTable, setShowUserRoleTable] = useState(false);
     const [showShezlongTable, setShowShezlongTable] = useState(false);
     const [showContactTable, setShowContactTable] = useState(false);
-    const[showShezlongReservationTable,setShowShezlongReservationTable] = useState(false);
+    const [showShezlongReservationTable,setShowShezlongReservationTable] = useState(false);
+    const [showFitnesTable,setShowFitnesTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -92,6 +94,9 @@ const Dashboard = () => {
     };
     const toggleShezlongReservation = () => {
         setShowShezlongReservationTable(!showShezlongReservationTable);
+    };
+    const toggleFintesTable = () => {
+        setShowFitnesTable(!showFitnesTable);
     };
 
     return (
@@ -190,6 +195,9 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={togglePoolTable}>Pool</NavLink>
                                 </li>
                                 <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleFintesTable}>Fitnes</NavLink>
+                                </li>
+                                <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleSpaTable}>Spa</NavLink>
                                 </li>
                                 <li className="sidebar-item">
@@ -285,6 +293,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showHallTable && (
                                 <Hall />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showFitnesTable && (
+                                <Fitnes />
                             )}
                         </div>
                         <div className="container-fluid">
