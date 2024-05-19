@@ -19,6 +19,7 @@ import ShezlongForm from './Crud-Functions/ShezlongForm.jsx';
 import ContactUs from './Crud-Functions/ContactUs.jsx';
 import ShezlongReservation from './Crud-Functions/ShezlongReservationCrud.jsx';
 import Fitnes from './Crud-Functions/Fitnes.jsx';
+import FitnessEquipments from './Crud-Functions/FitnessEquipments.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -40,6 +41,7 @@ const Dashboard = () => {
     const [showContactTable, setShowContactTable] = useState(false);
     const [showShezlongReservationTable,setShowShezlongReservationTable] = useState(false);
     const [showFitnesTable,setShowFitnesTable] = useState(false);
+    const [showFitnesEquipmentsTable,setShowFitnesEquipmentsTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -97,6 +99,9 @@ const Dashboard = () => {
     };
     const toggleFintesTable = () => {
         setShowFitnesTable(!showFitnesTable);
+    };
+    const toggleFintesEquipmentsTable = () => {
+        setShowFitnesEquipmentsTable(!showFitnesEquipmentsTable);
     };
 
     return (
@@ -196,6 +201,9 @@ const Dashboard = () => {
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleFintesTable}>Fitnes</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleFintesEquipmentsTable}>Fitnes Equipments</NavLink>
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleSpaTable}>Spa</NavLink>
@@ -298,6 +306,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showFitnesTable && (
                                 <Fitnes />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showFitnesEquipmentsTable && (
+                                <FitnessEquipments />
                             )}
                         </div>
                         <div className="container-fluid">
