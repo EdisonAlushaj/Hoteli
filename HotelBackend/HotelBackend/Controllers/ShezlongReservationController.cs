@@ -42,39 +42,44 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ShezlongReservation>> AddShezlongReservation(int userId, int shezlongId, DateTime reservationDate)
+        [HttpPost]
+        public async Task<ActionResult<ShezlongReservation>> AddShezlongReservation([FromQuery] int userId, [FromQuery] int shezlongId, [FromQuery] DateTime reservationDate)
         {
-            var userExists = await _context.Userrs.AnyAsync(u => u.UserId == userId);
-            if (!userExists)
+            // Check if the shezlong is already reserved on the selected date
+            var existingReservation = await _context.ShezlongReservations.FirstOrDefaultAsync(ur => ur.ShezlongId == shezlongId && ur.ReservationDate.Date == reservationDate.Date);
+
+            if (existingReservation != null)
             {
-                return NotFound("User not found");
+                // If a reservation already exists for the same shezlong and date, return a conflict response
+                return Conflict("This shezlong is already reserved on the selected date.");
             }
 
-            var roleExists = await _context.Shezlongs.AnyAsync(r => r.Id == shezlongId);
-            if (!roleExists)
+            // If no existing reservation, proceed with shezlong validation
+            var shezlongExists = await _context.Shezlongs.AnyAsync(s => s.Id == shezlongId);
+            if (!shezlongExists)
             {
                 return NotFound("Shezlong not found");
             }
 
-            var existingUserRole = await _context.ShezlongReservations.FirstOrDefaultAsync(ur => ur.UserId == userId && ur.ShezlongId == shezlongId);
-            if (existingUserRole != null)
-            {
-                return Conflict("ShezlongReservation association already exists");
-            }
-
-
-            var userRole = new ShezlongReservation
+            // Create the reservation
+            var reservation = new ShezlongReservation
             {
                 UserId = userId,
                 ShezlongId = shezlongId,
-                 ReservationDate = reservationDate
+                ReservationDate = reservationDate
             };
 
-            _context.ShezlongReservations.Add(userRole);
+            _context.ShezlongReservations.Add(reservation);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetShezlongReservationById), new { id = userRole.ReservationId }, userRole);
+            return CreatedAtAction(nameof(GetShezlongReservationById), new { id = reservation.ReservationId }, reservation);
         }
+
+
+
+
+
+
 
 
         [HttpDelete("{id}")]
