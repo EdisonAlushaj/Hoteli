@@ -3,6 +3,7 @@ using HotelBackend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace HotelBackend.Controllers
 {
@@ -20,9 +21,9 @@ namespace HotelBackend.Controllers
         [HttpPost]
         public IActionResult CreateOrder([FromBody] OrderCreationDto orderDto)
         {
-            if (orderDto == null)
+            if (orderDto == null || orderDto.OrderItems == null || orderDto.OrderItems.Length == 0)
             {
-                return BadRequest();
+                return BadRequest("Invalid order data.");
             }
 
             // Retrieve the user
@@ -32,7 +33,7 @@ namespace HotelBackend.Controllers
                 return BadRequest("User not found.");
             }
 
-            // Validate and process order items
+            // Create order
             var order = new Order
             {
                 UserId = orderDto.UserId,
@@ -55,7 +56,6 @@ namespace HotelBackend.Controllers
                     return BadRequest($"Menu food item with ID {item.MenuFoodId} not found.");
                 }
                 item.Price = menuFood.FoodPrice * item.Quantity;
-                order.TotalOrderPrice += item.Price; // Add item price to total order price
             }
 
             // Calculate total order price
@@ -65,15 +65,33 @@ namespace HotelBackend.Controllers
             _context.Orders.Add(order);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetOrderById), new { id = order.OrderId }, order);
-        }
+            // Create a DTO for the response including the user details and excluding price from order items
+            var responseDto = new OrderDto
+            {
+                OrderId = order.OrderId,
+                User = new UserDto
+                {
+                    UserId = user.UserId,
+                    Name = user.UserFullName
+                },
+                DeliveryLocation = order.DeliveryLocation,
+                DeliveryNumber = order.DeliveryNumber,
+                PaymentMethod = order.PaymentMethod,
+                TotalOrderPrice = order.TotalOrderPrice, // Calculated total price
+                OrderItems = orderDto.OrderItems.Select(oi => new OrderItemDto
+                {
+                    MenuFoodId = oi.MenuFoodId,
+                    Quantity = oi.Quantity
+                }).ToArray()
+            };
 
+            return CreatedAtAction(nameof(GetOrderById), new { id = order.OrderId }, responseDto);
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetOrderById(int id)
         {
             var order = _context.Orders
-                .Include(o => o.User)
                 .Include(o => o.OrderItems)
                 .ThenInclude(oi => oi.MenuFood)
                 .FirstOrDefault(o => o.OrderId == id);
@@ -83,12 +101,62 @@ namespace HotelBackend.Controllers
                 return NotFound();
             }
 
-            return Ok(order);
+            return Ok(MapOrderToDto(order));
+        }
+
+        // Map Order entity to OrderDto
+        private OrderDto MapOrderToDto(Order order)
+        {
+            var user = _context.Userrs.Find(order.UserId);
+            return new OrderDto
+            {
+                OrderId = order.OrderId,
+                User = new UserDto
+                {
+                    UserId = user.UserId,
+                    Name = user.UserFullName
+                },
+                DeliveryLocation = order.DeliveryLocation,
+                DeliveryNumber = order.DeliveryNumber,
+                PaymentMethod = order.PaymentMethod,
+                TotalOrderPrice = order.TotalOrderPrice,
+                OrderItems = order.OrderItems.Select(oi => new OrderItemDto
+                {
+                    MenuFoodId = oi.MenuFoodId,
+                    Quantity = oi.Quantity
+                }).ToArray()
+            };
         }
     }
 
+    // Define DTOs for order
+    public class OrderDto
+    {
+        public int OrderId { get; set; }
+        public UserDto User { get; set; } // Include User object
+        public string DeliveryLocation { get; set; }
+        public string DeliveryNumber { get; set; }
+        public string PaymentMethod { get; set; }
+        public double TotalOrderPrice { get; set; }
+        public OrderItemDto[] OrderItems { get; set; }
+    }
 
-    // Define DTO (Data Transfer Object) for order creation
+    // Define DTO for user details
+    public class UserDto
+    {
+        public int UserId { get; set; }
+        public string Name { get; set; }
+    }
+
+    // Define DTO for order item
+    public class OrderItemDto
+    {
+        public int MenuFoodId { get; set; }
+        public int Quantity { get; set; }
+        // Note: Price property is excluded here
+    }
+
+    // Define DTO for order creation
     public class OrderCreationDto
     {
         public int UserId { get; set; }
@@ -97,11 +165,4 @@ namespace HotelBackend.Controllers
         public string PaymentMethod { get; set; }
         public OrderItemDto[] OrderItems { get; set; }
     }
-
-    public class OrderItemDto
-    {
-        public int MenuFoodId { get; set; }
-        public int Quantity { get; set; }
-    }
 }
-
