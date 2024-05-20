@@ -13,6 +13,7 @@ const Menu = React.lazy(() => import("./Menu/Menu"));
 const Login = React.lazy(() => import("./login.jsx"));
 const Register = React.lazy(() => import("./register.jsx"));
 const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
+const Pool = React.lazy(() => import("./Services/Pool"));
 
 export const MainLayout = () => {
   // useEffect(() => {
@@ -44,7 +45,7 @@ export const MainLayout = () => {
                     <a href="#">Spa</a>
                     <a href="#">Sauna</a>
                     <a href="#">Gym</a>
-                    <a href="#">Pool</a>
+                    <NavLink to="/Pool">Pool</NavLink>
                     <a href="#">Activities</a>
 
                     <NavLink to="/login">Login</NavLink>

@@ -9,7 +9,7 @@ import Menu from "./Menu/Menu";
 import Login from "./login.jsx";
 import Register from "./register.jsx";
 import Dashboard from "./Dashboard/dashboard";
-
+import Pool from "./Services/Pool";
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Navigate to="/login" />} />
@@ -22,6 +22,7 @@ const AppRoutes = () => (
       <Route path="/rooms" element={<Rooms />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/menu" element={<Menu />} />
+      <Route path="/pool" element={<Pool />} />
     </Route>
   </Routes>
 );
