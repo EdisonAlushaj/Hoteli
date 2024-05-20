@@ -24,6 +24,8 @@ namespace HotelBackend.Data
         public DbSet<ContactRequest> ContactRequests { get; set; }
         public DbSet<Shezlong> Shezlongs { get; set; }
         public DbSet<TableReservation> TableReservations { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pool>()
@@ -80,7 +82,6 @@ namespace HotelBackend.Data
                 .WithMany()
                 .HasForeignKey(sr => sr.UserId);
 
-            // Configure the relationship between ShezlongReservation and Shezlong
             modelBuilder.Entity<ShezlongReservation>()
                 .HasOne(sr => sr.Shezlong)
                 .WithMany()
@@ -94,11 +95,11 @@ namespace HotelBackend.Data
                 .WithMany()
                 .HasForeignKey(tr => tr.UserId);
 
-            // Configure the relationship with compatible foreign key properties
             modelBuilder.Entity<TableReservation>()
                 .HasOne(tr => tr.Table)
                 .WithMany()
-                .HasForeignKey(tr => tr.Id); // Use compatible foreign key properties
+                .HasForeignKey(tr => tr.Id);
+     
 
             base.OnModelCreating(modelBuilder);
         }

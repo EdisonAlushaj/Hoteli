@@ -1104,6 +1104,38 @@
     ]
   },
   {
+    "ContainingType": "HotelBackend.Controllers.OrderController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/Order",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderDto",
+        "Type": "HotelBackend.Controllers.OrderCreationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderController",
+    "Method": "GetOrderById",
+    "RelativePath": "api/Order/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.PoolController",
     "Method": "GetAllPools",
     "RelativePath": "api/Pool",
@@ -2230,7 +2262,7 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.TableReservationsController",
-    "Method": "GetTableReservation",
+    "Method": "GetTableReservations",
     "RelativePath": "api/TableReservations",
     "HttpMethod": "GET",
     "IsController": true,
@@ -2306,40 +2338,14 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.TableReservationsController",
-    "Method": "DeleteTableReservation",
-    "RelativePath": "api/TableReservations/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.TableReservation, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.TableReservationsController",
     "Method": "GetTableReservationById",
-    "RelativePath": "api/TableReservations/{TableReservationId}",
+    "RelativePath": "api/TableReservations/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "TableReservationId",
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2355,6 +2361,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.TableReservationsController",
+    "Method": "DeleteTableReservation",
+    "RelativePath": "api/TableReservations/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "HotelBackend.Controllers.UserrController",

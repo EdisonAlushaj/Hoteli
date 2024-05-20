@@ -273,6 +273,65 @@ namespace HotelBackend.Migrations
                     b.ToTable("MenuFoods");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<string>("DeliveryLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeliveryNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
+
+                    b.Property<int>("MenuFoodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("MenuFoodId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
                 {
                     b.Property<int>("Id")
@@ -646,6 +705,36 @@ namespace HotelBackend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.Order", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Userr", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.OrderItem", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.MenuFood", "MenuFood")
+                        .WithMany()
+                        .HasForeignKey("MenuFoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBackend.Entities.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuFood");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
                 {
                     b.HasOne("HotelBackend.Entities.Hall", null)
@@ -728,6 +817,11 @@ namespace HotelBackend.Migrations
                     b.Navigation("Roles");
 
                     b.Navigation("Userr");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }
