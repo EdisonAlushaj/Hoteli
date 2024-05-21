@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { ShezlongReservationEndPoints } from '../../endpoints';
+import { SpaReservationEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -9,11 +9,11 @@ import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ShezlongReservation= () => {
+const SpaReservationCrud= () => {
     const [showAdd, setShowAdd] = useState(false);
 
     const [userId, setUserId] = useState('');
-    const [shelzongId, setShelzongId] = useState('');
+    const [spaId, setspaId] = useState('');
     const[reservationDate,setReservationDate] =useState('');
     const [data, setData] = useState([]);
 
@@ -22,7 +22,7 @@ const ShezlongReservation= () => {
     }, []);
 
     const getData = () => {
-        axios.get(ShezlongReservationEndPoints)
+        axios.get(SpaReservationEndPoint)
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -33,11 +33,11 @@ const ShezlongReservation= () => {
     };
 
     const handleDelete = (id) => {
-        if (window.confirm("Are you sure to delete this Shezlong Reservation?")) {
-            axios.delete(`${ShezlongReservationEndPoints}/${id}`)
+        if (window.confirm("Are you sure to delete this Spa Reservation?")) {
+            axios.delete(`${SpaReservationEndPoint}/${id}`)
                 .then((result) => {
                     if (result.status === 200) {
-                        toast.success('Shezlong Reservation has been deleted');
+                        toast.success('Spa Reservation has been deleted');
                         getData();
                     }
                 })
@@ -48,13 +48,13 @@ const ShezlongReservation= () => {
     };
 
     const handleSave = () => {
-        const url = `${ShezlongReservationEndPoints}?userId=${userId}&shezlongId=${shelzongId}&reservationDate=${reservationDate}`;
+        const url = `${SpaReservationEndPoint}?userId=${userId}&spaId=${spaId}&reservationDate=${reservationDate}`;
 
         axios.post(url)
             .then((result) => {
                 getData();
                 clear();
-                toast.success('Shezlong Reservationhas been added.');
+                toast.success('Spa Reservation has been added.');
                 handleCloseAdd();
             })
             .catch((error) => {
@@ -64,7 +64,7 @@ const ShezlongReservation= () => {
 
     const clear = () => {
         setUserId('');
-        setShelzongId('');
+        setspaId('');
         setReservationDate('');
     };
 
@@ -76,7 +76,7 @@ const ShezlongReservation= () => {
             <Fragment>
                 <ToastContainer />
                 <div className='d-flex justify-content-evenly' style={{ width: "20em", height: "3em", alignItems: "center" }}>
-                    <p style={{ fontSize: "2em", margin: "0" }}><b>Shezlong Reservation</b></p>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Spa Reservation</b></p>
                     <button className="btn btn-rounded btn-primary" onClick={handleShowAdd}>Add</button>
                 </div>
                 <br />
@@ -85,7 +85,7 @@ const ShezlongReservation= () => {
                         <tr>
                             <th>Id</th>
                             <th>User Id</th>
-                            <th>Shezlong Id</th>
+                            <th>Spa Id</th>
                             <th>Date</th>
                         </tr>
                     </thead>
@@ -95,7 +95,7 @@ const ShezlongReservation= () => {
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{item.userId}</td>
-                                    <td>{item.shezlongId}</td>
+                                    <td>{item.spaId}</td>
                                     <td>{item.reservationDate}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.reservationId)}>Delete</button>
@@ -108,7 +108,7 @@ const ShezlongReservation= () => {
 
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Shezlong</Modal.Title>
+                        <Modal.Title>Add Spa</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
@@ -118,8 +118,8 @@ const ShezlongReservation= () => {
                                 />
                             </Col>
                             <Col>
-                                <input type="number" className='form-control' placeholder='Enter Shezlong Id'
-                                    value={shelzongId} onChange={(e) => setShelzongId(e.target.value)}
+                                <input type="number" className='form-control' placeholder='Enter Spa Id'
+                                    value={spaId} onChange={(e) => setspaId(e.target.value)}
                                 />
                             </Col>
                             <Col>
@@ -143,4 +143,4 @@ const ShezlongReservation= () => {
     );
 };
 
-export default ShezlongReservation;
+export default SpaReservationCrud;

@@ -22,6 +22,7 @@ import Fitnes from './Crud-Functions/Fitnes.jsx';
 import FitnessEquipments from './Crud-Functions/FitnessEquipments.jsx';
 import AboutCrud from './Crud-Functions/AboutCrud.jsx';
 import OrderFood from './Crud-Functions/OrderFood.jsx';
+import SpaReservationCrud from './Crud-Functions/SpaReservationCrud.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -42,6 +43,7 @@ const Dashboard = () => {
     const [showShezlongTable, setShowShezlongTable] = useState(false);
     const [showContactTable, setShowContactTable] = useState(false);
     const [showShezlongReservationTable, setShowShezlongReservationTable] = useState(false);
+    const [showSpaReservationTable, setShowSpaReservationTable] = useState(false);
     const [showFitnesTable, setShowFitnesTable] = useState(false);
     const [showFitnesEquipmentsTable, setShowFitnesEquipmentsTable] = useState(false);
     const [showAboutTable, setShowAboutTable] = useState(false);
@@ -100,6 +102,9 @@ const Dashboard = () => {
     };
     const toggleShezlongReservation = () => {
         setShowShezlongReservationTable(!showShezlongReservationTable);
+    };
+    const toggleSpaReservation = () => {
+        setShowSpaReservationTable(!showSpaReservationTable);
     };
     const toggleFintesTable = () => {
         setShowFitnesTable(!showFitnesTable);
@@ -221,6 +226,9 @@ const Dashboard = () => {
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleSpaTable}>Spa</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleSpaReservation}>Spa Reservation</NavLink>
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleSaunaTable}>Sauna</NavLink>
@@ -364,6 +372,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showAboutTable && (
                                 <AboutCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showSpaReservationTable && (
+                                <SpaReservationCrud />
                             )}
                         </div>
                     </main>
