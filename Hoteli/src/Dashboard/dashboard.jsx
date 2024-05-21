@@ -21,6 +21,7 @@ import ShezlongReservation from './Crud-Functions/ShezlongReservationCrud.jsx';
 import Fitnes from './Crud-Functions/Fitnes.jsx';
 import FitnessEquipments from './Crud-Functions/FitnessEquipments.jsx';
 import AboutCrud from './Crud-Functions/AboutCrud.jsx';
+import OrderFood from './Crud-Functions/OrderFood.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -44,6 +45,7 @@ const Dashboard = () => {
     const [showFitnesTable, setShowFitnesTable] = useState(false);
     const [showFitnesEquipmentsTable, setShowFitnesEquipmentsTable] = useState(false);
     const [showAboutTable, setShowAboutTable] = useState(false);
+    const [showOrder, setShowOrder] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -108,6 +110,9 @@ const Dashboard = () => {
     const toggleAboutTable = () => {
         setShowAboutTable(!showAboutTable);
     };
+    const toggleOrder = () => {
+        setShowOrder(!showOrder);
+    };
 
     return (
         <>
@@ -171,6 +176,10 @@ const Dashboard = () => {
                             <ul id="auth" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleFoodMenuTable}>Food</NavLink>
+                                </li>
+                                
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleOrder}>Order food</NavLink>
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleCafeMenuTable}>Coffee&Sweets</NavLink>
@@ -280,6 +289,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showFoodMenuTable && (
                                 <MenuFoodCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showOrder && (
+                                <OrderFood />
                             )}
                         </div>
                         <div className="container-fluid">

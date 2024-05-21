@@ -38,3 +38,4 @@ export const FitnesEndPoints = `https://localhost:7189/api/Fitnes`;
 export const FitnesEquipmentsEndPoints = `https://localhost:7189/api/FitnesEquipment`;
 
 export const AboutEndPoints = `https://localhost:7189/api/AboutContent`;
+export const OrderFoodEndPoints = `https://localhost:7189/api/Order`;

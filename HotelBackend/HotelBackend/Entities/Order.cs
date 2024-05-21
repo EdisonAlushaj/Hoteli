@@ -27,8 +27,8 @@ namespace HotelBackend.Entities
         public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
         [NotMapped]
-        public double TotalOrderPrice { get;  set; }
-    
+        public double TotalOrderPrice { get; private set; }
+
         // Method to calculate total order price
         public void CalculateTotalOrderPrice()
         {
@@ -40,4 +40,3 @@ namespace HotelBackend.Entities
         }
     }
 }
-

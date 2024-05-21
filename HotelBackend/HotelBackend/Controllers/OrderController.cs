@@ -5,20 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace HotelBackend.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrderController : ControllerBase
+
+    namespace HotelBackend.Controllers
     {
-        private readonly DataContext _context;
-
-        public OrderController(DataContext context)
+        [Route("api/[controller]")]
+        [ApiController]
+        public class OrderController : ControllerBase
         {
-            _context = context;
-        }
+            private readonly DataContext _context;
 
-        [HttpPost]
+            public OrderController(DataContext context)
+            {
+                _context = context;
+            }
+
+            [HttpPost]
         public IActionResult CreateOrder([FromBody] OrderCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderItems == null || orderDto.OrderItems.Length == 0)
@@ -88,6 +89,25 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetOrderById), new { id = order.OrderId }, responseDto);
         }
 
+        [HttpGet]
+        public IActionResult GetAllOrders()
+        {
+            var orders = _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.MenuFood)
+                .ToList();
+
+            // Ensure total order price is calculated for each order
+            foreach (var order in orders)
+            {
+                order.CalculateTotalOrderPrice();
+            }
+
+            var orderDtos = orders.Select(MapOrderToDto).ToList();
+
+            return Ok(orderDtos);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetOrderById(int id)
         {
@@ -100,6 +120,9 @@ namespace HotelBackend.Controllers
             {
                 return NotFound();
             }
+
+            // Ensure total order price is calculated
+            order.CalculateTotalOrderPrice();
 
             return Ok(MapOrderToDto(order));
         }
@@ -127,7 +150,23 @@ namespace HotelBackend.Controllers
                 }).ToArray()
             };
         }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteOrder(int id)
+        {
+            var order = _context.Orders.Find(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+
+            return NoContent(); // 204 No Content response
+        }
     }
+
 
     // Define DTOs for order
     public class OrderDto
