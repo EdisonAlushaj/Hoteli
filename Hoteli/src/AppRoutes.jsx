@@ -10,6 +10,7 @@ import Login from "./login.jsx";
 import Register from "./register.jsx";
 import Dashboard from "./Dashboard/dashboard";
 import Pool from "./Services/Pool";
+import Spa from "./Services/Spa";
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Navigate to="/login" />} />
@@ -23,6 +24,7 @@ const AppRoutes = () => (
       <Route path="/contact" element={<Contact />} />
       <Route path="/menu" element={<Menu />} />
       <Route path="/pool" element={<Pool />} />
+      <Route path="/spa" element={<Spa />} />
     </Route>
   </Routes>
 );

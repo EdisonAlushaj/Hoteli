@@ -1,5 +1,5 @@
-import React, { Component, Suspense, useEffect } from "react";
-import { Route, NavLink, Routes, HashRouter, Outlet } from "react-router-dom";
+import React, { Component, Suspense} from "react";
+import {NavLink, HashRouter, Outlet } from "react-router-dom";
 import './Header.css';
 import logo from './assets/MeGusta-Horizontal-removebg-preview.png';
 import Footer from "./Footer/Footer.jsx";
@@ -14,6 +14,7 @@ const Login = React.lazy(() => import("./login.jsx"));
 const Register = React.lazy(() => import("./register.jsx"));
 const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
 const Pool = React.lazy(() => import("./Services/Pool"));
+const Spa = React.lazy(() => import("./Services/Spa"));
 
 export const MainLayout = () => {
   // useEffect(() => {
@@ -42,7 +43,7 @@ export const MainLayout = () => {
 
                   <div className="dropdown-content">
                     <NavLink to="/Menu">Restaurant</NavLink>
-                    <a href="#">Spa</a>
+                    <NavLink to="/Spa">Spa</NavLink>
                     <a href="#">Sauna</a>
                     <a href="#">Gym</a>
                     <NavLink to="/Pool">Pool</NavLink>
