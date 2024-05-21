@@ -20,6 +20,7 @@ namespace HotelBackend.Data
         public DbSet<Userr> Userrs { get; set; }
         public DbSet<UsersRoles> UsersRoless { get; set; }
         public DbSet<ShezlongReservation> ShezlongReservations { get; set; }
+        public DbSet<SpaReservation> SpaReservations { get; set; }
         public DbSet<Pool> Pools { get; set; }
         public DbSet<ContactRequest> ContactRequests { get; set; }
         public DbSet<Shezlong> Shezlongs { get; set; }
@@ -86,6 +87,19 @@ namespace HotelBackend.Data
                 .HasOne(sr => sr.Shezlong)
                 .WithMany()
                 .HasForeignKey(sr => sr.ShezlongId);
+
+            modelBuilder.Entity<SpaReservation>()
+          .HasKey(sr => new { sr.ReservationId });
+
+            modelBuilder.Entity<SpaReservation>()
+                .HasOne(sr => sr.Userr)
+                .WithMany()
+                .HasForeignKey(sr => sr.UserId);
+
+            modelBuilder.Entity<SpaReservation>()
+                .HasOne(sr => sr.Spa)
+                .WithMany()
+                .HasForeignKey(sr => sr.SpaId);
 
             modelBuilder.Entity<TableReservation>()
         .HasKey(ur => new { ur.TableReservationId });
