@@ -10,5 +10,6 @@ namespace HotelBackend.Entities
         public string Description { get; set; }
         public string image { get; set; }
         public int HallId { get; set; }
+
     }
 }

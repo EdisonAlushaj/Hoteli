@@ -15,7 +15,7 @@ const Register = React.lazy(() => import("./register.jsx"));
 const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
 const Pool = React.lazy(() => import("./Services/Pool"));
 const Spa = React.lazy(() => import("./Services/Spa"));
-
+const Sauna = React.lazy(() => import("./Services/Sauna.jsx"));
 export const MainLayout = () => {
   // useEffect(() => {
   //   axios.get(api)
@@ -44,7 +44,7 @@ export const MainLayout = () => {
                   <div className="dropdown-content">
                     <NavLink to="/Menu">Restaurant</NavLink>
                     <NavLink to="/Spa">Spa</NavLink>
-                    <a href="#">Sauna</a>
+                    <NavLink to="/Sauna">Sauna</NavLink>
                     <a href="#">Gym</a>
                     <NavLink to="/Pool">Pool</NavLink>
                     <a href="#">Activities</a>

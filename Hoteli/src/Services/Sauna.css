@@ -1,0 +1,89 @@
+.cover-photo {
+    background-image: url('./sauna.jpg');
+    background-size: cover;
+    background-position: cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .cover-title {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .container {
+    margin-top: -50px;
+  }
+  
+  .spa-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .spa-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .list-group-item.active {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .reservation-form {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .reservation-form h4 {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px; 
+  }
+  
+  .btn-success {
+    margin-top: 10px; 
+  }
+  .form-control-sm {
+    border-radius: 5px;
+    box-shadow: none;
+    border-color: #ced4da;
+    font-size: 0.875rem;
+  }
+  
+  .form-control-sm:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .btn-success.btn-sm {
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .btn-success.btn-sm:hover {
+    background-color: #218838;
+  }
+  
+  .btn-block {
+    width: 100%;
+  }
+  
