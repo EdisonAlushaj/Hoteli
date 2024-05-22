@@ -38,7 +38,10 @@ namespace HotelBackend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TableReservation>> GetTableReservationById(int id)
         {
-            var tableReservation = await _context.TableReservations.FindAsync(id);
+            var tableReservation = await _context.TableReservations
+                .Include(tr => tr.User)
+                .Include(tr => tr.Table)
+                .FirstOrDefaultAsync(tr => tr.ReservationId == id);
 
             if (tableReservation == null)
             {
@@ -50,7 +53,7 @@ namespace HotelBackend.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<TableReservation>> AddTableReservation(int userId, int tableId, DateTime reservationDate, TimeSpan reservationTime, int maxGuests, string specialRequests, EstablishmentType establishment)
+        public async Task<ActionResult<TableReservation>> AddTableReservation([FromQuery] int userId, [FromQuery] int tableId, [FromQuery] DateTime reservationDate, [FromQuery] int maxGuests, [FromQuery] string specialRequests, [FromQuery] EstablishmentType establishment)
         {
             // Check if the user exists
             var userExists = await _context.Userrs.AnyAsync(u => u.UserId == userId);
@@ -66,11 +69,11 @@ namespace HotelBackend.Controllers
                 return NotFound("Table not found");
             }
 
-            // Check for existing table reservation for the same user and table
-            var existingReservation = await _context.TableReservations.FirstOrDefaultAsync(tr => tr.UserId == userId && tr.Id == tableId);
+            // Check for existing reservation for the same table and date
+            var existingReservation = await _context.TableReservations.FirstOrDefaultAsync(tr => tr.Id == tableId && tr.ReservationDate == reservationDate);
             if (existingReservation != null)
             {
-                return Conflict("Table reservation already exists for this user and table");
+                return Conflict("Table is already reserved for this date and time");
             }
 
             // Create a new table reservation
@@ -79,7 +82,6 @@ namespace HotelBackend.Controllers
                 UserId = userId,
                 Id = tableId,
                 ReservationDate = reservationDate,
-                ReservationTime = reservationTime,
                 MaxGuests = maxGuests,
                 SpecialRequests = specialRequests,
                 Establishment = establishment
@@ -90,8 +92,12 @@ namespace HotelBackend.Controllers
             await _context.SaveChangesAsync();
 
             // Return the newly created table reservation
-            return CreatedAtAction(nameof(GetTableReservations), new { id = tableReservation.TableReservationId }, tableReservation);
+            return CreatedAtAction(nameof(GetTableReservations), new { id = tableReservation.ReservationId }, tableReservation);
         }
+
+
+
+
 
 
         [HttpDelete("{id}")]
@@ -107,7 +113,8 @@ namespace HotelBackend.Controllers
             _context.TableReservations.Remove(tableReservation);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return NoContent(); // Ensure this returns 204 No Content
         }
+
     }
 }

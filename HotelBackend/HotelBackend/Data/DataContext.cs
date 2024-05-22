@@ -114,7 +114,7 @@ namespace HotelBackend.Data
                 .WithMany()
                 .HasForeignKey(sr => sr.SaunaId);
             modelBuilder.Entity<TableReservation>()
-        .HasKey(ur => new { ur.TableReservationId });
+        .HasKey(ur => new { ur.ReservationId });
 
             modelBuilder.Entity<TableReservation>()
                 .HasOne(tr => tr.User)

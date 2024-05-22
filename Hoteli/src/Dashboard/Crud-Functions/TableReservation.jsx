@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {TableReservationsEndPoint} from'../../endpoints';
+import { TableReservationsEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -12,18 +12,15 @@ import 'react-toastify/dist/ReactToastify.css';
 const TableReservation = () => {
     const [showAdd, setShowAdd] = useState(false);
 
-
     const handleCloseAdd = () => setShowAdd(false);
     const handleShowAdd = () => setShowAdd(true);
 
-    const [tableReservationId, settableReservationId] = useState('')
-    const [userId, setuserId] = useState('')
-    const [tableId, settableId] = useState('')
-    const [reservationDate, setreservationDate] = useState('')
-    const [reservationTime, setreservationTime] = useState('')
-    const [maxGuests, setmaxGuests] = useState('')
-    const [specialRequest, setspecialRequest] = useState('')
-    const [establishment, setestablishment] = useState('')
+    const [userId, setUserId] = useState('');
+    const [tableId, setTableId] = useState('');
+    const [reservationDatetime, setReservationDatetime] = useState('');
+    const [maxGuests, setMaxGuests] = useState('');
+    const [specialRequest, setSpecialRequest] = useState('');
+    const [establishment, setEstablishment] = useState('');
 
     const [data, setData] = useState([]);
 
@@ -35,124 +32,111 @@ const TableReservation = () => {
         axios.get(TableReservationsEndPoint)
             .then((response) => {
                 console.log(response);
-                setData(response.data)
+                setData(response.data);
             })
             .catch((error) => {
-                console.log(error)
-            })
-    }
+                console.log(error);
+            });
+    };
 
-    async function Load() {
-        const result = await axios.get(TableReservationsEndPoint);
-        setuserId(result.data);
-        console.log(result.data);
-    }
-
-  
-
-    const handelDelete = (tableReservationId) => {
-        if (window, confirm("Are you sure to delete this tablereservation.") == true) {
-            axios.delete(`${TableReservationsEndPoint}/${tableReservationId}`)
+    const handleDelete = (id) => {
+        if (window.confirm("Are you sure to delete this table reservation?")) {
+            axios.delete(`${TableReservationsEndPoint}/${id}`)
                 .then((result) => {
-                    if (result.status == 200) {
+                    if (result.status === 204 || result.status === 200) {
                         toast.success('Reservation has been deleted');
-                        getData();
+                        setData(data.filter(item => item.reservationId !== id)); 
                     }
                 })
                 .catch((error) => {
-                    toast.error(error);
-                })
+                    toast.error(error.message);
+                });
         }
-    }
+    };
 
     const handleSave = () => {
-        handleShowAdd();
-        const url = TableReservationsEndPoint;
-        const data = {
-            "userId": userId,
-            "tableId": tableId,
-            "reservationDate": reservationDate,
-            "reservationTime": reservationTime,
-            "maxGuests": maxGuests,
-            "specialRequest": specialRequest,
-            "establishment": establishment
+        // Check if there's an existing reservation for the same table and datetime
+        const existingReservation = data.find(item => item.id === parseInt(tableId, 10) && new Date(item.reservationDate).getTime() === new Date(reservationDatetime).getTime());
+        
+        if (existingReservation) {
+            // Show toast message that the table is already reserved at that time
+            toast.error('The table is already reserved at the selected time.');
+            return; // Exit function to prevent further execution
         }
-
-        axios.post(url, data)
+    
+        // Proceed with adding the new reservation
+        const url = `${TableReservationsEndPoint}?userId=${userId}&tableId=${tableId}&reservationDate=${reservationDatetime}&maxGuests=${maxGuests}&specialRequests=${specialRequest}&establishment=${establishment}`;
+    
+        axios.post(url)
             .then((result) => {
-                getData();
-                clear();
-                toast.success('Table reservation has been added.');
-                handleCloseAdd();
+                if (result.status === 201) {
+                    toast.success('Table reservation has been added.');
+                    getData();
+                    clear();
+                    handleCloseAdd();
+                }
             })
-    }
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
+    
+    
+    
 
     const clear = () => {
-        setuserId('');
-        settableId('');
-        setreservationDate('');
-        setreservationTime('');
-        setmaxGuests('');
-        setspecialRequest('');
-        setestablishment('');
-    }
+        setUserId('');
+        setTableId('');
+        setReservationDatetime('');
+        setMaxGuests('');
+        setSpecialRequest('');
+        setEstablishment('');
+    };
 
     return (
         <>
             <Fragment>
                 <ToastContainer />
-       
-
-                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontreservationDate: "2em", margin: "0"}}><b>Table Reservation</b></p>
-                    <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
+                <div className='d-flex justify-content-evenly' style={{ width: "20em", height: "3em", alignItems: "center" }}>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Table Reservation</b></p>
+                    <Button className="btn btn-rounded btn-primary" onClick={handleShowAdd}>Add</Button>
                 </div>
-
                 <br />
-
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>tableReservationId</th>
-                            <th>userId</th>
-                            <th>tableId</th>
-                            <th>reservationDate</th>
-                            <th>reservationTime</th>
-                            <th>maxGuests</th>
-                            <th>specialRequest</th>
-                            <th>establishment</th>
+                            <th>ReservationId</th>
+                            <th>UserId</th>
+                            <th>TableId</th>
+                            <th>Reservation Date</th>
+                            <th>Max Guests</th>
+                            <th>Special Request</th>
+                            <th>Establishment</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             data && data.length > 0 ?
-                                data.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{item.userId}</td>
-                                            <td>{item.tableId}</td>
-                                            <td>{item.reservationDate}</td>
-                                            <td>{item.reservationTime}</td>
-                                            <td>{item.maxGuests}</td>
-                                            <td>{item.specialRequest}</td>
-                                            <td>{item.establishment}</td>
-                                            <td className='d-flex flex-row justify-content-evenly'>
-                                            
-
-                                                <button className="btn btn-rounded btn-danger" onClick={() => handelDelete(item.tableReservationId)}>Delete</button>
-
-                                            </td>
-                                        </tr>
-                                    )
-                                })
+                                data.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.reservationId}</td>
+                                        <td>{item.userId}</td>
+                                        <td>{item.id}</td>
+                                        <td>{new Date(item.reservationDate).toLocaleString()}</td>
+                                        <td>{item.maxGuests}</td>
+                                        <td>{item.specialRequests}</td>
+                                        <td>{item.establishment}</td>
+                                        <td className='d-flex flex-row justify-content-evenly'>
+                                            <Button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.reservationId)}>Delete</Button>
+                                        </td>
+                                    </tr>
+                                ))
                                 :
                                 'Loading...'
                         }
-
                     </tbody>
                 </Table>
-
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Table Reservation</Modal.Title>
@@ -161,45 +145,39 @@ const TableReservation = () => {
                         <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter userId'
-                                    value={userId} onChange={(e) => setuserId(e.target.value)}
+                                    value={userId} onChange={(e) => setUserId(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter tableId'
-                                    value={tableId} onChange={(e) => settableId(e.target.value)}
+                                    value={tableId} onChange={(e) => setTableId(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter reservationDate'
-                                    value={reservationDate} onChange={(e) => setreservationDate(e.target.value)}
-                                />
-                            </Col>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Col>
-                                <input type="text" className='form-control' placeholder='Enter reservationTime'
-                                    value={reservationTime} onChange={(e) => setreservationTime(e.target.value)}
+                                <input type="datetime-local" className='form-control' placeholder='Enter reservation date and time'
+                                    value={reservationDatetime} onChange={(e) => setReservationDatetime(e.target.value)}
                                 />
                             </Col>
                         </Row>
                         <br />
                         <Row>
-
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter maxGuests'
-                                    value={maxGuests} onChange={(e) => setmaxGuests(e.target.value)}
+                                <input type="number" className='form-control' placeholder='Enter maxGuests'
+                                    value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter specialRequest'
-                                    value={specialRequest} onChange={(e) => setspecialRequest(e.target.value)}
+                                    value={specialRequest} onChange={(e) => setSpecialRequest(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter establishment'
-                                    value={establishment} onChange={(e) => setestablishment(e.target.value)}
-                                />
+                                <select className='form-control' value={establishment} onChange={(e) => setEstablishment(e.target.value)}>
+                                    <option value="">Select establishment</option>
+                                    <option value="Restaurant">Restaurant</option>
+                                    <option value="Bar">Bar</option>
+                                    <option value="Cafe">Cafe</option>
+                                </select>
                             </Col>
                         </Row>
                     </Modal.Body>
@@ -212,8 +190,6 @@ const TableReservation = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-
-           
             </Fragment>
         </>
     );

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 function Reservation() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    date: '',
-    time: '',
+    datetime: '',
     guests: '',
     specialRequests: '',
+    establishment: '',
   });
 
   const [error, setError] = useState('');
@@ -23,19 +23,17 @@ function Reservation() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name ||  !formData.date || !formData.time || !formData.guests || !formData.establishment)  {
+    if (!formData.name || !formData.datetime || !formData.guests || !formData.establishment) {
       setError('Please fill out all required fields.');
     } else {
       setError('');
       console.log('Form submitted:', formData);
       setFormData({
         name: '',
- 
-        date: '',
-        time: '',
+        datetime: '',
         guests: '',
         specialRequests: '',
-        establishment: '' 
+        establishment: ''
       });
     }
   };
@@ -57,34 +55,16 @@ function Reservation() {
           />
         </Form.Group>
 
-    
-
-        <Row>
-          <Col>
-            <Form.Group controlId="formDate">
-              <Form.Label>Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleInputChange}
-                style={{ width: '10em', marginBottom: '15px' }}
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="formTime">
-              <Form.Label>Time</Form.Label>
-              <Form.Control
-                type="time"
-                name="time"
-                value={formData.time}
-                onChange={handleInputChange}
-                style={{ marginBottom: '15px' }}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        <Form.Group controlId="formDatetime">
+          <Form.Label>Date and Time</Form.Label>
+          <Form.Control
+            type="datetime-local"
+            name="datetime"
+            value={formData.datetime}
+            onChange={handleInputChange}
+            style={{ marginBottom: '15px' }}
+          />
+        </Form.Group>
 
         <Form.Group controlId="formGuests">
           <Form.Label>Number of Guests</Form.Label>
@@ -131,7 +111,7 @@ function Reservation() {
           </Button>
         </div>
       </Form>
-      </div>
+    </div>
   );
 }
 
