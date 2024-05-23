@@ -28,6 +28,8 @@ namespace HotelBackend.Data
         public DbSet<TableReservation> TableReservations { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<RoomBooking> RoomBookings { get; set; }
+        public DbSet<RoomBookingItem> RoomBookingItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pool>()

@@ -440,6 +440,57 @@ namespace HotelBackend.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.RoomBooking", b =>
+                {
+                    b.Property<int>("RoomBookingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomBookingId"));
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoomBookingId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RoomBookings");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.RoomBookingItem", b =>
+                {
+                    b.Property<int>("RoomBookingItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomBookingItemId"));
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomBookingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoomBookingItemId");
+
+                    b.HasIndex("RoomBookingId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomBookingItems");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Sauna", b =>
                 {
                     b.Property<int>("Id")
@@ -793,6 +844,36 @@ namespace HotelBackend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HotelBackend.Entities.RoomBooking", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.Userr", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.RoomBookingItem", b =>
+                {
+                    b.HasOne("HotelBackend.Entities.RoomBooking", "RoomBooking")
+                        .WithMany("RoomBookingItems")
+                        .HasForeignKey("RoomBookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBackend.Entities.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+
+                    b.Navigation("RoomBooking");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.Sauna", b =>
                 {
                     b.HasOne("HotelBackend.Entities.Hall", null)
@@ -909,6 +990,11 @@ namespace HotelBackend.Migrations
             modelBuilder.Entity("HotelBackend.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("HotelBackend.Entities.RoomBooking", b =>
+                {
+                    b.Navigation("RoomBookingItems");
                 });
 #pragma warning restore 612, 618
         }
