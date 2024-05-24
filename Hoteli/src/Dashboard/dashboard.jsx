@@ -24,6 +24,8 @@ import AboutCrud from './Crud-Functions/AboutCrud.jsx';
 import OrderFood from './Crud-Functions/OrderFood.jsx';
 import SpaReservationCrud from './Crud-Functions/SpaReservationCrud.jsx';
 import SaunaReservationCrud from './Crud-Functions/SaunaReservationCrud.jsx';
+import RoomBookingCrud from './Crud-Functions/RoomBookingCrud.jsx';
+
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
     const [showFoodMenuTable, setShowFoodMenuTable] = useState(false);
@@ -49,6 +51,7 @@ const Dashboard = () => {
     const [showFitnesEquipmentsTable, setShowFitnesEquipmentsTable] = useState(false);
     const [showAboutTable, setShowAboutTable] = useState(false);
     const [showOrder, setShowOrder] = useState(false);
+    const [showRoomBookingTable, setRoomBookingTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -121,6 +124,9 @@ const Dashboard = () => {
     };
     const toggleOrder = () => {
         setShowOrder(!showOrder);
+    };
+    const toggleRoomBookingTable = () => {
+        setRoomBookingTable(!showRoomBookingTable);
     };
 
     return (
@@ -243,12 +249,14 @@ const Dashboard = () => {
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleShezlong}>Shezlong</NavLink>
                                 </li>
-
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleShezlongReservation}>Shezlong Reservation</NavLink>
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleActivitiesTable}>Activities</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleRoomBookingTable}>Room Booking</NavLink>
                                 </li>
                             </ul>
                         </li>
@@ -374,6 +382,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showActivitiesTable && (
                                 <ActivitiesCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showRoomBookingTable && (
+                                <RoomBookingCrud />
                             )}
                         </div>
                         <div className="container-fluid">
