@@ -154,7 +154,7 @@ const TableCrud = () => {
                                 data.map((item, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{index + 1}</td>
+                                            <td>{item.id}</td>
                                             <td>{item.tableNumber}</td>
                                             <td>{item.maxGuests}</td>
                                             <td>{item.establishment}</td>
@@ -194,9 +194,6 @@ const TableCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                {/* <input type="text" className='form-control' placeholder='Enter Establishment'
-                                    value={establishment} onChange={(e) => setEstablishment(e.target.value)}
-                                /> */}
                                 <select className='form-control' value={establishment} onChange={(e) => setEstablishment(e.target.value)}>
                                     <option value="Restaurant">Restaurant</option>
                                     <option value="Bar">Bar</option>
