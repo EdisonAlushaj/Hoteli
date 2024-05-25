@@ -12,6 +12,7 @@ import Dashboard from "./Dashboard/dashboard";
 import Pool from "./Services/Pool";
 import Spa from "./Services/Spa";
 import Sauna from "./Services/Sauna.jsx";
+import Activities from "./Services/Activities.jsx";
 import Booking from "./Booking/RoomBooking.jsx";
 const AppRoutes = () => (
   <Routes>
@@ -28,6 +29,7 @@ const AppRoutes = () => (
       <Route path="/pool" element={<Pool />} />
       <Route path="/spa" element={<Spa />} />
       <Route path="/sauna" element={<Sauna />} />
+      <Route path="/activities" element={<Activities />} />
       <Route path="/booking" element={<Booking />} />
     </Route>
   </Routes>

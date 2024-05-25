@@ -49,9 +49,7 @@ export const MainLayout = () => {
                     <NavLink to="/Sauna">Sauna</NavLink>
                     <a href="#">Gym</a>
                     <NavLink to="/Pool">Pool</NavLink>
-                    <a href="#">Activities</a>
-
-                    <NavLink to="/login">Login</NavLink>
+                    <NavLink to="/Activities">Activities</NavLink>
                   </div>
                 </div>
               </li>
