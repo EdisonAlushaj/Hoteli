@@ -1,113 +1,115 @@
-import React, { useState ,useEffect} from 'react';
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Menu.css';
 
-function MenuFood() {
-    const [selectedItems, setSelectedItems] = useState([]);
+const MenuFood = () => {
+    const [showAdd, setShowAdd] = useState(false);
+    const [userId, setUserId] = useState('');
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [selectedItems, setSelectedItems] = useState([]);
     const [foodItems, setFoodItems] = useState([]);
-    const handleQuantityChange = (value, index) => {
-        const updatedItems = [...selectedItems];
-        updatedItems[index].quantity = parseInt(value);
-        setSelectedItems(updatedItems);
-    };
-    const fetchFoodItems = async () => {
-        try {
-            const token = localStorage.getItem('token'); // Assuming you store the token in localStorage
-    
-            const response = await fetch('https://localhost:7189/api/MenuFood', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Add the token if you have authentication
-                }
-            });
-    
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-    
-            const data = await response.json();
-            setFoodItems(data);
-        } catch (error) {
-            console.error('Error fetching food items:', error);
-        }
-    };
+
     useEffect(() => {
-        fetchFoodItems(); 
+        fetchFoodItems();
     }, []);
 
+    const fetchFoodItems = async () => {
+        try {
+            const response = await axios.get('https://localhost:7189/api/MenuFood');
+            
+            // Debug: Log the fetched food items
+            console.log('Fetched Food Items:', response.data);
+            
+            setFoodItems(response.data);
+        } catch (error) {
+            toast.error('Error fetching food items.');
+        }
+    };
+
+    const handleQuantityChange = (value, index) => {
+        const updatedItems = [...selectedItems];
+        updatedItems[index].quantity = parseInt(value) || 1;
+        setSelectedItems(updatedItems);
+    };
+
     const addToOrder = (itemToAdd, quantity) => {
-        // Check if the itemToAdd is already in selectedItems
+        if (quantity <= 0) {
+            toast.error("Please enter a valid quantity.");
+            return;
+        }
+
         const existingItemIndex = selectedItems.findIndex(item =>
             item.menuFoodId === itemToAdd.menuFoodId && item.foodName === itemToAdd.foodName
         );
-    
+
         if (existingItemIndex !== -1) {
-            // If the item exists, update its quantity
             const updatedItems = [...selectedItems];
-            updatedItems[existingItemIndex].quantity += quantity; // Increment quantity
+            updatedItems[existingItemIndex].quantity += quantity;
             setSelectedItems(updatedItems);
         } else {
-            // If the item does not exist, add it with the specified quantity
             setSelectedItems([...selectedItems, { ...itemToAdd, quantity }]);
         }
     };
-    
-    
+
     const removeFromOrder = (indexToRemove) => {
         const updatedItems = selectedItems.filter((item, index) => index !== indexToRemove);
         setSelectedItems(updatedItems);
     };
+
     const submitOrder = async () => {
-        try {
-            // Retrieve user ID from JWT token stored in local storage
-            const token = localStorage.getItem('token');
-            const decodedToken = jwt_decode(token);
-            const userId = decodedToken.userId;
+        if (!userId || !deliveryLocation || !deliveryNumber || !paymentMethod || selectedItems.length === 0) {
+            toast.error('Please fill out all fields and add items to your order.');
+            return;
+        }
     
-            // Construct order data with the user ID
+        try {
             const orderData = {
                 userId: userId,
-                deliveryLocation,
-                deliveryNumber,
-                paymentMethod,
+                deliveryLocation: deliveryLocation,
+                deliveryNumber: deliveryNumber,
+                paymentMethod: paymentMethod,
                 orderItems: selectedItems.map(item => ({
-                    menuFoodId: item.menuFoodId,
-                    quantity: item.quantity
+                    menuFoodId: parseInt(item.id),
+                    quantity: parseInt(item.quantity)
                 }))
             };
-            // Add console logs here to check the values of orderData
-            console.log('Order data:', orderData);
-            console.log('JSON string:', JSON.stringify(orderData));
     
-            const response = await fetch('https://localhost:7189/api/Order', {
-                method: 'POST',
+            // Debug: Log the order data to check its structure
+            console.log('Order Data:', JSON.stringify(orderData, null, 2));
+    
+            const response = await axios.post('https://localhost:7189/api/Order', orderData, {
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(orderData)
+                }
             });
     
-            if (!response.ok) {
-                throw new Error('Failed to submit order');
+            // Check the response status code
+            if (response.status === 200 || response.status === 201) {
+                setSelectedItems([]);
+                setUserId('');
+                setDeliveryLocation('');
+                setDeliveryNumber('');
+                setPaymentMethod('');
+                setShowAdd(false);
+                toast.success('Order submitted successfully!');
+            } else {
+                toast.error(`Failed to submit order. Server responded with status code ${response.status}`);
             }
-    
-            // Reset form fields and selected items upon successful submission
-            setSelectedItems([]);
-            setDeliveryLocation('');
-            setDeliveryNumber('');
-            setPaymentMethod('');
-    
-            // Show success message to the user
-            alert('Order submitted successfully!');
         } catch (error) {
-            console.error('Error submitting order:', error);
+            // Debug: Log the error response
+            console.error('Order submission error:', error.response?.data || error.message);
+            toast.error('Failed to submit order. Please try again later.');
         }
     };
+
+    const handleShowAdd = () => setShowAdd(true);
+    const handleCloseAdd = () => setShowAdd(false);
 
     return (
         <Container fluid style={{ backgroundColor: '#d1d1e0' }}>
@@ -121,20 +123,18 @@ function MenuFood() {
                                     <Card.Img variant="top" src={foodItem.foodImage} />
                                     <Card.Body>
                                         <Card.Title style={{ color: '#6b4d38' }}>{foodItem.foodName}</Card.Title>
-                                        <Card.Text>
-                                            {foodItem.foodDescription}
-                                        </Card.Text>
+                                        <Card.Text>{foodItem.foodDescription}</Card.Text>
                                         <Card.Text className="text-muted">${foodItem.foodPrice}</Card.Text>
                                         <Button variant="primary" onClick={() => {
-    const quantity = parseInt(prompt("Enter quantity:"));
-    if (!isNaN(quantity) && quantity > 0) {
-        addToOrder(foodItem, quantity);
-    } else {
-        alert("Please enter a valid quantity.");
-    }
-}}>
-    Add to Order
-</Button>
+                                            const quantity = parseInt(prompt("Enter quantity:"));
+                                            if (!isNaN(quantity) && quantity > 0) {
+                                                addToOrder(foodItem, quantity);
+                                            } else {
+                                                toast.error("Please enter a valid quantity.");
+                                            }
+                                        }}>
+                                            Add to Order
+                                        </Button>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -148,7 +148,7 @@ function MenuFood() {
                             <ul>
                                 {selectedItems.map((item, index) => (
                                     <li key={index}>
-                                        {item.foodName} - {item.foodPrice}{' '}
+                                        {item.foodName} - ${item.foodPrice} - {item.quantity} pcs
                                         <Button variant="danger" size="sm" onClick={() => removeFromOrder(index)}>
                                             Remove
                                         </Button>
@@ -156,74 +156,94 @@ function MenuFood() {
                                 ))}
                             </ul>
                             <hr />
-                            <div className='d-flex  align-items-center flex-column'>
-                            <Form style={{borderTop:'1px solid marron', borderRadius:'20px',padding:'20px', fontFamily: 'Roboto Slab, serif',width:'22em'}}>
-    <Form.Group controlId="formDeliveryLocation">
-        <Form.Label>Delivery Location</Form.Label>
-        <Form.Control
-            as="select"
-            value={deliveryLocation}
-            onChange={(e) => setDeliveryLocation(e.target.value)}
-        >
-            <option value="">Select delivery location</option>
-            <option value="Room">Room</option>
-            <option value="Pool Shezlong">Pool Shezlong</option>
-        </Form.Control>
-    </Form.Group>
-    {deliveryLocation && (
-        <Form.Group controlId="formDeliveryNumber">
-            <Form.Label>
-                {deliveryLocation === 'Room' ? 'Room Number' : 'Shezlong Number'}
-            </Form.Label>
-            <Form.Control
-                type="number"
-                placeholder={`Enter ${deliveryLocation} number`}
-                value={deliveryNumber}
-                onChange={(e) => setDeliveryNumber(e.target.value)}
-            />
-        </Form.Group>
-    )}
-    <Form.Group controlId="formPaymentMethod">
-        <Form.Label>Payment Method</Form.Label>
-        <Form.Control
-            as="select"
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-        >
-            <option value="">Select payment method</option>
-            <option value="card-online">Card - Online</option>
-            <option value="cash-at-delivery">Cash - At Delivery</option>
-        </Form.Control>
-    </Form.Group>
-    {/* Order items will be dynamically added */}
-    {/* Example: For each selected item, display a row with quantity input */}
-    {selectedItems.map((item, index) => (
-        <div key={index}>
-            <Form.Group controlId={`formQuantity${index}`}>
-                <Form.Label>{item.foodName} Quantity</Form.Label>
-                <Form.Control
-                    type="number"
-                    min="1"
-                    value={item.quantity}
-                    onChange={(e) => handleQuantityChange(e.target.value, index)}
-                />
-            </Form.Group>
-        </div>
-    ))}
-    <Button variant="success" onClick={submitOrder}>
-        Submit Order
-    </Button>
-</Form>
-                                <Button variant="success" onClick={submitOrder}>
-                                    Submit Order
-                                </Button>
-                            </div>
+                            <Button variant="primary" onClick={handleShowAdd}>
+                                Proceed to Checkout
+                            </Button>
                         </div>
                     </Col>
                 )}
             </Row>
+
+            <Modal show={showAdd} onHide={handleCloseAdd}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Submit Order</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="userId">
+                            <Form.Label>User ID</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter user ID"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formDeliveryLocation">
+                            <Form.Label>Delivery Location</Form.Label>
+                            <Form.Control
+                                as="select"
+                                value={deliveryLocation}
+                                onChange={(e) => setDeliveryLocation(e.target.value)}
+                            >
+                                <option value="">Select delivery location</option>
+                                <option value="Room">Room</option>
+                                <option value="Pool Shezlong">Pool Shezlong</option>
+                            </Form.Control>
+                        </Form.Group>
+                        {deliveryLocation && (
+                            <Form.Group controlId="formDeliveryNumber">
+                                <Form.Label>
+                                    {deliveryLocation === 'Room' ? 'Room Number' : 'Shezlong Number'}
+                                </Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    placeholder={`Enter ${deliveryLocation} number`}
+                                    value={deliveryNumber}
+                                    onChange={(e) => setDeliveryNumber(e.target.value)}
+                                />
+                            </Form.Group>
+                        )}
+                        <Form.Group controlId="formPaymentMethod">
+                            <Form.Label>Payment Method</Form.Label>
+                            <Form.Control
+                                as="select"
+                                value={paymentMethod}
+                                onChange={(e) => setPaymentMethod(e.target.value)}
+                            >
+                                <option value="">Select payment method</option>
+                                <option value="card-online">Card - Online</option>
+                                <option value="cash-at-delivery">Cash - At Delivery</option>
+                            </Form.Control>
+                        </Form.Group>
+                        {selectedItems.map((item, index) => (
+                            <div key={index}>
+                                <Form.Group controlId={`formQuantity${index}`}>
+                                    <Form.Label>{item.foodName} Quantity</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        min="1"
+                                        value={item.quantity}
+                                        onChange={(e) => handleQuantityChange(e.target.value, index)}
+                                    />
+                                </Form.Group>
+                            </div>
+                        ))}
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseAdd}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={submitOrder}>
+                        Submit Order
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <ToastContainer />
         </Container>
     );
-}
+};
 
 export default MenuFood;
