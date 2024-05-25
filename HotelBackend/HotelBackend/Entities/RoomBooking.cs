@@ -18,6 +18,9 @@ namespace HotelBackend.Entities
         [Required]
         public string PaymentMethod { get; set; }
 
+        [Required]
+        public DateTime Data { get; set; }
+
         public List<RoomBookingItem> RoomBookingItems { get; set; } = new List<RoomBookingItem>();
 
         [NotMapped]

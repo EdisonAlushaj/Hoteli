@@ -37,6 +37,7 @@ namespace HotelBackend.Controllers
             {
                 UserId = roomBookingDto.UserId,
                 PaymentMethod = roomBookingDto.PaymentMethod,
+                Data = roomBookingDto.Data,
                 RoomBookingItems = roomBookingDto.RoomBookingItems.Select(item => new RoomBookingItem
                 {
                     RoomId = item.RoomId,
@@ -72,6 +73,7 @@ namespace HotelBackend.Controllers
                     Name = user.UserFullName
                 },
                 PaymentMethod = roomBooking.PaymentMethod,
+                Data = roomBookingDto.Data,
                 TotalBookingPrice = roomBooking.TotalBookingPrice, // Calculated total price
                 RoomBookingItems = roomBooking.RoomBookingItems.Select(oi => new RoomBookingItemDto
                 {
@@ -134,6 +136,7 @@ namespace HotelBackend.Controllers
                     Name = user.UserFullName
                 },
                 PaymentMethod = roomBooking.PaymentMethod,
+                Data = roomBooking.Data,
                 TotalBookingPrice = roomBooking.TotalBookingPrice,
                 RoomBookingItems = roomBooking.RoomBookingItems.Select(oi => new RoomBookingItemDto
                 {
@@ -142,6 +145,7 @@ namespace HotelBackend.Controllers
                 }).ToArray()
             };
         }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteRoomBooking(int id)
         {
@@ -166,6 +170,7 @@ namespace HotelBackend.Controllers
         public int RoomBookingId { get; set; }
         public UserDto User { get; set; } // Include User object
         public string PaymentMethod { get; set; }
+        public DateTime Data { get; set; }
         public double TotalBookingPrice { get; set; }
         public RoomBookingItemDto[] RoomBookingItems { get; set; }
     }
@@ -182,7 +187,6 @@ namespace HotelBackend.Controllers
     {
         public int RoomId { get; set; }
         public int Quantity { get; set; }
-        // Note: Price property is excluded here
     }
 
     // Define DTO for order creation
@@ -190,6 +194,7 @@ namespace HotelBackend.Controllers
     {
         public int UserId { get; set; }
         public string PaymentMethod { get; set; }
+        public DateTime Data { get; set; }
         public RoomBookingItemDto[] RoomBookingItems { get; set; }
     }
 }
