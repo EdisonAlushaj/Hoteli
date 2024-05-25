@@ -16,6 +16,8 @@ const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
 const Pool = React.lazy(() => import("./Services/Pool"));
 const Spa = React.lazy(() => import("./Services/Spa"));
 const Sauna = React.lazy(() => import("./Services/Sauna.jsx"));
+const Booking = React.lazy(() => import("./Booking/RoomBooking.jsx"));
+
 export const MainLayout = () => {
   // useEffect(() => {
   //   axios.get(api)
@@ -34,7 +36,7 @@ export const MainLayout = () => {
           <div className="header-content-wrapper">
             <img id='logo' src={logo} alt="logo-img" style={{ height: "7em" }} />
             <ul>
-              <li><NavLink to="/">Home</NavLink></li>
+              <li><NavLink to="/home">Home</NavLink></li>
               <li><NavLink to="/about">About</NavLink></li>
               <li><NavLink to="/Rooms">Rooms</NavLink></li>
               <li>
@@ -56,7 +58,7 @@ export const MainLayout = () => {
               <li><NavLink to="/contact">Contact</NavLink></li>
               <li><NavLink to="/dashboard">Dashboard</NavLink></li>
             </ul>
-            <button id="booking-btn">BOOK NOW</button>
+            <button id="booking-btn"><NavLink to="/booking">BOOK NOW</NavLink></button>
           </div>
         </div>
       </header>
