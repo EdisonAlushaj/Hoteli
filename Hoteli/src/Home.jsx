@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {NavLink} from "react-router-dom";
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -49,7 +50,7 @@ function Home() {
 
       <div className=' d-flex justify-content-center align-items-center'>
         <div className='d-flex justify-content-center align-items-center' style={{position: 'absolute', width: '90%'}}>
-          <button className='btn' style={{color: '#fff', backgroundColor: '#b07256', borderRadius: '0', width: '10em', height: '3em', fontSize: '1.2em'}}>BOOK NOW</button>
+          <button className='btn' style={{color: '#fff', backgroundColor: '#b07256', borderRadius: '0', width: '10em', height: '3em', fontSize: '1.2em'}}><NavLink to="/booking" style={{color: "#fff"}}>BOOK NOW</NavLink></button>
         </div>
 
         <img src={BookImg} alt="Booking img" className='BookingIMG'/>

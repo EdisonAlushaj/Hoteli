@@ -4,6 +4,7 @@ import './Header.css';
 import logo from './assets/MeGusta-Horizontal-removebg-preview.png';
 import Footer from "./Footer/Footer.jsx";
 import AppRoutes from "./AppRoutes.jsx";
+import cookieUtils from './cookieUtils';
 
 const Home = React.lazy(() => import("./Home"));
 const About = React.lazy(() => import("./About"));
@@ -19,15 +20,9 @@ const Sauna = React.lazy(() => import("./Services/Sauna.jsx"));
 const Booking = React.lazy(() => import("./Booking/RoomBooking.jsx"));
 
 export const MainLayout = () => {
-  // useEffect(() => {
-  //   axios.get(api)
-  //     .then(response => {
-  //       console.log(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []);
+  
+  const userRole = cookieUtils.getUserRoleFromCookies();
+
   return (
     <div>
 
@@ -54,9 +49,11 @@ export const MainLayout = () => {
                 </div>
               </li>
               <li><NavLink to="/contact">Contact</NavLink></li>
-              <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+              {userRole === 'Admin' && (
+                <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+              )}
             </ul>
-            <button id="booking-btn"><NavLink to="/booking">BOOK NOW</NavLink></button>
+            <button id="booking-btn" ><NavLink to="/booking" style={{color: "#fff"}}>BOOK NOW</NavLink></button>
           </div>
         </div>
       </header>

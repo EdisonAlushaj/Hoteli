@@ -3,6 +3,7 @@ import axios from 'axios';
 import loginfoto from './loginfoto.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
 import { NavLink, useNavigate } from "react-router-dom";
+import cookieUtils from './cookieUtils';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -25,15 +26,17 @@ function Login() {
       ;
 
       const role = parsedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-console.log("User Role:", role);
+      console.log("User Role:", role);
 
-if (role === 'Admin') {
-  console.log("Navigating to admin dashboard...");
-  navigate('/dashboard');
-} else {
-  console.log("Navigating to home page...");
-  navigate('/home');
-}
+      cookieUtils.setUserRoleInCookies(role);
+
+      if (role === 'Admin') {
+        console.log("Navigating to admin dashboard...");
+        navigate('/dashboard');
+      } else {
+        console.log("Navigating to home page...");
+        navigate('/home');
+      }
 
     } catch (error) {
       if (error.response) {
@@ -57,7 +60,7 @@ if (role === 'Admin') {
     try {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
 
@@ -88,7 +91,7 @@ if (role === 'Admin') {
                     <form>
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <i className="fas fa-cubes fa-2x me-3" style={{ color: '#ff6219' }}></i>
-                        <div className="col-md-6 col-lg-5 d-none d-md-block"><img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }}/></div>
+                        <div className="col-md-6 col-lg-5 d-none d-md-block"><img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }} /></div>
                       </div>
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
                         Log into your account
