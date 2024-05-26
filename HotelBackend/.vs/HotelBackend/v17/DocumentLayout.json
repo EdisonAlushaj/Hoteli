@@ -1,50 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\",
+  "WorkspaceRootPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\roombookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\roombookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526133547_First.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HotelBackend\\Migrations\\20240526133547_First.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240523155330_Room-Booking-Update-2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HotelBackend\\Migrations\\20240523155330_Room-Booking-Update-2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526132611_First.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HotelBackend\\Migrations\\20240526132611_First.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\roombookingitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\roombookingitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\roombooking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\roombooking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\menufood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\menufood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\migrations\\20240523143216_room-booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\migrations\\20240523143216_room-booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\data\\aplicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\data\\aplicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\ediso\\onedrive\\desktop\\hoteli\\hotelbackend\\hotelbackend\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,164 +34,88 @@
       "DocumentGroups": [
         {
           "DockedWidth": 155,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MenuFood.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\MenuFood.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\MenuFood.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\MenuFood.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\MenuFood.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T15:51:34.548Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "20240523143216_Room-Booking.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240523143216_Room-Booking.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240523143216_Room-Booking.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240523143216_Room-Booking.cs",
-              "RelativeToolTip": "HotelBackend\\Migrations\\20240523143216_Room-Booking.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAQwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T14:32:16.786Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DataContext.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Data\\DataContext.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
-              "RelativeToolTip": "HotelBackend\\Data\\DataContext.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAkwB4AAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T09:42:59.73Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RoomBookingController.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\RoomBookingController.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Controllers\\RoomBookingController.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\RoomBookingController.cs",
-              "RelativeToolTip": "HotelBackend\\Controllers\\RoomBookingController.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAiwDUAAAARAAAA",
+              "Title": "20240526133547_First.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526133547_First.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240526133547_First.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526133547_First.cs",
+              "RelativeToolTip": "HotelBackend\\Migrations\\20240526133547_First.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T10:20:49.756Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "OrderItem.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\OrderItem.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\OrderItem.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\OrderItem.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\OrderItem.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T14:26:17.684Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 127,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Order.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\Order.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Order.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\Order.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAxwBEAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T10:26:14.886Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-05-26T13:35:48.131Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "20240523155330_Room-Booking-Update-2.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240523155330_Room-Booking-Update-2.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240523155330_Room-Booking-Update-2.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240523155330_Room-Booking-Update-2.cs",
-              "RelativeToolTip": "HotelBackend\\Migrations\\20240523155330_Room-Booking-Update-2.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "20240526132611_First.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526132611_First.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240526132611_First.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526132611_First.cs",
+              "RelativeToolTip": "HotelBackend\\Migrations\\20240526132611_First.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T15:53:30.305Z",
+              "WhenOpened": "2024-05-26T13:26:11.633Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Controllers\\OrderController.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "HotelBackend\\Controllers\\OrderController.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAswDUAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T10:19:28.389Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Room.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Room.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\Room.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\Room.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\Room.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T09:48:31.151Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RoomBooking.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\RoomBooking.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\RoomBooking.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\RoomBooking.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\RoomBooking.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAewBAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T09:53:41.963Z",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\appsettings.json",
+              "RelativeDocumentMoniker": "HotelBackend\\appsettings.json",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\appsettings.json",
+              "RelativeToolTip": "HotelBackend\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-26T13:24:10.6Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "RoomBookingItem.cs",
-              "DocumentMoniker": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\RoomBookingItem.cs",
-              "RelativeDocumentMoniker": "HotelBackend\\Entities\\RoomBookingItem.cs",
-              "ToolTip": "C:\\Users\\ediso\\OneDrive\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Entities\\RoomBookingItem.cs",
-              "RelativeToolTip": "HotelBackend\\Entities\\RoomBookingItem.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAeAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Program.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Program.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Program.cs",
+              "RelativeToolTip": "HotelBackend\\Program.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAqwFgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T09:47:43.461Z",
+              "WhenOpened": "2024-05-26T12:52:07.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\AplicationUser.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Data\\AplicationUser.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\AplicationUser.cs",
+              "RelativeToolTip": "HotelBackend\\Data\\AplicationUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T12:44:15.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Data\\DataContext.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
+              "RelativeToolTip": "HotelBackend\\Data\\DataContext.cs",
+              "ViewState": "AQIAAHQAAAAAAAAAAAAqwI4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T12:41:25.943Z",
               "EditorCaption": ""
             }
           ]
