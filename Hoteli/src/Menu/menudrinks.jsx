@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Menu.css';
+import axios from 'axios';
 
 function MenuDrinks() {
     const [selectedItems, setSelectedItems] = useState([]);
@@ -9,10 +10,27 @@ function MenuDrinks() {
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [drinkItems, setDrinkItems] = useState([]);
 
     const addToOrder = (itemName) => {
         setSelectedItems([...selectedItems, itemName]);
     };
+    useEffect(() => {
+        fetchDrinkItems();
+    }, []);
+    const fetchDrinkItems = async () => {
+        try {
+            const response = await axios.get('https://localhost:7189/api/MenuDrink');
+            
+            // Debug: Log the fetched food items
+            console.log('Fetched drink Items:', response.data);
+            
+            setDrinkItems(response.data);
+        } catch (error) {
+            toast.error('Error fetching drink items.');
+        }
+    };
+
     
     const removeFromOrder = (indexToRemove) => {
         const updatedItems = selectedItems.filter((item, index) => index !== indexToRemove);
@@ -38,22 +56,28 @@ function MenuDrinks() {
             <Row className="mt-5">
                 <Col>
                 <Row md={4}>
-                        <Col>
-                            <Card>
-                                <Card.Img variant="top" src="food_item_1.jpg" />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>Drink</Card.Title>
-                                    <Card.Text>
-                                        Traditional Spanish dish with a variety of fresh seafood and rice.
-                                    </Card.Text>
-                                    <Card.Text className="text-muted">$18.99</Card.Text>
-                                    <Button variant="primary" onClick={() => addToOrder(`${document.querySelector('.card-title').innerText} - ${document.querySelector('.text-muted').innerText}`)}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        {/* Add more food items here */}
+                        {drinkItems.map((drinkItem, index) => (
+                            <Col key={index}>
+                                <Card>
+                                    <Card.Img variant="top" src={drinkItem.drinkImage} />
+                                    <Card.Body>
+                                        <Card.Title style={{ color: '#6b4d38' }}>{drinkItem.drinkName}</Card.Title>
+                                        <Card.Text>{drinkItem.drinkDescription}</Card.Text>
+                                        <Card.Text className="text-muted">${drinkItem.drinkPrice}</Card.Text>
+                                        <Button variant="primary" onClick={() => {
+                                            const quantity = parseInt(prompt("Enter quantity:"));
+                                            if (!isNaN(quantity) && quantity > 0) {
+                                                addToOrder(drinkItem, quantity);
+                                            } else {
+                                                toast.error("Please enter a valid quantity.");
+                                            }
+                                        }}>
+                                            Add to Order
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
                     </Row>
                 </Col>
                 {selectedItems.length > 0 && (
