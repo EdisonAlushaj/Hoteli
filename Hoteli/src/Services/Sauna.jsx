@@ -65,7 +65,7 @@ const Sauna = () => {
 
   return (
     <div>
-      <div className="cover-photo"></div>
+      <div className="cover-photooooo"></div>
       <Container className="mt-5">
         <h1 className="mb-4">Saunas</h1>
         <Row>

@@ -74,7 +74,7 @@ const Pool = () => {
 
   return (
     <div>
-      <div className="cover-photo">
+      <div className="cover-photooo">
         <h1 className="cover-title">Welcome to Our Pools!</h1>
       </div>
       <div className="container mt-5">
