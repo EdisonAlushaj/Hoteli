@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SharedClassLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d13d33d1c98d870b9bbd3e0ce73d5bf2f882ea67")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9efb16a373955297cbf33c843c825d8ac46f7c9")]
 [assembly: System.Reflection.AssemblyProductAttribute("SharedClassLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SharedClassLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
