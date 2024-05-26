@@ -275,7 +275,7 @@ const Dashboard = () => {
                         </li>
                     </ul>
                     <div className="sidebar-footer">
-                        <NavLink to="#" className="sidebar-link">
+                        <NavLink to="/home" className="sidebar-link">
                             <i className="lni lni-exit"></i>
                             <span>Logout</span>
                         </NavLink>

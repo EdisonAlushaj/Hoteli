@@ -1,14 +1,12 @@
 ﻿using HotelBackend.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBackend.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<ApplicationUser>
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-
-        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<SuperHero> SuperHeroes { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -30,43 +28,53 @@ namespace HotelBackend.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<RoomBooking> RoomBookings { get; set; }
         public DbSet<RoomBookingItem> RoomBookingItems { get; set; }
+        public DbSet<Table> Tables { get; set; }
+        public DbSet<Activities> Activities { get; set; }
+        public DbSet<Hall> Halls { get; set; }
+        public DbSet<FitnesEquipmet> FitnesEquipmets { get; set; }
+        public DbSet<Spa> Spas { get; set; }
+        public DbSet<Fitnes> Fitness { get; set; }
+        public DbSet<Sauna> Saunas { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Pool>()
-                 .HasOne<Hall>()
-                 .WithMany()
-                 .HasForeignKey(p => p.HallId)
-                 .IsRequired();
+                .HasOne<Hall>()
+                .WithMany()
+                .HasForeignKey(p => p.HallId)
+                .IsRequired();
 
             modelBuilder.Entity<Shezlong>()
-                  .HasOne<Pool>()
-                  .WithMany()
-                  .HasForeignKey(s => s.PoolId);
+                .HasOne<Pool>()
+                .WithMany()
+                .HasForeignKey(s => s.PoolId);
 
             modelBuilder.Entity<Fitnes>()
-                 .HasOne<Hall>()
-                 .WithMany()
-                 .HasForeignKey(p => p.HallId)
-                 .IsRequired();
+                .HasOne<Hall>()
+                .WithMany()
+                .HasForeignKey(p => p.HallId)
+                .IsRequired();
 
             modelBuilder.Entity<FitnesEquipmet>()
-                 .HasOne<Fitnes>()
-                 .WithMany()
-                 .HasForeignKey(p => p.FitnesId)
-                 .IsRequired();
+                .HasOne<Fitnes>()
+                .WithMany()
+                .HasForeignKey(p => p.FitnesId)
+                .IsRequired();
 
             modelBuilder.Entity<Sauna>()
-                 .HasOne<Hall>()
-                 .WithMany()
-                 .HasForeignKey(p => p.HallId)
-                 .IsRequired();
+                .HasOne<Hall>()
+                .WithMany()
+                .HasForeignKey(p => p.HallId)
+                .IsRequired();
 
             modelBuilder.Entity<Roli>()
                 .Property(r => r.RoleSalary)
                 .HasColumnType("decimal(18, 2)");
 
             modelBuilder.Entity<UsersRoles>()
-            .HasKey(ur => new { ur.UsersRolesId });
+                .HasKey(ur => new { ur.UsersRolesId });
 
             modelBuilder.Entity<UsersRoles>()
                 .HasOne(ur => ur.Userr)
@@ -79,7 +87,7 @@ namespace HotelBackend.Data
                 .HasForeignKey(ur => ur.RolesId);
 
             modelBuilder.Entity<ShezlongReservation>()
-          .HasKey(sr => new { sr.ReservationId });
+                .HasKey(sr => new { sr.ReservationId });
 
             modelBuilder.Entity<ShezlongReservation>()
                 .HasOne(sr => sr.Userr)
@@ -92,7 +100,7 @@ namespace HotelBackend.Data
                 .HasForeignKey(sr => sr.ShezlongId);
 
             modelBuilder.Entity<SpaReservation>()
-          .HasKey(sr => new { sr.ReservationId });
+                .HasKey(sr => new { sr.ReservationId });
 
             modelBuilder.Entity<SpaReservation>()
                 .HasOne(sr => sr.Userr)
@@ -103,8 +111,9 @@ namespace HotelBackend.Data
                 .HasOne(sr => sr.Spa)
                 .WithMany()
                 .HasForeignKey(sr => sr.SpaId);
+
             modelBuilder.Entity<SaunaReservation>()
-.HasKey(sr => new { sr.ReservationId });
+                .HasKey(sr => new { sr.ReservationId });
 
             modelBuilder.Entity<SaunaReservation>()
                 .HasOne(sr => sr.Userr)
@@ -115,8 +124,9 @@ namespace HotelBackend.Data
                 .HasOne(sr => sr.Sauna)
                 .WithMany()
                 .HasForeignKey(sr => sr.SaunaId);
+
             modelBuilder.Entity<TableReservation>()
-        .HasKey(ur => new { ur.ReservationId });
+                .HasKey(tr => new { tr.ReservationId });
 
             modelBuilder.Entity<TableReservation>()
                 .HasOne(tr => tr.User)
@@ -127,16 +137,6 @@ namespace HotelBackend.Data
                 .HasOne(tr => tr.Table)
                 .WithMany()
                 .HasForeignKey(tr => tr.Id);
-     
-
-            base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Table> Tables { get; set; }
-        public DbSet<Activities> Activities { get; set; }
-        public DbSet<Hall> Halls { get; set; }
-        public DbSet<FitnesEquipmet> FitnesEquipmets { get; set; }
-        public DbSet<Spa> Spas { get; set; }
-        public DbSet<Fitnes> Fitness { get; set; }
-        public DbSet<Sauna> Saunas { get; set; }
     }
 }

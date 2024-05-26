@@ -13,6 +13,7 @@ const RoomBooking = () => {
     const [showAdd, setShowAdd] = useState(false);
     const [userId, setUserId] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [bookingDay, setBookingDay] = useState('');
     const [roomBookingItems, setRoomBookingItems] = useState([{ roomId: '', quantity: '' }]);
     const [data, setData] = useState([]);
 
@@ -57,6 +58,7 @@ const RoomBooking = () => {
         const RoomBookingDto = {
             userId: userId,
             paymentMethod: paymentMethod,
+            data: bookingDay,
             roomBookingItems: roomBookingItems.map(item => ({
                 roomId: parseInt(item.roomId),
                 quantity: parseInt(item.quantity)
@@ -78,6 +80,7 @@ const RoomBooking = () => {
     const clear = () => {
         setUserId('');
         setPaymentMethod('');
+        setBookingDay('');
         setRoomBookingItems([{ roomId: '', quantity: '' }]);
     };
 
@@ -110,6 +113,7 @@ const RoomBooking = () => {
                             <th>Booking ID</th>
                             <th>User Name</th>
                             <th>Payment Method</th>
+                            <th>Booking Day</th>
                             <th>Total Price</th>
                             <th>Actions</th>
                         </tr>
@@ -121,6 +125,7 @@ const RoomBooking = () => {
                                     <td>{item.roomBookingId}</td>
                                     <td>{item.user.name}</td>
                                     <td>{item.paymentMethod}</td>
+                                    <td>{item.data}</td>
                                     <td>{item.totalBookingPrice}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.roomBookingId)}>Delete</button>
@@ -145,6 +150,13 @@ const RoomBooking = () => {
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Payment Method'
                                     value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <input type="date" className='form-control' placeholder='Enter Date'
+                                    value={bookingDay} onChange={(e) => setBookingDay(e.target.value)}
                                 />
                             </Col>
                         </Row>

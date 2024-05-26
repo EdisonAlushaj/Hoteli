@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import loginfoto from './loginfoto.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
 import { NavLink, useNavigate } from "react-router-dom";
@@ -8,31 +9,64 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  function GetLoginDetails() {
-    let items = { email, password };
-    console.warn(items);
-    fetch('https://localhost:7189/api/Login', {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(items)
-    })
-   .then((result) => {
-      result.json().then((resp) => {
-        console.warn(resp);
-        if (resp.role === 'admin') {
-          navigate("/dashboard");
-        } else {
-          navigate("/home");
-        }
+  const GetLoginDetails = async () => {
+    try {
+      const response = await axios.post('https://localhost:7189/api/Account/login', {
+        email: email,
+        password: password
       });
-    })
-   .catch((error) => {
-      console.error('Error fetching data:', error);
-    });
-  }
+
+      const token = response.data.token;
+      console.log("JWT Token:", token);
+
+      const parsedToken = parseJwt(token);
+      console.log("Parsed Token:", parsedToken);
+
+      ;
+
+      const role = parsedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+console.log("User Role:", role);
+
+if (role === 'Admin') {
+  console.log("Navigating to admin dashboard...");
+  navigate('/dashboard');
+} else {
+  console.log("Navigating to home page...");
+  navigate('/home');
+}
+
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Error request:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error message:", error.message);
+      }
+      console.error("Error config:", error.config);
+    }
+  };
+
+  const parseJwt = (token) => {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      console.error("Error parsing JWT token:", e);
+      return null;
+    }
+  };
 
   return (
     <section style={{ backgroundColor: '#b07256' }}>
@@ -98,7 +132,6 @@ function Login() {
                       <a href="#!" className="small text-muted">
                         Privacy policy
                       </a>
-                      
                     </form>
                   </div>
                 </div>
