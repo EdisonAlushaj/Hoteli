@@ -9,8 +9,19 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-public class AccountRepository(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config) : IUserAccount
+public class AccountRepository : IUserAccount
 {
+    private readonly UserManager<ApplicationUser> userManager;
+    private readonly RoleManager<IdentityRole> roleManager;
+    private readonly IConfiguration config;
+
+    public AccountRepository(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
+    {
+        this.userManager = userManager;
+        this.roleManager = roleManager;
+        this.config = config;
+    }
+
     public async Task<GeneralResponse> CreateAccount(UserDTO userDTO)
     {
         if (userDTO is null) return new GeneralResponse(false, "Model is empty");
@@ -20,14 +31,18 @@ public class AccountRepository(UserManager<ApplicationUser> userManager, RoleMan
             Name = userDTO.Name,
             Email = userDTO.Email,
             PasswordHash = userDTO.Password,
-            UserName = userDTO.Name,
+            UserName = userDTO.Email
         };
 
         var user = await userManager.FindByEmailAsync(newUser.Email);
         if (user != null) return new GeneralResponse(false, "User already registered");
 
         var createUserResult = await userManager.CreateAsync(newUser, userDTO.Password);
-        if (!createUserResult.Succeeded) return new GeneralResponse(false, "Error occurred.. please try again");
+        if (!createUserResult.Succeeded)
+        {
+            var errors = string.Join(", ", createUserResult.Errors.Select(e => e.Description));
+            return new GeneralResponse(false, $"Error occurred during user creation: {errors}");
+        }
 
         var isFirstUser = (await userManager.Users.CountAsync()) == 1;
         var roleName = isFirstUser ? "Admin" : "User";
@@ -36,11 +51,19 @@ public class AccountRepository(UserManager<ApplicationUser> userManager, RoleMan
         if (!roleExists)
         {
             var roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
-            if (!roleResult.Succeeded) return new GeneralResponse(false, "Error creating role");
+            if (!roleResult.Succeeded)
+            {
+                var errors = string.Join(", ", roleResult.Errors.Select(e => e.Description));
+                return new GeneralResponse(false, $"Error creating role: {errors}");
+            }
         }
 
         var addToRoleResult = await userManager.AddToRoleAsync(newUser, roleName);
-        if (!addToRoleResult.Succeeded) return new GeneralResponse(false, "Error adding user to role");
+        if (!addToRoleResult.Succeeded)
+        {
+            var errors = string.Join(", ", addToRoleResult.Errors.Select(e => e.Description));
+            return new GeneralResponse(false, $"Error adding user to role: {errors}");
+        }
 
         return new GeneralResponse(true, "Account Created");
     }
