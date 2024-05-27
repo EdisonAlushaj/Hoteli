@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\repositories\\accountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\migrations\\20240526133547_first.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\migrations\\20240526133547_first.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\sharedclasslibrary\\contracts\\iuseraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|solutionrelative:sharedclasslibrary\\contracts\\iuseraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\sharedclasslibrary\\dtos\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|solutionrelative:sharedclasslibrary\\dtos\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\sharedclasslibrary\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|solutionrelative:sharedclasslibrary\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\sharedclasslibrary\\dtos\\serviceresponses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,12 +35,8 @@
       "RelativeMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|solutionrelative:sharedclasslibrary\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\sharedclasslibrary\\contracts\\iuseraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|solutionrelative:sharedclasslibrary\\contracts\\iuseraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|solutionrelative:hotelbackend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\sharedclasslibrary\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93736EDD-B8C2-4E4A-BF34-67238BDFDAF0}|SharedClassLibrary\\SharedClassLibrary.csproj|solutionrelative:sharedclasslibrary\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4D9EDDE2-FB63-4F65-84A2-51311CA681E6}|HotelBackend\\HotelBackend.csproj|c:\\users\\elez kadrijaj\\desktop\\hoteli\\hotelbackend\\hotelbackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -78,7 +82,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 155,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -87,45 +91,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ServiceResponses.cs",
-              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\ServiceResponses.cs",
-              "RelativeDocumentMoniker": "SharedClassLibrary\\DTOs\\ServiceResponses.cs",
-              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\ServiceResponses.cs",
-              "RelativeToolTip": "SharedClassLibrary\\DTOs\\ServiceResponses.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T14:02:18.928Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LoginDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\LoginDTO.cs",
-              "RelativeDocumentMoniker": "SharedClassLibrary\\DTOs\\LoginDTO.cs",
-              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\LoginDTO.cs",
-              "RelativeToolTip": "SharedClassLibrary\\DTOs\\LoginDTO.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAkwAkAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T13:48:03.521Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\UserDTO.cs",
-              "RelativeDocumentMoniker": "SharedClassLibrary\\DTOs\\UserDTO.cs",
-              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\UserDTO.cs",
-              "RelativeToolTip": "SharedClassLibrary\\DTOs\\UserDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T13:42:18.895Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "UserSession.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\UserSession.cs",
               "RelativeDocumentMoniker": "SharedClassLibrary\\DTOs\\UserSession.cs",
@@ -133,12 +98,11 @@
               "RelativeToolTip": "SharedClassLibrary\\DTOs\\UserSession.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T14:07:16.133Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T14:07:16.133Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\AccountController.cs",
@@ -151,46 +115,94 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AccountRepository.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Repositories\\AccountRepository.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Repositories\\AccountRepository.cs",
               "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Repositories\\AccountRepository.cs",
               "RelativeToolTip": "HotelBackend\\Repositories\\AccountRepository.cs",
-              "ViewState": "AQIAAD0AAAAAAAAAAAAIwFIAAAA1AAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACEAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-26T14:13:29.992Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
+              "Title": "20240526133547_First.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526133547_First.cs",
+              "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240526133547_First.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526133547_First.cs",
+              "RelativeToolTip": "HotelBackend\\Migrations\\20240526133547_First.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAmwCsAAABYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T18:26:30.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "IUserAccount.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\Contracts\\IUserAccount.cs",
               "RelativeDocumentMoniker": "SharedClassLibrary\\Contracts\\IUserAccount.cs",
               "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\Contracts\\IUserAccount.cs",
               "RelativeToolTip": "SharedClassLibrary\\Contracts\\IUserAccount.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABNAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-26T13:41:17.79Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Program.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Program.cs",
               "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Program.cs",
               "RelativeToolTip": "HotelBackend\\Program.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T12:52:07.288Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T12:52:07.288Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "UserDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\UserDTO.cs",
+              "RelativeDocumentMoniker": "SharedClassLibrary\\DTOs\\UserDTO.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\UserDTO.cs",
+              "RelativeToolTip": "SharedClassLibrary\\DTOs\\UserDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T13:42:18.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "SharedClassLibrary\\DTOs\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\LoginDTO.cs",
+              "RelativeToolTip": "SharedClassLibrary\\DTOs\\LoginDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T13:48:03.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ServiceResponses.cs",
+              "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\ServiceResponses.cs",
+              "RelativeDocumentMoniker": "SharedClassLibrary\\DTOs\\ServiceResponses.cs",
+              "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\DTOs\\ServiceResponses.cs",
+              "RelativeToolTip": "SharedClassLibrary\\DTOs\\ServiceResponses.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T14:02:18.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\appsettings.json",
               "RelativeDocumentMoniker": "HotelBackend\\appsettings.json",
@@ -198,12 +210,11 @@
               "RelativeToolTip": "HotelBackend\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-05-26T13:24:10.6Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T13:24:10.6Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "HotelBackend\\Properties\\launchSettings.json",
@@ -211,12 +222,11 @@
               "RelativeToolTip": "HotelBackend\\Properties\\launchSettings.json",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-05-26T15:43:39.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T15:43:39.308Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "ActivitiesController.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\ActivitiesController.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\ActivitiesController.cs",
@@ -224,12 +234,11 @@
               "RelativeToolTip": "HotelBackend\\Controllers\\ActivitiesController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T15:47:51.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T15:47:51.352Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "HotelBackend\\WeatherForecast.cs",
@@ -237,12 +246,11 @@
               "RelativeToolTip": "HotelBackend\\WeatherForecast.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T15:43:52.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T15:43:52.103Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "HotelBackend.http",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.http",
               "RelativeDocumentMoniker": "HotelBackend\\HotelBackend.http",
@@ -250,25 +258,23 @@
               "RelativeToolTip": "HotelBackend\\HotelBackend.http",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-05-26T15:13:46.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T15:13:46.644Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "HotelBackend",
+              "DocumentIndex": 13,
+              "Title": "HotelBackend.csproj",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
               "RelativeDocumentMoniker": "HotelBackend\\HotelBackend.csproj",
               "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
               "RelativeToolTip": "HotelBackend\\HotelBackend.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-05-26T15:45:06.632Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T15:45:06.632Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "DataContext.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\DataContext.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Data\\DataContext.cs",
@@ -276,12 +282,11 @@
               "RelativeToolTip": "HotelBackend\\Data\\DataContext.cs",
               "ViewState": "AQIAAIIAAAAAAAAAAAAcwAgAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T12:41:25.943Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T12:41:25.943Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Data\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Data\\ApplicationUser.cs",
@@ -289,12 +294,11 @@
               "RelativeToolTip": "HotelBackend\\Data\\ApplicationUser.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T12:44:15.24Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T12:44:15.24Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "20240526132611_First.cs",
               "DocumentMoniker": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Migrations\\20240526132611_First.cs",
               "RelativeDocumentMoniker": "HotelBackend\\Migrations\\20240526132611_First.cs",

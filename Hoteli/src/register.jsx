@@ -9,8 +9,8 @@ function Register() {
 
   const [FullName, setFullName] = useState('');
   const [Email, setEmail] = useState('');
-  const [ContactNumber, setContactNumber] = useState('');
   const [Password, setPassword] = useState('');
+  const [ConfirmPassword, setConfirmPassword] = useState('');
 
   const handleFullNameChange = (event) => {
     setFullName(event.target.value);
@@ -20,22 +20,22 @@ function Register() {
     setEmail(event.target.value);
   };
 
-  const handleContactNumberChange = (event) => {
-    setContactNumber(event.target.value);
-  };
-
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
+
   const handleRegister = () => {
-    const url = 'https://localhost:7189/api/Userr';
+    const url = 'https://localhost:7189/api/Account/register';
     const data = {
-      "UserFullName": FullName,
-      "UserEmail": Email,
-      "UserContactNumber": ContactNumber,
-      "UserPassword": Password,
-    }
+      "name": FullName,
+      "email": Email,
+      "password": Password,
+      "confirmpassword": ConfirmPassword,
+    };
 
     axios.post(url, data)
       .then((result) => {
@@ -43,16 +43,23 @@ function Register() {
         alert('User has been registered.');
       })
       .catch((error) => {
-        setErrorMessage('Failed to register user.');
+        if (error.response) {
+          setErrorMessage('Failed to register user: ' + error.response.data.message);
+        } else if (error.request) {
+          setErrorMessage('Failed to register user: No response from the server.');
+        } else {
+          setErrorMessage('Failed to register user: ' + error.message);
+        }
       });
-  }
+  };
 
   const clear = () => {
     setFullName('');
     setEmail('');
-    setContactNumber('');
     setPassword('');
-  }
+    setConfirmPassword('');
+    setErrorMessage('');
+  };
 
   return (
     <section style={{ backgroundColor: '#b07256'}}>
@@ -82,12 +89,12 @@ function Register() {
                         Create your account
                       </h5>
                       <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="name">
+                        <label className="form-label" htmlFor="fullname">
                           Name
                         </label>
                         <input
                           type="text"
-                          id="name"
+                          id="fullname"
                           className="form-control form-control-lg"
                           value={FullName}
                           onChange={handleFullNameChange}
@@ -106,18 +113,6 @@ function Register() {
                         />
                       </div>
                       <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="contactNumber">
-                          Contact Number
-                        </label>
-                        <input
-                          type="text"
-                          id="contactNumber"
-                          className="form-control form-control-lg"
-                          value={ContactNumber}
-                          onChange={handleContactNumberChange}
-                        />
-                      </div>
-                      <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="password">
                           Password
                         </label>
@@ -127,6 +122,18 @@ function Register() {
                           className="form-control form-control-lg"
                           value={Password}
                           onChange={handlePasswordChange}
+                        />
+                      </div>
+                      <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="confirm-password">
+                          Confirm Password
+                        </label>
+                        <input
+                          type="password"
+                          id="confirm-password"
+                          className="form-control form-control-lg"
+                          value={ConfirmPassword}
+                          onChange={handleConfirmPasswordChange}
                         />
                       </div>
                       <div className="pt-1 mb-4">
