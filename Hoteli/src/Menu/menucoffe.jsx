@@ -64,7 +64,7 @@ function MenuCoffe() {
                                         <Card.Text>
                                             {cafeItem.cafeDescription}
                                         </Card.Text>
-                                        <Card.Text className="text-muted">${cafeItem.foodPrice}</Card.Text>
+                                        <Card.Text className="text-muted">${cafeItem.cafePrice}</Card.Text>
                                         <Button variant="primary" onClick={() => addToOrder(`${cafeItem.cafeName} - ${cafeItem.cafePrice}`)}>
                                             Add to Order
                                         </Button>
