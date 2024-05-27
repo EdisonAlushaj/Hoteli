@@ -1,95 +1,93 @@
-﻿
-using HotelBackend.Data;
-using Microsoft.AspNetCore.Identity; // Ensure you are using the correct namespace
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using HotelBackend.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using SharedClassLibrary.Contracts;
 using SharedClassLibrary.DTOs;
+using static SharedClassLibrary.DTOs.ServiceResponses;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using static SharedClassLibrary.DTOs.ServiceResponses;
+using Microsoft.EntityFrameworkCore;
 
-namespace HotelBackend.Repositories
+public class AccountRepository(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config) : IUserAccount
 {
-    public class AccountRepository(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config) : IUserAccount
+    public async Task<GeneralResponse> CreateAccount(UserDTO userDTO)
     {
+        if (userDTO is null) return new GeneralResponse(false, "Model is empty");
 
-        public async Task<GeneralResponse> CreateAccount(UserDTO userDTO)
+        var newUser = new ApplicationUser
         {
-            if (userDTO is null) return new GeneralResponse(false, "Model is empty");
+            Name = userDTO.Name,
+            Email = userDTO.Email,
+            PasswordHash = userDTO.Password,
+            UserName = userDTO.Name,
+        };
 
-            var newUser = new ApplicationUser
-            {
-                UserName = userDTO.Email,
-                Email = userDTO.Email,
-                PasswordHash = userDTO.Password,
-                
-            };
+        var user = await userManager.FindByEmailAsync(newUser.Email);
+        if (user != null) return new GeneralResponse(false, "User already registered");
 
-            var user = await userManager.FindByEmailAsync(newUser.Email);
-            if (user != null) return new GeneralResponse(false, "User already registered");
+        var createUserResult = await userManager.CreateAsync(newUser, userDTO.Password);
+        if (!createUserResult.Succeeded) return new GeneralResponse(false, "Error occurred.. please try again");
 
-            var createUserResult = await userManager.CreateAsync(newUser, userDTO.Password);
-            if (!createUserResult.Succeeded) return new GeneralResponse(false, "Error occurred.. please try again");
+        var isFirstUser = (await userManager.Users.CountAsync()) == 1;
+        var roleName = isFirstUser ? "Admin" : "User";
 
-            // Assign Default Role: Admin to first registrar; rest as User
-            var isFirstUser = (await userManager.Users.CountAsync()) == 1;
-            var roleName = isFirstUser ? "Admin" : "User";
-
-            var roleExists = await roleManager.RoleExistsAsync(roleName);
-            if (!roleExists)
-            {
-                var roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
-                if (!roleResult.Succeeded) return new GeneralResponse(false, "Error creating role");
-            }
-
-            var addToRoleResult = await userManager.AddToRoleAsync(newUser, roleName);
-            if (!addToRoleResult.Succeeded) return new GeneralResponse(false, "Error adding user to role");
-
-            return new GeneralResponse(true, "Account Created");
+        var roleExists = await roleManager.RoleExistsAsync(roleName);
+        if (!roleExists)
+        {
+            var roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+            if (!roleResult.Succeeded) return new GeneralResponse(false, "Error creating role");
         }
 
-        public async Task<LoginResponse> LoginAccount(LoginDTO loginDTO)
+        var addToRoleResult = await userManager.AddToRoleAsync(newUser, roleName);
+        if (!addToRoleResult.Succeeded) return new GeneralResponse(false, "Error adding user to role");
+
+        return new GeneralResponse(true, "Account Created");
+    }
+
+    public async Task<LoginResponse> LoginAccount(LoginDTO loginDTO)
+    {
+        if (loginDTO == null)
+            return new LoginResponse(false, null, "Login container is empty");
+
+        var getUser = await userManager.FindByEmailAsync(loginDTO.Email);
+        if (getUser == null)
+            return new LoginResponse(false, null, "User not found");
+
+        if (string.IsNullOrEmpty(getUser.Email) || string.IsNullOrEmpty(getUser.UserName))
+            return new LoginResponse(false, null, "User data is incomplete");
+
+        bool checkUserPasswords = await userManager.CheckPasswordAsync(getUser, loginDTO.Password);
+        if (!checkUserPasswords)
+            return new LoginResponse(false, null, "Invalid email/password");
+
+        var getUserRole = await userManager.GetRolesAsync(getUser);
+        if (getUserRole == null || !getUserRole.Any())
+            return new LoginResponse(false, null, "User has no assigned roles");
+
+        var userSession = new UserSession(getUser.Id, getUser.UserName, getUser.Email, getUserRole.First());
+        string token = GenerateToken(userSession);
+        return new LoginResponse(true, token, "Login completed");
+    }
+
+    private string GenerateToken(UserSession user)
+    {
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        var userClaims = new[]
         {
-            if (loginDTO == null)
-                return new LoginResponse(false, null!, "Login container is empty");
-
-            var getUser = await userManager.FindByEmailAsync(loginDTO.Email);
-            if (getUser is null)
-                return new LoginResponse(false, null!, "User not found");
-
-            bool checkUserPasswords = await userManager.CheckPasswordAsync(getUser, loginDTO.Password);
-            if (!checkUserPasswords)
-                return new LoginResponse(false, null!, "Invalid email/password");
-
-            var getUserRole = await userManager.GetRolesAsync(getUser);
-            var userSession = new UserSession(getUser.Id, getUser.Name, getUser.Email, getUserRole.First());
-            string token = GenerateToken(userSession);
-            return new LoginResponse(true, token!, "Login completed");
-        }
-
-        private string GenerateToken(UserSession user)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var userClaims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role)
-            };
-            var token = new JwtSecurityToken(
-                issuer: config["Jwt:Issuer"],
-                audience: config["Jwt:Audience"],
-                claims: userClaims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: credentials
-                );
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+            new Claim(ClaimTypes.NameIdentifier, user.Id),
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role)
+        };
+        var token = new JwtSecurityToken(
+            issuer: config["Jwt:Issuer"],
+            audience: config["Jwt:Audience"],
+            claims: userClaims,
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: credentials
+        );
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
