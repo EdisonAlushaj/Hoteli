@@ -25,6 +25,7 @@ import OrderFood from './Crud-Functions/OrderFood.jsx';
 import SpaReservationCrud from './Crud-Functions/SpaReservationCrud.jsx';
 import SaunaReservationCrud from './Crud-Functions/SaunaReservationCrud.jsx';
 import RoomBookingCrud from './Crud-Functions/RoomBookingCrud.jsx';
+import UserInformation from './Crud-Functions/UserInformation.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -52,6 +53,7 @@ const Dashboard = () => {
     const [showAboutTable, setShowAboutTable] = useState(false);
     const [showOrder, setShowOrder] = useState(false);
     const [showRoomBookingTable, setRoomBookingTable] = useState(false);
+    const [showUserInformationTable, setUserInformationTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -128,6 +130,9 @@ const Dashboard = () => {
     const toggleRoomBookingTable = () => {
         setRoomBookingTable(!showRoomBookingTable);
     };
+    const toggleUserInfromationTable = () => {
+        setUserInformationTable(!showUserInformationTable);
+    };
 
     return (
         <>
@@ -164,6 +169,12 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={toggleUserRoleTable}>User&Roles</NavLink>
                                 </li>
                             </ul>
+                        </li>
+                        <li className="sidebar-item">
+                            <NavLink to="#" className="sidebar-link" onClick={toggleUserInfromationTable}>
+                                <i className="lni lni-cog"></i>
+                                <span>Users</span>
+                            </NavLink>
                         </li>
                         <li className="sidebar-item">
                             <NavLink to="#" className="sidebar-link" onClick={toggleContactTable}>
@@ -297,6 +308,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showUserRoleTable && (
                                 <UserRoleCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showUserInformationTable && (
+                                <UserInformation />
                             )}
                         </div>
                         <div className="container-fluid">

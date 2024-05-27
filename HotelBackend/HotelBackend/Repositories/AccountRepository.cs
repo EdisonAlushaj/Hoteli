@@ -1,13 +1,16 @@
 ﻿using HotelBackend.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SharedClassLibrary.Contracts;
 using SharedClassLibrary.DTOs;
-using static SharedClassLibrary.DTOs.ServiceResponses;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using static SharedClassLibrary.DTOs.ServiceResponses;
 
 public class AccountRepository : IUserAccount
 {
@@ -30,8 +33,7 @@ public class AccountRepository : IUserAccount
         {
             Name = userDTO.Name,
             Email = userDTO.Email,
-            PasswordHash = userDTO.Password,
-            UserName = userDTO.Email
+            UserName = userDTO.Email // Ensure the username is unique and valid
         };
 
         var user = await userManager.FindByEmailAsync(newUser.Email);
@@ -91,6 +93,26 @@ public class AccountRepository : IUserAccount
         var userSession = new UserSession(getUser.Id, getUser.UserName, getUser.Email, getUserRole.First());
         string token = GenerateToken(userSession);
         return new LoginResponse(true, token, "Login completed");
+    }
+
+    public async Task<List<UserDetailsDTO>> GetUsers()
+    {
+        var users = await userManager.Users.ToListAsync();
+        var userDetails = new List<UserDetailsDTO>();
+
+        foreach (var user in users)
+        {
+            var roles = await userManager.GetRolesAsync(user);
+            userDetails.Add(new UserDetailsDTO
+            {
+                Id = user.Id,
+                Name = user.Name ?? string.Empty, // Handle potential null values
+                Email = user.Email ?? string.Empty, // Handle potential null values
+                Role = roles.FirstOrDefault() ?? string.Empty // Handle potential null values
+            });
+        }
+
+        return userDetails;
     }
 
     private string GenerateToken(UserSession user)

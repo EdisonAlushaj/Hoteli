@@ -6,6 +6,7 @@ namespace SharedClassLibrary.Contracts
     public interface IUserAccount
     {
         Task<GeneralResponse> CreateAccount(UserDTO userDTO);  // Correct method name
-        Task<ServiceResponses.LoginResponse> LoginAccount(LoginDTO loginDTO);
+        Task<LoginResponse> LoginAccount(LoginDTO loginDTO);
+        Task<List<UserDetailsDTO>> GetUsers();
     }
 }
