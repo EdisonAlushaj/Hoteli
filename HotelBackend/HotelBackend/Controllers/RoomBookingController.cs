@@ -18,26 +18,39 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateBooking([FromBody] RoomBookingCreationDto roomBookingDto)
+        public async Task<IActionResult> CreateBooking([FromBody] RoomBookingCreationDto roomBookingDto)
         {
             if (roomBookingDto == null || roomBookingDto.RoomBookingItems == null || roomBookingDto.RoomBookingItems.Length == 0)
             {
                 return BadRequest("Invalid booking data.");
             }
 
-            // Retrieve the user
-            var user = _context.Userrs.Find(roomBookingDto.UserId);
+            var user = await _context.Userrs.FindAsync(roomBookingDto.UserId);
             if (user == null)
             {
                 return BadRequest("User not found.");
             }
 
-            // Create order
+            // Check if the room is available for booking on the selected dates
+            foreach (var item in roomBookingDto.RoomBookingItems)
+            {
+                var existingReservation = await _context.RoomBookings
+                    .Where(rb => rb.RoomBookingItems.Any(rbi => rbi.RoomId == item.RoomId))
+                    .AnyAsync(rb => rb.CheckInDate <= roomBookingDto.CheckOutDate && rb.CheckOutDate >= roomBookingDto.CheckInDate);
+
+                if (existingReservation)
+                {
+                    return Conflict($"Room {item.RoomId} is already reserved on the selected dates.");
+                }
+            }
+
+            // Create a new room booking
             var roomBooking = new RoomBooking
             {
                 UserId = roomBookingDto.UserId,
                 PaymentMethod = roomBookingDto.PaymentMethod,
-                Data = roomBookingDto.Data,
+                CheckInDate = roomBookingDto.CheckInDate,
+                CheckOutDate = roomBookingDto.CheckOutDate,
                 RoomBookingItems = roomBookingDto.RoomBookingItems.Select(item => new RoomBookingItem
                 {
                     RoomId = item.RoomId,
@@ -45,10 +58,9 @@ namespace HotelBackend.Controllers
                 }).ToList()
             };
 
-            // Calculate prices for order items
             foreach (var item in roomBooking.RoomBookingItems)
             {
-                var room = _context.Rooms.Find(item.RoomId);
+                var room = await _context.Rooms.FindAsync(item.RoomId);
                 if (room == null)
                 {
                     return BadRequest($"Room item with ID {item.RoomId} not found.");
@@ -56,14 +68,11 @@ namespace HotelBackend.Controllers
                 item.Price = room.Price * item.Quantity;
             }
 
-            // Calculate total order price
             roomBooking.CalculateTotalBookingPrice();
 
-            // Add order to context and save changes
             _context.RoomBookings.Add(roomBooking);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            // Create a DTO for the response including the user details and excluding price from order items
             var responseDto = new RoomBookingDto
             {
                 RoomBookingId = roomBooking.RoomBookingId,
@@ -73,8 +82,9 @@ namespace HotelBackend.Controllers
                     Name = user.UserFullName
                 },
                 PaymentMethod = roomBooking.PaymentMethod,
-                Data = roomBookingDto.Data,
-                TotalBookingPrice = roomBooking.TotalBookingPrice, // Calculated total price
+                CheckInDate = roomBooking.CheckInDate,
+                CheckOutDate = roomBooking.CheckOutDate,
+                TotalBookingPrice = roomBooking.TotalBookingPrice,
                 RoomBookingItems = roomBooking.RoomBookingItems.Select(oi => new RoomBookingItemDto
                 {
                     RoomId = oi.RoomId,
@@ -93,7 +103,6 @@ namespace HotelBackend.Controllers
                 .ThenInclude(oi => oi.Room)
                 .ToList();
 
-            // Ensure total order price is calculated for each order
             foreach (var room in roomBookings)
             {
                 room.CalculateTotalBookingPrice();
@@ -117,13 +126,11 @@ namespace HotelBackend.Controllers
                 return NotFound();
             }
 
-            // Ensure total order price is calculated
             roomBooking.CalculateTotalBookingPrice();
 
             return Ok(MapRoomBookingDto(roomBooking));
         }
 
-        // Map Order entity to OrderDto
         private RoomBookingDto MapRoomBookingDto(RoomBooking roomBooking)
         {
             var user = _context.Userrs.Find(roomBooking.UserId);
@@ -136,7 +143,8 @@ namespace HotelBackend.Controllers
                     Name = user.UserFullName
                 },
                 PaymentMethod = roomBooking.PaymentMethod,
-                Data = roomBooking.Data,
+                CheckInDate = roomBooking.CheckInDate,
+                CheckOutDate = roomBooking.CheckOutDate,
                 TotalBookingPrice = roomBooking.TotalBookingPrice,
                 RoomBookingItems = roomBooking.RoomBookingItems.Select(oi => new RoomBookingItemDto
                 {
@@ -159,42 +167,40 @@ namespace HotelBackend.Controllers
             _context.RoomBookings.Remove(roomBooking);
             _context.SaveChanges();
 
-            return NoContent(); // 204 No Content response
+            return NoContent();
         }
     }
 
 
-    // Define DTOs for order
     public class RoomBookingDto
     {
         public int RoomBookingId { get; set; }
-        public UserDto User { get; set; } // Include User object
+        public UserDto User { get; set; }
         public string PaymentMethod { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
         public double TotalBookingPrice { get; set; }
         public RoomBookingItemDto[] RoomBookingItems { get; set; }
     }
 
-    // Define DTO for user details
     public class RoomDto
     {
         public int UserId { get; set; }
         public string Name { get; set; }
     }
 
-    // Define DTO for order item
     public class RoomBookingItemDto
     {
         public int RoomId { get; set; }
         public int Quantity { get; set; }
     }
 
-    // Define DTO for order creation
     public class RoomBookingCreationDto
     {
         public int UserId { get; set; }
         public string PaymentMethod { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
         public RoomBookingItemDto[] RoomBookingItems { get; set; }
     }
 }

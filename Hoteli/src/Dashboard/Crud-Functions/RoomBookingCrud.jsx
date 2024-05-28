@@ -103,7 +103,7 @@ const RoomBooking = () => {
             <Fragment>
                 <ToastContainer />
                 <div className='d-flex justify-content-evenly' style={{ width: "20em", height: "3em", alignItems: "center" }}>
-                    <p style={{ fontSize: "2em", margin: "0" }}><b>Room Booking Food</b></p>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Room Booking</b></p>
                     <button className="btn btn-rounded btn-primary" onClick={handleShowAdd}>Add</button>
                 </div>
                 <br />

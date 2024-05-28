@@ -19,7 +19,10 @@ namespace HotelBackend.Entities
         public string PaymentMethod { get; set; }
 
         [Required]
-        public DateTime Data { get; set; }
+        public DateTime CheckInDate { get; set; }
+
+        [Required]
+        public DateTime CheckOutDate { get; set; }
 
         public List<RoomBookingItem> RoomBookingItems { get; set; } = new List<RoomBookingItem>();
 
