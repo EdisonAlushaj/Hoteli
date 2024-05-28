@@ -11,94 +11,66 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const UserInformation = () => {
     const [show, setShow] = useState(false);
-    const [showAdd, setShowAdd] = useState(false);
-    const [userData, setUserData] = useState([]);
+    const [users, setUsers] = useState([]);
     const [editUser, setEditUser] = useState({
         id: '',
         name: '',
         email: '',
         role: ''
     });
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(UserCrud)
+        axios.get("https://localhost:7189/api/Account/users")
             .then((response) => {
                 console.log(response);
-                setUserData(response.data);
+                setUsers(response.data); // Update users state with fetched data
             })
             .catch((error) => {
                 console.log(error);
             });
     };
 
-    async function editUserHandler(user) {
+    const handleEdit = (user) => {
+        setEditUser(user);
+        setUserId(user.id); // Set the user's ID
         setShow(true);
-        setEditUser({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-        });
-    }
-
-    const handleDelete = (id) => {
-        if (window.confirm("Are you sure to delete this user.")) {
-            axios.delete(`${UserCrud}/${id}`)
-                .then((result) => {
-                    if (result.status === 200) {
-                        toast.success('User has been deleted');
-                        getData();
-                    }
-                })
-                .catch((error) => {
-                    toast.error(error);
-                });
-        }
-    };
-    const handleSave = () => {
-        const url = UserCrud;
-        const data = {
-            name: editUser.name,
-            email: editUser.email,
-            role: editUser.role
-        };
-    
-        axios.post(url, data)
-            .then((result) => {
-                getData();
-                toast.success('User has been added.');
-                handleCloseAdd();
-            })
-            .catch((error) => {
-                console.error("Error adding User:", error);
-                toast.error('Failed to add user.');
-            });
     };
 
-    const handleClose = () => setShow(false);
-    const handleCloseAdd = () => setShowAdd(false);
-
-    const update = async () => {
+    const handleUpdate = async () => {
         try {
-            await axios.patch(`${UserCrud}/${editUser.id}`, editUser);
+            await axios.patch(`https://localhost:7189/api/Account/update/${userId}`, editUser); // Corrected URL
             toast.success('User updated successfully');
-            handleClose();
+            setShow(false);
             getData();
         } catch (error) {
             console.error("Error updating User:", error);
+            toast.error('Failed to update user.');
         }
-    }
+    };
+
+    const handleDelete = (id) => {
+        if (window.confirm("Are you sure to delete this user?")) {
+            axios.delete(`${UserCrud}/${id}`)
+                .then(() => {
+                    toast.success('User has been deleted');
+                    getData();
+                })
+                .catch((error) => {
+                    toast.error('Failed to delete user.');
+                });
+        }
+    };
 
     return (
         <>
             <ToastContainer />
-            <div className="d-flex justify-content-between" style={{ width: "20em", height: "3em", alignItems: "center" }}>
+            <div style={{ width: "20em", height: "3em", alignItems: "center" }}>
                 <p style={{ fontSize: "2em", margin: "0" }}><b>User Table</b></p>
-                <button className="btn btn-rounded btn-primary" onClick={() => setShowAdd(true)}>Add</button>
             </div>
 
             <br />
@@ -114,14 +86,14 @@ const UserInformation = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {userData.map((user, index) => (
+                    {users.map((user, index) => (
                         <tr key={index}>
                             <td>{user.id}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td className="d-flex flex-row justify-content-evenly">
-                                <button className="btn btn-rounded btn-primary" onClick={() => editUserHandler(user)}>Edit</button>
+                                <button className="btn btn-rounded btn-primary" onClick={() => handleEdit(user)}>Edit</button>
                                 <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(user.id)}>Delete</button>
                             </td>
                         </tr>
@@ -129,7 +101,7 @@ const UserInformation = () => {
                 </tbody>
             </Table>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={() => setShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
@@ -156,28 +128,11 @@ const UserInformation = () => {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={() => setShow(false)}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={update}>
+                    <Button variant="primary" onClick={handleUpdate}>
                         Update
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-            <Modal show={showAdd} onHide={handleCloseAdd}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add User</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {/* Add User form inputs */}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseAdd}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleSave}>
-                        Add
                     </Button>
                 </Modal.Footer>
             </Modal>
