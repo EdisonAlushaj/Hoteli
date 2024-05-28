@@ -12,7 +12,8 @@ function RoomBooking() {
     const [showAdd, setShowAdd] = useState(false);
     const [selectedItems, setSelectedItems] = useState([]);
     const [paymentMethod, setPaymentMethod] = useState('');
-    const [bookingDay, setBookingDay] = useState('');
+    const [checkInDate, setCheckInDate] = useState('');
+    const [checkOutDate, setCheckOutDate] = useState('');
     const [roomBookingItems, setRoomBookingItems] = useState([]);
     const [userId, setUserId] = useState('');
 
@@ -46,7 +47,7 @@ function RoomBooking() {
         }
 
         const existingItemIndex = selectedItems.findIndex(item =>
-            item.userId === itemToAdd.userId && item.roomName === itemToAdd.roomName && item.data === itemToAdd.bookingDay
+            item.userId === itemToAdd.userId && item.roomName === itemToAdd.roomName && item.checkInDate === itemToAdd.checkInDate && item.checkOutDate === itemToAdd.checkOutDate
         );
 
         if (existingItemIndex !== -1) {
@@ -64,7 +65,7 @@ function RoomBooking() {
     };
 
     const submitBooking = async () => {
-        if (!userId || !paymentMethod || !bookingDay || selectedItems.length === 0) {
+        if (!userId || !paymentMethod || !checkInDate || !checkOutDate || selectedItems.length === 0) {
             toast.error('Please fill out all fields and add items to your order.');
             return;
         }
@@ -73,14 +74,14 @@ function RoomBooking() {
             const orderData = {
                 userId: userId,
                 paymentMethod: paymentMethod,
-                data: bookingDay,
+                checkInDate: checkInDate,
+                checkOutDate: checkOutDate,
                 roomBookingItems: selectedItems.map(item => ({
                     roomId: parseInt(item.id),
                     quantity: parseInt(item.quantity)
                 }))
             };
 
-            // Debug: Log the order data to check its structure
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
 
             const response = await axios.post('https://localhost:7189/api/RoomBooking', orderData, {
@@ -93,7 +94,8 @@ function RoomBooking() {
                 setSelectedItems([]);
                 setUserId('');
                 setPaymentMethod('');
-                setBookingDay('');
+                setCheckInDate('');
+                setCheckOutDate('');
                 setShowAdd(false);
                 toast.success('Booking submitted successfully!');
             } else {
@@ -154,7 +156,8 @@ function RoomBooking() {
                                 <ul>
                                     {selectedItems.map((item, index) => (
                                         <li key={index}>
-                                            {item.roomName} - {item.price}$ - {item.quantity} - {item.data}
+                                            {item.roomName} - {item.price} $ - {item.quantity} - Check In: {item.checkInDate} - Check Out: {item.checkOutDate}
+                                            <br />
                                             <Button variant="danger" size="sm" onClick={() => removeFromBooking(index)}>
                                                 Remove
                                             </Button>
@@ -198,9 +201,15 @@ function RoomBooking() {
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group controlId="formPaymentMethod">
-                                <Form.Label>Data</Form.Label>
-                                <input type="date" className='form-control' placeholder='Enter Date '
-                                    value={bookingDay} onChange={(e) => setBookingDay(e.target.value)}
+                                <Form.Label>Check  In</Form.Label>
+                                <input type="date" className='form-control' placeholder='Enter Check In date '
+                                    value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formPaymentMethod">
+                                <Form.Label>Check  Out</Form.Label>
+                                <input type="date" className='form-control' placeholder='Enter Check Out date '
+                                    value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)}
                                 />
                             </Form.Group>
                             {selectedItems.map((item, index) => (
