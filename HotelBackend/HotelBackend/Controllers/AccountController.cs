@@ -38,5 +38,20 @@ namespace HotelBackend.Controllers
             var users = await userAccount.GetUsers();
             return Ok(users);
         }
+
+
+        [HttpPatch("update/{id}")]
+        public async Task<IActionResult> UpdateUser(string id, UserDetailsDTO userDetailsDTO)
+        {
+            var response = await userAccount.UpdateUser(id, userDetailsDTO);
+            if (!response.Flag)
+                return BadRequest(response);
+
+            return Ok(response);
+        }
+
+
+
+
     }
 }

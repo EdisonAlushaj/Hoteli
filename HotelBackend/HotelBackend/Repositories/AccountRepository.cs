@@ -114,6 +114,46 @@ public class AccountRepository : IUserAccount
 
         return userDetails;
     }
+    public async Task<ServiceResponses.GeneralResponse> UpdateUser(string userId, UserDetailsDTO userDetailsDTO)
+    {
+        if (userDetailsDTO == null)
+            return new ServiceResponses.GeneralResponse(false, "Model is empty");
+
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null)
+            return new ServiceResponses.GeneralResponse(false, "User not found");
+
+        user.Name = userDetailsDTO.Name;
+        user.Email = userDetailsDTO.Email;
+        user.UserName = userDetailsDTO.Email; // Ensure the username is updated if the email changes
+
+        var updateUserResult = await userManager.UpdateAsync(user);
+        if (!updateUserResult.Succeeded)
+        {
+            var errors = string.Join(", ", updateUserResult.Errors.Select(e => e.Description));
+            return new ServiceResponses.GeneralResponse(false, $"Error updating user: {errors}");
+        }
+
+        if (!string.IsNullOrEmpty(userDetailsDTO.Role))
+        {
+            var currentRoles = await userManager.GetRolesAsync(user);
+            var removeFromRolesResult = await userManager.RemoveFromRolesAsync(user, currentRoles);
+            if (!removeFromRolesResult.Succeeded)
+            {
+                var errors = string.Join(", ", removeFromRolesResult.Errors.Select(e => e.Description));
+                return new ServiceResponses.GeneralResponse(false, $"Error removing user from roles: {errors}");
+            }
+
+            var addToRoleResult = await userManager.AddToRoleAsync(user, userDetailsDTO.Role);
+            if (!addToRoleResult.Succeeded)
+            {
+                var errors = string.Join(", ", addToRoleResult.Errors.Select(e => e.Description));
+                return new ServiceResponses.GeneralResponse(false, $"Error adding user to role: {errors}");
+            }
+        }
+
+        return new ServiceResponses.GeneralResponse(true, "User updated successfully");
+    }
 
     private string GenerateToken(UserSession user)
     {
