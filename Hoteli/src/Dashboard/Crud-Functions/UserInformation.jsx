@@ -121,9 +121,14 @@ const UserInformation = () => {
                     <br />
                     <Row>
                         <Col>
-                            <input type="text" className="form-control" placeholder="Enter User Role"
+                            {/* <input type="text" className="form-control" placeholder="Enter User Role"
                                 value={editUser.role} onChange={(e) => setEditUser({ ...editUser, role: e.target.value })}
-                            />
+                            /> */}
+
+                            <select className='form-control' value={editUser.role} onChange={(e) => setEditUser({ ...editUser, role: e.target.value })}>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
                         </Col>
                     </Row>
                 </Modal.Body>

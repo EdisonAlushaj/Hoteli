@@ -147,7 +147,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <ul className="sidebar-nav">
-                        <li className="sidebar-item">
+                        {/* <li className="sidebar-item">
                             <NavLink
                                 to="#"
                                 className="sidebar-link collapsed has-dropdown"
@@ -169,10 +169,10 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={toggleUserRoleTable}>User&Roles</NavLink>
                                 </li>
                             </ul>
-                        </li>
+                        </li> */}
                         <li className="sidebar-item">
                             <NavLink to="#" className="sidebar-link" onClick={toggleUserInfromationTable}>
-                                <i className="lni lni-cog"></i>
+                                <i className="lni lni-user"></i>
                                 <span>Users</span>
                             </NavLink>
                         </li>
@@ -203,7 +203,7 @@ const Dashboard = () => {
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleFoodMenuTable}>Food</NavLink>
                                 </li>
-                                
+
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleOrder}>Order food</NavLink>
                                 </li>
@@ -295,7 +295,7 @@ const Dashboard = () => {
                 <div className="main">
                     <main className="content px-3 py-4">
                         <h3 className="fw-bold fs-4 mb-3 text-center">Dashboard</h3>
-                        <div className="container-fluid">
+                        {/* <div className="container-fluid">
                             {showUsersTable && (
                                 <UsersCrud />
                             )}
@@ -309,7 +309,7 @@ const Dashboard = () => {
                             {showUserRoleTable && (
                                 <UserRoleCrud />
                             )}
-                        </div>
+                        </div> */}
                         <div className="container-fluid">
                             {showUserInformationTable && (
                                 <UserInformation />
