@@ -1,5 +1,5 @@
-import React, { Component, Suspense} from "react";
-import {NavLink, HashRouter, Outlet } from "react-router-dom";
+import React, { Component, Suspense } from "react";
+import { NavLink, HashRouter, Outlet } from "react-router-dom";
 import './Header.css';
 import logo from './assets/MeGusta-Horizontal-removebg-preview.png';
 import Footer from "./Footer/Footer.jsx";
@@ -20,7 +20,7 @@ const Sauna = React.lazy(() => import("./Services/Sauna.jsx"));
 const Booking = React.lazy(() => import("./Booking/RoomBooking.jsx"));
 
 export const MainLayout = () => {
-  
+
   const userRole = cookieUtils.getUserRoleFromCookies();
 
   return (
@@ -52,8 +52,9 @@ export const MainLayout = () => {
               {userRole === 'Admin' && (
                 <li><NavLink to="/dashboard">Dashboard</NavLink></li>
               )}
+              <li><NavLink to="/">Log Out</NavLink></li>
             </ul>
-            <button id="booking-btn" ><NavLink to="/booking" style={{color: "#fff"}}>BOOK NOW</NavLink></button>
+            <button id="booking-btn" ><NavLink to="/booking" style={{ color: "#fff" }}>BOOK NOW</NavLink></button>
           </div>
         </div>
       </header>

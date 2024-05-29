@@ -15,7 +15,7 @@ Header{
     display: flex;
     list-style: none;
     display: inline-flex ;
-    width: 47em;
+    width: 50em;
     align-items: center;
     margin-left: 10em;
   }
@@ -29,7 +29,6 @@ Header{
     border: none;
     background-color: #b07256;
     color: #fff;
-    margin-left: -3em;
   } 
   .dropbtn {
     border: none;
