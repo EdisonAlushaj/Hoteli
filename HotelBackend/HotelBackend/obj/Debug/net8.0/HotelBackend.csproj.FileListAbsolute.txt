@@ -565,3 +565,15 @@ C:\Users\Elez Kadrijaj\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0
 C:\Users\Elez Kadrijaj\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
 C:\Users\Elez Kadrijaj\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.dll
 C:\Users\Elez Kadrijaj\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.pdb
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Scrutor.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.dll
+C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.pdb

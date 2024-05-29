@@ -51,7 +51,6 @@ namespace HotelBackend.Controllers
             return Ok(tableReservation);
         }
 
-
         [HttpPost]
         public async Task<ActionResult<TableReservation>> AddTableReservation([FromQuery] int userId, [FromQuery] int tableId, [FromQuery] DateTime reservationDate, [FromQuery] int maxGuests, [FromQuery] string specialRequests, [FromQuery] EstablishmentType establishment)
         {
@@ -69,11 +68,16 @@ namespace HotelBackend.Controllers
                 return NotFound("Table not found");
             }
 
-            // Check for existing reservation for the same table and date
-            var existingReservation = await _context.TableReservations.FirstOrDefaultAsync(tr => tr.Id == tableId && tr.ReservationDate == reservationDate);
+            // Check for existing reservation for the same table and time window
+            var startTime = reservationDate;
+            var endTime = reservationDate.AddHours(3);
+            var existingReservation = await _context.TableReservations
+                .FirstOrDefaultAsync(tr => tr.Id == tableId
+                                           && tr.ReservationDate >= startTime
+                                           && tr.ReservationDate < endTime);
             if (existingReservation != null)
             {
-                return Conflict("Table is already reserved for this date and time");
+                return Conflict("Table is already reserved for this date and time or within the next 3 hours");
             }
 
             // Create a new table reservation
@@ -94,10 +98,6 @@ namespace HotelBackend.Controllers
             // Return the newly created table reservation
             return CreatedAtAction(nameof(GetTableReservations), new { id = tableReservation.ReservationId }, tableReservation);
         }
-
-
-
-
 
 
         [HttpDelete("{id}")]

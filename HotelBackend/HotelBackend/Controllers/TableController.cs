@@ -3,6 +3,9 @@ using HotelBackend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HotelBackend.Controllers
 {
@@ -10,7 +13,7 @@ namespace HotelBackend.Controllers
     [ApiController]
     public class TableController : ControllerBase
     {
-        public readonly DataContext _context;
+        private readonly DataContext _context;
 
         public TableController(DataContext context)
         {
@@ -21,13 +24,11 @@ namespace HotelBackend.Controllers
         public async Task<ActionResult<List<Table>>> GetAllTables()
         {
             var tables = await _context.Tables.ToListAsync();
-
             return Ok(tables);
         }
 
-
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Table>>> GetTable(int id)
+        public async Task<ActionResult<Table>> GetTable(int id)
         {
             var table = await _context.Tables.FindAsync(id);
             if (table == null)
@@ -40,12 +41,10 @@ namespace HotelBackend.Controllers
         {
             _context.Tables.Add(table);
             await _context.SaveChangesAsync();
-
-            return Ok(await _context.Tables.ToListAsync()); ;
+            return Ok(await _context.Tables.ToListAsync());
         }
 
-        [HttpPatch]
-        [Route("UpdateTable/{id}")]
+        [HttpPatch("UpdateTable/{id}")]
         public async Task<Table> UpdateTable(Table objTable)
         {
             _context.Entry(objTable).State = EntityState.Modified;
@@ -61,10 +60,24 @@ namespace HotelBackend.Controllers
                 return NotFound("Table not found");
 
             _context.Tables.Remove(dbTable);
-
             await _context.SaveChangesAsync();
+            return Ok(await _context.Tables.ToListAsync());
+        }
 
-            return Ok(await _context.Tables.ToListAsync()); ;
+        // New endpoint to get tables by establishment type
+        [HttpGet("by-establishment/{establishment}")]
+        public async Task<ActionResult<List<Table>>> GetTablesByEstablishment(EstablishmentType establishment)
+        {
+            var tables = await _context.Tables
+                .Where(t => t.Establishment == establishment)
+                .ToListAsync();
+
+            if (tables == null || tables.Count == 0)
+            {
+                return NotFound("No tables found for the specified establishment type.");
+            }
+
+            return Ok(tables);
         }
     }
 }

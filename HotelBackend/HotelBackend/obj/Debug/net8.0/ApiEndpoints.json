@@ -129,6 +129,69 @@
     ]
   },
   {
+    "ContainingType": "HotelBackend.Controllers.AccountController",
+    "Method": "Login",
+    "RelativePath": "api/Account/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDTO",
+        "Type": "SharedClassLibrary.DTOs.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.AccountController",
+    "Method": "Register",
+    "RelativePath": "api/Account/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDTO",
+        "Type": "SharedClassLibrary.DTOs.UserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.AccountController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/Account/update/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userDetailsDTO",
+        "Type": "SharedClassLibrary.DTOs.UserDetailsDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.AccountController",
+    "Method": "GetUsers",
+    "RelativePath": "api/Account/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.ActivitiesController",
     "Method": "GetAllActivities",
     "RelativePath": "api/Activities",
@@ -1549,6 +1612,64 @@
     ]
   },
   {
+    "ContainingType": "HotelBackend.Controllers.RoomBookingController",
+    "Method": "CreateBooking",
+    "RelativePath": "api/RoomBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomBookingDto",
+        "Type": "HotelBackend.Controllers.RoomBookingCreationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.RoomBookingController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/RoomBooking",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.RoomBookingController",
+    "Method": "GetRoomBookingById",
+    "RelativePath": "api/RoomBooking/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.RoomBookingController",
+    "Method": "DeleteRoomBooking",
+    "RelativePath": "api/RoomBooking/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.SaunaController",
     "Method": "GetAllSaunas",
     "RelativePath": "api/Sauna",
@@ -2435,7 +2556,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Table, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HotelBackend.Entities.Table",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2456,6 +2577,32 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Table, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.TableController",
+    "Method": "GetTablesByEstablishment",
+    "RelativePath": "api/Table/by-establishment/{establishment}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "establishment",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -2543,11 +2690,6 @@
       {
         "Name": "reservationDate",
         "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "reservationTime",
-        "Type": "System.TimeSpan",
         "IsRequired": false
       },
       {
