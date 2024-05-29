@@ -130,8 +130,7 @@
               "RelativeToolTip": "HotelBackend\\RefreshToken.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T17:25:53.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T17:25:53.2Z"
             },
             {
               "$type": "Document",
@@ -155,8 +154,7 @@
               "RelativeToolTip": "HotelBackend\\Entities\\TableReservation.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAowBkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-29T15:37:11.952Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-29T15:37:11.952Z"
             },
             {
               "$type": "Document",
@@ -190,7 +188,7 @@
               "RelativeDocumentMoniker": "HotelBackend\\Controllers\\AccountController.cs",
               "ToolTip": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\Controllers\\AccountController.cs",
               "RelativeToolTip": "HotelBackend\\Controllers\\AccountController.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAIwCEAAAAqAAAA",
+              "ViewState": "AQIAACcAAAAAAAAAAAAIwDgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-26T15:32:24.371Z",
               "EditorCaption": ""
@@ -217,8 +215,7 @@
               "RelativeToolTip": "SharedClassLibrary\\Contracts\\IUserAccount.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T13:41:17.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T13:41:17.79Z"
             },
             {
               "$type": "Document",

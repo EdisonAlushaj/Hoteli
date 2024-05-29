@@ -16,20 +16,22 @@ function Login() {
         email: email,
         password: password
       });
-
+  
       const token = response.data.token;
       console.log("JWT Token:", token);
-
+  
       const parsedToken = parseJwt(token);
       console.log("Parsed Token:", parsedToken);
-
-      ;
-
+  
       const role = parsedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
       console.log("User Role:", role);
-
+  
       cookieUtils.setUserRoleInCookies(role);
-
+  
+      // Set the refresh token in cookies
+      const refreshToken = response.data.refreshToken;
+      cookieUtils.setRefreshToken(refreshToken);
+  
       if (role === 'Admin') {
         console.log("Navigating to admin dashboard...");
         navigate('/dashboard');
@@ -37,7 +39,7 @@ function Login() {
         console.log("Navigating to home page...");
         navigate('/home');
       }
-
+  
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
