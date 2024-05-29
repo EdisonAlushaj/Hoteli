@@ -4764,19 +4764,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
+    "C:\\Users\\Elez Kadrijaj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
+      "projectUniqueName": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
       "projectName": "HotelBackend",
-      "projectPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
-      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\obj\\",
+      "projectPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\HotelBackend.csproj",
+      "packagesPath": "C:\\Users\\Elez Kadrijaj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Elez Kadrijaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4790,8 +4790,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj": {
-              "projectPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj"
+            "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj": {
+              "projectPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj"
             }
           }
         }
@@ -4869,7 +4869,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
