@@ -3123,19 +3123,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
+    "C:\\Users\\Elez Kadrijaj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj",
       "projectName": "SharedClassLibrary",
-      "projectPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj",
-      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\obj\\",
+      "projectPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\SharedClassLibrary.csproj",
+      "packagesPath": "C:\\Users\\Elez Kadrijaj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Elez Kadrijaj\\Desktop\\Hoteli\\HotelBackend\\SharedClassLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Elez Kadrijaj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3211,7 +3211,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SharedClassLibrary.Contracts;
 using SharedClassLibrary.DTOs;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace HotelBackend.Controllers
@@ -29,6 +30,8 @@ namespace HotelBackend.Controllers
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
             var response = await userAccount.LoginAccount(loginDTO);
+            var refreshToken = GenerateRefreshToken();
+            SetRefreshToken(refreshToken);
             return Ok(response);
         }
 
@@ -50,6 +53,26 @@ namespace HotelBackend.Controllers
             return Ok(response);
         }
 
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expired = DateTime.Now.AddDays(7),
+                Created = DateTime.Now
+            };
+
+            return refreshToken;
+        }
+        private void SetRefreshToken(RefreshToken newRefreshToken)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expired
+            };
+            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+        }
 
 
 

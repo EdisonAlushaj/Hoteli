@@ -1,5 +1,6 @@
+// AppRoutes.jsx
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { MainLayout } from "./App.jsx";
 import Home from "./Home";
 import About from "./About";
@@ -14,12 +15,17 @@ import Spa from "./Services/Spa";
 import Sauna from "./Services/Sauna.jsx";
 import Activities from "./Services/Activities.jsx";
 import Booking from "./Booking/RoomBooking.jsx";
+import PrivateRoute from "../PrivateRoute.jsx";
+
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Navigate to="/login" />} />
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
-    <Route path="/dashboard" element={<Dashboard />} />
+    <Route element={<PrivateRoute/>}>
+              <Route path='/dashboard' element={<Dashboard/>} />
+              
+          </Route>
     <Route path="/" element={<MainLayout />}>
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
