@@ -2301,7 +2301,7 @@
         "IsRequired": false
       },
       {
-        "Name": "reservationDate",
+        "Name": "reservationStart",
         "Type": "System.DateTime",
         "IsRequired": false
       }
