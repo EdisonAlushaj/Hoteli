@@ -26,7 +26,7 @@ const SaunaCrud = () => {
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
     const [hallId, setHallId] = useState('')
-
+    const [duration, setDuration] = useState('')
 
     const [editId, setEditId] = useState('')
     const [editName, setEditName] = useState('')
@@ -34,7 +34,7 @@ const SaunaCrud = () => {
     const [editDescription, setEditDescription] = useState('')
     const [editImage, setEditImage] = useState('')
     const [editHallId, setEditHallId] = useState('')
-
+    const [editDuration, setEditDuration] = useState('')
 
     const [data, setData] = useState([]);
 
@@ -60,7 +60,7 @@ const SaunaCrud = () => {
         setEditDescription(cafes.description);
         setEditHallId(cafes.hallId);
         setEditImage(cafes.image);
-     
+        setEditDuration(cafes.duration);
         setId(cafes.id);
     }
     async function Load() {
@@ -78,7 +78,8 @@ const SaunaCrud = () => {
                 cost: editcost,
                 description: editDescription,
                 image: editImage,
-                hallId: editHallId
+                hallId: editHallId, 
+                 duration: editDuration
             });
             toast.success('Sauna updated successfully');
             handleClose();
@@ -113,7 +114,8 @@ const SaunaCrud = () => {
             "cost": cost,
             "description": description,
             "image": image,
-            "hallId": hallId
+            "hallId": hallId,
+            "duration": duration
         }
 
         axios.post(url, data)
@@ -131,13 +133,15 @@ const SaunaCrud = () => {
         setDescription('');
         setImage('');
         setHallId('');
-      
+        setDuration('');
+
         setEditName('');
         setEditcost('');
         setEditDescription('');
         setEditImage('');
         setEditHallId('');
-     
+        setEditDuration('');
+
         setEditId('');
     }
 
@@ -161,6 +165,7 @@ const SaunaCrud = () => {
                             <th>Description</th>
                             <th>Image</th>
                             <th>Hall Id</th>
+                            <th>Duration</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -173,9 +178,13 @@ const SaunaCrud = () => {
                                             <td>{item.name}</td>
                                             <td>{item.cost}</td>
                                             <td>{item.description}</td>
-                                            <td>{item.image}</td>
+                                            <td>
+    <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+</td>
+                   
                                             <td>{item.hallId}</td>
-                                            
+                                            <td>{item.duration}</td>
+
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editSauna(item)}>Edit</button>
 
@@ -227,7 +236,11 @@ const SaunaCrud = () => {
                                     value={hallId} onChange={(e) => setHallId(e.target.value)}
                                 />
                             </Col>
-                      
+                            <Col>
+                                <input type="number" className='form-control' placeholder='Enter Duration'
+                                    value={duration} onChange={(e) => setDuration(e.target.value)}
+                                />
+                            </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
@@ -275,7 +288,11 @@ const SaunaCrud = () => {
                                     value={editHallId} onChange={(e) => setEditHallId(e.target.value)}
                                 />
                             </Col>
-                        
+                            <Col>
+                                <input type="number" className='form-control' placeholder='Enter Duration'
+                                    value={editDuration} onChange={(e) => setEditDuration(e.target.value)}
+                                />
+                            </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>

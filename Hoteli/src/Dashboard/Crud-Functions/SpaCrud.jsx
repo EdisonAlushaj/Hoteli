@@ -24,6 +24,7 @@ const SpaCrud = () => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
+    const [durationInMinutes, setDuration] = useState('')
     const [hallId, setHallId] = useState('')
 
 
@@ -31,6 +32,7 @@ const SpaCrud = () => {
     const [editName, setEditName] = useState('')
     const [editPrice, setEditPrice] = useState('')
     const [editDescription, setEditDescription] = useState('')
+    const [editDuration, setEditDuration] = useState('')
     const [editHallId, setEditHallId] = useState('')
 
 
@@ -56,6 +58,7 @@ const SpaCrud = () => {
         setEditName(cafes.name);
         setEditPrice(cafes.price);
         setEditDescription(cafes.description);
+        setEditDuration(cafes.durationInMinutes);
         setEditHallId(cafes.hallId);
      
         setId(cafes.id);
@@ -72,8 +75,9 @@ const SpaCrud = () => {
             await axios.patch(`${SpaEndPoint}/UpdateSpa/${Id}`, {
                 id: Id,
                 name: editName,
-                foodPrice: editPrice,
+                price: editPrice,
                 description: editDescription,
+                durationInMinutes: editDuration,
                 hallId: editHallId
             });
             toast.success('Spa updated successfully');
@@ -108,6 +112,7 @@ const SpaCrud = () => {
             "name": name,
             "price": price,
             "description": description,
+            "durationInMinutes": durationInMinutes,
             "hallId": hallId
         }
 
@@ -124,11 +129,12 @@ const SpaCrud = () => {
         setName('');
         setPrice('');
         setDescription('');
+        setDuration('');
         setHallId('');
       
         setEditName('');
         setEditPrice('');
-        setEditDescription('');
+        setEditDuration('');
         setEditHallId('');
      
         setEditId('');
@@ -152,6 +158,7 @@ const SpaCrud = () => {
                             <th>Spa Name</th>
                             <th>Spa Price</th>
                             <th>Spa Description</th>
+                            <th>Spa Duration</th>
                             <th>Hall Id</th>
                         </tr>
                     </thead>
@@ -165,6 +172,7 @@ const SpaCrud = () => {
                                             <td>{item.name}</td>
                                             <td>{item.price}</td>
                                             <td>{item.description}</td>
+                                            <td>{item.durationInMinutes}</td>
                                             <td>{item.hallId}</td>
                                             
                                             <td className='d-flex flex-row justify-content-evenly'>
@@ -209,6 +217,11 @@ const SpaCrud = () => {
                                 />
                             </Col>
                             <Col>
+                                <input type="number" className='form-control' placeholder='Enter Spa Duration'
+                                    value={durationInMinutes} onChange={(e) => setDuration(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
                                 <input type="number" className='form-control' placeholder='Enter Hall Id'
                                     value={hallId} onChange={(e) => setHallId(e.target.value)}
                                 />
@@ -249,6 +262,11 @@ const SpaCrud = () => {
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Description'
                                     value={editDescription} onChange={(e) => setEditDescription(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
+                                <input type="number" className='form-control' placeholder='Enter Duration'
+                                    value={editDuration} onChange={(e) => setEditDuration(e.target.value)}
                                 />
                             </Col>
                             <Col>

@@ -4,6 +4,7 @@ using HotelBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240530103351_AddDurationInMinutesToSpa")]
+    partial class AddDurationInMinutesToSpa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AboutContents", (string)null);
+                    b.ToTable("AboutContents");
                 });
 
             modelBuilder.Entity("ContactRequest", b =>
@@ -65,7 +68,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactRequests", (string)null);
+                    b.ToTable("ContactRequests");
                 });
 
             modelBuilder.Entity("HotelBackend.Data.ApplicationUser", b =>
@@ -170,7 +173,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities", (string)null);
+                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Fitnes", b =>
@@ -205,7 +208,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("HallId");
 
-                    b.ToTable("Fitness", (string)null);
+                    b.ToTable("Fitness");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.FitnesEquipmet", b =>
@@ -235,7 +238,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("FitnesId");
 
-                    b.ToTable("FitnesEquipmets", (string)null);
+                    b.ToTable("FitnesEquipmets");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Hall", b =>
@@ -255,7 +258,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Halls", (string)null);
+                    b.ToTable("Halls");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.MenuCafe", b =>
@@ -283,7 +286,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuCafes", (string)null);
+                    b.ToTable("MenuCafes");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.MenuDrink", b =>
@@ -311,7 +314,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuDrinks", (string)null);
+                    b.ToTable("MenuDrinks");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.MenuFood", b =>
@@ -339,7 +342,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuFoods", (string)null);
+                    b.ToTable("MenuFoods");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Order", b =>
@@ -369,7 +372,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.OrderItem", b =>
@@ -398,7 +401,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Pool", b =>
@@ -430,7 +433,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("HallId");
 
-                    b.ToTable("Pools", (string)null);
+                    b.ToTable("Pools");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Roli", b =>
@@ -471,7 +474,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Rolis", (string)null);
+                    b.ToTable("Rolis");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Room", b =>
@@ -506,7 +509,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.RoomBooking", b =>
@@ -534,7 +537,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RoomBookings", (string)null);
+                    b.ToTable("RoomBookings");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.RoomBookingItem", b =>
@@ -563,7 +566,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("RoomBookingItems", (string)null);
+                    b.ToTable("RoomBookingItems");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Sauna", b =>
@@ -581,9 +584,6 @@ namespace HotelBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
                     b.Property<int>("HallId")
                         .HasColumnType("int");
 
@@ -599,7 +599,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("HallId");
 
-                    b.ToTable("Saunas", (string)null);
+                    b.ToTable("Saunas");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.SaunaReservation", b =>
@@ -625,7 +625,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SaunaReservations", (string)null);
+                    b.ToTable("SaunaReservations");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Shezlong", b =>
@@ -643,7 +643,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("PoolId");
 
-                    b.ToTable("Shezlongs", (string)null);
+                    b.ToTable("Shezlongs");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.ShezlongReservation", b =>
@@ -669,7 +669,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShezlongReservations", (string)null);
+                    b.ToTable("ShezlongReservations");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Spa", b =>
@@ -699,7 +699,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spas", (string)null);
+                    b.ToTable("Spas");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.SpaReservation", b =>
@@ -725,7 +725,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SpaReservations", (string)null);
+                    b.ToTable("SpaReservations");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.SuperHero", b =>
@@ -754,7 +754,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuperHeroes", (string)null);
+                    b.ToTable("SuperHeroes");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Table", b =>
@@ -776,7 +776,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tables", (string)null);
+                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.TableReservation", b =>
@@ -813,7 +813,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TableReservations", (string)null);
+                    b.ToTable("TableReservations");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.Userr", b =>
@@ -842,7 +842,7 @@ namespace HotelBackend.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Userrs", (string)null);
+                    b.ToTable("Userrs");
                 });
 
             modelBuilder.Entity("HotelBackend.Entities.UsersRoles", b =>
@@ -865,7 +865,7 @@ namespace HotelBackend.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("UsersRoless", (string)null);
+                    b.ToTable("UsersRoless");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

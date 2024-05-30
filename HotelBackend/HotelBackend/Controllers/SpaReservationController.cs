@@ -40,28 +40,34 @@ namespace HotelBackend.Controllers
                 return NotFound("SpaReservation not found");
             return Ok(SpaReservation);
         }
-
         [HttpPost]
-        public async Task<ActionResult<SpaReservation>> AddSpaReservation([FromQuery] int userId, [FromQuery] int spaId, [FromQuery] DateTime reservationDate)
+        public async Task<ActionResult<SpaReservation>> AddSpaReservation([FromQuery] int userId, [FromQuery] int spaId, [FromQuery] DateTime reservationStart)
         {
-            var existingReservation = await _context.SpaReservations.FirstOrDefaultAsync(ur => ur.SpaId == spaId && ur.ReservationDate.Date == reservationDate.Date);
-
-            if (existingReservation != null)
-            {
-                return Conflict("This spa is already reserved on the selected date.");
-            }
-
-            var spaExists = await _context.Spas.AnyAsync(s => s.Id == spaId);
-            if (!spaExists)
+            var spa = await _context.Spas.FindAsync(spaId);
+            if (spa == null)
             {
                 return NotFound("Spa not found");
+            }
+
+            var reservationEnd = reservationStart.AddMinutes(spa.DurationInMinutes);
+
+            // Check for overlapping reservations
+            var overlappingReservations = await _context.SpaReservations
+                .AnyAsync(r =>
+                    r.SpaId == spaId &&
+                    ((reservationStart >= r.ReservationDate && reservationStart < r.ReservationDate.AddMinutes(r.Spa.DurationInMinutes)) ||
+                    (reservationEnd > r.ReservationDate && reservationEnd <= r.ReservationDate.AddMinutes(r.Spa.DurationInMinutes))));
+
+            if (overlappingReservations)
+            {
+                return Conflict("This spa is already reserved during the selected time slot.");
             }
 
             var reservation = new SpaReservation
             {
                 UserId = userId,
                 SpaId = spaId,
-                ReservationDate = reservationDate
+                ReservationDate = reservationStart
             };
 
             _context.SpaReservations.Add(reservation);
@@ -69,9 +75,9 @@ namespace HotelBackend.Controllers
 
             return CreatedAtAction(nameof(GetSpaReservationById), new { id = reservation.ReservationId }, reservation);
         }
+    
 
-
-        [HttpDelete("{id}")]
+                [HttpDelete("{id}")]
         public async Task<ActionResult<SpaReservation>> DeleteSpaReservation(int id)
         {
             var SpaReservation = await _context.SpaReservations.FindAsync(id);

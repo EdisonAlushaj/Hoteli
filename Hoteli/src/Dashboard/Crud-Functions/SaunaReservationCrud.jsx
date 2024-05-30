@@ -96,7 +96,7 @@ const SaunaReservationCrud= () => {
                                     <td>{index + 1}</td>
                                     <td>{item.userId}</td>
                                     <td>{item.saunaId}</td>
-                                    <td>{item.reservationDate}</td>
+                                    <td>{new Date(item.reservationDate).toLocaleString()}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.reservationId)}>Delete</button>
                                     </td>

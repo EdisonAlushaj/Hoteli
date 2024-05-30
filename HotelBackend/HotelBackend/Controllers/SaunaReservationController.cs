@@ -42,26 +42,33 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<SaunaReservation>> AddSaunaReservation([FromQuery] int userId, [FromQuery] int saunaId, [FromQuery] DateTime reservationDate)
+        public async Task<ActionResult<SaunaReservation>> AddSaunaReservation([FromQuery] int userId, [FromQuery] int saunaId, [FromQuery] DateTime reservationStart)
         {
-            var existingReservation = await _context.SaunaReservations.FirstOrDefaultAsync(ur => ur.SaunaId == saunaId && ur.ReservationDate.Date == reservationDate.Date);
-
-            if (existingReservation != null)
-            {
-                return Conflict("This sauna is already reserved on the selected date.");
-            }
-
-            var saunaExists = await _context.Saunas.AnyAsync(s => s.Id == saunaId);
-            if (!saunaExists)
+            var sauna = await _context.Saunas.FindAsync(saunaId);
+            if (sauna == null)
             {
                 return NotFound("Sauna not found");
+            }
+
+            var reservationEnd = reservationStart.AddMinutes(sauna.Duration);
+
+            // Check for overlapping reservations
+            var overlappingReservations = await _context.SaunaReservations
+                .AnyAsync(r =>
+                    r.SaunaId == saunaId &&
+                    ((reservationStart >= r.ReservationDate && reservationStart < r.ReservationDate.AddMinutes(r.Sauna.Duration)) ||
+                    (reservationEnd > r.ReservationDate && reservationEnd <= r.ReservationDate.AddMinutes(r.Sauna.Duration))));
+
+            if (overlappingReservations)
+            {
+                return Conflict("This sauna is already reserved during the selected time slot.");
             }
 
             var reservation = new SaunaReservation
             {
                 UserId = userId,
                 SaunaId = saunaId,
-                ReservationDate = reservationDate
+                ReservationDate = reservationStart
             };
 
             _context.SaunaReservations.Add(reservation);
