@@ -95,6 +95,38 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetRoomBookingById), new { id = roomBooking.RoomBookingId }, responseDto);
         }
 
+        [HttpGet("available")]
+        public async Task<IActionResult> GetAvailableRooms(DateTime checkInDate, DateTime checkOutDate)
+        {
+            if (checkInDate > checkOutDate)
+            {
+                return BadRequest("Check-in date must be before check-out date.");
+            }
+
+            var roomBookings = _context.RoomBookings
+                .Where(rb => rb.CheckOutDate >= checkInDate && rb.CheckInDate <= checkOutDate);
+
+            var availableRooms = await _context.Rooms
+                .Where(r => !roomBookings
+                    .Any(rb => rb.RoomBookingItems.Any(rbi => rbi.RoomId == r.Id)))
+                .Select(r => new
+                {
+                    r.Id,
+                    r.RoomName,
+                    r.Price,
+                    AvailableFrom = _context.RoomBookings
+                        .Where(rb => rb.RoomBookingItems.Any(rbi => rbi.RoomId == r.Id))
+                        .OrderByDescending(rb => rb.CheckOutDate)
+                        .Select(rb => (DateTime?)rb.CheckOutDate)
+                        .FirstOrDefault() ?? checkInDate,
+                    AvailableTo = checkOutDate
+                })
+                .ToListAsync();
+
+            return Ok(availableRooms);
+        }
+
+
         [HttpGet]
         public IActionResult GetAllOrders()
         {

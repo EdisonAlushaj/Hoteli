@@ -25,7 +25,6 @@ namespace HotelBackend.Controllers
             return Ok(rooms);
         }
 
-
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Room>>> GetRoom(int id)
         {
@@ -34,7 +33,7 @@ namespace HotelBackend.Controllers
                 return NotFound("Room not found");
             return Ok(room);
         }
-
+        
         [HttpPost]
         public async Task<ActionResult<List<Room>>> AddRoom(Room room)
         {

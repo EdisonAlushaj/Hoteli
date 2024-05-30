@@ -16,10 +16,22 @@ function RoomBooking() {
     const [checkOutDate, setCheckOutDate] = useState('');
     const [roomBookingItems, setRoomBookingItems] = useState([]);
     const [userId, setUserId] = useState('');
+    const [availableRooms, setAvailableRooms] = useState([]);
 
     useEffect(() => {
         fetchRoomItems();
+        //fetchAvailableRooms(checkInDate, checkOutDate);
     }, []);
+
+    const fetchAvailableRooms = async (checkInDate2, checkOutDate2) => {
+        try {
+            const response = await axios.get(`https://localhost:7189/api/RoomBooking/available?checkInDate=${checkInDate2}&checkOutDate=${checkOutDate2}`);
+            setRoomBookingItems(response.data);
+        } catch (error) {
+            toast.error('Error fetching available rooms.');
+            console.log(error);
+        }
+    };
 
     const fetchRoomItems = async () => {
         try {
@@ -110,6 +122,37 @@ function RoomBooking() {
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
 
+    const AvailableRooms = ({ availableRooms }) => {
+        return (
+            <Col md={4}>
+                <div className="available-rooms">
+                    <h2>Available Rooms</h2>
+                    {availableRooms.map((room) => (
+                        <Col key={index}>
+                            <Card>
+                                <Card.Img variant="top" src={roomItem.image} />
+                                <Card.Body>
+                                    <Card.Title style={{ color: '#6b4d38' }}>{roomItem.roomName}</Card.Title>
+                                    <Card.Text>{roomItem.description}</Card.Text>
+                                    <Card.Text className="text-muted">${roomItem.price}</Card.Text>
+                                    <Button variant="primary" onClick={() => {
+                                        const quantity = parseInt(prompt("Enter quantity:"));
+                                        if (!isNaN(quantity) && quantity > 0) {
+                                            addToBooking(roomItem, quantity);
+                                        } else {
+                                            toast.error("Please enter a valid quantity.");
+                                        }
+                                    }}>
+                                        Add to Order
+                                    </Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </div>
+            </Col>
+        );
+    };
 
     return (
         <>
@@ -120,11 +163,100 @@ function RoomBooking() {
 
                 <img src={CoverImg} className="img-fluid d-block" alt="Cover Image" />
             </div>
-            <Container fluid style={{ backgroundColor: '#d1d1e0' }}>
+            <Container fluid>
                 <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b' }}>Rooms</h1>
+
+                <Form.Group controlId="formCheckInDate">
+                    <Form.Label>Check  In</Form.Label>
+                    <input type="date" className='form-control' placeholder='Enter Check In date '
+                        value={checkInDate} onChange={(e) => { setCheckInDate(e.target.value); fetchAvailableRooms(e.target.value, checkOutDate); }}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formCheckOutDate">
+                    <Form.Label>Check  Out</Form.Label>
+                    <input type="date" className='form-control' placeholder='Enter Check Out date '
+                        value={checkOutDate} onChange={(e) => { setCheckOutDate(e.target.value); fetchAvailableRooms(checkInDate, e.target.value); }}
+                    />
+                </Form.Group>
+
                 <Row className="mt-5">
                     <Col>
-                        <Row md={4}>
+                        <Row md={1} style={{ maxWidth: "80%" }}>
+                            {roomBookingItems.map((roomItem, index) => (
+                                <Col key={index}>
+                                    <Card>
+                                        <Card.Img variant="top" src={roomItem.image} />
+                                        <Card.Body>
+                                            <Card.Title style={{ color: '#6b4d38' }}>{roomItem.roomName}</Card.Title>
+                                            <Card.Text>{roomItem.description}</Card.Text>
+                                            <Card.Text className="text-muted">${roomItem.price}</Card.Text>
+                                            <Button variant="primary" onClick={() => {
+                                                const quantity = parseInt(prompt("Enter quantity:"));
+                                                if (!isNaN(quantity) && quantity > 0) {
+                                                    addToBooking(roomItem, quantity);
+                                                } else {
+                                                    toast.error("Please enter a valid quantity.");
+                                                }
+                                            }}>
+                                                Add to Order
+                                            </Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
+
+                            {/* {availableRooms.map((room) => (
+                                <Col key={index}>
+                                    <Card>
+                                        <Card.Img variant="top" src={room.image} />
+                                        <Card.Body>
+                                            <Card.Title style={{ color: '#6b4d38' }}>{room.roomName}</Card.Title>
+                                            <Card.Text>{room.description}</Card.Text>
+                                            <Card.Text className="text-muted">${room.price}</Card.Text>
+                                            <Button variant="primary" onClick={() => {
+                                                const quantity = parseInt(prompt("Enter quantity:"));
+                                                if (!isNaN(quantity) && quantity > 0) {
+                                                    addToBooking(room, quantity);
+                                                } else {
+                                                    toast.error("Please enter a valid quantity.");
+                                                }
+                                            }}>
+                                                Add to Order
+                                            </Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))} */}
+                        </Row>
+                    </Col>
+                    <AvailableRooms availableRooms={availableRooms} />
+                    {selectedItems.length > 0 && (
+                        <Col md={4}>
+                            <div className="order-summary">
+                                <h2>Booking Summary</h2>
+                                <ul>
+                                    {selectedItems.map((item, index) => (
+                                        <li key={index}>
+                                            {item.roomName} - {item.price} $ - {item.quantity} - Check In: {item.checkInDate} - Check Out: {item.checkOutDate}
+                                            <br />
+                                            <Button variant="danger" size="sm" onClick={() => removeFromBooking(index)}>
+                                                Remove
+                                            </Button>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <hr />
+                                <Button variant="primary" onClick={handleShowAdd}>
+                                    Proceed to Checkout
+                                </Button>
+                            </div>
+                        </Col>
+                    )}
+                </Row>
+
+                {/* <Row className="mt-5">
+                    <Col>
+                        <Row md={1} style={{ maxWidth: "80%" }}>
                             {roomBookingItems.map((roomItem, index) => (
                                 <Col key={index}>
                                     <Card>
@@ -171,7 +303,7 @@ function RoomBooking() {
                             </div>
                         </Col>
                     )}
-                </Row>
+                </Row> */}
 
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>

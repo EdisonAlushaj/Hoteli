@@ -1,7 +1,10 @@
-﻿namespace HotelBackend.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HotelBackend.Entities
 {
     public class Room
     {
+        [Key]
         public int Id { get; set; }
         public required string RoomName { get; set; } 
         public string Capacity { get; set; } = string.Empty;
