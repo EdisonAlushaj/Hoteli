@@ -22,47 +22,29 @@ const Sauna = () => {
         console.error('Error fetching saunas:', error);
       }
     };
-
-    const fetchSaunaReservations = async () => {
-      try {
-        const response = await axios.get('https://localhost:7189/api/SaunaReservation');
-        setSaunaReservations(response.data);
-      } catch (error) {
-        console.error('Error fetching sauna reservations:', error);
-      }
-    };
-
     fetchSaunas();
-    fetchSaunaReservations();
   }, []);
 
-  const handleReservationSubmit = async (e) => {
+     const handleReservationSubmit = async (e) => {
     e.preventDefault();
     if (!selectedSauna || !userId || !reservationDate) {
-      toast.error('Please fill out all fields');
+      console.error('Please fill out all fields');
       return;
     }
 
     try {
-      const response = await axios.post('https://localhost:7189/api/SaunaReservation', null, {
-        params: {
-          userId: parseInt(userId),
-          saunaId: selectedSauna.id,
-          reservationDate: reservationDate
-        }
-      });
-      toast.success('Sauna reserved successfully');
-      const updatedReservations = await axios.get('https://localhost:7189/api/SaunaReservation');
-      setSaunaReservations(updatedReservations.data);
+      const response = await axios.post(`https://localhost:7189/api/SaunaReservation?userId=${userId}&saunaId=${selectedSauna.id}&reservationStart=${reservationDate}`);
+      toast.success('Sauna Reservation has been added.');
+      console.log('Reservation added successfully:', response.data);
+      setUserId('');
+      setReservationDate('');
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        toast.error('Sauna already reserved for this date');
-      } else {
-        toast.error('Error reserving sauna');
-      }
+      toast.error("This sauna is already reserved during the selected time slot.");
+      console.error('Error adding reservation:', error);
     }
   };
 
+   
   return (
     <div>
       <div className="cover-photooooo"></div>
@@ -84,6 +66,7 @@ const Sauna = () => {
                       <Card.Text>Hall nr: {sauna.hallId}</Card.Text>
                       <Card.Text>Cost: {sauna.cost}$</Card.Text>
                       <Card.Text>Description: {sauna.description}</Card.Text>
+                      <Card.Text>Duration: {sauna.duration}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Button>
