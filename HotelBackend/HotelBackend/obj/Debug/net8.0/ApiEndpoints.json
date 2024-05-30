@@ -1225,6 +1225,64 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HotelBackend.Controllers.OrderDrinksController",
+    "Method": "CreateOrderDrink",
+    "RelativePath": "api/OrderDrinks",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderDto",
+        "Type": "HotelBackend.Controllers.OrderDrinkCreationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderDrinksController",
+    "Method": "GetAllOrderDrinks",
+    "RelativePath": "api/OrderDrinks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderDrinksController",
+    "Method": "GetOrderDrinkById",
+    "RelativePath": "api/OrderDrinks/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderDrinksController",
+    "Method": "DeleteOrderDrink",
+    "RelativePath": "api/OrderDrinks/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.PoolController",
     "Method": "GetAllPools",
     "RelativePath": "api/Pool",
@@ -1665,6 +1723,27 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.RoomBookingController",
+    "Method": "GetAvailableRooms",
+    "RelativePath": "api/RoomBooking/available",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "checkInDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "checkOutDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
