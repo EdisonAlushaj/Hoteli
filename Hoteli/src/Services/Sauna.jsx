@@ -109,7 +109,7 @@ const Sauna = () => {
                       <Form.Group controlId="reservationDate">
                         <Form.Label>Reservation Date</Form.Label>
                         <Form.Control
-                          type="date"
+                          type="datetime-local"
                           value={reservationDate}
                           onChange={(e) => setReservationDate(e.target.value)}
                         />

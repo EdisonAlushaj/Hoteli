@@ -3,11 +3,12 @@ import axios from 'axios';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Spa.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Spa = () => {
   const [spas, setSpas] = useState([]);
   const [selectedSpa, setSelectedSpa] = useState(null);
-  const [spaReservations, setSpaReservations] = useState([]);
   const [reservationDate, setReservationDate] = useState('');
   const [userId, setUserId] = useState('');
 
@@ -21,17 +22,7 @@ const Spa = () => {
       }
     };
 
-    const fetchSpaReservations = async () => {
-      try {
-        const response = await axios.get('https://localhost:7189/api/SpaReservation');
-        setSpaReservations(response.data);
-      } catch (error) {
-        console.error('Error fetching spa reservations:', error);
-      }
-    };
-
     fetchSpas();
-    fetchSpaReservations();
   }, []);
 
   const handleReservationSubmit = async (e) => {
@@ -42,29 +33,21 @@ const Spa = () => {
     }
 
     try {
-      const response = await axios.post('https://localhost:7189/api/SpaReservation', null, {
-        params: {
-          userId: parseInt(userId),
-          spaId: selectedSpa.id,
-          reservationDate: reservationDate
-        }
-      });
-      console.log('Spa reserved successfully:', response.data);
-      const updatedReservations = await axios.get('https://localhost:7189/api/SpaReservation');
-      setSpaReservations(updatedReservations.data);
+      const response = await axios.post(`https://localhost:7189/api/SpaReservation?userId=${userId}&spaId=${selectedSpa.id}&reservationStart=${reservationDate}`);
+      toast.success('Spa Reservation has been added.');
+      console.log('Reservation added successfully:', response.data);
+      setUserId('');
+      setReservationDate('');
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        console.error('Spa already reserved for this date');
-      } else {
-        console.error('Error reserving spa:', error);
-      }
+      toast.error("This spa is already reserved during the selected time slot.");
+      console.error('Error adding reservation:', error);
     }
   };
 
   return (
     <div>
-      <div className="cover-photo">
-      </div>
+          <ToastContainer />
+      <div className="cover-photo"></div>
       <Container className="mt-5">
         <h1 className="mb-4">Spas</h1>
         <Row>
@@ -80,7 +63,9 @@ const Spa = () => {
                   <Card className="spa-card">
                     <Card.Body>
                       <Card.Title>Spa {spa.id}</Card.Title>
-                      <Card.Text>Location: {spa.location}</Card.Text>
+                      <Card.Text>durationInMinutes: {spa.durationInMinutes} minutes</Card.Text>
+                      <Card.Text>Price: {spa.price} $</Card.Text>
+                      <Card.Text>Location: {spa.hallId}</Card.Text>
                       <Card.Text>Description: {spa.description}</Card.Text>
                     </Card.Body>
                   </Card>
@@ -107,7 +92,7 @@ const Spa = () => {
                       <Form.Group controlId="reservationDate">
                         <Form.Label>Reservation Date</Form.Label>
                         <Form.Control
-                          type="date"
+                          type="datetime-local"
                           value={reservationDate}
                           onChange={(e) => setReservationDate(e.target.value)}
                         />

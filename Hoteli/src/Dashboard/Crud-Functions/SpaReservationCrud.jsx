@@ -14,7 +14,7 @@ const SpaReservationCrud= () => {
 
     const [userId, setUserId] = useState('');
     const [spaId, setspaId] = useState('');
-    const[reservationDate,setReservationDate] =useState('');
+    const [reservationDate, setReservationDate] = useState('');
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -24,16 +24,16 @@ const SpaReservationCrud= () => {
     const getData = () => {
         axios.get(SpaReservationEndPoint)
             .then((response) => {
-                console.log(response);
                 setData(response.data);
             })
             .catch((error) => {
                 console.log(error);
+                toast.error("Error fetching data");
             });
     };
 
     const handleDelete = (id) => {
-        if (window.confirm("Are you sure to delete this Spa Reservation?")) {
+        if (window.confirm("Are you sure you want to delete this Spa Reservation?")) {
             axios.delete(`${SpaReservationEndPoint}/${id}`)
                 .then((result) => {
                     if (result.status === 200) {
@@ -42,13 +42,13 @@ const SpaReservationCrud= () => {
                     }
                 })
                 .catch((error) => {
-                    toast.error(error);
+                    toast.error("Error deleting data");
                 });
         }
     };
 
     const handleSave = () => {
-        const url = `${SpaReservationEndPoint}?userId=${userId}&spaId=${spaId}&reservationDate=${reservationDate}`;
+        const url = `${SpaReservationEndPoint}?userId=${userId}&spaId=${spaId}&reservationStart=${reservationDate}`;
 
         axios.post(url)
             .then((result) => {
@@ -58,7 +58,11 @@ const SpaReservationCrud= () => {
                 handleCloseAdd();
             })
             .catch((error) => {
-                toast.error(error);
+                if (error.response && error.response.status === 409) {
+                    toast.error("This spa is already reserved during the selected time slot.");
+                } else {
+                    toast.error("Error adding reservation");
+                }
             });
     };
 
@@ -87,28 +91,33 @@ const SpaReservationCrud= () => {
                             <th>User Id</th>
                             <th>Spa Id</th>
                             <th>Date</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data && data.length > 0 ? (
                             data.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td>{item.reservationId}</td>
                                     <td>{item.userId}</td>
                                     <td>{item.spaId}</td>
-                                    <td>{item.reservationDate}</td>
+                                    <td>{new Date(item.reservationDate).toLocaleString()}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.reservationId)}>Delete</button>
                                     </td>
                                 </tr>
                             ))
-                        ) : 'Loading...'}
+                        ) : (
+                            <tr>
+                                <td colSpan="5">Loading...</td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
 
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Spa</Modal.Title>
+                        <Modal.Title>Add Spa Reservation</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
@@ -123,7 +132,7 @@ const SpaReservationCrud= () => {
                                 />
                             </Col>
                             <Col>
-                                <input type="date" className='form-control' placeholder='Enter Date '
+                                <input type="datetime-local" className='form-control' placeholder='Enter Date '
                                     value={reservationDate} onChange={(e) => setReservationDate(e.target.value)}
                                 />
                             </Col>
