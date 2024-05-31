@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './RoomBooking.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import CoverImg from "../Rooms/RoomIMG/room-cover.jpg";
 
 function RoomBooking() {
@@ -19,14 +18,18 @@ function RoomBooking() {
     const [availableRooms, setAvailableRooms] = useState([]);
 
     useEffect(() => {
-        fetchRoomItems();
-        //fetchAvailableRooms(checkInDate, checkOutDate);
-    }, []);
+        if (checkInDate && checkOutDate) {
+            fetchAvailableRooms(checkInDate, checkOutDate);
+        }
+    }, [checkInDate, checkOutDate]);
 
     const fetchAvailableRooms = async (checkInDate2, checkOutDate2) => {
+        if (!checkInDate2 || !checkOutDate2) {
+            return; // Do not fetch if either date is not set
+        }
         try {
             const response = await axios.get(`https://localhost:7189/api/RoomBooking/available?checkInDate=${checkInDate2}&checkOutDate=${checkOutDate2}`);
-            setRoomBookingItems(response.data);
+            setAvailableRooms(response.data); // Assuming response.data contains the list of available rooms
         } catch (error) {
             toast.error('Error fetching available rooms.');
             console.log(error);
@@ -48,7 +51,7 @@ function RoomBooking() {
 
     const handleQuantityChange = (value, index) => {
         const updatedItems = [...selectedItems];
-        updatedItems[index].quantity = parseInt(value) || 1;
+        updatedItems[index].quantity = parseInt(value, 10) || 1;
         setSelectedItems(updatedItems);
     };
 
@@ -67,7 +70,7 @@ function RoomBooking() {
             updatedItems[existingItemIndex].quantity += quantity;
             setSelectedItems(updatedItems);
         } else {
-            setSelectedItems([...selectedItems, { ...itemToAdd, quantity }]);
+            setSelectedItems(prevItems => [...prevItems, { ...itemToAdd, quantity }]);
         }
     };
 
@@ -124,31 +127,33 @@ function RoomBooking() {
 
     const AvailableRooms = ({ availableRooms }) => {
         return (
-            <Col md={4}>
+            <Col md={8}>
                 <div className="available-rooms">
-                    <h2>Available Rooms</h2>
-                    {availableRooms.map((room) => (
-                        <Col key={index}>
-                            <Card>
-                                <Card.Img variant="top" src={roomItem.image} />
-                                <Card.Body>
-                                    <Card.Title style={{ color: '#6b4d38' }}>{roomItem.roomName}</Card.Title>
-                                    <Card.Text>{roomItem.description}</Card.Text>
-                                    <Card.Text className="text-muted">${roomItem.price}</Card.Text>
-                                    <Button variant="primary" onClick={() => {
-                                        const quantity = parseInt(prompt("Enter quantity:"));
-                                        if (!isNaN(quantity) && quantity > 0) {
-                                            addToBooking(roomItem, quantity);
-                                        } else {
-                                            toast.error("Please enter a valid quantity.");
-                                        }
-                                    }}>
-                                        Add to Order
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
+                    {/* <h2>Available Rooms</h2> */}
+                    <Row md={1} style={{ maxWidth: "100%" }}>
+                        {availableRooms.map((roomItem, index) => (
+                            <Col key={index}>
+                                <Card>
+                                    <Card.Img variant="top" src={roomItem.image} />
+                                    <Card.Body>
+                                        <Card.Title style={{ color: '#6b4d38' }}>{roomItem.roomName}</Card.Title>
+                                        <Card.Text>{roomItem.description}</Card.Text>
+                                        <Card.Text className="text-muted">${roomItem.price}</Card.Text>
+                                        <Button variant="primary" onClick={() => {
+                                            const quantity = parseInt(prompt("Enter quantity:"));
+                                            if (!isNaN(quantity) && quantity > 0) {
+                                                addToBooking(roomItem, quantity);
+                                            } else {
+                                                toast.error("Please enter a valid quantity.");
+                                            }
+                                        }}>
+                                            Add to Order
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>
                 </div>
             </Col>
         );
@@ -163,24 +168,27 @@ function RoomBooking() {
 
                 <img src={CoverImg} className="img-fluid d-block" alt="Cover Image" />
             </div>
-            <Container fluid>
-                <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b' }}>Rooms</h1>
 
-                <Form.Group controlId="formCheckInDate">
-                    <Form.Label>Check  In</Form.Label>
-                    <input type="date" className='form-control' placeholder='Enter Check In date '
-                        value={checkInDate} onChange={(e) => { setCheckInDate(e.target.value); fetchAvailableRooms(e.target.value, checkOutDate); }}
-                    />
-                </Form.Group>
-                <Form.Group controlId="formCheckOutDate">
-                    <Form.Label>Check  Out</Form.Label>
-                    <input type="date" className='form-control' placeholder='Enter Check Out date '
-                        value={checkOutDate} onChange={(e) => { setCheckOutDate(e.target.value); fetchAvailableRooms(checkInDate, e.target.value); }}
-                    />
-                </Form.Group>
+            <Container fluid>
+                <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Enter the Check In and Check Out Dates</h1>
+
+                <div className='d-flex justify-content-start align-items-center'>
+                    <Form.Group controlId="formCheckInDate" className='col-md-1' style={{ marginLeft: '5.3em' }}>
+                        <Form.Label>Check  In</Form.Label>
+                        <input type="date" className='form-control' placeholder='Enter Check In date '
+                            value={checkInDate} onChange={(e) => { setCheckInDate(e.target.value); fetchAvailableRooms(e.target.value, checkOutDate); }}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formCheckOutDate" className='col-md-1' style={{ marginLeft: '2em' }}>
+                        <Form.Label>Check  Out</Form.Label>
+                        <input type="date" className='form-control' placeholder='Enter Check Out date '
+                            value={checkOutDate} onChange={(e) => { setCheckOutDate(e.target.value); fetchAvailableRooms(checkInDate, e.target.value); }}
+                        />
+                    </Form.Group>
+                </div>
 
                 <Row className="mt-5">
-                    <Col>
+                    {/* <Col>
                         <Row md={1} style={{ maxWidth: "80%" }}>
                             {roomBookingItems.map((roomItem, index) => (
                                 <Col key={index}>
@@ -205,7 +213,7 @@ function RoomBooking() {
                                 </Col>
                             ))}
 
-                            {/* {availableRooms.map((room) => (
+                            {availableRooms.map((room) => (
                                 <Col key={index}>
                                     <Card>
                                         <Card.Img variant="top" src={room.image} />
@@ -226,9 +234,9 @@ function RoomBooking() {
                                         </Card.Body>
                                     </Card>
                                 </Col>
-                            ))} */}
+                            ))}
                         </Row>
-                    </Col>
+                    </Col> */}
                     <AvailableRooms availableRooms={availableRooms} />
                     {selectedItems.length > 0 && (
                         <Col md={4}>
@@ -332,13 +340,13 @@ function RoomBooking() {
                                     <option value="cash-at-delivery">Cash - At Delivery</option>
                                 </Form.Control>
                             </Form.Group>
-                            <Form.Group controlId="formPaymentMethod">
+                            <Form.Group controlId="formCheckInDate">
                                 <Form.Label>Check  In</Form.Label>
                                 <input type="date" className='form-control' placeholder='Enter Check In date '
                                     value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)}
                                 />
                             </Form.Group>
-                            <Form.Group controlId="formPaymentMethod">
+                            <Form.Group controlId="formCheckOutDate">
                                 <Form.Label>Check  Out</Form.Label>
                                 <input type="date" className='form-control' placeholder='Enter Check Out date '
                                     value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)}
