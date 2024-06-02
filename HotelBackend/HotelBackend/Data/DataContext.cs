@@ -134,12 +134,12 @@ namespace HotelBackend.Data
             modelBuilder.Entity<TableReservation>()
                 .HasOne(tr => tr.User)
                 .WithMany()
-                .HasForeignKey(tr => tr.UserId);
+                .HasForeignKey(tr => tr.Id);
 
             modelBuilder.Entity<TableReservation>()
                 .HasOne(tr => tr.Table)
                 .WithMany()
-                .HasForeignKey(tr => tr.Id);
+                .HasForeignKey(tr => tr.TableId);
 
             modelBuilder.Entity<ActivitiesReservation>()
                 .HasKey(sr => new { sr.ReservationId });

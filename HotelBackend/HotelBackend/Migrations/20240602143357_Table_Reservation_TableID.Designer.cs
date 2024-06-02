@@ -4,6 +4,7 @@ using HotelBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240602143357_Table_Reservation_TableID")]
+    partial class Table_Reservation_TableID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -875,9 +878,6 @@ namespace HotelBackend.Migrations
                     b.Property<int>("Establishment")
                         .HasColumnType("int");
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("MaxGuests")
                         .HasColumnType("int");
 
@@ -892,11 +892,14 @@ namespace HotelBackend.Migrations
                     b.Property<int>("TableId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("Id");
-
                     b.HasIndex("TableId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TableReservations");
                 });
@@ -1297,13 +1300,15 @@ namespace HotelBackend.Migrations
 
             modelBuilder.Entity("HotelBackend.Entities.TableReservation", b =>
                 {
-                    b.HasOne("HotelBackend.Data.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("Id");
-
                     b.HasOne("HotelBackend.Entities.Table", "Table")
                         .WithMany()
                         .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBackend.Entities.Userr", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

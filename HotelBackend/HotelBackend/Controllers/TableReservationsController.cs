@@ -52,10 +52,10 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TableReservation>> AddTableReservation([FromQuery] int userId, [FromQuery] int tableId, [FromQuery] DateTime reservationDate, [FromQuery] int maxGuests, [FromQuery] string specialRequests, [FromQuery] EstablishmentType establishment)
+        public async Task<ActionResult<TableReservation>> AddTableReservation([FromQuery] string userId, [FromQuery] int tableId, [FromQuery] DateTime reservationDate, [FromQuery] int maxGuests, [FromQuery] string specialRequests, [FromQuery] EstablishmentType establishment)
         {
             // Check if the user exists
-            var userExists = await _context.Userrs.AnyAsync(u => u.UserId == userId);
+            var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
             if (!userExists)
             {
                 return NotFound("User not found");
@@ -72,7 +72,7 @@ namespace HotelBackend.Controllers
             var startTime = reservationDate;
             var endTime = reservationDate.AddHours(3);
             var existingReservation = await _context.TableReservations
-                .FirstOrDefaultAsync(tr => tr.Id == tableId
+                .FirstOrDefaultAsync(tr => tr.TableId == tableId
                                            && tr.ReservationDate >= startTime
                                            && tr.ReservationDate < endTime);
             if (existingReservation != null)
@@ -83,8 +83,8 @@ namespace HotelBackend.Controllers
             // Create a new table reservation
             var tableReservation = new TableReservation
             {
-                UserId = userId,
-                Id = tableId,
+                Id = userId,
+                TableId = tableId,
                 ReservationDate = reservationDate,
                 MaxGuests = maxGuests,
                 SpecialRequests = specialRequests,
