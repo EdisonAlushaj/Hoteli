@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { RoomEndPoint, RoomBookingEndPoint } from '../endpoints';
 import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './RoomBooking.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CoverImg from "../Rooms/RoomIMG/room-cover.jpg";
@@ -28,7 +28,7 @@ function RoomBooking() {
             return; // Do not fetch if either date is not set
         }
         try {
-            const response = await axios.get(`https://localhost:7189/api/RoomBooking/available?checkInDate=${checkInDate2}&checkOutDate=${checkOutDate2}`);
+            const response = await axios.get(`${RoomBookingEndPoint}/available?checkInDate=${checkInDate2}&checkOutDate=${checkOutDate2}`);
             setAvailableRooms(response.data); // Assuming response.data contains the list of available rooms
         } catch (error) {
             toast.error('Error fetching available rooms.');
@@ -38,7 +38,7 @@ function RoomBooking() {
 
     const fetchRoomItems = async () => {
         try {
-            const response = await axios.get('https://localhost:7189/api/Room');
+            const response = await axios.get(RoomEndPoint);
 
             console.log('Fetched Room Items:', response.data);
 
@@ -99,7 +99,7 @@ function RoomBooking() {
 
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
 
-            const response = await axios.post('https://localhost:7189/api/RoomBooking', orderData, {
+            const response = await axios.post(RoomBookingEndPoint, orderData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

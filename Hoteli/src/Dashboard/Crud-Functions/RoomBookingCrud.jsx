@@ -8,10 +8,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import cookieUtils from '../../cookieUtils.jsx';
 
 const RoomBooking = () => {
     const [showAdd, setShowAdd] = useState(false);
-    const [userId, setUserId] = useState('');
+
+    const userId = cookieUtils.getUserIdFromCookies();
     const [paymentMethod, setPaymentMethod] = useState('');
     const [bookingDay, setBookingDay] = useState('');
     const [roomBookingItems, setRoomBookingItems] = useState([{ roomId: '', quantity: '' }]);
@@ -56,7 +58,7 @@ const RoomBooking = () => {
 
     const handleSave = () => {
         const RoomBookingDto = {
-            userId: userId,
+            id: userId,
             paymentMethod: paymentMethod,
             data: bookingDay,
             roomBookingItems: roomBookingItems.map(item => ({
@@ -78,7 +80,7 @@ const RoomBooking = () => {
     };
 
     const clear = () => {
-        setUserId('');
+        // setUserId('');
         setPaymentMethod('');
         setBookingDay('');
         setRoomBookingItems([{ roomId: '', quantity: '' }]);
@@ -142,18 +144,16 @@ const RoomBooking = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col>
+                            {/* <Col>
                                 <input type="number" className='form-control' placeholder='Enter User Id'
                                     value={userId} onChange={(e) => setUserId(e.target.value)}
                                 />
-                            </Col>
+                            </Col> */}
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Payment Method'
                                     value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}
                                 />
                             </Col>
-                        </Row>
-                        <Row>
                             <Col>
                                 <input type="date" className='form-control' placeholder='Enter Date'
                                     value={bookingDay} onChange={(e) => setBookingDay(e.target.value)}

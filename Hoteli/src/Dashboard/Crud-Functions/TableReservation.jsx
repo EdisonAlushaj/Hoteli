@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import cookieUtils from '../../cookieUtils.jsx';
 
 const TableReservation = () => {
     const [showAdd, setShowAdd] = useState(false);
@@ -15,7 +16,7 @@ const TableReservation = () => {
     const handleCloseAdd = () => setShowAdd(false);
     const handleShowAdd = () => setShowAdd(true);
 
-    const [userId, setUserId] = useState('');
+    const userId = cookieUtils.getUserIdFromCookies();
     const [tableId, setTableId] = useState('');
     const [reservationDatetime, setReservationDatetime] = useState('');
     const [maxGuests, setMaxGuests] = useState('');
@@ -85,7 +86,7 @@ const TableReservation = () => {
     
 
     const clear = () => {
-        setUserId('');
+        //setUserId('');
         setTableId('');
         setReservationDatetime('');
         setMaxGuests('');
@@ -121,8 +122,8 @@ const TableReservation = () => {
                                 data.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.reservationId}</td>
-                                        <td>{item.userId}</td>
                                         <td>{item.id}</td>
+                                        <td>{item.tableId}</td>
                                         <td>{new Date(item.reservationDate).toLocaleString()}</td>
                                         <td>{item.maxGuests}</td>
                                         <td>{item.specialRequests}</td>
@@ -143,11 +144,11 @@ const TableReservation = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col>
+                            {/* <Col>
                                 <input type="text" className='form-control' placeholder='Enter userId'
                                     value={userId} onChange={(e) => setUserId(e.target.value)}
                                 />
-                            </Col>
+                            </Col> */}
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter tableId'
                                     value={tableId} onChange={(e) => setTableId(e.target.value)}

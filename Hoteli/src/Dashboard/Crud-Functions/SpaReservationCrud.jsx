@@ -8,11 +8,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import cookieUtils from '../../cookieUtils.jsx';
 
 const SpaReservationCrud= () => {
     const [showAdd, setShowAdd] = useState(false);
 
-    const [userId, setUserId] = useState('');
+    const userId = cookieUtils.getUserIdFromCookies();
     const [spaId, setspaId] = useState('');
     const [reservationDate, setReservationDate] = useState('');
     const [data, setData] = useState([]);
@@ -67,7 +68,7 @@ const SpaReservationCrud= () => {
     };
 
     const clear = () => {
-        setUserId('');
+        // setUserId('');
         setspaId('');
         setReservationDate('');
     };
@@ -99,7 +100,7 @@ const SpaReservationCrud= () => {
                             data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.reservationId}</td>
-                                    <td>{item.userId}</td>
+                                    <td>{item.id}</td>
                                     <td>{item.spaId}</td>
                                     <td>{new Date(item.reservationDate).toLocaleString()}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>
@@ -121,11 +122,11 @@ const SpaReservationCrud= () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col>
+                            {/* <Col>
                                 <input type="number" className='form-control' placeholder='Enter User Id'
                                     value={userId} onChange={(e) => setUserId(e.target.value)}
                                 />
-                            </Col>
+                            </Col> */}
                             <Col>
                                 <input type="number" className='form-control' placeholder='Enter Spa Id'
                                     value={spaId} onChange={(e) => setspaId(e.target.value)}

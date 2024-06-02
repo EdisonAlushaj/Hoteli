@@ -25,7 +25,11 @@ function Login() {
   
       const role = parsedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
       console.log("User Role:", role);
+
+      const userId = parsedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+      console.log("User Id:", userId);
   
+      cookieUtils.setUserIdInCookies(userId);
       cookieUtils.setUserRoleInCookies(role);
   
       // Set the refresh token in cookies
@@ -121,7 +125,7 @@ function Login() {
                         />
                       </div>
                       <div className="pt-1 mb-4">
-                        <button className="btn btn-dark btn-lg btn-block" type="button" onClick={GetLoginDetails}>
+                        <button className="btn btn-dark btn-lg" type="button" onClick={GetLoginDetails}>
                           Login
                         </button>
                       </div>
@@ -129,7 +133,7 @@ function Login() {
                         Forgot password?
                       </a>
                       <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                        Don't have an account? <NavLink to="/register"><button className="btn btn-dark btn-sm btn-block">Register here</button></NavLink>
+                        Don't have an account? <NavLink to="/register"><button className="btn btn-dark btn-sm">Register here</button></NavLink>
                       </p>
                       <a href="#!" className="small text-muted">
                         Terms of use.

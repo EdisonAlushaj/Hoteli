@@ -22,6 +22,12 @@ const Booking = React.lazy(() => import("./Booking/RoomBooking.jsx"));
 export const MainLayout = () => {
 
   const userRole = cookieUtils.getUserRoleFromCookies();
+  
+
+  const logOut = () => {
+    cookieUtils.clearUserRole();
+    window.location.href = '/login';
+  }
 
   return (
     <div>
@@ -52,7 +58,13 @@ export const MainLayout = () => {
               {userRole === 'Admin' && (
                 <li><NavLink to="/dashboard">Dashboard</NavLink></li>
               )}
-              <li><NavLink to="/">Log Out</NavLink></li>
+              {!cookieUtils.getUserRoleFromCookies() && (
+                <li><NavLink to="/login">Log In</NavLink></li>
+              )}
+              {cookieUtils.getUserRoleFromCookies() && (
+                <li><NavLink to="/" onClick={logOut}>Log Out</NavLink></li>
+              )}
+
             </ul>
             <button id="booking-btn" ><NavLink to="/booking" style={{ color: "#fff" }}>BOOK NOW</NavLink></button>
           </div>

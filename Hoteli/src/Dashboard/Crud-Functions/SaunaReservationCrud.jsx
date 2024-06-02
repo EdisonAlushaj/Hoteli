@@ -8,13 +8,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import cookieUtils from '../../cookieUtils.jsx';
+
 
 const SaunaReservationCrud= () => {
     const [showAdd, setShowAdd] = useState(false);
 
-    const [userId, setUserId] = useState('');
+    const userId = cookieUtils.getUserIdFromCookies();
     const [saunaId, setsaunaId] = useState('');
-    const[reservationDate,setReservationDate] =useState('');
+    const [reservationDate,setReservationDate] =useState('');
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -63,7 +65,7 @@ const SaunaReservationCrud= () => {
     };
 
     const clear = () => {
-        setUserId('');
+        // setUserId('');
         setsaunaId('');
         setReservationDate('');
     };
@@ -94,7 +96,7 @@ const SaunaReservationCrud= () => {
                             data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{item.userId}</td>
+                                    <td>{item.id}</td>
                                     <td>{item.saunaId}</td>
                                     <td>{new Date(item.reservationDate).toLocaleString()}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>
@@ -112,11 +114,11 @@ const SaunaReservationCrud= () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col>
+                            {/* <Col>
                                 <input type="number" className='form-control' placeholder='Enter User Id'
                                     value={userId} onChange={(e) => setUserId(e.target.value)}
                                 />
-                            </Col>
+                            </Col> */}
                             <Col>
                                 <input type="number" className='form-control' placeholder='Enter Sauna Id'
                                     value={saunaId} onChange={(e) => setsaunaId(e.target.value)}

@@ -8,10 +8,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import cookieUtils from '../../cookieUtils.jsx';
 
 const OrderFood = () => {
     const [showAdd, setShowAdd] = useState(false);
-    const [userId, setUserId] = useState('');
+
+    const userId = cookieUtils.getUserIdFromCookies();
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
@@ -57,7 +59,7 @@ const OrderFood = () => {
     
     const handleSave = () => {
         const orderDto = {
-            userId: userId,
+            id: userId,
             deliveryLocation: deliveryLocation,
             deliveryNumber: deliveryNumber,
             paymentMethod: paymentMethod,
@@ -80,7 +82,7 @@ const OrderFood = () => {
     };
 
     const clear = () => {
-        setUserId('');
+        // setUserId('');
         setDeliveryLocation('');
         setDeliveryNumber('');
         setPaymentMethod('');
@@ -126,7 +128,7 @@ const OrderFood = () => {
                         {data && data.length > 0 ? (
                             data.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.orderId}</td>
+                                    <td>{item.id}</td>
                                     <td>{item.user.name}</td>
                                     <td>{item.deliveryLocation}</td>
                                     <td>{item.deliveryNumber}</td>
@@ -147,23 +149,23 @@ const OrderFood = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col>
+                            {/* <Col>
                                 <input type="number" className='form-control' placeholder='Enter User Id'
                                     value={userId} onChange={(e) => setUserId(e.target.value)}
                                 />
-                            </Col>
+                            </Col> */}
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Delivery Location'
                                     value={deliveryLocation} onChange={(e) => setDeliveryLocation(e.target.value)}
                                 />
                             </Col>
-                        </Row>
-                        <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Delivery Number'
                                     value={deliveryNumber} onChange={(e) => setDeliveryNumber(e.target.value)}
                                 />
                             </Col>
+                        </Row>
+                        <Row>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter Payment Method'
                                     value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}
