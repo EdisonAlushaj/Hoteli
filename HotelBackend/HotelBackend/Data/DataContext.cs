@@ -108,7 +108,7 @@ namespace HotelBackend.Data
             modelBuilder.Entity<SpaReservation>()
                 .HasOne(sr => sr.Userr)
                 .WithMany()
-                .HasForeignKey(sr => sr.UserId);
+                .HasForeignKey(sr => sr.Id);
 
             modelBuilder.Entity<SpaReservation>()
                 .HasOne(sr => sr.Spa)

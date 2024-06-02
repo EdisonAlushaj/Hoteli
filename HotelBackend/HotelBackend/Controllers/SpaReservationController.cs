@@ -65,7 +65,7 @@ namespace HotelBackend.Controllers
 
             var reservation = new SpaReservation
             {
-                UserId = userId,
+                Id = userId,
                 SpaId = spaId,
                 ReservationDate = reservationStart
             };
