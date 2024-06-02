@@ -27,7 +27,7 @@ namespace HotelBackend.Controllers
             }
 
             // Retrieve the user
-            var user = _context.Userrs.Find(orderDto.UserId);
+            var user = _context.Users.Find(orderDto.Id);
             if (user == null)
             {
                 return BadRequest("User not found.");
@@ -36,7 +36,7 @@ namespace HotelBackend.Controllers
             // Create order
             var order = new OrderDrink
             {
-                UserId = orderDto.UserId,
+                Id = orderDto.Id,
                 DeliveryLocation = orderDto.DeliveryLocation,
                 DeliveryNumber = orderDto.DeliveryNumber,
                 PaymentMethod = orderDto.PaymentMethod,
@@ -71,8 +71,8 @@ namespace HotelBackend.Controllers
                 OrderDrinkId = order.OrderDrinkId,
                 User = new UseriDto
                 {
-                    UserId = user.UserId,
-                    Name = user.UserFullName
+                    Id = user.Id,
+                    Name = user.Name
                 },
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
@@ -129,14 +129,14 @@ namespace HotelBackend.Controllers
         // Map Order entity to OrderDto
         private OrderDrinkDto MapOrderDrinkToDto(OrderDrink order)
         {
-            var user = _context.Userrs.Find(order.UserId);
+            var user = _context.Users.Find(order.Id);
             return new OrderDrinkDto
             {
                 OrderDrinkId = order.OrderDrinkId,
                 User = new UseriDto
                 {
-                    UserId = user.UserId,
-                    Name = user.UserFullName
+                    Id = user.Id,
+                    Name = user.Name
                 },
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
@@ -182,7 +182,7 @@ namespace HotelBackend.Controllers
     // Define DTO for user details
     public class UseriDto
     {
-        public int UserId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 
@@ -197,7 +197,7 @@ namespace HotelBackend.Controllers
     // Define DTO for order creation
     public class OrderDrinkCreationDto
     {
-        public int UserId { get; set; }
+        public string Id { get; set; }
         public string DeliveryLocation { get; set; }
         public string DeliveryNumber { get; set; }
         public string PaymentMethod { get; set; }
