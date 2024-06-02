@@ -153,6 +153,21 @@ namespace HotelBackend.Data
                 .HasOne(sr => sr.Activities)
                 .WithMany()
                 .HasForeignKey(sr => sr.ActivitiesId);
+
+            modelBuilder.Entity<RoomBooking>()
+                .HasOne(sr => sr.User)
+                .WithMany()
+                .HasForeignKey(sr => sr.Id);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(sr => sr.User)
+                .WithMany()
+                .HasForeignKey(sr => sr.Id);
+
+            modelBuilder.Entity<OrderDrink>()
+                .HasOne(sr => sr.User)
+                .WithMany()
+                .HasForeignKey(sr => sr.Id);
         }
     }
 }

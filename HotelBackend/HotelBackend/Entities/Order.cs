@@ -8,12 +8,8 @@ namespace HotelBackend.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
-
-        [Required]
-        public int UserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public Userr User { get; set; }
+        public string Id { get; set; }
+        public Data.ApplicationUser User { get; set; }
 
         [Required]
         public string DeliveryLocation { get; set; }

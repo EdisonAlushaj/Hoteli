@@ -28,7 +28,7 @@ using System.Linq;
             }
 
             // Retrieve the user
-            var user = _context.Userrs.Find(orderDto.UserId);
+            var user = _context.Users.Find(orderDto.UserId);
             if (user == null)
             {
                 return BadRequest("User not found.");
@@ -37,7 +37,7 @@ using System.Linq;
             // Create order
             var order = new Order
             {
-                UserId = orderDto.UserId,
+                Id = orderDto.UserId,
                 DeliveryLocation = orderDto.DeliveryLocation,
                 DeliveryNumber = orderDto.DeliveryNumber,
                 PaymentMethod = orderDto.PaymentMethod,
@@ -72,8 +72,8 @@ using System.Linq;
                 OrderId = order.OrderId,
                 User = new UserDto
                 {
-                    UserId = user.UserId,
-                    Name = user.UserFullName
+                    UserId = user.Id,
+                    Name = user.Name
                 },
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
@@ -130,14 +130,14 @@ using System.Linq;
         // Map Order entity to OrderDto
         private OrderDto MapOrderToDto(Order order)
         {
-            var user = _context.Userrs.Find(order.UserId);
+            var user = _context.Users.Find(order.Id);
             return new OrderDto
             {
                 OrderId = order.OrderId,
                 User = new UserDto
                 {
-                    UserId = user.UserId,
-                    Name = user.UserFullName
+                    UserId = user.Id,
+                    Name = user.Name
                 },
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
@@ -183,7 +183,7 @@ using System.Linq;
     // Define DTO for user details
     public class UserDto
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
     }
 
@@ -198,7 +198,7 @@ using System.Linq;
     // Define DTO for order creation
     public class OrderCreationDto
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string DeliveryLocation { get; set; }
         public string DeliveryNumber { get; set; }
         public string PaymentMethod { get; set; }

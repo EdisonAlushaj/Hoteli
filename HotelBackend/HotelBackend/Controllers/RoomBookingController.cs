@@ -25,13 +25,12 @@ namespace HotelBackend.Controllers
                 return BadRequest("Invalid booking data.");
             }
 
-            var user = await _context.Userrs.FindAsync(roomBookingDto.UserId);
+            var user = await _context.Users.FindAsync(roomBookingDto.UserId);
             if (user == null)
             {
                 return BadRequest("User not found.");
             }
 
-            // Check if the room is available for booking on the selected dates
             foreach (var item in roomBookingDto.RoomBookingItems)
             {
                 var existingReservation = await _context.RoomBookings
@@ -47,7 +46,7 @@ namespace HotelBackend.Controllers
             // Create a new room booking
             var roomBooking = new RoomBooking
             {
-                UserId = roomBookingDto.UserId,
+                Id = roomBookingDto.UserId,
                 PaymentMethod = roomBookingDto.PaymentMethod,
                 CheckInDate = roomBookingDto.CheckInDate,
                 CheckOutDate = roomBookingDto.CheckOutDate,
@@ -76,10 +75,10 @@ namespace HotelBackend.Controllers
             var responseDto = new RoomBookingDto
             {
                 RoomBookingId = roomBooking.RoomBookingId,
-                User = new UserDto
+                User = new UserrDto
                 {
-                    UserId = user.UserId,
-                    Name = user.UserFullName
+                    UserrId = user.Id,
+                    Name = user.Name
                 },
                 PaymentMethod = roomBooking.PaymentMethod,
                 CheckInDate = roomBooking.CheckInDate,
@@ -165,14 +164,14 @@ namespace HotelBackend.Controllers
 
         private RoomBookingDto MapRoomBookingDto(RoomBooking roomBooking)
         {
-            var user = _context.Userrs.Find(roomBooking.UserId);
+            var user = _context.Users.Find(roomBooking.Id);
             return new RoomBookingDto
             {
                 RoomBookingId = roomBooking.RoomBookingId,
-                User = new UserDto
+                User = new UserrDto
                 {
-                    UserId = user.UserId,
-                    Name = user.UserFullName
+                    UserrId = user.Id,
+                    Name = user.Name
                 },
                 PaymentMethod = roomBooking.PaymentMethod,
                 CheckInDate = roomBooking.CheckInDate,
@@ -207,7 +206,7 @@ namespace HotelBackend.Controllers
     public class RoomBookingDto
     {
         public int RoomBookingId { get; set; }
-        public UserDto User { get; set; }
+        public UserrDto User { get; set; }
         public string PaymentMethod { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
@@ -215,9 +214,9 @@ namespace HotelBackend.Controllers
         public RoomBookingItemDto[] RoomBookingItems { get; set; }
     }
 
-    public class RoomDto
+    public class UserrDto
     {
-        public int UserId { get; set; }
+        public string UserrId { get; set; }
         public string Name { get; set; }
     }
 
@@ -229,7 +228,7 @@ namespace HotelBackend.Controllers
 
     public class RoomBookingCreationDto
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string PaymentMethod { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
