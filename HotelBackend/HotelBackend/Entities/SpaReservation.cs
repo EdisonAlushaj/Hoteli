@@ -9,8 +9,8 @@ namespace HotelBackend.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ReservationId { get; set; }
 
-        public int UserId { get; set; }
-        public Userr Userr { get; set; }
+        public string UserId { get; set; }
+        public Data.ApplicationUser Userr { get; set; }
         public int SpaId { get; set; } 
         public Spa Spa { get; set; }
         public DateTime ReservationDate { get; set; }

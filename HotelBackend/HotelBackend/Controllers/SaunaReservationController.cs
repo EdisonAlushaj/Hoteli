@@ -16,6 +16,7 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SaunaReservation>>> GetSaunaReservation()
         {
@@ -42,7 +43,7 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<SaunaReservation>> AddSaunaReservation([FromQuery] int userId, [FromQuery] int saunaId, [FromQuery] DateTime reservationStart)
+        public async Task<ActionResult<SaunaReservation>> AddSaunaReservation([FromQuery] string userId, [FromQuery] int saunaId, [FromQuery] DateTime reservationStart)
         {
             var sauna = await _context.Saunas.FindAsync(saunaId);
             if (sauna == null)

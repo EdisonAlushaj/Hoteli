@@ -32,14 +32,14 @@ namespace HotelBackend.Controllers
         {
             Console.WriteLine("Received contact request for Name: " + contactRequest.Name);
 
-            var user = await _context.Userrs.FirstOrDefaultAsync(u => u.UserFullName == contactRequest.Name);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Name == contactRequest.Name);
 
             if (user == null)
             {
                 return NotFound("User not found");
             }
 
-            if (user.UserEmail != contactRequest.Email)
+            if (user.Email != contactRequest.Email)
             {
                 return BadRequest("Invalid email");
             }
@@ -59,13 +59,13 @@ namespace HotelBackend.Controllers
             return Ok(contactResponse);
         }
     }
-    }
-    public class ContactRequest
-        {
-    [Key] // Define Id as the primary key
+}
+public class ContactRequest
+{
+    [Key]
     public int Id { get; set; }
     public string Name { get; set; }
-            public string Email { get; set; }
-            public string Message { get; set; }
-        }
+    public string Email { get; set; }
+    public string Message { get; set; }
+}
     

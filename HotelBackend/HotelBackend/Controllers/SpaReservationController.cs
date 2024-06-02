@@ -41,7 +41,7 @@ namespace HotelBackend.Controllers
             return Ok(SpaReservation);
         }
         [HttpPost]
-        public async Task<ActionResult<SpaReservation>> AddSpaReservation([FromQuery] int userId, [FromQuery] int spaId, [FromQuery] DateTime reservationStart)
+        public async Task<ActionResult<SpaReservation>> AddSpaReservation([FromQuery] string userId, [FromQuery] int spaId, [FromQuery] DateTime reservationStart)
         {
             var spa = await _context.Spas.FindAsync(spaId);
             if (spa == null)

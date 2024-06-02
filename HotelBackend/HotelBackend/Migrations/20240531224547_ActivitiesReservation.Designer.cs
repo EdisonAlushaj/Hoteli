@@ -4,6 +4,7 @@ using HotelBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240531224547_ActivitiesReservation")]
+    partial class ActivitiesReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -699,9 +702,8 @@ namespace HotelBackend.Migrations
                     b.Property<int>("SaunaId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("ReservationId");
 
@@ -738,20 +740,20 @@ namespace HotelBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ShezlongId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("Id");
-
                     b.HasIndex("ShezlongId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ShezlongReservations");
                 });
@@ -800,9 +802,8 @@ namespace HotelBackend.Migrations
                     b.Property<int>("SpaId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("ReservationId");
 
@@ -1086,6 +1087,32 @@ namespace HotelBackend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("SharedClassLibrary.DTOs.UserDTO", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserDTO");
+                });
+
             modelBuilder.Entity("HotelBackend.Entities.ActivitiesReservation", b =>
                 {
                     b.HasOne("HotelBackend.Entities.Activities", "Activities")
@@ -1094,7 +1121,7 @@ namespace HotelBackend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBackend.Data.ApplicationUser", "User")
+                    b.HasOne("SharedClassLibrary.DTOs.UserDTO", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1239,7 +1266,7 @@ namespace HotelBackend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBackend.Data.ApplicationUser", "Userr")
+                    b.HasOne("HotelBackend.Entities.Userr", "Userr")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1261,13 +1288,15 @@ namespace HotelBackend.Migrations
 
             modelBuilder.Entity("HotelBackend.Entities.ShezlongReservation", b =>
                 {
-                    b.HasOne("HotelBackend.Data.ApplicationUser", "Userr")
-                        .WithMany()
-                        .HasForeignKey("Id");
-
                     b.HasOne("HotelBackend.Entities.Shezlong", "Shezlong")
                         .WithMany()
                         .HasForeignKey("ShezlongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBackend.Entities.Userr", "Userr")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1284,7 +1313,7 @@ namespace HotelBackend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBackend.Data.ApplicationUser", "Userr")
+                    b.HasOne("HotelBackend.Entities.Userr", "Userr")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

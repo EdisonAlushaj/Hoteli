@@ -42,8 +42,7 @@ namespace HotelBackend.Controllers
         }
 
         [HttpPost]
-        [HttpPost]
-        public async Task<ActionResult<ShezlongReservation>> AddShezlongReservation([FromQuery] int userId, [FromQuery] int shezlongId, [FromQuery] DateTime reservationDate)
+        public async Task<ActionResult<ShezlongReservation>> AddShezlongReservation([FromQuery] string userId, [FromQuery] int shezlongId, [FromQuery] DateTime reservationDate)
         {
             // Check if the shezlong is already reserved on the selected date
             var existingReservation = await _context.ShezlongReservations.FirstOrDefaultAsync(ur => ur.ShezlongId == shezlongId && ur.ReservationDate.Date == reservationDate.Date);
@@ -64,7 +63,7 @@ namespace HotelBackend.Controllers
             // Create the reservation
             var reservation = new ShezlongReservation
             {
-                UserId = userId,
+                Id = userId,
                 ShezlongId = shezlongId,
                 ReservationDate = reservationDate
             };
@@ -76,19 +75,13 @@ namespace HotelBackend.Controllers
         }
 
 
-
-
-
-
-
-
         [HttpDelete("{id}")]
         public async Task<ActionResult<ShezlongReservation>> DeleteShezlongReservation(int id)
         {
             var shezlongReservation = await _context.ShezlongReservations.FindAsync(id);
 
             if (shezlongReservation == null)
-                return NotFound("User Role not found");
+                return NotFound("Shezlong not found not found");
 
             _context.ShezlongReservations.Remove(shezlongReservation);
             await _context.SaveChangesAsync();

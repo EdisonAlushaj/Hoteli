@@ -37,6 +37,7 @@ namespace HotelBackend.Data
         public DbSet<Spa> Spas { get; set; }
         public DbSet<Fitnes> Fitness { get; set; }
         public DbSet<Sauna> Saunas { get; set; }
+        public DbSet<ActivitiesReservation> ActivitiesReservations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,7 +95,7 @@ namespace HotelBackend.Data
             modelBuilder.Entity<ShezlongReservation>()
                 .HasOne(sr => sr.Userr)
                 .WithMany()
-                .HasForeignKey(sr => sr.UserId);
+                .HasForeignKey(sr => sr.Id);
 
             modelBuilder.Entity<ShezlongReservation>()
                 .HasOne(sr => sr.Shezlong)
@@ -139,6 +140,19 @@ namespace HotelBackend.Data
                 .HasOne(tr => tr.Table)
                 .WithMany()
                 .HasForeignKey(tr => tr.Id);
+
+            modelBuilder.Entity<ActivitiesReservation>()
+                .HasKey(sr => new { sr.ReservationId });
+
+            modelBuilder.Entity<ActivitiesReservation>()
+                .HasOne(sr => sr.User)
+                .WithMany()
+                .HasForeignKey(sr => sr.UserId);
+
+            modelBuilder.Entity<ActivitiesReservation>()
+                .HasOne(sr => sr.Activities)
+                .WithMany()
+                .HasForeignKey(sr => sr.ActivitiesId);
         }
     }
 }
