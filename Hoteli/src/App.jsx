@@ -6,19 +6,6 @@ import Footer from "./Footer/Footer.jsx";
 import AppRoutes from "./AppRoutes.jsx";
 import cookieUtils from './cookieUtils';
 
-const Home = React.lazy(() => import("./Home"));
-const About = React.lazy(() => import("./About"));
-const Rooms = React.lazy(() => import("./Rooms/Rooms"));
-const Contact = React.lazy(() => import("./Contact"));
-const Menu = React.lazy(() => import("./Menu/Menu"));
-const Login = React.lazy(() => import("./login.jsx"));
-const Register = React.lazy(() => import("./register.jsx"));
-const Dashboard = React.lazy(() => import("./Dashboard/dashboard"));
-const Pool = React.lazy(() => import("./Services/Pool"));
-const Spa = React.lazy(() => import("./Services/Spa"));
-const Sauna = React.lazy(() => import("./Services/Sauna.jsx"));
-const Booking = React.lazy(() => import("./Booking/RoomBooking.jsx"));
-
 export const MainLayout = () => {
 
   const userRole = cookieUtils.getUserRoleFromCookies();
@@ -48,7 +35,7 @@ export const MainLayout = () => {
                     <NavLink to="/Menu">Restaurant</NavLink>
                     <NavLink to="/Spa">Spa</NavLink>
                     <NavLink to="/Sauna">Sauna</NavLink>
-                    <a href="#">Gym</a>
+                    <NavLink to="/Gym">Gym</NavLink>
                     <NavLink to="/Pool">Pool</NavLink>
                     <NavLink to="/Activities">Activities</NavLink>
                   </div>

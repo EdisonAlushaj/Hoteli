@@ -36,6 +36,7 @@ namespace HotelBackend.Data
         public DbSet<FitnesEquipmet> FitnesEquipmets { get; set; }
         public DbSet<Spa> Spas { get; set; }
         public DbSet<Fitnes> Fitness { get; set; }
+        public DbSet<FitnesApply> FitnesApplys { get; set; }
         public DbSet<Sauna> Saunas { get; set; }
         public DbSet<ActivitiesReservation> ActivitiesReservations { get; set; }
 
@@ -168,6 +169,20 @@ namespace HotelBackend.Data
                 .HasOne(sr => sr.User)
                 .WithMany()
                 .HasForeignKey(sr => sr.Id);
+
+            modelBuilder.Entity<FitnesApply>()
+                .HasKey(sr => new { sr.ReservationId });
+
+            modelBuilder.Entity<FitnesApply>()
+                .HasOne(sr => sr.Userr)
+                .WithMany()
+                .HasForeignKey(sr => sr.Id);
+
+            modelBuilder.Entity<FitnesApply>()
+                .HasOne(sr => sr.Fitnes)
+                .WithMany()
+                .HasForeignKey(sr => sr.FitnesId);
+
         }
     }
 }
