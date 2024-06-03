@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const FitnesEquipments = () => {
+const FitnessEquipments = () => {
 
     const [show, setShow] = useState(false)
     const [showAdd, setShowAdd] = useState(false);
@@ -272,4 +272,4 @@ const FitnesEquipments = () => {
     );
 };
 
-export default FitnesEquipments;
+export default FitnessEquipments;

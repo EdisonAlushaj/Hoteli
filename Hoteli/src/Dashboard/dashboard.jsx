@@ -26,6 +26,7 @@ import SpaReservationCrud from './Crud-Functions/SpaReservationCrud.jsx';
 import SaunaReservationCrud from './Crud-Functions/SaunaReservationCrud.jsx';
 import RoomBookingCrud from './Crud-Functions/RoomBookingCrud.jsx';
 import UserInformation from './Crud-Functions/UserInformation.jsx';
+import FitnesApply from './Crud-Functions/GymReservation.jsx';
 
 const Dashboard = () => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -54,6 +55,7 @@ const Dashboard = () => {
     const [showOrder, setShowOrder] = useState(false);
     const [showRoomBookingTable, setRoomBookingTable] = useState(false);
     const [showUserInformationTable, setUserInformationTable] = useState(false);
+    const [showFitnesApplyTable, setFitnesApplyTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -132,6 +134,9 @@ const Dashboard = () => {
     };
     const toggleUserInfromationTable = () => {
         setUserInformationTable(!showUserInformationTable);
+    };
+    const toggleFitnesApplyTable = () => {
+        setFitnesApplyTable(!showFitnesApplyTable);
     };
 
     return (
@@ -262,6 +267,9 @@ const Dashboard = () => {
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleShezlongReservation}>Shezlong Reservation</NavLink>
+                                </li>
+                                <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleFitnesApplyTable}>Fitnes Apply</NavLink>
                                 </li>
                                 <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleActivitiesTable}>Activities</NavLink>
@@ -418,6 +426,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showSaunaReservationTable && (
                                 <SaunaReservationCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showFitnesApplyTable && (
+                                <FitnesApply />
                             )}
                         </div>
                     </main>
