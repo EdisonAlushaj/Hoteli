@@ -37,7 +37,6 @@ const GymReservation= () => {
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Fitnes Apply has been deleted');
-                        // Filter out the deleted item from the state
                         setData(data.filter(item => item.reservationId !== id));
                     } else {
                         toast.error('Failed to delete Fitnes Apply');
