@@ -29,6 +29,9 @@ function Login() {
       const userId = parsedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
       console.log("User Id:", userId);
   
+      const name = parsedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+      console.log("User Name:", name);
+
       cookieUtils.setUserIdInCookies(userId);
       cookieUtils.setUserRoleInCookies(role);
   

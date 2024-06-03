@@ -77,7 +77,7 @@ namespace HotelBackend.Controllers
                 RoomBookingId = roomBooking.RoomBookingId,
                 User = new UserrDto
                 {
-                    UserrId = user.Id,
+                    Id = user.Id,
                     Name = user.Name
                 },
                 PaymentMethod = roomBooking.PaymentMethod,
@@ -164,15 +164,36 @@ namespace HotelBackend.Controllers
 
         private RoomBookingDto MapRoomBookingDto(RoomBooking roomBooking)
         {
-            var user = _context.Users.Find(roomBooking.Id);
+            //var user = _context.Users.Find(roomBooking.Id);
+
+            UserrDto userDto;
+            if (roomBooking.Id != null)
+            {
+                var user = _context.Users.Find(roomBooking.Id);
+                if (user != null)
+                {
+                    userDto = new UserrDto
+                    {
+                        Id = user.Id,
+                        Name = user.Name
+                    };
+                }
+                else
+                {
+                    // Handle the case where the user is not found
+                    userDto = null; // or some default value
+                }
+            }
+            else
+            {
+                // Handle the case where roomBooking.Id is null
+                userDto = null; // or some default value
+            }
+
             return new RoomBookingDto
             {
                 RoomBookingId = roomBooking.RoomBookingId,
-                User = new UserrDto
-                {
-                    UserrId = user.Id,
-                    Name = user.Name
-                },
+                User = userDto,
                 PaymentMethod = roomBooking.PaymentMethod,
                 CheckInDate = roomBooking.CheckInDate,
                 CheckOutDate = roomBooking.CheckOutDate,
@@ -216,7 +237,7 @@ namespace HotelBackend.Controllers
 
     public class UserrDto
     {
-        public string UserrId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 
