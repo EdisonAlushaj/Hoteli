@@ -31,6 +31,9 @@ export const ShezlongEndPoints = `https://localhost:7189/api/Shezlong`;
 
 export const SaunaEndPoint = `https://localhost:7189/api/Sauna`;
 
+export const ActivitiesReservationEndPoint = `https://localhost:7189/api/ActivitiesReservation`;
+
+
 export const ShezlongReservationEndPoints = `https://localhost:7189/api/ShezlongReservation`;
 
 export const FitnesEndPoints = `https://localhost:7189/api/Fitnes`;

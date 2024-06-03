@@ -6,15 +6,15 @@ import MenuCafeCrud from './Crud-Functions/MenuCafeCrud.jsx';
 import MenuFoodCrud from './Crud-Functions/MenuFoodCrud.jsx';
 import MenuDrinkCrud from './Crud-Functions/MenuDrinkCrud.jsx';
 import TableCrud from './Crud-Functions/TableCrud.jsx';
-import UsersCrud from './Crud-Functions/UsersCrud.jsx';
-import RolesCrud from './Crud-Functions/RolesCrud.jsx';
+
 import TableReservation from './Crud-Functions/TableReservation.jsx';
 import Hall from './Crud-Functions/Hall.jsx';
 import Pool from './Crud-Functions/Pool.jsx';
 import SpaCrud from './Crud-Functions/SpaCrud.jsx';
 import SaunaCrud from './Crud-Functions/SaunaCrud.jsx';
 import ActivitiesCrud from './Crud-Functions/ActivitiesCrud.jsx';
-import UserRoleCrud from './Crud-Functions/UserRoleCrud.jsx';
+import ActivitiesReservationCrud from './Crud-Functions/ActivitiesReservationCrud.jsx';
+
 import ShezlongForm from './Crud-Functions/ShezlongForm.jsx';
 import ContactUs from './Crud-Functions/ContactUs.jsx';
 import ShezlongReservation from './Crud-Functions/ShezlongReservationCrud.jsx';
@@ -34,15 +34,12 @@ const Dashboard = () => {
     const [showCafeMenuTable, setShowCafeMenuTable] = useState(false);
     const [showDrinkMenuTable, setShowDrinkMenuTable] = useState(false);
     const [showTableTable, setShowTableTable] = useState(false);
-    const [showUsersTable, setShowUsersTable] = useState(false);
-    const [showRolesTable, setShowRolesTable] = useState(false);
     const [showTableReservationTable, setShowTableReservationTable] = useState(false);
     const [showHallTable, setShowHallTable] = useState(false);
     const [showPoolTable, setShowPoolTable] = useState(false);
     const [showSpaCrudTable, setShowSpaCrudTable] = useState(false);
     const [showSaunaTable, setShowSaunaTable] = useState(false);
     const [showActivitiesTable, setShowActivitiesTable] = useState(false);
-    const [showUserRoleTable, setShowUserRoleTable] = useState(false);
     const [showShezlongTable, setShowShezlongTable] = useState(false);
     const [showContactTable, setShowContactTable] = useState(false);
     const [showShezlongReservationTable, setShowShezlongReservationTable] = useState(false);
@@ -54,6 +51,7 @@ const Dashboard = () => {
     const [showOrder, setShowOrder] = useState(false);
     const [showRoomBookingTable, setRoomBookingTable] = useState(false);
     const [showUserInformationTable, setUserInformationTable] = useState(false);
+    const [showActivitiesReservationTable, setActivitiesReservationTable] = useState(false);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(!isSidebarExpanded);
@@ -73,12 +71,7 @@ const Dashboard = () => {
     const toggleTableTable = () => {
         setShowTableTable(!showTableTable);
     };
-    const toggleUsersTable = () => {
-        setShowUsersTable(!showUsersTable);
-    };
-    const toggleRolesTable = () => {
-        setShowRolesTable(!showRolesTable);
-    };
+
     const toggleTableReservationTable = () => {
         setShowTableReservationTable(!showTableReservationTable);
     };
@@ -97,9 +90,7 @@ const Dashboard = () => {
     const toggleActivitiesTable = () => {
         setShowActivitiesTable(!showActivitiesTable);
     };
-    const toggleUserRoleTable = () => {
-        setShowUserRoleTable(!showUserRoleTable);
-    };
+
     const toggleShezlong = () => {
         setShowShezlongTable(!showShezlongTable);
     };
@@ -114,6 +105,9 @@ const Dashboard = () => {
     };
     const toggleSaunaReservation = () => {
         setShowSaunaReservationTable(!showSaunaReservationTable);
+    };
+    const toggleActivitiesReservationTable = () => {
+        setActivitiesReservationTable(!showActivitiesReservationTable);
     };
     const toggleFintesTable = () => {
         setShowFitnesTable(!showFitnesTable);
@@ -267,6 +261,9 @@ const Dashboard = () => {
                                     <NavLink to="#" className="sidebar-link" onClick={toggleActivitiesTable}>Activities</NavLink>
                                 </li>
                                 <li className="sidebar-item">
+                                    <NavLink to="#" className="sidebar-link" onClick={toggleActivitiesReservationTable}>Activities Reservation</NavLink>
+                                </li>
+                                <li className="sidebar-item">
                                     <NavLink to="#" className="sidebar-link" onClick={toggleRoomBookingTable}>Room Booking</NavLink>
                                 </li>
                             </ul>
@@ -398,6 +395,11 @@ const Dashboard = () => {
                         <div className="container-fluid">
                             {showActivitiesTable && (
                                 <ActivitiesCrud />
+                            )}
+                        </div>
+                        <div className="container-fluid">
+                            {showActivitiesReservationTable && (
+                                <ActivitiesReservationCrud />
                             )}
                         </div>
                         <div className="container-fluid">

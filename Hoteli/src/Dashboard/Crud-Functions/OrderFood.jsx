@@ -128,7 +128,7 @@ const OrderFood = () => {
                         {data && data.length > 0 ? (
                             data.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.id}</td>
+                                    <td>{item.orderId}</td>
                                     <td>{item.user.name}</td>
                                     <td>{item.deliveryLocation}</td>
                                     <td>{item.deliveryNumber}</td>
