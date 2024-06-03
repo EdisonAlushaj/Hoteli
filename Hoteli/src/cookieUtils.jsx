@@ -10,12 +10,20 @@ const cookieUtils = {
     Cookies.set('userId', userId, { expires: 1 }); // expires in 1 day
   },
 
+  setNameInCookies: (name) => {
+    Cookies.set('name', name, { expires: 1 }); // expires in 1 day
+  },
+
   getUserIdFromCookies: () => {
     return Cookies.get('userId');
   },
 
   getUserRoleFromCookies: () => {
     return Cookies.get('userRole');
+  },
+
+  getNameFromCookies: () => {
+    return Cookies.get('name');
   },
 
   setRefreshToken: (refreshToken) => {

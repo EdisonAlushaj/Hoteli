@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using HotelBackend.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -130,15 +131,34 @@ using System.Linq;
         // Map Order entity to OrderDto
         private OrderDto MapOrderToDto(Order order)
         {
-            var user = _context.Users.Find(order.Id);
+            UserDto userDto;
+            if (order.Id != null)
+            {
+                var user = _context.Users.Find(order.Id);
+                if (user != null)
+                {
+                    userDto = new UserDto
+                    {
+                        UserId = user.Id,
+                        Name = user.Name
+                    };
+                }
+                else
+                {
+                    // Handle the case where the user is not found
+                    userDto = null; // or some default value
+                }
+            }
+            else
+            {
+                // Handle the case where roomBooking.Id is null
+                userDto = null; // or some default value
+            }
+
             return new OrderDto
             {
                 OrderId = order.OrderId,
-                User = new UserDto
-                {
-                    UserId = user.Id,
-                    Name = user.Name
-                },
+                User = userDto,
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
                 PaymentMethod = order.PaymentMethod,
