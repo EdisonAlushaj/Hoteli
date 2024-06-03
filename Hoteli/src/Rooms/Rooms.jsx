@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Slider from "./SliderRoom";
 import CoverImg from "./RoomIMG/room-cover.jpg";
 import { RoomEndPoint } from '../endpoints';
+import Booking from '../Booking/RoomBooking.jsx';
+import { Routes, Route, Navigate, NavLink } from "react-router-dom";
 
 import foto1 from "./RoomIMG/Room1-1.jpg";
 import foto2 from "./RoomIMG/Room1-2.jpg";
@@ -103,7 +105,7 @@ const LayoutOne = ({ title, capacity, size, description, imageUrls, currentIndex
         <p className="text-xl-start">{description}</p>
 
         <button type="button" className="btn">
-          VIEW MORE
+          <NavLink style={{color: "black"}} to="/booking">View More</NavLink>
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Activities.css';
+import cookieUtils from '../cookieUtils.jsx';
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
@@ -15,7 +16,7 @@ const Activities = () => {
       }
     };
 
-    fetchActivities();
+    fetchActivities(); 
   }, []);
 
   const handleApply = async (id) => {

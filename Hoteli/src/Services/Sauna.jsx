@@ -5,13 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Sauna.css';
+import cookieUtils from '../cookieUtils.jsx';
 
 const Sauna = () => {
   const [saunas, setSaunas] = useState([]);
   const [selectedSauna, setSelectedSauna] = useState(null);
   const [saunaReservations, setSaunaReservations] = useState([]);
   const [reservationDate, setReservationDate] = useState('');
-  const [userId, setUserId] = useState('');
+
+  const userId = cookieUtils.getUserIdFromCookies();
 
   useEffect(() => {
     const fetchSaunas = async () => {
@@ -25,7 +27,7 @@ const Sauna = () => {
     fetchSaunas();
   }, []);
 
-     const handleReservationSubmit = async (e) => {
+  const handleReservationSubmit = async (e) => {
     e.preventDefault();
     if (!selectedSauna || !userId || !reservationDate) {
       console.error('Please fill out all fields');
@@ -36,7 +38,6 @@ const Sauna = () => {
       const response = await axios.post(`https://localhost:7189/api/SaunaReservation?userId=${userId}&saunaId=${selectedSauna.id}&reservationStart=${reservationDate}`);
       toast.success('Sauna Reservation has been added.');
       console.log('Reservation added successfully:', response.data);
-      setUserId('');
       setReservationDate('');
     } catch (error) {
       toast.error("This sauna is already reserved during the selected time slot.");
@@ -44,7 +45,7 @@ const Sauna = () => {
     }
   };
 
-   
+
   return (
     <div>
       <div className="cover-photooooo"></div>
@@ -80,15 +81,6 @@ const Sauna = () => {
                 <Card className="reservation-form">
                   <Card.Body>
                     <Form onSubmit={handleReservationSubmit}>
-                      <Form.Group controlId="userId">
-                        <Form.Label>User ID</Form.Label>
-                        <Form.Control
-                          type="text"
-                          value={userId}
-                          onChange={(e) => setUserId(e.target.value)}
-                          placeholder="Enter your user ID"
-                        />
-                      </Form.Group>
                       <Form.Group controlId="reservationDate">
                         <Form.Label>Reservation Date</Form.Label>
                         <Form.Control

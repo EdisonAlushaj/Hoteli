@@ -6,15 +6,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CoverImg from "../Rooms/RoomIMG/room-cover.jpg";
+import cookieUtils from '../cookieUtils.jsx';
 
 function RoomBooking() {
     const [showAdd, setShowAdd] = useState(false);
+    
+    const userId = cookieUtils.getUserIdFromCookies();
     const [selectedItems, setSelectedItems] = useState([]);
     const [paymentMethod, setPaymentMethod] = useState('');
     const [checkInDate, setCheckInDate] = useState('');
     const [checkOutDate, setCheckOutDate] = useState('');
     const [roomBookingItems, setRoomBookingItems] = useState([]);
-    const [userId, setUserId] = useState('');
     const [availableRooms, setAvailableRooms] = useState([]);
 
     useEffect(() => {
@@ -107,7 +109,6 @@ function RoomBooking() {
 
             if (response.status === 200 || response.status === 201) {
                 setSelectedItems([]);
-                setUserId('');
                 setPaymentMethod('');
                 setCheckInDate('');
                 setCheckOutDate('');
@@ -319,15 +320,6 @@ function RoomBooking() {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <Form.Group controlId="userId">
-                                <Form.Label>User ID</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter user ID"
-                                    value={userId}
-                                    onChange={(e) => setUserId(e.target.value)}
-                                />
-                            </Form.Group>
                             <Form.Group controlId="formPaymentMethod">
                                 <Form.Label>Payment Method</Form.Label>
                                 <Form.Control

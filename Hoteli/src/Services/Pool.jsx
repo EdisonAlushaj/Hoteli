@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Pool.css';
+import cookieUtils from '../cookieUtils.jsx';
 
 const Pool = () => {
   const [pools, setPools] = useState([]);
@@ -10,7 +11,8 @@ const Pool = () => {
   const [selectedShezlong, setSelectedShezlong] = useState(null);
   const [shezlongReservations, setShezlongReservations] = useState([]);
   const [reservationDate, setReservationDate] = useState('');
-  const [userId, setUserId] = useState('');
+  
+  const userId = cookieUtils.getUserIdFromCookies();
 
   useEffect(() => {
     const fetchPools = async () => {
@@ -55,7 +57,7 @@ const Pool = () => {
     try {
       const response = await axios.post(`https://localhost:7189/api/ShezlongReservation`, null, {
         params: {
-          userId: parseInt(userId),
+          userId: userId,
           shezlongId: selectedShezlong.id,
           reservationDate: reservationDate
         }
@@ -126,10 +128,6 @@ const Pool = () => {
                   <div className="reservation-form">
                     <h4>Reserve Shezlong {selectedShezlong.id}</h4>
                     <form onSubmit={handleReservationSubmit}>
-                      <div className="form-group">
-                        <label htmlFor="userId">User ID:</label>
-                        <input type="text" className="form-control form-control-sm" id="userId" value={userId} onChange={(e) => setUserId(e.target.value)} />
-                      </div>
                       <div className="form-group">
                         <label htmlFor="reservationDate">Reservation Date:</label>
                         <input type="date" className="form-control form-control-sm" id="reservationDate" value={reservationDate} onChange={(e) => setReservationDate(e.target.value)} />

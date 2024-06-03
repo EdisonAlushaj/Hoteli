@@ -5,10 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Menu.css';
+import cookieUtils from '../cookieUtils.jsx';
 
 const MenuFood = () => {
     const [showAdd, setShowAdd] = useState(false);
-    const [userId, setUserId] = useState('');
+
+    const userId = cookieUtils.getUserIdFromCookies();
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
@@ -92,7 +94,6 @@ const MenuFood = () => {
             // Check the response status code
             if (response.status === 200 || response.status === 201) {
                 setSelectedItems([]);
-                setUserId('');
                 setDeliveryLocation('');
                 setDeliveryNumber('');
                 setPaymentMethod('');
@@ -170,15 +171,6 @@ const MenuFood = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group controlId="userId">
-                            <Form.Label>User ID</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter user ID"
-                                value={userId}
-                                onChange={(e) => setUserId(e.target.value)}
-                            />
-                        </Form.Group>
                         <Form.Group controlId="formDeliveryLocation">
                             <Form.Label>Delivery Location</Form.Label>
                             <Form.Control
