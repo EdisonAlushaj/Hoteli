@@ -3,28 +3,27 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelBackend.Entities
 {
-    public class OrderDrinkItem
+    public class OrderCoffeeItem
     {
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrderDrinkItemId { get; set; }
+        public int OrderCoffeeItemId { get; set; }
 
         [Required]
-        public int OrderDrinkId { get; set; }
+        public int OrderCoffeeId { get; set; }
 
-        [ForeignKey("OrderDrinkId")]
-        public OrderDrink OrderDrink { get; set; }
-
-        [Required]
-        public int MenuDrinkId { get; set; }
-
-        [ForeignKey("MenuDrinkId")]
-        public MenuDrink MenuDrink { get; set; }
+        [ForeignKey("OrderCoffeeId")]
+        public OrderCoffee OrderCoffee { get; set; }
 
         [Required]
-        public string DrinkName { get; set; }
+        public int MenuCoffeeId { get; set; }
 
+        [ForeignKey("MenuCoffeeId")]
+        public MenuCafe MenuCoffee { get; set; }
+
+        [Required]
+        public string CafeName { get; set; }
         [Required]
         public double Price { get; set; }
 

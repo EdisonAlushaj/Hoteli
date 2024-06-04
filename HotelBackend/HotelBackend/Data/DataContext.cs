@@ -28,6 +28,8 @@ namespace HotelBackend.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<OrderDrink> OrderDrinks { get; set; }
         public DbSet<OrderDrinkItem> OrderDrinkItems { get; set; }
+        public DbSet<OrderCoffee> OrderCoffees { get; set; }
+        public DbSet<OrderCoffeeItem> OrderCoffeeItems { get; set; }
         public DbSet<RoomBooking> RoomBookings { get; set; }
         public DbSet<RoomBookingItem> RoomBookingItems { get; set; }
         public DbSet<Table> Tables { get; set; }
@@ -166,6 +168,11 @@ namespace HotelBackend.Data
                 .HasForeignKey(sr => sr.Id);
 
             modelBuilder.Entity<OrderDrink>()
+                .HasOne(sr => sr.User)
+                .WithMany()
+                .HasForeignKey(sr => sr.Id);
+
+            modelBuilder.Entity<OrderCoffee>()
                 .HasOne(sr => sr.User)
                 .WithMany()
                 .HasForeignKey(sr => sr.Id);
