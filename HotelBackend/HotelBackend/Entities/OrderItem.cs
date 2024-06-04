@@ -22,6 +22,8 @@ namespace HotelBackend.Entities
         public MenuFood MenuFood { get; set; }
 
         [Required]
+        public string Foodname { get; set; }
+        [Required]
         public double Price { get; set; }
 
         [Required]

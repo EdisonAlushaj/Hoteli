@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { OrderFoodEndPoints } from '../../endpoints.js';
+import { OrderDrinkEndPoints } from '../../endpoints.js';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -10,14 +10,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import cookieUtils from '../../cookieUtils.jsx';
 
-const OrderFood = () => {
+const OrderDrinks = () => {
     const [showAdd, setShowAdd] = useState(false);
 
     const userId = cookieUtils.getUserIdFromCookies();
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
-    const [orderItems, setOrderItems] = useState([{ menuFoodId: '', quantity: '' }]);
+    const [orderDrinkItems, setOrderDrinkItems] = useState([{ menuDrinkId: '', quantity: '' }]);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const OrderFood = () => {
     }, []);
 
     const getData = () => {
-        axios.get(OrderFoodEndPoints)
+        axios.get(OrderDrinkEndPoints)
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -36,13 +36,13 @@ const OrderFood = () => {
     };
 
     const handleDelete = (id) => {
-        console.log("Deleting order with ID:", id);
-        if (window.confirm("Are you sure to delete this Order?")) {
+        console.log("Deleting drink order with ID:", id);
+        if (window.confirm("Are you sure to delete this drink Order?")) {
             // Update UI immediately
             setData(data.filter(item => item.orderId !== id));
             
             // Send request to delete order from the server
-            axios.delete(`${OrderFoodEndPoints}/${id}`)
+            axios.delete(`${OrderDrinkEndPoints}/${id}`)
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Order has been deleted');
@@ -63,17 +63,17 @@ const OrderFood = () => {
             deliveryLocation: deliveryLocation,
             deliveryNumber: deliveryNumber,
             paymentMethod: paymentMethod,
-            orderItems: orderItems.map(item => ({
-                menuFoodId: parseInt(item.menuFoodId),
+            orderDrinkItems: orderDrinkItems.map(item => ({
+                menuDrinkId: parseInt(item.menuDrinkId),
                 quantity: parseInt(item.quantity)
             }))
         };
 
-        axios.post(OrderFoodEndPoints, orderDto)
+        axios.post(OrderDrinkEndPoints, orderDto)
             .then((result) => {
                 getData();
                 clear();
-                toast.success('Order has been added.');
+                toast.success('Order drink has been added.');
                 handleCloseAdd();
             })
             .catch((error) => {
@@ -85,7 +85,7 @@ const OrderFood = () => {
         setDeliveryLocation('');
         setDeliveryNumber('');
         setPaymentMethod('');
-        setOrderItems([{ menuFoodId: '', quantity: '' }]);
+        setOrderDrinkItems([{ menuDrinkId: '', quantity: '' }]);
     };
 
     const handleCloseAdd = () => setShowAdd(false);
@@ -93,13 +93,13 @@ const OrderFood = () => {
 
     const handleOrderItemChange = (index, e) => {
         const { name, value } = e.target;
-        const updatedOrderItems = [...orderItems];
-        updatedOrderItems[index][name] = value;
-        setOrderItems(updatedOrderItems);
+        const updatedOrderDrinkItems = [...orderDrinkItems];
+        updatedOrderDrinkItems[index][name] = value;
+        setOrderDrinkItems(updatedOrderDrinkItems);
     };
 
-    const addOrderItem = () => {
-        setOrderItems([...orderItems, { menuFoodId: '', quantity: '' }]);
+    const addOrderDrinkItem = () => {
+        setOrderDrinkItems([...orderDrinkItems, { menuDrinkId: '', quantity: '' }]);
     };
 
     return (
@@ -107,20 +107,20 @@ const OrderFood = () => {
             <Fragment>
                 <ToastContainer />
                 <div className='d-flex justify-content-evenly' style={{ width: "20em", height: "3em", alignItems: "center" }}>
-                    <p style={{ fontSize: "2em", margin: "0" }}><b>Order Food</b></p>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Order Drink</b></p>
                     <button className="btn btn-rounded btn-primary" onClick={handleShowAdd}>Add</button>
                 </div>
                 <br />
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>Order ID</th>
+                            <th>Order Drink ID</th>
                             <th>User Name</th>
                             <th>Delivery Location</th>
                             <th>Delivery Number</th>
                             <th>Payment Method</th>
                             <th>Total Price</th>
-                            <th>Order Items</th>
+                            <th>Order Drink Items</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -133,16 +133,16 @@ const OrderFood = () => {
                                     <td>{item.deliveryLocation}</td>
                                     <td>{item.deliveryNumber}</td>
                                     <td>{item.paymentMethod}</td>
-                                    <strong><td>${item.totalOrderPrice}$</td></strong>
+                                    <strong><td>${item.totalOrderDrinkPrice}$</td></strong>
                                     <td>
-    {item.orderItems.map((orderItem, idx) => (
+    {item.orderDrinkItems.map((orderDrinkItem, idx) => (
         <div key={idx} className="card mb-2" style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
             <div className="card-body">
-                <p className="card-text"><strong>Food ID:</strong> {orderItem.menuFoodId}</p>
-                <p className="card-text"><strong>Food Name:</strong> {orderItem.foodName}</p>
-                <p className="card-text"><strong>Price:</strong> ${orderItem.price / orderItem.quantity} </p>
-                <p className="card-text"><strong>Quantity: </strong> {orderItem.quantity} </p>
-                <p className="card-text"><strong>Price * Quantity:</strong>  ${orderItem.price}</p>
+                <p className="card-text"><strong>Drink ID:</strong> {orderDrinkItem.menuDrinkId}</p>
+                <p className="card-text"><strong>Drink Name:</strong> {orderDrinkItem.drinkName}</p>
+                <p className="card-text"><strong>Price:</strong> ${orderDrinkItem.price / orderDrinkItem.quantity} </p>
+                <p className="card-text"><strong>Quantity: </strong> {orderDrinkItem.quantity} </p>
+                <p className="card-text"><strong>Price * Quantity:</strong>  ${orderDrinkItem.price}</p>
             </div>
         </div>
     ))}
@@ -180,11 +180,11 @@ const OrderFood = () => {
                                 />
                             </Col>
                         </Row>
-                        {orderItems.map((item, index) => (
+                        {orderDrinkItems.map((item, index) => (
                             <Row key={index}>
                                 <Col>
-                                    <input type="number" className='form-control' placeholder='Menu Food Id'
-                                        name="menuFoodId" value={item.menuFoodId} onChange={(e) => handleOrderItemChange(index, e)}
+                                    <input type="number" className='form-control' placeholder='Menu Drink Id'
+                                        name="menuDrinkId" value={item.menuDrinkId} onChange={(e) => handleOrderItemChange(index, e)}
                                     />
                                 </Col>
                                 <Col>
@@ -194,7 +194,7 @@ const OrderFood = () => {
                                 </Col>
                             </Row>
                         ))}
-                        <Button variant="secondary" onClick={addOrderItem}>Add Item</Button>
+                        <Button variant="secondary" onClick={addOrderDrinkItem}>Add Drink Item</Button>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleCloseAdd}>
@@ -210,4 +210,4 @@ const OrderFood = () => {
     );
 };
 
-export default OrderFood;
+export default OrderDrinks;

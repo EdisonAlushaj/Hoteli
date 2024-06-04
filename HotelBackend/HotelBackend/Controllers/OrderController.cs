@@ -45,6 +45,7 @@ using System.Linq;
                 OrderItems = orderDto.OrderItems.Select(item => new OrderItem
                 {
                     MenuFoodId = item.MenuFoodId,
+            
                     Quantity = item.Quantity
                 }).ToList()
             };
@@ -57,6 +58,7 @@ using System.Linq;
                 {
                     return BadRequest($"Menu food item with ID {item.MenuFoodId} not found.");
                 }
+                item.Foodname = menuFood.FoodName ;
                 item.Price = menuFood.FoodPrice * item.Quantity;
             }
 
@@ -166,6 +168,8 @@ using System.Linq;
                 OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                 {
                     MenuFoodId = oi.MenuFoodId,
+                    FoodName= oi.Foodname,
+                    Price =oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
@@ -211,6 +215,8 @@ using System.Linq;
     public class OrderItemDto
     {
         public int MenuFoodId { get; set; }
+        public string FoodName { get; set; }
+        public double Price { get; set; }
         public int Quantity { get; set; }
         // Note: Price property is excluded here
     }
