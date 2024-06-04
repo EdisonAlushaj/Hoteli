@@ -10,7 +10,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const GetLoginDetails = async () => {
+  const GetLoginDetails = async (event) => {
+    event.preventDefault(); // Prevent the default form submission
     try {
       const response = await axios.post('https://localhost:7189/api/Account/login', {
         email: email,
@@ -97,7 +98,7 @@ function Login() {
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form>
+                    <form onSubmit={GetLoginDetails}>
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <i className="fas fa-cubes fa-2x me-3" style={{ color: '#ff6219' }}></i>
                         <div className="col-md-6 col-lg-5 d-none d-md-block"><img src={MeGusta} style={{ maxHeight: '100%', maxWidth: '100%' }} /></div>
@@ -128,7 +129,7 @@ function Login() {
                         />
                       </div>
                       <div className="pt-1 mb-4">
-                        <button className="btn btn-dark btn-lg" type="button" onClick={GetLoginDetails}>
+                        <button className="btn btn-dark btn-lg" type="submit">
                           Login
                         </button>
                       </div>
@@ -136,7 +137,7 @@ function Login() {
                         Forgot password?
                       </a>
                       <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                        Don't have an account? <NavLink to="/register"><button className="btn btn-dark btn-sm">Register here</button></NavLink>
+                        Don't have an account? <NavLink to="/register"><button className="btn btn-dark btn-sm" type="button">Register here</button></NavLink>
                       </p>
                       <a href="#!" className="small text-muted">
                         Terms of use.
