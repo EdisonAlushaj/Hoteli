@@ -20,8 +20,9 @@ const Activities = () => {
   }, []);
 
   const handleApply = async (id) => {
+    const userId = cookieUtils.getUserIdFromCookies();
     try {
-      await axios.post(`https://localhost:7189/api/Activities/${id}/apply`);
+      await axios.post(`https://localhost:7189/api/ActivitiesReservation?userId=${userId}&activitiesId=${id}`);
       alert('Applied successfully!');
     } catch (error) {
       console.error('Error applying for activity:', error);
