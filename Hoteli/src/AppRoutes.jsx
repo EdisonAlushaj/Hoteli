@@ -16,7 +16,7 @@ import Sauna from "./Services/Sauna.jsx";
 import Activities from "./Services/Activities.jsx";
 import Booking from "./Booking/RoomBooking.jsx";
 import PrivateRoute from "../PrivateRoute.jsx";
-//import Gym from "./Services/Gym.jsx";
+import Gym from "./Services/Gym.jsx";
 
 const AppRoutes = () => (
   <Routes>
@@ -38,7 +38,7 @@ const AppRoutes = () => (
       <Route path="/sauna" element={<Sauna />} />
       <Route path="/activities" element={<Activities />} />
       <Route path="/booking" element={<Booking />} />
-      {/* <Route path="/gym" element={<Gym />} /> */}
+      <Route path="/gym" element={<Gym />} /> 
     </Route>
   </Routes>
 );

@@ -22,18 +22,16 @@ const Fitnes = () => {
 
     const [id, setId] = useState('')
     const [fitnesName, setfitnesName] = useState('')
-    const [priceDaily, setPriceDaily] = useState('')
-    const [priceMonthly, setPriceMonthly] = useState('')
-    const [priceOffers, setPriceOffers] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState('')
     const [image, setImage] = useState('')
     const [hallId, setHallId] = useState('')
 
 
     const [editId, setEditId] = useState('')
     const [editFitnesName, setEditFitnesName] = useState('')
-    const [editPriceDaily, setEditPriceDaily] = useState('')
-    const [editPriceMonthly, setEditPriceMonthly] = useState('')
-    const [editPriceOffers, setEditPriceOffers] = useState('')
+    const [editDescription, setEditDescription] = useState('')
+    const [editPrice, setEditPrice] = useState('')
     const [editImage, setEditImage] = useState('')
     const [editHallId, setEditHallId] = useState('')
 
@@ -59,9 +57,8 @@ const Fitnes = () => {
         handleShow();
 
         setEditFitnesName(roles.fitnesName);
-        setEditPriceDaily(roles.priceDaily);
-        setEditPriceMonthly(roles.priceMonthly);
-        setEditPriceOffers(roles.priceOffers);
+        setEditDescription(roles.description);
+        setEditPrice(roles.price);
         setEditImage(roles.image);
         setEditHallId(roles.hallId);
 
@@ -79,9 +76,8 @@ const Fitnes = () => {
             await axios.patch(`${FitnesEndPoints}/UpdateFitnes/${id}`, {
                 id: id,
                 fitnesName: editFitnesName,
-                priceDaily: editPriceDaily,
-                priceMonthly: editPriceMonthly,
-                priceOffers: editPriceOffers,
+                description: editDescription,
+                price: editPrice,
                 image: editImage,
                 hallId: editHallId
             });
@@ -115,9 +111,8 @@ const Fitnes = () => {
         const url = FitnesEndPoints;
         const data = {
             "fitnesName": fitnesName,
-            "priceDaily": priceDaily,
-            "priceMonthly": priceMonthly,
-            "priceOffers": priceOffers,
+            "description": description,
+            "price": price,
             "image": image,
             "hallId": hallId
         }
@@ -133,17 +128,15 @@ const Fitnes = () => {
 
     const clear = () => {
         setfitnesName('');
-        setPriceDaily('');
-        setPriceMonthly('');
-        setPriceOffers('');
+        setDescription('');
+        setPrice('');
         setImage('');
         setHallId('');
 
 
         setEditFitnesName('');
-        setEditPriceDaily('');
-        setEditPriceMonthly('');
-        setEditPriceOffers('');
+        setEditDescription('');
+        setEditPrice('');
         setEditImage('');
         setEditHallId('');
 
@@ -166,9 +159,8 @@ const Fitnes = () => {
                         <tr>
                             <th>Id</th>
                             <th>Fitnes Name</th>
-                            <th>Price Daily</th>
-                            <th>price Monthly</th>
-                            <th>Price Offers</th>
+                            <th>Description</th>
+                            <th>Price</th>
                             <th>Image</th>
                             <th>Hall Id</th>
                             <th></th>
@@ -182,9 +174,8 @@ const Fitnes = () => {
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>{item.fitnesName}</td>
-                                            <td>{item.priceDaily}</td>
-                                            <td>{item.priceMonthly}</td>
-                                            <td>{item.priceOffers}</td>
+                                            <td>{item.description}</td>
+                                            <td>{item.price}</td>
                                             <td>{item.image}</td>
                                             <td>{item.hallId}</td>
 
@@ -216,21 +207,17 @@ const Fitnes = () => {
                                 />
                             </Col>
                             <Col>
-                                <input type="number" className='form-control' placeholder='Enter Price Daily'
-                                    value={priceDaily} onChange={(e) => setPriceDaily(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Description'
+                                    value={description} onChange={(e) => setDescription(e.target.value)}
                                 />
                             </Col>
                         </Row>
                         <br />
                         <Row>
+                            
                             <Col>
-                                <input type="number" className='form-control' placeholder='Enter Price Monthly'
-                                    value={priceMonthly} onChange={(e) => setPriceMonthly(e.target.value)}
-                                />
-                            </Col>
-                            <Col>
-                                <input type="number" className='form-control' placeholder='Enter Price Offers'
-                                    value={priceOffers} onChange={(e) => setPriceOffers(e.target.value)}
+                                <input type="number" className='form-control' placeholder='Enter Price'
+                                    value={price} onChange={(e) => setPrice(e.target.value)}
                                 />
                             </Col>
                         </Row>
@@ -273,21 +260,16 @@ const Fitnes = () => {
                                 />
                             </Col>
                             <Col>
-                                <input type="number" className='form-control' placeholder='Enter Price Daily'
-                                    value={editPriceDaily} onChange={(e) => setEditPriceDaily(e.target.value)}
+                                <input type="text" className='form-control' placeholder='Enter Description'
+                                    value={editDescription} onChange={(e) => setEditDescription(e.target.value)}
                                 />
                             </Col>
                         </Row>
                         <br />
                         <Row>
                             <Col>
-                                <input type="number" className='form-control' placeholder='Enter Price Monthly'
-                                    value={editPriceMonthly} onChange={(e) => setEditPriceMonthly(e.target.value)}
-                                />
-                            </Col>
-                            <Col>
-                                <input type="number" className='form-control' placeholder='Enter Price Offers'
-                                    value={editPriceOffers} onChange={(e) => setEditPriceOffers(e.target.value)}
+                                <input type="number" className='form-control' placeholder='Enter Price'
+                                    value={editPrice} onChange={(e) => setEditPrice(e.target.value)}
                                 />
                             </Col>
                         </Row>
