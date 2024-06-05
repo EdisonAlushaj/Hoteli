@@ -46,6 +46,9 @@ export const OrderFoodEndPoints = `https://localhost:7189/api/Order`;
 
 export const OrderDrinkEndPoints = `https://localhost:7189/api/OrderDrinks`;
 
+export const OrderCoffeeEndPoints = `https://localhost:7189/api/OrderCoffee`;
+
+
 export const SpaReservationEndPoint = `https://localhost:7189/api/SpaReservation`;
 
 export const SaunaReservationEndPoint = `https://localhost:7189/api/SaunaReservation`;

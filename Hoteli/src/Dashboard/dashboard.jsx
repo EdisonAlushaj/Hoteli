@@ -21,6 +21,7 @@ import FitnessEquipments from "./Crud-Functions/FitnessEquipments.jsx";
 import AboutCrud from "./Crud-Functions/AboutCrud.jsx";
 import OrderFood from "./Crud-Functions/OrderFood.jsx";
 import OrderDrinks from "./Crud-Functions/OrderDrinks.jsx";
+import OrderCoffee from "./Crud-Functions/OrderCoffee.jsx";
 import SpaReservationCrud from "./Crud-Functions/SpaReservationCrud.jsx";
 import SaunaReservationCrud from "./Crud-Functions/SaunaReservationCrud.jsx";
 import RoomBookingCrud from "./Crud-Functions/RoomBookingCrud.jsx";
@@ -295,6 +296,16 @@ const Dashboard = () => {
                 <span className="fw-normal">Order Drink</span>
               </NavLink>
             </li>
+            <li className="sidebar-item">
+              <NavLink
+                to="#"
+                className="sidebar-link"
+                onClick={() => toggleTable("ordercoffee")}
+              >
+                <i className="lni lni-cart"></i>
+                <span className="fw-normal">Order Coffee</span>
+              </NavLink>
+            </li>
           </ul>
           <div className="sidebar-footer">
             <NavLink to="/home" className="sidebar-link">
@@ -333,6 +344,7 @@ const Dashboard = () => {
               {activeTable === "about" && <AboutCrud />}
               {activeTable === "order" && <OrderFood />}
               {activeTable === "orderdrink" && <OrderDrinks />}
+              {activeTable === "ordercoffee" && <OrderCoffee />}
             </div>
           </main>
         </div>

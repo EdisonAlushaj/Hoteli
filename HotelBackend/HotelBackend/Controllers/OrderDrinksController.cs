@@ -109,13 +109,11 @@ namespace HotelBackend.Controllers
                 return NotFound();
             }
 
-            // Ensure total order price is calculated
             orderi.CalculateTotalOrderDrinkPrice();
 
             return Ok(MapOrderDrinkToDto(orderi));
         }
 
-        // Map Order entity to OrderDto
         private OrderDrinkDto MapOrderDrinkToDto(OrderDrink order)
         {
             var user = _context.Users.Find(order.Id);

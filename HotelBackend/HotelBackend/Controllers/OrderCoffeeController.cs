@@ -41,20 +41,11 @@ namespace HotelBackend.Controllers
                 OrderCoffeeItems = orderDto.OrderCoffeeItems.Select(item => new OrderCoffeeItem
                 {
                     MenuCoffeeId = item.MenuCoffeeId,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    CafeName = _context.MenuCafes.Find(item.MenuCoffeeId)?.CafeName,
+                    Price = _context.MenuCafes.Find(item.MenuCoffeeId)?.CafePrice ?? 0
                 }).ToList()
             };
-
-            foreach (var item in order.OrderCoffeeItems)
-            {
-                var menuCoffee = _context.MenuCafes.Find(item.MenuCoffeeId);
-                if (menuCoffee == null)
-                {
-                    return BadRequest($"Menu Coffee item with ID {item.MenuCoffeeId} not found.");
-                }
-                item.CafeName = menuCoffee.CafeName;
-                item.Price = menuCoffee.CafePrice * item.Quantity;
-            }
 
             order.CalculateTotalOrderCoffeePrice();
 
@@ -76,6 +67,8 @@ namespace HotelBackend.Controllers
                 OrderCoffeeItems = orderDto.OrderCoffeeItems.Select(oi => new OrderCoffeeItemDto
                 {
                     MenuCoffeeId = oi.MenuCoffeeId,
+                    CafeName = oi.CafeName,
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };

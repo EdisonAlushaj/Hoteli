@@ -25,7 +25,6 @@ const MenuFood = () => {
         try {
             const response = await axios.get('https://localhost:7189/api/MenuFood');
             
-            // Debug: Log the fetched food items
             console.log('Fetched Food Items:', response.data);
             
             setFoodItems(response.data);
@@ -78,11 +77,11 @@ const MenuFood = () => {
                 paymentMethod: paymentMethod,
                 orderItems: selectedItems.map(item => ({
                     menuFoodId: parseInt(item.id),
-                    quantity: parseInt(item.quantity)
+                    quantity: parseInt(item.quantity),
+                    foodName: 'Food'
                 }))
             };
     
-            // Debug: Log the order data to check its structure
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
     
             const response = await axios.post('https://localhost:7189/api/Order', orderData, {
@@ -91,7 +90,6 @@ const MenuFood = () => {
                 }
             });
     
-            // Check the response status code
             if (response.status === 200 || response.status === 201) {
                 setSelectedItems([]);
                 setDeliveryLocation('');
@@ -103,7 +101,6 @@ const MenuFood = () => {
                 toast.error(`Failed to submit order. Server responded with status code ${response.status}`);
             }
         } catch (error) {
-            // Debug: Log the error response
             console.error('Order submission error:', error.response?.data || error.message);
             toast.error('Failed to submit order. Please try again later.');
         }
