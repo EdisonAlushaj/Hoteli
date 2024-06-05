@@ -148,13 +148,13 @@ namespace HotelBackend.Controllers
                 OrderDrinkId = order.OrderDrinkId,
                 User = new UseriDto
                 {
-                    Id = user.Id,
-                    Name = user.Name
+                    UserrId = user.Id,
+                    Namee = user.Name
                 },
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
                 PaymentMethod = order.PaymentMethod,
-                TotalOrderPrice = order.TotalOrderDrinkPrice,
+                TotalOrderDrinkPrice = order.TotalOrderDrinkPrice,
                 OrderDrinkItems = order.OrderDrinkItems.Select(oi => new OrderDrinkItemDto
                 {
                     MenuDrinkId = oi.MenuDrinkId,

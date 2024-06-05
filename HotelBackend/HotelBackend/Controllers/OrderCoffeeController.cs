@@ -64,7 +64,7 @@ namespace HotelBackend.Controllers
             var responseDto = new OrderCoffeeDto
             {
                 OrderCoffeeId = order.OrderCoffeeId,
-                User = new UseriDto
+                User = new UseriiDto
                 {
                     Id = user.Id,
                     Name = user.Name
@@ -125,7 +125,7 @@ namespace HotelBackend.Controllers
             return new OrderCoffeeDto
             {
                 OrderCoffeeId = order.OrderCoffeeId,
-                User = new UseriDto
+                User = new UseriiDto
                 {
                     Id = user.Id,
                     Name = user.Name
@@ -164,7 +164,7 @@ namespace HotelBackend.Controllers
     public class OrderCoffeeDto
     {
         public int OrderCoffeeId { get; set; }
-        public UseriDto User { get; set; } 
+        public UseriiDto User { get; set; } 
         public string DeliveryLocation { get; set; }
         public string DeliveryNumber { get; set; }
         public string PaymentMethod { get; set; }

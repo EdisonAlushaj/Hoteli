@@ -24,14 +24,12 @@ namespace HotelBackend.Entities
 
         [NotMapped]
         public double TotalOrderDrinkPrice { get; private set; }
-
-        // Method to calculate total order price
         public void CalculateTotalOrderDrinkPrice()
         {
             TotalOrderDrinkPrice = 0;
             foreach (var item in OrderDrinkItems)
             {
-                TotalOrderDrinkPrice += item.Price;
+                TotalOrderDrinkPrice += item.Price*item.Quantity;
             }
         }
     }

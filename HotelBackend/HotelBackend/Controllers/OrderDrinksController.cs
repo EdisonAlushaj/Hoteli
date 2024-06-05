@@ -1,8 +1,10 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using HotelBackend.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 
 namespace HotelBackend.Controllers
@@ -17,16 +19,16 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-
         [HttpPost]
-        public IActionResult CreateOrderDrink([FromBody] OrderDrinkCreationDto orderDto)
+        public IActionResult CreateOrder([FromBody] OrderDrinksCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderDrinkItems == null || orderDto.OrderDrinkItems.Length == 0)
             {
                 return BadRequest("Invalid order data.");
             }
 
-            var user = _context.Users.Find(orderDto.Id);
+            // Retrieve the user
+            var user = _context.Users.Find(orderDto.UserId);
             if (user == null)
             {
                 return BadRequest("User not found.");
@@ -34,27 +36,18 @@ namespace HotelBackend.Controllers
 
             var order = new OrderDrink
             {
-                Id = orderDto.Id,
+                Id = orderDto.UserId,
                 DeliveryLocation = orderDto.DeliveryLocation,
                 DeliveryNumber = orderDto.DeliveryNumber,
                 PaymentMethod = orderDto.PaymentMethod,
                 OrderDrinkItems = orderDto.OrderDrinkItems.Select(item => new OrderDrinkItem
                 {
                     MenuDrinkId = item.MenuDrinkId,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    DrinkkName = _context.MenuDrinks.Find(item.MenuDrinkId)?.DrinkName,
+                    Price = _context.MenuDrinks.Find(item.MenuDrinkId)?.DrinkPrice ?? 0
                 }).ToList()
             };
-
-            foreach (var item in order.OrderDrinkItems)
-            {
-                var menuDrink = _context.MenuDrinks.Find(item.MenuDrinkId);
-                if (menuDrink == null)
-                {
-                    return BadRequest($"Menu drink item with ID {item.MenuDrinkId} not found.");
-                }
-                item.DrinkName = menuDrink.DrinkName;
-                item.Price = menuDrink.DrinkPrice * item.Quantity;
-            }
 
             order.CalculateTotalOrderDrinkPrice();
 
@@ -67,23 +60,24 @@ namespace HotelBackend.Controllers
                 OrderDrinkId = order.OrderDrinkId,
                 User = new UseriDto
                 {
-                    Id = user.Id,
-                    Name = user.Name
+                    UserrId = user.Id,
+                    Namee = user.Name
                 },
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
                 PaymentMethod = order.PaymentMethod,
-                TotalOrderPrice = order.TotalOrderDrinkPrice, 
-                OrderDrinkItems = orderDto.OrderDrinkItems.Select(oi => new OrderDrinkItemDto
+                TotalOrderDrinkPrice = order.TotalOrderDrinkPrice,
+                OrderDrinkItems = order.OrderDrinkItems.Select(oi => new OrderDrinkItemDto
                 {
                     MenuDrinkId = oi.MenuDrinkId,
+                    DrinkkName = oi.DrinkkName, 
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
 
             return CreatedAtAction(nameof(GetOrderDrinkById), new { id = order.OrderDrinkId }, responseDto);
         }
-
         [HttpGet]
         public IActionResult GetAllOrderDrinks()
         {
@@ -105,47 +99,51 @@ namespace HotelBackend.Controllers
         [HttpGet("{id}")]
         public IActionResult GetOrderDrinkById(int id)
         {
-            var order = _context.OrderDrinks
+            var orderi = _context.OrderDrinks
                 .Include(o => o.OrderDrinkItems)
                 .ThenInclude(oi => oi.MenuDrink)
                 .FirstOrDefault(o => o.OrderDrinkId == id);
 
-            if (order == null)
+            if (orderi == null)
             {
                 return NotFound();
             }
 
-            order.CalculateTotalOrderDrinkPrice();
+            // Ensure total order price is calculated
+            orderi.CalculateTotalOrderDrinkPrice();
 
-            return Ok(MapOrderDrinkToDto(order));
+            return Ok(MapOrderDrinkToDto(orderi));
         }
 
+        // Map Order entity to OrderDto
         private OrderDrinkDto MapOrderDrinkToDto(OrderDrink order)
         {
             var user = _context.Users.Find(order.Id);
+            var useriDto = user != null ? new UseriDto
+            {
+                UserrId = user.Id,
+                Namee = user.Name
+            } : null;
+
             return new OrderDrinkDto
             {
                 OrderDrinkId = order.OrderDrinkId,
-                User = new UseriDto
-                {
-                    Id = user.Id,
-                    Name = user.Name
-                },
+                User = useriDto,
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
                 PaymentMethod = order.PaymentMethod,
-                TotalOrderPrice = order.TotalOrderDrinkPrice,
+                TotalOrderDrinkPrice = order.TotalOrderDrinkPrice,
                 OrderDrinkItems = order.OrderDrinkItems.Select(oi => new OrderDrinkItemDto
                 {
                     MenuDrinkId = oi.MenuDrinkId,
-                    DrinkName = oi.DrinkName,
+                    DrinkkName = oi.DrinkkName,
                     Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteOrderDrink(int id)
+        public IActionResult DeleteOrder(int id)
         {
             var order = _context.OrderDrinks.Find(id);
 
@@ -169,27 +167,27 @@ namespace HotelBackend.Controllers
         public string DeliveryLocation { get; set; }
         public string DeliveryNumber { get; set; }
         public string PaymentMethod { get; set; }
-        public double TotalOrderPrice { get; set; }
+        public double TotalOrderDrinkPrice { get; set; }
         public OrderDrinkItemDto[] OrderDrinkItems { get; set; }
     }
 
     public class UseriDto
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string UserrId { get; set; }
+        public string Namee { get; set; }
     }
 
     public class OrderDrinkItemDto
     {
         public int MenuDrinkId { get; set; }
-        public string DrinkName { get; set; }
+        public string DrinkkName { get; set; } 
         public double Price { get; set; }
         public int Quantity { get; set; }
     }
 
-    public class OrderDrinkCreationDto
+    public class OrderDrinksCreationDto
     {
-        public string Id { get; set; }
+        public string UserId { get; set; }
         public string DeliveryLocation { get; set; }
         public string DeliveryNumber { get; set; }
         public string PaymentMethod { get; set; }

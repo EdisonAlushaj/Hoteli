@@ -39,7 +39,7 @@ const OrderDrinks = () => {
         console.log("Deleting drink order with ID:", id);
         if (window.confirm("Are you sure to delete this drink Order?")) {
             // Update UI immediately
-            setData(data.filter(item => item.orderId !== id));
+            setData(data.filter(item => item.orderDrinkId !== id));
             
             // Send request to delete order from the server
             axios.delete(`${OrderDrinkEndPoints}/${id}`)
@@ -59,13 +59,14 @@ const OrderDrinks = () => {
     
     const handleSave = () => {
         const orderDto = {
-            id: userId,
+            userId: userId,
             deliveryLocation: deliveryLocation,
             deliveryNumber: deliveryNumber,
             paymentMethod: paymentMethod,
             orderDrinkItems: orderDrinkItems.map(item => ({
-                menuDrinkId: parseInt(item.menuDrinkId),
-                quantity: parseInt(item.quantity)
+                menuDrinkId: parseInt(item.menuDrinkId,10),
+                quantity: parseInt(item.quantity,10),
+                drinkkName: 'k'
             }))
         };
 
@@ -128,8 +129,8 @@ const OrderDrinks = () => {
                         {data && data.length > 0 ? (
                             data.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.orderId}</td>
-                                    <td>{item.user.name}</td>
+                                    <td>{item.orderDrinkId}</td>
+                                    <td>{item.user.namee}</td>
                                     <td>{item.deliveryLocation}</td>
                                     <td>{item.deliveryNumber}</td>
                                     <td>{item.paymentMethod}</td>
@@ -139,7 +140,7 @@ const OrderDrinks = () => {
         <div key={idx} className="card mb-2" style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
             <div className="card-body">
                 <p className="card-text"><strong>Drink ID:</strong> {orderDrinkItem.menuDrinkId}</p>
-                <p className="card-text"><strong>Drink Name:</strong> {orderDrinkItem.drinkName}</p>
+                <p className="card-text"><strong>Drink Name:</strong> {orderDrinkItem.drinkkName}</p>
                 <p className="card-text"><strong>Price:</strong> ${orderDrinkItem.price / orderDrinkItem.quantity} </p>
                 <p className="card-text"><strong>Quantity: </strong> {orderDrinkItem.quantity} </p>
                 <p className="card-text"><strong>Price * Quantity:</strong>  ${orderDrinkItem.price}</p>
@@ -148,7 +149,7 @@ const OrderDrinks = () => {
     ))}
 </td>
                                     <td className='d-flex flex-row justify-content-evenly'>
-                                        <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.orderId)}>Delete</button>
+                                        <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.orderDrinkId)}>Delete</button>
                                     </td>
                                 </tr>
                             ))
