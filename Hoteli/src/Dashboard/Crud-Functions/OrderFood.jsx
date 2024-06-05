@@ -55,32 +55,72 @@ const OrderFood = () => {
                 });
         }
     };
-    
-    
+
     const handleSave = () => {
-        const orderDto = {
-            id: userId,
+        // Validate the order data before sending
+        if (!userId || !deliveryLocation || !deliveryNumber || !paymentMethod || orderItems.length === 0) {
+            toast.error('Please fill all the required fields.');
+            return;
+        }
+    
+        // Prepare the order data
+        const orderData = {
+            userId: userId,
             deliveryLocation: deliveryLocation,
             deliveryNumber: deliveryNumber,
             paymentMethod: paymentMethod,
             orderItems: orderItems.map(item => ({
-                menuFoodId: parseInt(item.menuFoodId),
-                quantity: parseInt(item.quantity)
+                menuFoodId: parseInt(item.menuFoodId, 10),
+                quantity: parseInt(item.quantity, 10),
+                foodName: 'Sample Food Name'
             }))
         };
-
-        axios.post(OrderFoodEndPoints, orderDto)
-            .then((result) => {
-                getData();
-                clear();
-                toast.success('Order has been added.');
-                handleCloseAdd();
+    
+        // Log the order data to see if it matches the backend expectations
+        console.log("Order Data being sent:", JSON.stringify(orderData, null, 2));
+    
+        // Send POST request to create a new order
+        axios.post(OrderFoodEndPoints, orderData)
+            .then((response) => {
+                if (response.status === 201) {
+                    toast.success('Order has been created successfully');
+                    setShowAdd(false); // Close the modal
+                    clear(); // Clear the form fields
+                    getData(); // Refresh the orders list
+                }
             })
             .catch((error) => {
-                toast.error(error);
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                    
+                    // Check if the error response contains validation errors
+                    if (error.response.status === 400 && error.response.data.errors) {
+                        const validationErrors = error.response.data.errors;
+                        const errorMessages = Object.values(validationErrors).flat();
+                        // Display validation error messages to the user
+                        errorMessages.forEach(errorMessage => {
+                            toast.error(errorMessage);
+                        });
+                    } else {
+                        // If it's not a validation error, show a generic error message
+                        toast.error('Error creating order. Please try again later.');
+                    }
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.log(error.request);
+                    toast.error('No response from server. Please check your internet connection.');
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                    toast.error('An unexpected error occurred. Please try again later.');
+                }
             });
     };
-
+    
     const clear = () => {
         setDeliveryLocation('');
         setDeliveryNumber('');
@@ -135,18 +175,18 @@ const OrderFood = () => {
                                     <td>{item.paymentMethod}</td>
                                     <strong><td>${item.totalOrderPrice}$</td></strong>
                                     <td>
-    {item.orderItems.map((orderItem, idx) => (
-        <div key={idx} className="card mb-2" style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
-            <div className="card-body">
-                <p className="card-text"><strong>Food ID:</strong> {orderItem.menuFoodId}</p>
-                <p className="card-text"><strong>Food Name:</strong> {orderItem.foodName}</p>
-                <p className="card-text"><strong>Price:</strong> ${orderItem.price / orderItem.quantity} </p>
-                <p className="card-text"><strong>Quantity: </strong> {orderItem.quantity} </p>
-                <p className="card-text"><strong>Price * Quantity:</strong>  ${orderItem.price}</p>
-            </div>
-        </div>
-    ))}
-</td>
+                                        {item.orderItems.map((orderItem, idx) => (
+                                            <div key={idx} className="card mb-2" style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
+                                                <div className="card-body">
+                                                    <p className="card-text"><strong>Food ID:</strong> {orderItem.menuFoodId}</p>
+                                                    <p className="card-text"><strong>Food Name:</strong> {orderItem.foodName}</p>
+                                                    <p className="card-text"><strong>Price:</strong> ${orderItem.price } </p>
+                                                    <p className="card-text"><strong>Quantity: </strong> {orderItem.quantity} </p>
+                                                    <p className="card-text"><strong>Price * Quantity:</strong>  ${orderItem.price * orderItem.quantity}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.orderId)}>Delete</button>
                                     </td>
@@ -180,21 +220,21 @@ const OrderFood = () => {
                                 />
                             </Col>
                         </Row>
-                        {orderItems.map((item, index) => (
-                            <Row key={index}>
-                                <Col>
-                                    <input type="number" className='form-control' placeholder='Menu Food Id'
-                                        name="menuFoodId" value={item.menuFoodId} onChange={(e) => handleOrderItemChange(index, e)}
-                                    />
-                                </Col>
-                                <Col>
-                                    <input type="number" className='form-control' placeholder='Quantity'
-                                        name="quantity" value={item.quantity} onChange={(e) => handleOrderItemChange(index, e)}
-                                    />
-                                </Col>
-                            </Row>
-                        ))}
-                        <Button variant="secondary" onClick={addOrderItem}>Add Item</Button>
+                        <Row>
+                            <Col>
+                                {orderItems.map((item, index) => (
+                                    <div key={index}>
+                                        <input type="text" name="menuFoodId" className='form-control' placeholder='Enter Food ID'
+                                            value={item.menuFoodId} onChange={(e) => handleOrderItemChange(index, e)}
+                                        />
+                                        <input type="text" name="quantity" className='form-control' placeholder='Enter Quantity'
+                                            value={item.quantity} onChange={(e) => handleOrderItemChange(index, e)}
+                                        />
+                                    </div>
+                                ))}
+                                <button className="btn btn-rounded btn-primary" onClick={addOrderItem}>Add Item</button>
+                            </Col>
+                        </Row>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleCloseAdd}>

@@ -19,8 +19,7 @@ using System.Linq;
             {
                 _context = context;
             }
-
-            [HttpPost]
+        [HttpPost]
         public IActionResult CreateOrder([FromBody] OrderCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderItems == null || orderDto.OrderItems.Length == 0)
@@ -38,29 +37,20 @@ using System.Linq;
             // Create order
             var order = new Order
             {
-                Id = orderDto.UserId,
+               Id = orderDto.UserId,
                 DeliveryLocation = orderDto.DeliveryLocation,
                 DeliveryNumber = orderDto.DeliveryNumber,
                 PaymentMethod = orderDto.PaymentMethod,
                 OrderItems = orderDto.OrderItems.Select(item => new OrderItem
                 {
                     MenuFoodId = item.MenuFoodId,
-            
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    // Populate FoodName here
+                    Foodname = _context.MenuFoods.Find(item.MenuFoodId)?.FoodName,
+                    // Populate Price here
+                    Price = _context.MenuFoods.Find(item.MenuFoodId)?.FoodPrice ?? 0
                 }).ToList()
             };
-
-            // Calculate prices for order items
-            foreach (var item in order.OrderItems)
-            {
-                var menuFood = _context.MenuFoods.Find(item.MenuFoodId);
-                if (menuFood == null)
-                {
-                    return BadRequest($"Menu food item with ID {item.MenuFoodId} not found.");
-                }
-                item.Foodname = menuFood.FoodName ;
-                item.Price = menuFood.FoodPrice * item.Quantity;
-            }
 
             // Calculate total order price
             order.CalculateTotalOrderPrice();
@@ -81,17 +71,18 @@ using System.Linq;
                 DeliveryLocation = order.DeliveryLocation,
                 DeliveryNumber = order.DeliveryNumber,
                 PaymentMethod = order.PaymentMethod,
-                TotalOrderPrice = order.TotalOrderPrice, // Calculated total price
-                OrderItems = orderDto.OrderItems.Select(oi => new OrderItemDto
+                TotalOrderPrice = order.TotalOrderPrice,
+                OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                 {
                     MenuFoodId = oi.MenuFoodId,
+                    FoodName = oi.Foodname, // Use the populated FoodName property
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
 
             return CreatedAtAction(nameof(GetOrderById), new { id = order.OrderId }, responseDto);
         }
-
         [HttpGet]
         public IActionResult GetAllOrders()
         {
@@ -133,29 +124,12 @@ using System.Linq;
         // Map Order entity to OrderDto
         private OrderDto MapOrderToDto(Order order)
         {
-            UserDto userDto;
-            if (order.Id != null)
+            var user = _context.Users.Find(order.Id);
+            var userDto = user != null ? new UserDto
             {
-                var user = _context.Users.Find(order.Id);
-                if (user != null)
-                {
-                    userDto = new UserDto
-                    {
-                        UserId = user.Id,
-                        Name = user.Name
-                    };
-                }
-                else
-                {
-                    // Handle the case where the user is not found
-                    userDto = null; // or some default value
-                }
-            }
-            else
-            {
-                // Handle the case where roomBooking.Id is null
-                userDto = null; // or some default value
-            }
+                UserId = user.Id,
+                Name = user.Name
+            } : null;
 
             return new OrderDto
             {
@@ -168,8 +142,8 @@ using System.Linq;
                 OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                 {
                     MenuFoodId = oi.MenuFoodId,
-                    FoodName= oi.Foodname,
-                    Price =oi.Price,
+                    FoodName = oi.Foodname,
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
@@ -215,7 +189,7 @@ using System.Linq;
     public class OrderItemDto
     {
         public int MenuFoodId { get; set; }
-        public string FoodName { get; set; }
+        public string FoodName { get; set; } // Add this property
         public double Price { get; set; }
         public int Quantity { get; set; }
         // Note: Price property is excluded here
