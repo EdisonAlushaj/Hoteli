@@ -15,7 +15,8 @@ const RoomBooking = () => {
 
     const userId = cookieUtils.getUserIdFromCookies();
     const [paymentMethod, setPaymentMethod] = useState('');
-    const [bookingDay, setBookingDay] = useState('');
+    const [checkInDate, setCheckInDate] = useState('');
+    const [checkOutDate, setCheckOutDate] = useState('');
     const [roomBookingItems, setRoomBookingItems] = useState([{ roomId: '', quantity: '' }]);
     const [data, setData] = useState([]);
 
@@ -57,13 +58,20 @@ const RoomBooking = () => {
 
 
     const handleSave = () => {
+        if (!userId || !paymentMethod || !checkInDate || !checkOutDate || roomBookingItems.length === 0) {
+            toast.error('Please fill all the required fields.');
+            return;
+        }
+
         const RoomBookingDto = {
             id: userId,
             paymentMethod: paymentMethod,
-            data: bookingDay,
+            checkInDate: checkInDate,
+            checkOutDate: checkOutDate,
             roomBookingItems: roomBookingItems.map(item => ({
                 roomId: parseInt(item.roomId),
-                quantity: parseInt(item.quantity)
+                quantity: parseInt(item.quantity),
+                roomName: 'Room'
             }))
         };
 
@@ -82,7 +90,8 @@ const RoomBooking = () => {
     const clear = () => {
         // setUserId('');
         setPaymentMethod('');
-        setBookingDay('');
+        setCheckInDate('');
+        setCheckOutDate('');
         setRoomBookingItems([{ roomId: '', quantity: '' }]);
     };
 
@@ -115,8 +124,10 @@ const RoomBooking = () => {
                             <th>Booking ID</th>
                             <th>User Name</th>
                             <th>Payment Method</th>
-                            <th>Booking Day</th>
+                            <th>Check In Date</th>
+                            <th>Check Out Date</th>
                             <th>Total Price</th>
+                            <th>Booking Items</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -127,8 +138,21 @@ const RoomBooking = () => {
                                     <td>{item.roomBookingId}</td>
                                     <td>{item.user.name}</td>
                                     <td>{item.paymentMethod}</td>
-                                    <td>{item.data}</td>
-                                    <td>{item.totalBookingPrice}</td>
+                                    <td>{item.checkInDate}</td>
+                                    <td>{item.checkOutDate}</td>
+                                    <td>{item.totalBookingPrice}</td><td>
+                                        {item.roomBookingItems.map((bookingItem, idx) => (
+                                            <div key={idx} className="card mb-2" style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
+                                                <div className="card-body">
+                                                    <p className="card-text"><strong>Room ID:</strong> {bookingItem.roomId}</p>
+                                                    <p className="card-text"><strong>Room Name:</strong> {bookingItem.roomName}</p>
+                                                    <p className="card-text"><strong>Quantity: </strong> {bookingItem.quantity} </p>
+                                                    <p className="card-text"><strong>Price:</strong> ${bookingItem.price} </p>
+                                                    <p className="card-text"><strong>Price * Quantity:</strong>  ${bookingItem.price * bookingItem.quantity}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.roomBookingId)}>Delete</button>
                                     </td>
@@ -150,13 +174,20 @@ const RoomBooking = () => {
                                 />
                             </Col> */}
                             <Col>
-                                <input type="text" className='form-control' placeholder='Enter Payment Method'
-                                    value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}
+                                <select className='form-control' value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+                                    <option value="">Select payment method</option>
+                                    <option value="card-online">Card - Online</option>
+                                    <option value="cash-at-delivery">Cash - At Delivery</option>
+                                </select>
+                            </Col>
+                            <Col>
+                                <input type="date" className='form-control' placeholder='Enter Date'
+                                    value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <input type="date" className='form-control' placeholder='Enter Date'
-                                    value={bookingDay} onChange={(e) => setBookingDay(e.target.value)}
+                                    value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)}
                                 />
                             </Col>
                         </Row>

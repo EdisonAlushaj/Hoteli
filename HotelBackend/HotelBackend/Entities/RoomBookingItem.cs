@@ -20,6 +20,9 @@ namespace HotelBackend.Entities
         public Room Room { get; set; }
 
         [Required]
+        public string Roomname { get; set; }
+
+        [Required]
         public double Price { get; set; }
         [Required]
         public int Quantity { get; set; }

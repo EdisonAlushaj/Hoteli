@@ -316,7 +316,7 @@ const Dashboard = () => {
         </aside>
         <div className="main">
           <main className="content px-3 py-4">
-            <h3 className="fw-bold fs-4 mb-3 text-center">Dashboard</h3>
+            <h1 className="fw-bold mb-3 text-center">Dashboard</h1>
             <div className="container-fluid">
               {activeTable === "userInformation" && <UserInformation />}
               {activeTable === "contact" && <ContactUs />}

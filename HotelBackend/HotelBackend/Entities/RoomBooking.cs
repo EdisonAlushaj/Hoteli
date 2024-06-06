@@ -32,7 +32,7 @@ namespace HotelBackend.Entities
             TotalBookingPrice = 0;
             foreach (var item in RoomBookingItems)
             {
-                TotalBookingPrice += item.Price;
+                TotalBookingPrice += item.Price * item.Quantity;
             }
         }
     }

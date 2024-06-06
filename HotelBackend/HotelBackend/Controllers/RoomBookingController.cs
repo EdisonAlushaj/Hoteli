@@ -53,7 +53,10 @@ namespace HotelBackend.Controllers
                 RoomBookingItems = roomBookingDto.RoomBookingItems.Select(item => new RoomBookingItem
                 {
                     RoomId = item.RoomId,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                     Roomname = _context.Rooms.Find(item.RoomId)?.RoomName,
+                    // Populate Price here
+                    Price = _context.Rooms.Find(item.RoomId)?.Price ?? 0
                 }).ToList()
             };
 
@@ -87,6 +90,8 @@ namespace HotelBackend.Controllers
                 RoomBookingItems = roomBooking.RoomBookingItems.Select(oi => new RoomBookingItemDto
                 {
                     RoomId = oi.RoomId,
+                    RoomName = oi.Roomname,
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
@@ -201,6 +206,8 @@ namespace HotelBackend.Controllers
                 RoomBookingItems = roomBooking.RoomBookingItems.Select(oi => new RoomBookingItemDto
                 {
                     RoomId = oi.RoomId,
+                    RoomName = oi.Roomname,
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
@@ -244,6 +251,8 @@ namespace HotelBackend.Controllers
     public class RoomBookingItemDto
     {
         public int RoomId { get; set; }
+        public string RoomName { get; set; }
+        public double Price { get; set; }
         public int Quantity { get; set; }
     }
 

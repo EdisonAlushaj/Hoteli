@@ -95,7 +95,8 @@ function RoomBooking() {
                 checkOutDate: checkOutDate,
                 roomBookingItems: selectedItems.map(item => ({
                     roomId: parseInt(item.id),
-                    quantity: parseInt(item.quantity)
+                    quantity: parseInt(item.quantity),
+                    roomName: 'Room'
                 }))
             };
 
