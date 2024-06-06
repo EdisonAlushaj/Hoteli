@@ -9,7 +9,7 @@ import cookieUtils from './cookieUtils';
 export const MainLayout = () => {
 
   const userRole = cookieUtils.getUserRoleFromCookies();
-  
+  const userName = cookieUtils.getNameFromCookies();
 
   const logOut = () => {
     cookieUtils.clearUserRole();
@@ -51,7 +51,7 @@ export const MainLayout = () => {
               {cookieUtils.getUserRoleFromCookies() && (
                 <li><NavLink to="/" onClick={logOut}>Log Out</NavLink></li>
               )}
-
+              <li><NavLink to="/orderSummary"><i className="lni lni-user"></i></NavLink></li>
             </ul>
             <button id="booking-btn" ><NavLink to="/booking" style={{ color: "#fff" }}>BOOK NOW</NavLink></button>
           </div>

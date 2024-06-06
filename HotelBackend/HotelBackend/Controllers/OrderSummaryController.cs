@@ -72,14 +72,12 @@ namespace HotelBackend.Controllers
                 }
                 else
                 {
-                    // Handle the case where the user is not found
-                    userDto = null; // or some default value
+                    userDto = null;
                 }
             }
             else
             {
-                // Handle the case where roomBooking.Id is null
-                userDto = null; // or some default value
+                userDto = null;
             }
 
             return new RoomBookingDto
@@ -93,6 +91,8 @@ namespace HotelBackend.Controllers
                 RoomBookingItems = roomBooking.RoomBookingItems.Select(oi => new RoomBookingItemDto
                 {
                     RoomId = oi.RoomId,
+                    RoomName = oi.Roomname,
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
@@ -114,14 +114,12 @@ namespace HotelBackend.Controllers
                 }
                 else
                 {
-                    // Handle the case where the user is not found
-                    userDto = null; // or some default value
+                    userDto = null;
                 }
             }
             else
             {
-                // Handle the case where roomBooking.Id is null
-                userDto = null; // or some default value
+                userDto = null;
             }
 
             return new OrderDto
@@ -135,6 +133,8 @@ namespace HotelBackend.Controllers
                 OrderItems = order.OrderItems.Select(oi => new OrderItemDto
                 {
                     MenuFoodId = oi.MenuFoodId,
+                    FoodName = oi.Foodname,
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };
@@ -158,6 +158,8 @@ namespace HotelBackend.Controllers
                 OrderDrinkItems = order.OrderDrinkItems.Select(oi => new OrderDrinkItemDto
                 {
                     MenuDrinkId = oi.MenuDrinkId,
+                    DrinkkName = oi.DrinkkName,
+                    Price = oi.Price,
                     Quantity = oi.Quantity
                 }).ToArray()
             };

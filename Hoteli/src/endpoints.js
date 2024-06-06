@@ -56,3 +56,5 @@ export const SaunaReservationEndPoint = `https://localhost:7189/api/SaunaReserva
 export const RoomBookingEndPoint = `https://localhost:7189/api/RoomBooking`;
 
 export const UserCrud = `https://localhost:7189/api/Account`;
+
+export const OrderSummaryCrud = `https://localhost:7189/api/OrderSummary`;

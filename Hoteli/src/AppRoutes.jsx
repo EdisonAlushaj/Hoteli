@@ -17,6 +17,7 @@ import Activities from "./Services/Activities.jsx";
 import Booking from "./Booking/RoomBooking.jsx";
 import PrivateRoute from "../PrivateRoute.jsx";
 import Gym from "./Services/Gym.jsx";
+import OrderSummary from "./OrderSummary/OrderSummary.jsx";
 
 const AppRoutes = () => (
   <Routes>
@@ -39,6 +40,7 @@ const AppRoutes = () => (
       <Route path="/activities" element={<Activities />} />
       <Route path="/booking" element={<Booking />} />
       <Route path="/gym" element={<Gym />} /> 
+      <Route path="/orderSummary" element={<OrderSummary />} />
     </Route>
   </Routes>
 );
