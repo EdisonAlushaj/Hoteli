@@ -9,6 +9,9 @@ import cookieUtils from '../cookieUtils.jsx';
 
 const MenuCoffe = () => {
     const [showAdd, setShowAdd] = useState(false);
+    const [showQuantityModal, setShowQuantityModal] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
+    const [quantity, setQuantity] = useState(1);
 
     const Id = cookieUtils.getUserIdFromCookies();
     const [deliveryLocation, setDeliveryLocation] = useState('');
@@ -39,14 +42,18 @@ const MenuCoffe = () => {
         setSelectedItems(updatedItems);
     };
 
-    const addToOrder = (itemToAdd, quantity) => {
+    const calculateTotalPrice = () => {
+        return selectedItems.reduce((total, item) => total + item.cafePrice * item.quantity, 0);
+    };
+
+    const addToOrder = () => {
         if (quantity <= 0) {
             toast.error("Please enter a valid quantity.");
             return;
         }
 
         const existingItemIndex = selectedItems.findIndex(item =>
-            item.menuCoffeeId === itemToAdd.menuCoffeeId && item.cafeName === itemToAdd.cafeName
+            item.menuCoffeeId === currentItem.menuCoffeeId && item.cafeName === currentItem.cafeName
         );
 
         if (existingItemIndex !== -1) {
@@ -54,8 +61,11 @@ const MenuCoffe = () => {
             updatedItems[existingItemIndex].quantity += quantity;
             setSelectedItems(updatedItems);
         } else {
-            setSelectedItems([...selectedItems, { ...itemToAdd, quantity }]);
+            setSelectedItems([...selectedItems, { ...currentItem, quantity }]);
         }
+
+        setShowQuantityModal(false);
+        setQuantity(1);
     };
 
     const removeFromOrder = (indexToRemove) => {
@@ -78,8 +88,9 @@ const MenuCoffe = () => {
                 orderCoffeeItems: selectedItems.map(item => ({
                     menuCoffeeId: parseInt(item.id),
                     quantity: parseInt(item.quantity),
-                    cafeName: 'cafe'
-                }))
+                    cafeName: item.cafeName
+                })),
+                totalOrderPrice: calculateTotalPrice()
             };
     
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
@@ -109,6 +120,16 @@ const MenuCoffe = () => {
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
 
+    const handleShowQuantityModal = (item) => {
+        setCurrentItem(item);
+        setShowQuantityModal(true);
+    };
+
+    const handleCloseQuantityModal = () => {
+        setShowQuantityModal(false);
+        setQuantity(1);
+    };
+
     return (
         <Container fluid style={{ backgroundColor: '#FFE4C4' }}>
             <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#b07256' }}>Menu</h1>
@@ -123,14 +144,7 @@ const MenuCoffe = () => {
                                         <Card.Title style={{ color: '#6b4d38' }}>{coffeeItem.cafeName}</Card.Title>
                                         <Card.Text>{coffeeItem.cafeDescription}</Card.Text>
                                         <Card.Text className="text-muted">${coffeeItem.cafePrice}</Card.Text>
-                                        <Button variant="primary" onClick={() => {
-                                            const quantity = parseInt(prompt("Enter quantity:"));
-                                            if (!isNaN(quantity) && quantity > 0) {
-                                                addToOrder(coffeeItem, quantity);
-                                            } else {
-                                                toast.error("Please enter a valid quantity.");
-                                            }
-                                        }}>
+                                        <Button variant="primary" onClick={() => handleShowQuantityModal(coffeeItem)}>
                                             Add to Order
                                         </Button>
                                     </Card.Body>
@@ -145,8 +159,11 @@ const MenuCoffe = () => {
                             <h2>Order Summary</h2>
                             <ul>
                                 {selectedItems.map((item, index) => (
-                                    <li key={index}>
-                                        {item.cafeName} - ${item.cafePrice} - {item.quantity} pcs
+                                    <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                        <img src={item.cafeImage} alt={item.cafeName} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                                        <div style={{ flex: 1 }}>
+                                            {item.cafeName} - ${item.cafePrice} - {item.quantity} pcs
+                                        </div>
                                         <Button variant="danger" size="sm" onClick={() => removeFromOrder(index)}>
                                             Remove
                                         </Button>
@@ -154,6 +171,7 @@ const MenuCoffe = () => {
                                 ))}
                             </ul>
                             <hr />
+                            <h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
                             <Button variant="primary" onClick={handleShowAdd}>
                                 Proceed to Checkout
                             </Button>
@@ -206,33 +224,70 @@ const MenuCoffe = () => {
                             </Form.Control>
                         </Form.Group>
                         {selectedItems.map((item, index) => (
-                            <div key={index}>
-                                <Form.Group controlId={`formQuantity${index}`}>
-                                    <Form.Label>{item.cafeName} Quantity</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        min="1"
-                                        value={item.quantity}
-                                        onChange={(e) => handleQuantityChange(e.target.value, index)}
-                                    />
-                                </Form.Group>
-                            </div>
-                        ))}
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseAdd}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={submitOrder}>
-                        Submit Order
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                                <img src={item.cafeImage} alt={item.cafeName} style={{ width: '50px', height: '50px', marginRight: '10px'}} />
+<div style={{ flex: 1 }}>
+    <h5>{item.cafeName} Quantity</h5>
+    <Form.Control
+        type="number"
+        min="1"
+        value={item.quantity}
+        onChange={(e) => handleQuantityChange(e.target.value, index)}
+    />
+</div>
+</div>
+))}
+</Form>
+<h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
+</Modal.Body>
+<Modal.Footer>
+<Button variant="secondary" onClick={handleCloseAdd}>
+Close
+</Button>
+<Button variant="primary" onClick={submitOrder}>
+Submit Order
+</Button>
+</Modal.Footer>
+</Modal>
 
-            <ToastContainer />
-        </Container>
-    );
+<Modal show={showQuantityModal} onHide={handleCloseQuantityModal}>
+    <Modal.Header closeButton>
+        <Modal.Title>Enter Quantity</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+        {currentItem && (
+            <>
+                <div className="text-center">
+                    <img src={currentItem.cafeImage} alt={currentItem.cafeName} style={{ width: '100px', height: '100px', marginBottom: '10px' }} />
+                    <h5>{currentItem.cafeName}</h5>
+                    <p>{currentItem.cafeDescription}</p>
+                    <p className="text-muted">${currentItem.cafePrice}</p>
+                </div>
+                <Form.Group controlId="formQuantity">
+                    <Form.Label>Quantity</Form.Label>
+                    <Form.Control
+                        type="number"
+                        min="1"
+                        value={quantity}
+                        onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                    />
+                </Form.Group>
+            </>
+        )}
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="secondary" onClick={handleCloseQuantityModal}>
+            Close
+        </Button>
+        <Button variant="primary" onClick={addToOrder}>
+            Add to Order
+        </Button>
+    </Modal.Footer>
+</Modal>
+
+<ToastContainer />
+</Container>
+);
 };
 
 export default MenuCoffe;

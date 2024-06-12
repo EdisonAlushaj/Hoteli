@@ -9,6 +9,9 @@ import cookieUtils from '../cookieUtils.jsx';
 
 const MenuFood = () => {
     const [showAdd, setShowAdd] = useState(false);
+    const [showQuantityModal, setShowQuantityModal] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
+    const [quantity, setQuantity] = useState(1);
 
     const userId = cookieUtils.getUserIdFromCookies();
     const [deliveryLocation, setDeliveryLocation] = useState('');
@@ -39,14 +42,18 @@ const MenuFood = () => {
         setSelectedItems(updatedItems);
     };
 
-    const addToOrder = (itemToAdd, quantity) => {
+    const calculateTotalPrice = () => {
+        return selectedItems.reduce((total, item) => total + item.foodPrice * item.quantity, 0);
+    };
+
+    const addToOrder = () => {
         if (quantity <= 0) {
             toast.error("Please enter a valid quantity.");
             return;
         }
 
         const existingItemIndex = selectedItems.findIndex(item =>
-            item.menuFoodId === itemToAdd.menuFoodId && item.foodName === itemToAdd.foodName
+            item.menuFoodId === currentItem.menuFoodId && item.foodName === currentItem.foodName
         );
 
         if (existingItemIndex !== -1) {
@@ -54,8 +61,11 @@ const MenuFood = () => {
             updatedItems[existingItemIndex].quantity += quantity;
             setSelectedItems(updatedItems);
         } else {
-            setSelectedItems([...selectedItems, { ...itemToAdd, quantity }]);
+            setSelectedItems([...selectedItems, { ...currentItem, quantity }]);
         }
+
+        setShowQuantityModal(false);
+        setQuantity(1);
     };
 
     const removeFromOrder = (indexToRemove) => {
@@ -78,8 +88,9 @@ const MenuFood = () => {
                 orderItems: selectedItems.map(item => ({
                     menuFoodId: parseInt(item.id),
                     quantity: parseInt(item.quantity),
-                    foodName: 'Food'
-                }))
+                    foodName: item.foodName
+                })),
+                totalOrderPrice: calculateTotalPrice()
             };
     
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
@@ -109,6 +120,16 @@ const MenuFood = () => {
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
 
+    const handleShowQuantityModal = (item) => {
+        setCurrentItem(item);
+        setShowQuantityModal(true);
+    };
+
+    const handleCloseQuantityModal = () => {
+        setShowQuantityModal(false);
+        setQuantity(1);
+    };
+
     return (
         <Container fluid style={{ backgroundColor: '#d1d1e0' }}>
             <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b' }}>Menu</h1>
@@ -123,14 +144,7 @@ const MenuFood = () => {
                                         <Card.Title style={{ color: '#6b4d38' }}>{foodItem.foodName}</Card.Title>
                                         <Card.Text>{foodItem.foodDescription}</Card.Text>
                                         <Card.Text className="text-muted">${foodItem.foodPrice}</Card.Text>
-                                        <Button variant="primary" onClick={() => {
-                                            const quantity = parseInt(prompt("Enter quantity:"));
-                                            if (!isNaN(quantity) && quantity > 0) {
-                                                addToOrder(foodItem, quantity);
-                                            } else {
-                                                toast.error("Please enter a valid quantity.");
-                                            }
-                                        }}>
+                                        <Button variant="primary" onClick={() => handleShowQuantityModal(foodItem)}>
                                             Add to Order
                                         </Button>
                                     </Card.Body>
@@ -145,8 +159,11 @@ const MenuFood = () => {
                             <h2>Order Summary</h2>
                             <ul>
                                 {selectedItems.map((item, index) => (
-                                    <li key={index}>
-                                        {item.foodName} - ${item.foodPrice} - {item.quantity} pcs
+                                    <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                        <img src={item.foodImage} alt={item.foodName} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                                        <div style={{ flex: 1 }}>
+                                            {item.foodName} - ${item.foodPrice} - {item.quantity} pcs
+                                        </div>
                                         <Button variant="danger" size="sm" onClick={() => removeFromOrder(index)}>
                                             Remove
                                         </Button>
@@ -154,6 +171,7 @@ const MenuFood = () => {
                                 ))}
                             </ul>
                             <hr />
+                            <h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
                             <Button variant="primary" onClick={handleShowAdd}>
                                 Proceed to Checkout
                             </Button>
@@ -206,19 +224,23 @@ const MenuFood = () => {
                             </Form.Control>
                         </Form.Group>
                         {selectedItems.map((item, index) => (
-                            <div key={index}>
-                                <Form.Group controlId={`formQuantity${index}`}>
-                                    <Form.Label>{item.foodName} Quantity</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        min="1"
-                                        value={item.quantity}
-                                        onChange={(e) => handleQuantityChange(e.target.value, index)}
-                                    />
-                                </Form.Group>
+                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                                <img src={item.foodImage} alt={item.foodName} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                                <div style={{ flex: 1 }}>
+                                    <Form.Group controlId={`formQuantity${index}`}>
+                                        <Form.Label>{item.foodName} Quantity</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            min="1"
+                                            value={item.quantity}
+                                            onChange={(e) => handleQuantityChange(e.target.value, index)}
+                                        />
+                                    </Form.Group>
+                                </div>
                             </div>
                         ))}
                     </Form>
+                    <h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseAdd}>
@@ -226,6 +248,41 @@ const MenuFood = () => {
                     </Button>
                     <Button variant="primary" onClick={submitOrder}>
                         Submit Order
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showQuantityModal} onHide={handleCloseQuantityModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Select Quantity</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {currentItem && (
+                        <>
+                            <div className="text-center">
+                                <img src={currentItem.foodImage} alt={currentItem.foodName} style={{ width: '100px', height: '100px', marginBottom: '10px' }} />
+                                <h5>{currentItem.foodName}</h5>
+                                <p>{currentItem.foodDescription}</p>
+                                <p className="text-muted">${currentItem.foodPrice}</p>
+                            </div>
+                            <Form.Group controlId="formQuantity">
+                                <Form.Label>Quantity</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    min="1"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                                />
+                            </Form.Group>
+                        </>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseQuantityModal}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={addToOrder}>
+                        Add to Order
                     </Button>
                 </Modal.Footer>
             </Modal>

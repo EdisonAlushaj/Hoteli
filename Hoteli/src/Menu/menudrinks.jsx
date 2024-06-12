@@ -9,25 +9,28 @@ import cookieUtils from '../cookieUtils.jsx';
 
 const MenuDrinks = () => {
     const [showAdd, setShowAdd] = useState(false);
+    const [showQuantityModal, setShowQuantityModal] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
+    const [quantity, setQuantity] = useState(1);
 
     const userId = cookieUtils.getUserIdFromCookies();
     const [deliveryLocation, setDeliveryLocation] = useState('');
     const [deliveryNumber, setDeliveryNumber] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
     const [selectedItems, setSelectedItems] = useState([]);
-    const [drinkItems, setdrinkItems] = useState([]);
+    const [drinkItems, setDrinkItems] = useState([]);
 
     useEffect(() => {
-        fetchdrinkItems();
+        fetchDrinkItems();
     }, []);
 
-    const fetchdrinkItems = async () => {
+    const fetchDrinkItems = async () => {
         try {
             const response = await axios.get('https://localhost:7189/api/MenuDrink');
             
             console.log('Fetched Drink Items:', response.data);
             
-            setdrinkItems(response.data);
+            setDrinkItems(response.data);
         } catch (error) {
             toast.error('Error fetching drink items.');
         }
@@ -39,14 +42,18 @@ const MenuDrinks = () => {
         setSelectedItems(updatedItems);
     };
 
-    const addToOrder = (itemToAdd, quantity) => {
+    const calculateTotalPrice = () => {
+        return selectedItems.reduce((total, item) => total + item.drinkPrice * item.quantity, 0);
+    };
+
+    const addToOrder = () => {
         if (quantity <= 0) {
             toast.error("Please enter a valid quantity.");
             return;
         }
 
         const existingItemIndex = selectedItems.findIndex(item =>
-            item.menuDrinkId === itemToAdd.menuDrinkId && item.drinkkName === itemToAdd.drinkName
+            item.menuDrinkId === currentItem.menuDrinkId && item.drinkName === currentItem.drinkName
         );
 
         if (existingItemIndex !== -1) {
@@ -54,8 +61,11 @@ const MenuDrinks = () => {
             updatedItems[existingItemIndex].quantity += quantity;
             setSelectedItems(updatedItems);
         } else {
-            setSelectedItems([...selectedItems, { ...itemToAdd, quantity }]);
+            setSelectedItems([...selectedItems, { ...currentItem, quantity }]);
         }
+
+        setShowQuantityModal(false);
+        setQuantity(1);
     };
 
     const removeFromOrder = (indexToRemove) => {
@@ -78,8 +88,9 @@ const MenuDrinks = () => {
                 orderDrinkItems: selectedItems.map(item => ({
                     menuDrinkId: parseInt(item.id),
                     quantity: parseInt(item.quantity),
-                    drinkkName: 'Drink'
-                }))
+                    drinkName: item.drinkName
+                })),
+                totalOrderPrice: calculateTotalPrice()
             };
     
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
@@ -109,6 +120,16 @@ const MenuDrinks = () => {
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
 
+    const handleShowQuantityModal = (item) => {
+        setCurrentItem(item);
+        setShowQuantityModal(true);
+    };
+
+    const handleCloseQuantityModal = () => {
+        setShowQuantityModal(false);
+        setQuantity(1);
+    };
+
     return (
         <Container fluid style={{ backgroundColor: '#d9bfbf' }}>
             <h1 className="text-center mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#603939' }}>Menu</h1>
@@ -123,14 +144,7 @@ const MenuDrinks = () => {
                                         <Card.Title style={{ color: '#6b4d38' }}>{drinkItem.drinkName}</Card.Title>
                                         <Card.Text>{drinkItem.drinkDescription}</Card.Text>
                                         <Card.Text className="text-muted">${drinkItem.drinkPrice}</Card.Text>
-                                        <Button variant="primary" onClick={() => {
-                                            const quantity = parseInt(prompt("Enter quantity:"));
-                                            if (!isNaN(quantity) && quantity > 0) {
-                                                addToOrder(drinkItem, quantity);
-                                            } else {
-                                                toast.error("Please enter a valid quantity.");
-                                            }
-                                        }}>
+                                        <Button variant="primary" onClick={() => handleShowQuantityModal(drinkItem)}>
                                             Add to Order
                                         </Button>
                                     </Card.Body>
@@ -145,8 +159,11 @@ const MenuDrinks = () => {
                             <h2>Order Summary</h2>
                             <ul>
                                 {selectedItems.map((item, index) => (
-                                    <li key={index}>
-                                        {item.drinkName} - ${item.drinkPrice} - {item.quantity} pcs
+                                    <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                        <img src={item.drinkImage} alt={item.drinkName} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                                        <div style={{ flex: 1 }}>
+                                            {item.drinkName} - ${item.drinkPrice} - {item.quantity} pcs
+                                        </div>
                                         <Button variant="danger" size="sm" onClick={() => removeFromOrder(index)}>
                                             Remove
                                         </Button>
@@ -154,6 +171,7 @@ const MenuDrinks = () => {
                                 ))}
                             </ul>
                             <hr />
+                            <h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
                             <Button variant="primary" onClick={handleShowAdd}>
                                 Proceed to Checkout
                             </Button>
@@ -206,19 +224,24 @@ const MenuDrinks = () => {
                             </Form.Control>
                         </Form.Group>
                         {selectedItems.map((item, index) => (
-                            <div key={index}>
-                                <Form.Group controlId={`formQuantity${index}`}>
-                                    <Form.Label>{item.drinkName} Quantity</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        min="1"
-                                        value={item.quantity}
-                                        onChange={(e) => handleQuantityChange(e.target.value, index)}
-                                    />
-                                </Form.Group>
+                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                                <img src={item.drinkImage} alt={item.drinkName} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                                <div style={{ flex: 1 }}>
+                                    <h5>{item.drinkName}</h5>
+                                    <Form.Group controlId={`formQuantity${index}`}>
+                                        <Form.Label>Quantity</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            min="1"
+                                            value={item.quantity}
+                                            onChange={(e) => handleQuantityChange(e.target.value, index)}
+                                        />
+                                    </Form.Group>
+                                </div>
                             </div>
                         ))}
                     </Form>
+                    <h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseAdd}>
@@ -226,6 +249,41 @@ const MenuDrinks = () => {
                     </Button>
                     <Button variant="primary" onClick={submitOrder}>
                         Submit Order
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showQuantityModal} onHide={handleCloseQuantityModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Select Quantity</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {currentItem && (
+                        <>
+                            <div className="text-center">
+                                <img src={currentItem.drinkImage} alt={currentItem.drinkName} style={{ width: '100px', height: '100px', marginBottom: '10px' }} />
+                                <h5>{currentItem.drinkName}</h5>
+                                <p>{currentItem.drinkDescription}</p>
+                                <p className="text-muted">${currentItem.drinkPrice}</p>
+                            </div>
+                            <Form.Group controlId="formQuantity">
+                                <Form.Label>Quantity</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    min="1"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                                />
+                            </Form.Group>
+                        </>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseQuantityModal}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={addToOrder}>
+                        Add to Order
                     </Button>
                 </Modal.Footer>
             </Modal>
