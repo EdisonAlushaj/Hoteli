@@ -13,6 +13,8 @@ export const MainLayout = () => {
 
   const logOut = () => {
     cookieUtils.clearUserRole();
+    cookieUtils.clearUserId();
+    cookieUtils.clearName();
     window.location.href = '/login';
   }
 
@@ -81,3 +83,4 @@ class App extends Component {
 }
 
 export default App;
+

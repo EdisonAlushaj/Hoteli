@@ -46,6 +46,18 @@ const cookieUtils = {
 
     // Set an interval to refresh the token every 5 minutes
     setInterval(refreshRefreshToken, 5 * 60 * 1000); // 5 minutes interval
+  },
+
+  clearUserId: () => {
+    Cookies.remove('userId');
+  },
+
+  clearName: () => {
+    Cookies.remove('name');
+  },
+
+  clearUserRole: () => {
+    Cookies.remove('userRole');
   }
 };
 

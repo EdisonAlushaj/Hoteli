@@ -27,7 +27,7 @@ const OrderSummary = () => {
       })
       .catch(error => {
         console.error("API Error:", error);
-        setError('Failed to fetch data');
+        setError('Do you have an account. Please Sign In/Up.');
         setLoading(false);
       });
   };
