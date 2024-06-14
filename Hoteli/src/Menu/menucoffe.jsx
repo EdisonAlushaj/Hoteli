@@ -27,9 +27,9 @@ const MenuCoffe = () => {
     const fetchcoffeeItems = async () => {
         try {
             const response = await axios.get('https://localhost:7189/api/MenuCafe');
-            
+
             console.log('Fetched Cafe Items:', response.data);
-            
+
             setcoffeeItems(response.data);
         } catch (error) {
             toast.error('Error fetching cafe items.');
@@ -78,7 +78,7 @@ const MenuCoffe = () => {
             toast.error('Please fill out all fields and add items to your order.');
             return;
         }
-    
+
         try {
             const orderData = {
                 Id: Id,
@@ -92,15 +92,15 @@ const MenuCoffe = () => {
                 })),
                 totalOrderPrice: calculateTotalPrice()
             };
-    
+
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
-    
+
             const response = await axios.post('https://localhost:7189/api/OrderCoffee', orderData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-    
+
             if (response.status === 200 || response.status === 201) {
                 setSelectedItems([]);
                 setDeliveryLocation('');
@@ -225,69 +225,82 @@ const MenuCoffe = () => {
                         </Form.Group>
                         {selectedItems.map((item, index) => (
                             <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
-                                <img src={item.cafeImage} alt={item.cafeName} style={{ width: '50px', height: '50px', marginRight: '10px'}} />
-<div style={{ flex: 1 }}>
-    <h5>{item.cafeName} Quantity</h5>
-    <Form.Control
-        type="number"
-        min="1"
-        value={item.quantity}
-        onChange={(e) => handleQuantityChange(e.target.value, index)}
-    />
-</div>
-</div>
-))}
-</Form>
-<h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
-</Modal.Body>
-<Modal.Footer>
-<Button variant="secondary" onClick={handleCloseAdd}>
-Close
-</Button>
-<Button variant="primary" onClick={submitOrder}>
-Submit Order
-</Button>
-</Modal.Footer>
-</Modal>
+                                <img src={item.cafeImage} alt={item.cafeName} style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                                <div style={{ flex: 1 }}>
+                                    <h5>{item.cafeName} Quantity</h5>
+                                    <Form.Control
+                                        type="number"
+                                        min="1"
+                                        value={item.quantity}
+                                        onChange={(e) => handleQuantityChange(e.target.value, index)}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </Form>
+                    <h4>Total Price: ${calculateTotalPrice().toFixed(2)}</h4>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseAdd}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={submitOrder}>
+                        Submit Order
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
-<Modal show={showQuantityModal} onHide={handleCloseQuantityModal}>
-    <Modal.Header closeButton>
-        <Modal.Title>Enter Quantity</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-        {currentItem && (
-            <>
-                <div className="text-center">
-                    <img src={currentItem.cafeImage} alt={currentItem.cafeName} style={{ width: '100px', height: '100px', marginBottom: '10px' }} />
-                    <h5>{currentItem.cafeName}</h5>
-                    <p>{currentItem.cafeDescription}</p>
-                    <p className="text-muted">${currentItem.cafePrice}</p>
-                </div>
-                <Form.Group controlId="formQuantity">
-                    <Form.Label>Quantity</Form.Label>
-                    <Form.Control
-                        type="number"
-                        min="1"
-                        value={quantity}
-                        onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                    />
-                </Form.Group>
-            </>
-        )}
-    </Modal.Body>
-    <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseQuantityModal}>
-            Close
-        </Button>
-        <Button variant="primary" onClick={addToOrder}>
-            Add to Order
-        </Button>
-    </Modal.Footer>
-</Modal>
+            <Modal show={showQuantityModal} onHide={handleCloseQuantityModal}>
 
-<ToastContainer />
-</Container>
-);
+
+                {cookieUtils.getUserRoleFromCookies() ? (
+                    <>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Enter Quantity</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {currentItem && (
+                                <>
+                                    <div className="text-center">
+                                        <img src={currentItem.cafeImage} alt={currentItem.cafeName} style={{ width: '100px', height: '100px', marginBottom: '10px' }} />
+                                        <h5>{currentItem.cafeName}</h5>
+                                        <p>{currentItem.cafeDescription}</p>
+                                        <p className="text-muted">${currentItem.cafePrice}</p>
+                                    </div>
+                                    <Form.Group controlId="formQuantity">
+                                        <Form.Label>Quantity</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            min="1"
+                                            value={quantity}
+                                            onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                                        />
+                                    </Form.Group>
+                                </>
+                            )}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleCloseQuantityModal}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={addToOrder}>
+                                Add to Order
+                            </Button>
+                        </Modal.Footer>
+                    </>
+                ) :
+                    <>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Please Log In or Sign Up.</Modal.Title>
+                        </Modal.Header>
+                    </>
+                }
+
+            </Modal>
+
+            <ToastContainer />
+        </Container>
+    );
 };
 
 export default MenuCoffe;

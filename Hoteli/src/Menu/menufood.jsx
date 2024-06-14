@@ -27,9 +27,9 @@ const MenuFood = () => {
     const fetchFoodItems = async () => {
         try {
             const response = await axios.get('https://localhost:7189/api/MenuFood');
-            
+
             console.log('Fetched Food Items:', response.data);
-            
+
             setFoodItems(response.data);
         } catch (error) {
             toast.error('Error fetching food items.');
@@ -78,7 +78,7 @@ const MenuFood = () => {
             toast.error('Please fill out all fields and add items to your order.');
             return;
         }
-    
+
         try {
             const orderData = {
                 userId: userId,
@@ -92,15 +92,15 @@ const MenuFood = () => {
                 })),
                 totalOrderPrice: calculateTotalPrice()
             };
-    
+
             console.log('Order Data:', JSON.stringify(orderData, null, 2));
-    
+
             const response = await axios.post('https://localhost:7189/api/Order', orderData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-    
+
             if (response.status === 200 || response.status === 201) {
                 setSelectedItems([]);
                 setDeliveryLocation('');
@@ -253,38 +253,49 @@ const MenuFood = () => {
             </Modal>
 
             <Modal show={showQuantityModal} onHide={handleCloseQuantityModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Select Quantity</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {currentItem && (
-                        <>
-                            <div className="text-center">
-                                <img src={currentItem.foodImage} alt={currentItem.foodName} style={{ width: '100px', height: '100px', marginBottom: '10px' }} />
-                                <h5>{currentItem.foodName}</h5>
-                                <p>{currentItem.foodDescription}</p>
-                                <p className="text-muted">${currentItem.foodPrice}</p>
-                            </div>
-                            <Form.Group controlId="formQuantity">
-                                <Form.Label>Quantity</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    min="1"
-                                    value={quantity}
-                                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                                />
-                            </Form.Group>
-                        </>
-                    )}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseQuantityModal}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={addToOrder}>
-                        Add to Order
-                    </Button>
-                </Modal.Footer>
+                {cookieUtils.getUserRoleFromCookies() ? (
+                    <>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Select Quantity</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {currentItem && (
+                                <>
+                                    <div className="text-center">
+                                        <img src={currentItem.foodImage} alt={currentItem.foodName} style={{ width: '100px', height: '100px', marginBottom: '10px' }} />
+                                        <h5>{currentItem.foodName}</h5>
+                                        <p>{currentItem.foodDescription}</p>
+                                        <p className="text-muted">${currentItem.foodPrice}</p>
+                                    </div>
+                                    <Form.Group controlId="formQuantity">
+                                        <Form.Label>Quantity</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            min="1"
+                                            value={quantity}
+                                            onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                                        />
+                                    </Form.Group>
+                                </>
+                            )}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleCloseQuantityModal}>
+                                Cancel
+                            </Button>
+                            <Button variant="primary" onClick={addToOrder}>
+                                Add to Order
+                            </Button>
+                        </Modal.Footer>
+                    </>
+                ) :
+                    <>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Please Log In or Sign Up.</Modal.Title>
+                        </Modal.Header>
+                    </>
+                }
+
             </Modal>
 
             <ToastContainer />

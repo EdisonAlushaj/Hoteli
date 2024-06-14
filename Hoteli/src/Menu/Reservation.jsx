@@ -115,53 +115,69 @@ const Reservation = () => {
                             </Form.Group>
                         </Col>
                     </Row> */}
-                    <Row>
-                        <Col>
-                            <Form.Group controlId="establishment">
-                                <Form.Label>Establishment</Form.Label>
-                                <Form.Control as="select" value={establishment} onChange={(e) => setEstablishment(e.target.value)}>
-                                    <option value="">Select establishment</option>
-                                    <option value="Restaurant">Restaurant</option>
-                                    <option value="Bar">Bar</option>
-                                    <option value="Cafe">Cafe</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
 
-                        <Col>
-                            <Form.Group controlId="tableId">
-                                <Form.Label>Table ID</Form.Label>
-                                <Form.Control as="select" value={tableId} onChange={(e) => setTableId(e.target.value)} disabled={!establishment}>
-                                    <option value="">Select table</option>
-                                    {tables.map(table => (
-                                        <option key={table.id} value={table.id}>{table.tableNumber}</option>
-                                    ))}
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
-                    </Row>
 
-                    <Col>
-                        <Form.Group controlId="reservationDatetime">
-                            <Form.Label>Reservation Date and Time</Form.Label>
-                            <Form.Control type="datetime-local" placeholder="Enter reservation date and time" value={reservationDatetime} onChange={(e) => setReservationDatetime(e.target.value)} />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="maxGuests">
-                            <Form.Label>Max Guests</Form.Label>
-                            <Form.Control type="number" placeholder="Enter max guests" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)} readOnly />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="specialRequest">
-                            <Form.Label>Special Requests</Form.Label>
-                            <Form.Control type="text" placeholder="Enter special requests " value={specialRequest} onChange={(e) => setSpecialRequest(e.target.value)} />
-                        </Form.Group>
-                    </Col>
-                    <div className='d-flex justify-content-center align-items-center flex-column'>
-                        <Button style={{ background: '#999f81', border: 'none', width: '12em', marginTop: '15px' }} onClick={handleSave}>Add Reservation</Button>
-                    </div>
+                    {cookieUtils.getUserRoleFromCookies() ? (
+                        <>
+                            <Row>
+                                <Col>
+                                    <Form.Group controlId="establishment">
+                                        <Form.Label>Establishment</Form.Label>
+                                        <Form.Control as="select" value={establishment} onChange={(e) => setEstablishment(e.target.value)}>
+                                            <option value="">Select establishment</option>
+                                            <option value="Restaurant">Restaurant</option>
+                                            <option value="Bar">Bar</option>
+                                            <option value="Cafe">Cafe</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+
+                                <Col>
+                                    <Form.Group controlId="tableId">
+                                        <Form.Label>Table ID</Form.Label>
+                                        <Form.Control as="select" value={tableId} onChange={(e) => setTableId(e.target.value)} disabled={!establishment}>
+                                            <option value="">Select table</option>
+                                            {tables.map(table => (
+                                                <option key={table.id} value={table.id}>{table.tableNumber}</option>
+                                            ))}
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <Col>
+                                <Form.Group controlId="reservationDatetime">
+                                    <Form.Label>Reservation Date and Time</Form.Label>
+                                    <Form.Control type="datetime-local" placeholder="Enter reservation date and time" value={reservationDatetime} onChange={(e) => setReservationDatetime(e.target.value)} />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="maxGuests">
+                                    <Form.Label>Max Guests</Form.Label>
+                                    <Form.Control type="number" placeholder="Enter max guests" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)} readOnly />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="specialRequest">
+                                    <Form.Label>Special Requests</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter special requests " value={specialRequest} onChange={(e) => setSpecialRequest(e.target.value)} />
+                                </Form.Group>
+                            </Col>
+                            <div className='d-flex justify-content-center align-items-center flex-column'>
+                                <Button style={{ background: '#999f81', border: 'none', width: '12em', marginTop: '15px' }} onClick={handleSave}>Add Reservation</Button>
+                            </div>
+                        </>
+                    ) :
+                        <>
+                            <Row>
+                                <Col>
+                                    <Form.Group className='d-flex justify-content-center'>
+                                        <p style={{marginBottom: '0'}}>Please Log In or Sign Up</p>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                        </>
+                    }
                 </Form>
             </div>
         </Container>
