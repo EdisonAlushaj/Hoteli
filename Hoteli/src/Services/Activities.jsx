@@ -16,7 +16,7 @@ const Activities = () => {
       }
     };
 
-    fetchActivities(); 
+    fetchActivities();
   }, []);
 
   const handleApply = async (id) => {
@@ -35,25 +35,35 @@ const Activities = () => {
       <div className="cover-photoo">
         <h1 className="cover-title">Activities</h1>
       </div>
-      <div className="activities-list">
-        {activities.map(activity => (
-          <div className="activity" key={activity.id}>
-            {console.log('Image URL:', activity.image)}
-            <img
-              src={activity.image}
-              alt={activity.name}
-              className="activity-image"
-              onError={(e) => { e.target.onerror = null; e.target.src = "path/to/placeholder-image.jpg"; }}
-            />
-            <h2>{activity.name}</h2>
-            <p>{activity.description}</p>
-            <p>Location: {activity.location}</p>
-            <p>Duration: {activity.duration}</p>
-            <p>Cost: ${activity.cost.toFixed(2)}</p>
-            <button onClick={() => handleApply(activity.id)}>Apply</button>
+      {cookieUtils.getUserRoleFromCookies() ? (
+        <>
+          <div className="activities-list">
+            {activities.map(activity => (
+              <div className="activity" key={activity.id}>
+                {console.log('Image URL:', activity.image)}
+                <img
+                  src={activity.image}
+                  alt={activity.name}
+                  className="activity-image"
+                  onError={(e) => { e.target.onerror = null; e.target.src = "path/to/placeholder-image.jpg"; }}
+                />
+                <h2>{activity.name}</h2>
+                <p>{activity.description}</p>
+                <p>Location: {activity.location}</p>
+                <p>Duration: {activity.duration}</p>
+                <p>Cost: ${activity.cost.toFixed(2)}</p>
+                <button onClick={() => handleApply(activity.id)}>Apply</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) :
+        <>
+          <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Log in/Sign up to be apply for the activities.</h1>
+        </>
+      }
+
+
     </div>
   );
 };

@@ -11,7 +11,7 @@ const Pool = () => {
   const [selectedShezlong, setSelectedShezlong] = useState(null);
   const [shezlongReservations, setShezlongReservations] = useState([]);
   const [reservationDate, setReservationDate] = useState('');
-  
+
   const userId = cookieUtils.getUserIdFromCookies();
 
   useEffect(() => {
@@ -82,26 +82,36 @@ const Pool = () => {
       <div className="container mt-5">
         <h1 className="mb-4">Pools</h1>
         <div className="row">
-          <div className="col-md-4">
-            <div className="list-group">
-              {pools.map(pool => (
-                <button
-                  key={pool.id}
-                  type="button"
-                  className={`list-group-item list-group-item-action ${selectedPool && selectedPool.id === pool.id ? 'active' : ''}`}
-                  onClick={() => setSelectedPool(pool)}
-                >
-                  <div className="card pool-card">
-                    <div className="card-body">
-                      <h5 className="card-title">Pool {pool.id}</h5>
-                      <p className="card-text">Date: {pool.date}</p>
-                      <p className="card-text">Duration: {pool.duration}</p>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
+          {cookieUtils.getUserRoleFromCookies() ? (
+            <>
+              <div className="col-md-4">
+                <div className="list-group">
+                  {pools.map(pool => (
+                    <button
+                      key={pool.id}
+                      type="button"
+                      className={`list-group-item list-group-item-action ${selectedPool && selectedPool.id === pool.id ? 'active' : ''}`}
+                      onClick={() => setSelectedPool(pool)}
+                    >
+                      <div className="card pool-card">
+                        <div className="card-body">
+                          <h5 className="card-title">Pool {pool.id}</h5>
+                          <p className="card-text">Date: {pool.date}</p>
+                          <p className="card-text">Duration: {pool.duration}</p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          ) :
+            <>
+              <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Log in/Sign up to be able to make a reservation.</h1>
+            </>
+          }
+
+
           <div className="col-md-8">
             {selectedPool && (
               <div>

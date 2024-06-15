@@ -53,33 +53,43 @@ const Gym = () => {
                     <p style={{ fontSize: "2em" }}><b>Gyms</b></p>
                 </div>
 
-                <Row>
-                    {
-                        data && data.length > 0 ?
-                            data.map((item, index) => (
-                                <Col key={index} md={4} style={{ marginBottom: '20px' }}>
-                                    <Card>
-                                        <Card.Img variant="top" src={item.image} alt={item.fitnesName} />
-                                        <Card.Body className="d-flex flex-column align-items-center">
-                                            <Card.Title style={{ fontSize: "1.5em", textAlign: "center" }}>{item.fitnesName}</Card.Title>
-                                            <Card.Text style={{ fontSize: "1.2em", textAlign: "center" }}>
-                                                <b>Description:</b> {item.description}
-                                                <br />
-                                                <b>Price:</b> {item.price}
-                                                <br />
-                                                <b>Hall Id:</b> {item.hallId}
-                                            </Card.Text>
-                                            <Button variant="primary" style={{ fontSize: "1.2em", backgroundColor: "#b07256", borderColor: "#b07256" }} onClick={() => handleApply(item.id)}>Apply</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            ))
-                            :
-                            <Col>
-                                <p>Loading...</p>
-                            </Col>
-                    }
-                </Row>
+                {cookieUtils.getUserRoleFromCookies() ? (
+                    <>
+                        <Row>
+                            {
+                                data && data.length > 0 ?
+                                    data.map((item, index) => (
+                                        <Col key={index} md={4} style={{ marginBottom: '20px' }}>
+                                            <Card>
+                                                <Card.Img variant="top" src={item.image} alt={item.fitnesName} />
+                                                <Card.Body className="d-flex flex-column align-items-center">
+                                                    <Card.Title style={{ fontSize: "1.5em", textAlign: "center" }}>{item.fitnesName}</Card.Title>
+                                                    <Card.Text style={{ fontSize: "1.2em", textAlign: "center" }}>
+                                                        <b>Description:</b> {item.description}
+                                                        <br />
+                                                        <b>Price:</b> {item.price}
+                                                        <br />
+                                                        <b>Hall Id:</b> {item.hallId}
+                                                    </Card.Text>
+                                                    <Button variant="primary" style={{ fontSize: "1.2em", backgroundColor: "#b07256", borderColor: "#b07256" }} onClick={() => handleApply(item.id)}>Apply</Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    ))
+                                    :
+                                    <Col>
+                                        <p>Loading...</p>
+                                    </Col>
+                            }
+                        </Row>
+                    </>
+                ) :
+                    <>
+                        <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Log in/Sign up to be able to apply for the gym.</h1>
+                    </>
+                }
+
+
 
                 <Modal show={showApplyModal} onHide={() => setShowApplyModal(false)}>
                     <Modal.Header closeButton>

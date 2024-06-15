@@ -52,28 +52,37 @@ const Sauna = () => {
       <Container className="mt-5">
         <h1 className="mb-4">Saunas</h1>
         <Row>
-          <Col md={4}>
-            <div className="list-group">
-              {saunas.map(sauna => (
-                <Button
-                  key={sauna.id}
-                  variant="light"
-                  className={`list-group-item list-group-item-action ${selectedSauna && selectedSauna.id === sauna.id ? 'active' : ''}`}
-                  onClick={() => setSelectedSauna(sauna)}
-                >
-                  <Card className="sauna-card">
-                    <Card.Body>
-                      <Card.Title>Sauna {sauna.id}</Card.Title>
-                      <Card.Text>Hall nr: {sauna.hallId}</Card.Text>
-                      <Card.Text>Cost: {sauna.cost}$</Card.Text>
-                      <Card.Text>Description: {sauna.description}</Card.Text>
-                      <Card.Text>Duration: {sauna.duration}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Button>
-              ))}
-            </div>
-          </Col>
+          {cookieUtils.getUserRoleFromCookies() ? (
+            <>
+              <Col md={4}>
+                <div className="list-group">
+                  {saunas.map(sauna => (
+                    <Button
+                      key={sauna.id}
+                      variant="light"
+                      className={`list-group-item list-group-item-action ${selectedSauna && selectedSauna.id === sauna.id ? 'active' : ''}`}
+                      onClick={() => setSelectedSauna(sauna)}
+                    >
+                      <Card className="sauna-card">
+                        <Card.Body>
+                          <Card.Title>Sauna {sauna.id}</Card.Title>
+                          <Card.Text>Hall nr: {sauna.hallId}</Card.Text>
+                          <Card.Text>Cost: {sauna.cost}$</Card.Text>
+                          <Card.Text>Description: {sauna.description}</Card.Text>
+                          <Card.Text>Duration: {sauna.duration}</Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Button>
+                  ))}
+                </div>
+              </Col>
+            </>
+          ) :
+            <>
+              <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Log in/Sign up to be able to make a reservation.</h1>
+            </>
+          }
+
           <Col md={8}>
             {selectedSauna && (
               <div>

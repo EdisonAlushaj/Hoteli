@@ -10,7 +10,7 @@ import cookieUtils from '../cookieUtils.jsx';
 
 function RoomBooking() {
     const [showAdd, setShowAdd] = useState(false);
-    
+
     const userId = cookieUtils.getUserIdFromCookies();
     const [selectedItems, setSelectedItems] = useState([]);
     const [paymentMethod, setPaymentMethod] = useState('');
@@ -181,22 +181,32 @@ function RoomBooking() {
             </div>
 
             <Container fluid>
-                <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Enter the Check In and Check Out Dates</h1>
+                {cookieUtils.getUserRoleFromCookies() ? (
+                    <>
+                        <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Enter the Check In and Check Out Dates</h1>
 
-                <div className='d-flex justify-content-start align-items-center'>
-                    <Form.Group controlId="formCheckInDate" className='col-md-1' style={{ marginLeft: '5.3em' }}>
-                        <Form.Label>Check  In</Form.Label>
-                        <input type="date" className='form-control' placeholder='Enter Check In date '
-                            value={checkInDate} onChange={(e) => { setCheckInDate(e.target.value); fetchAvailableRooms(e.target.value, checkOutDate); }}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="formCheckOutDate" className='col-md-1' style={{ marginLeft: '2em' }}>
-                        <Form.Label>Check  Out</Form.Label>
-                        <input type="date" className='form-control' placeholder='Enter Check Out date '
-                            value={checkOutDate} onChange={(e) => { setCheckOutDate(e.target.value); fetchAvailableRooms(checkInDate, e.target.value); }}
-                        />
-                    </Form.Group>
-                </div>
+                        <div className='d-flex justify-content-start align-items-center'>
+                            <Form.Group controlId="formCheckInDate" className='col-md-1' style={{ marginLeft: '5.3em' }}>
+                                <Form.Label>Check  In</Form.Label>
+                                <input type="date" className='form-control' placeholder='Enter Check In date '
+                                    value={checkInDate} onChange={(e) => { setCheckInDate(e.target.value); fetchAvailableRooms(e.target.value, checkOutDate); }}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formCheckOutDate" className='col-md-1' style={{ marginLeft: '2em' }}>
+                                <Form.Label>Check  Out</Form.Label>
+                                <input type="date" className='form-control' placeholder='Enter Check Out date '
+                                    value={checkOutDate} onChange={(e) => { setCheckOutDate(e.target.value); fetchAvailableRooms(checkInDate, e.target.value); }}
+                                />
+                            </Form.Group>
+                        </div>
+                    </>
+                ) :
+                    <>
+                        <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Log in/Sign up to be able to book a room.</h1>
+                    </>
+                }
+
+
 
                 <Row className="mt-5">
                     <AvailableRooms availableRooms={availableRooms} />
