@@ -8,9 +8,8 @@ namespace HotelBackend.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        // Foreign key to reference the Pool
-       
         public int PoolId { get; set; }
+
 
        
     }

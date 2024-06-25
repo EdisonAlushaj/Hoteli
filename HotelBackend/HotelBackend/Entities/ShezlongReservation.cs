@@ -8,7 +8,6 @@ namespace HotelBackend.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ReservationId { get; set; }
-
         public string Id { get; set; }
         public Data.ApplicationUser Userr { get; set; }
         public int ShezlongId { get; set; }

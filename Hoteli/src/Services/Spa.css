@@ -9,8 +9,40 @@
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
+  .spa-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-info {
+    display: flex;
+    flex-wrap: wrap; 
+    margin-top: 10px;
+    color: #6c757d;
+  }
   
+  .card-info label {
+    font-weight: bold;
+    margin-right: 10px; 
+    display: flex; 
+    align-items: center;
+  }
+  
+  .card-info .card-text {
+    flex: 1;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center; 
+  }
+  
+  
+  .spa-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
   .cover-title {
+    text-align: center;
     font-size: 3rem;
     font-weight: bold;
   }

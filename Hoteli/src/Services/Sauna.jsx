@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,8 +10,8 @@ import cookieUtils from '../cookieUtils.jsx';
 const Sauna = () => {
   const [saunas, setSaunas] = useState([]);
   const [selectedSauna, setSelectedSauna] = useState(null);
-  const [saunaReservations, setSaunaReservations] = useState([]);
   const [reservationDate, setReservationDate] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const userId = cookieUtils.getUserIdFromCookies();
 
@@ -39,76 +39,73 @@ const Sauna = () => {
       toast.success('Sauna Reservation has been added.');
       console.log('Reservation added successfully:', response.data);
       setReservationDate('');
+      handleCloseModal();
     } catch (error) {
       toast.error("This sauna is already reserved during the selected time slot.");
       console.error('Error adding reservation:', error);
     }
   };
 
+  const handleShowModal = (sauna) => {
+    setSelectedSauna(sauna);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedSauna(null); 
+  };
 
   return (
     <div>
       <div className="cover-photooooo"></div>
       <Container className="mt-5">
-        <h1 className="mb-4">Saunas</h1>
+        <h1 className="mb-4"  style={{textAlign: 'center'}}>Saunas</h1>
         <Row>
-          {cookieUtils.getUserRoleFromCookies() ? (
-            <>
-              <Col md={4}>
-                <div className="list-group">
-                  {saunas.map(sauna => (
-                    <Button
-                      key={sauna.id}
-                      variant="light"
-                      className={`list-group-item list-group-item-action ${selectedSauna && selectedSauna.id === sauna.id ? 'active' : ''}`}
-                      onClick={() => setSelectedSauna(sauna)}
-                    >
-                      <Card className="sauna-card">
-                        <Card.Body>
-                          <Card.Title>Sauna {sauna.id}</Card.Title>
-                          <Card.Text>Hall nr: {sauna.hallId}</Card.Text>
-                          <Card.Text>Cost: {sauna.cost}$</Card.Text>
-                          <Card.Text>Description: {sauna.description}</Card.Text>
-                          <Card.Text>Duration: {sauna.duration}</Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </Button>
-                  ))}
-                </div>
-              </Col>
-            </>
-          ) :
-            <>
-              <h1 className="text-start mt-5" style={{ fontSize: '4rem', fontFamily: 'Roboto Slab, serif', color: '#47476b', marginLeft: '2em' }}>Log in/Sign up to be able to make a reservation.</h1>
-            </>
-          }
-
-          <Col md={8}>
-            {selectedSauna && (
-              <div>
-                <h2>Reserve Sauna {selectedSauna.id}</h2>
-                <Card className="reservation-form">
+          {saunas.map(sauna => (
+            <Col md={4} key={sauna.id}>
+              <Button
+                variant="light"
+                className={`list-group-item list-group-item-action ${selectedSauna && selectedSauna.id === sauna.id ? 'success' : ''}`}
+                onClick={() => handleShowModal(sauna)} 
+              >
+                <Card className="sauna-card">
                   <Card.Body>
-                    <Form onSubmit={handleReservationSubmit}>
-                      <Form.Group controlId="reservationDate">
-                        <Form.Label>Reservation Date</Form.Label>
-                        <Form.Control
-                          type="datetime-local"
-                          value={reservationDate}
-                          onChange={(e) => setReservationDate(e.target.value)}
-                        />
-                      </Form.Group>
-                      <Button variant="success" type="submit" className="btn-block">
-                        Reserve Sauna
-                      </Button>
-                    </Form>
+                    <Card.Title>Sauna {sauna.id}</Card.Title>
+                    <Card.Img src={sauna.image} style={{maxWidth: '100%', height: '200px', objectFit: 'cover'}}/>
+                    <Card.Text>Hall nr: {sauna.hallId}</Card.Text>
+                    <Card.Text>Cost: {sauna.cost}$</Card.Text>
+                    <Card.Text>Description: {sauna.description}</Card.Text>
+                    <Card.Text>Duration: {sauna.duration} minutes</Card.Text>
                   </Card.Body>
                 </Card>
-              </div>
-            )}
-          </Col>
+              </Button>
+            </Col>
+          ))}
         </Row>
       </Container>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reserve Sauna {selectedSauna && selectedSauna.id}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleReservationSubmit}>
+            <Form.Group controlId="reservationDate">
+              <Form.Label>Reservation Date</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                value={reservationDate}
+                onChange={(e) => setReservationDate(e.target.value)}
+              />
+            </Form.Group>
+            <Button variant="success" type="submit" className="btn-block">
+              Reserve Sauna
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
       <ToastContainer />
     </div>
   );

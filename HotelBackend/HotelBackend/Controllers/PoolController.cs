@@ -3,6 +3,8 @@ using HotelBackend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HotelBackend.Controllers
 {
@@ -10,62 +12,75 @@ namespace HotelBackend.Controllers
     [ApiController]
     public class PoolController : ControllerBase
     {
-        public readonly DataContext _context;
+        private readonly DataContext _context;
 
         public PoolController(DataContext context)
         {
             _context = context;
         }
 
+        // GET: api/Pool
         [HttpGet]
         public async Task<ActionResult<List<Pool>>> GetAllPools()
         {
-            var Pools = await _context.Pools.ToListAsync();
-
-            return Ok(Pools);
+            var pools = await _context.Pools.ToListAsync();
+            return Ok(pools);
         }
 
-
+        // GET: api/Pool/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Pool>>> GetPool(int id)
+        public async Task<ActionResult<Pool>> GetPool(int id)
         {
-            var Pool = await _context.Pools.FindAsync(id);
-            if (Pool == null)
+            var pool = await _context.Pools.FindAsync(id);
+            if (pool == null)
                 return NotFound("Pool not found");
-            return Ok(Pool);
+            return Ok(pool);
         }
 
+        // POST: api/Pool
         [HttpPost]
         public async Task<ActionResult<Pool>> AddPool(Pool pool)
         {
             _context.Pools.Add(pool);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction(nameof(GetPool), new { id = pool.Id }, pool);
         }
 
-
-        [HttpPatch]
-        [Route("UpdatePool/{id}")]
-        public async Task<Pool> UpdatePool(Pool objPool)
+        // PATCH: api/Pool/{id}
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePool(int id, Pool pool)
         {
-            _context.Entry(objPool).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return objPool;
+            if (id != pool.Id)
+                return BadRequest("ID mismatch");
+
+            _context.Entry(pool).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Pools.Any(e => e.Id == id))
+                    return NotFound("Pool not found");
+                else
+                    throw;
+            }
+
+            return NoContent();
         }
 
+        // DELETE: api/Pool/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<Pool>>> DeletePool(int id)
+        public async Task<IActionResult> DeletePool(int id)
         {
-            var dbPool = await _context.Pools.FindAsync(id);
-            if (dbPool == null)
+            var pool = await _context.Pools.FindAsync(id);
+            if (pool == null)
                 return NotFound("Pool not found");
 
-            _context.Pools.Remove(dbPool);
-
+            _context.Pools.Remove(pool);
             await _context.SaveChangesAsync();
-
-            return Ok(await _context.Pools.ToListAsync()); ;
+            return NoContent();
         }
     }
 }

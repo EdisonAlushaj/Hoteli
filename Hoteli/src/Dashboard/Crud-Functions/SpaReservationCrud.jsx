@@ -100,7 +100,7 @@ const SpaReservationCrud= () => {
                             data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.reservationId}</td>
-                                    <td>{item.id}</td>
+                                    <td>{item.userr.name}</td>
                                     <td>{item.spaId}</td>
                                     <td>{new Date(item.reservationDate).toLocaleString()}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>

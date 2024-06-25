@@ -18,11 +18,9 @@ namespace HotelBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Shezlong>>> GetAllShezlongs()
+        public async Task<ActionResult<IEnumerable<Shezlong>>> GetShezlongs([FromQuery] int poolId)
         {
-            var Shezlongs = await _context.Shezlongs.ToListAsync();
-
-            return Ok(Shezlongs);
+            return await _context.Shezlongs.Where(s => s.PoolId == poolId).ToListAsync();
         }
 
 
