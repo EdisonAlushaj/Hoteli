@@ -27,22 +27,11 @@ namespace HotelBackend.Controllers
             var contactRequests = await _context.ContactRequests.ToListAsync();
             return Ok(contactRequests);
         }
+
         [HttpPost]
-        public async Task<ActionResult<ContactRequest>> Contact(ContactRequest contactRequest)
+        public async Task<ActionResult<ContactRequest>> Contact([FromBody] ContactRequest contactRequest)
         {
             Console.WriteLine("Received contact request for Name: " + contactRequest.Name);
-
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Name == contactRequest.Name);
-
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            if (user.Email != contactRequest.Email)
-            {
-                return BadRequest("Invalid email");
-            }
 
             // Create a response object with name, email, and message
             var contactResponse = new ContactRequest
@@ -60,6 +49,7 @@ namespace HotelBackend.Controllers
         }
     }
 }
+
 public class ContactRequest
 {
     [Key]
@@ -68,4 +58,3 @@ public class ContactRequest
     public string Email { get; set; }
     public string Message { get; set; }
 }
-    
