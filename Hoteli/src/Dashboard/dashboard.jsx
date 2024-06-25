@@ -18,6 +18,7 @@ import ContactUs from "./Crud-Functions/ContactUs.jsx";
 import ShezlongReservation from "./Crud-Functions/ShezlongReservationCrud.jsx";
 import Fitnes from "./Crud-Functions/Fitnes.jsx";
 import FitnessEquipments from "./Crud-Functions/FitnessEquipments.jsx";
+import GymReservation from "./Crud-Functions/GymReservation.jsx";
 import AboutCrud from "./Crud-Functions/AboutCrud.jsx";
 import OrderFood from "./Crud-Functions/OrderFood.jsx";
 import OrderDrinks from "./Crud-Functions/OrderDrinks.jsx";
@@ -180,6 +181,16 @@ const Dashboard = () => {
               <NavLink
                 to="#"
                 className="sidebar-link"
+                onClick={() => toggleTable("gymReservation")}
+              >
+                <i className="lni lni-steam"></i>
+                <span className="fw-normal">Gym Reservation</span>
+              </NavLink>
+            </li>
+            <li className="sidebar-item">
+              <NavLink
+                to="#"
+                className="sidebar-link"
                 onClick={() => toggleTable("spa")}
               >
                 <i className="lni lni-steam"></i>
@@ -330,6 +341,7 @@ const Dashboard = () => {
               {activeTable === "pool" && <Pool />}
               {activeTable === "fitnes" && <Fitnes />}
               {activeTable === "fitnesEquipments" && <FitnessEquipments />}
+              {activeTable === "gymReservation" && <GymReservation />}
               {activeTable === "spa" && <SpaCrud />}
               {activeTable === "spaReservation" && <SpaReservationCrud />}
               {activeTable === "sauna" && <SaunaCrud />}

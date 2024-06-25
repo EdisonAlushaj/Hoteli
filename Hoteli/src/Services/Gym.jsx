@@ -26,9 +26,19 @@ const Gym = () => {
             });
     }
 
-    const handleApply = (fitnesId) => {
-        setSelectedFitnesId(fitnesId);
-        setShowApplyModal(true);
+    const handleApply = async (fitnesId) => {
+        try {
+            const response = await axios.get(`https://localhost:7189/api/FitnesApply?userId=${userId}&fitnesId=${fitnesId}`);
+            if (response.data.length > 0) {
+                toast.error('You have already applied to this gym.');
+            } else {
+                setSelectedFitnesId(fitnesId);
+                setShowApplyModal(true);
+            }
+        } catch (error) {
+            console.error('Error checking gym application:', error);
+            toast.error('Failed to check gym application.');
+        }
     }
 
     const handleSave = () => {

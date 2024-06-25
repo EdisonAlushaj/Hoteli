@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { FitnesApplyEndPoint } from '../../endpoints';
+import { GymReservationEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -21,7 +21,7 @@ const GymReservation= () => {
     }, []);
 
     const getData = () => {
-        axios.get(FitnesApplyEndPoint)
+        axios.get(GymReservationEndPoint)
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -33,7 +33,7 @@ const GymReservation= () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure to delete this Fitnes Apply?")) {
-            axios.delete(`${FitnesApplyEndPoint}/${id}`)
+            axios.delete(`${GymReservationEndPoint}/${id}`)
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Fitnes Apply has been deleted');
@@ -51,7 +51,7 @@ const GymReservation= () => {
     
 
     const handleSave = () => {
-        const url = `${FitnesApplyEndPoint}?userId=${userId}&fitnesId=${fitnesId}`;
+        const url = `${GymReservationEndPoint}?userId=${userId}&fitnesId=${fitnesId}`;
 
         axios.post(url)
             .then((result) => {
@@ -86,7 +86,7 @@ const GymReservation= () => {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>User Id</th>
+                            <th>User Name</th>
                             <th>Fitnes Id</th>
                         </tr>
                     </thead>
@@ -95,7 +95,7 @@ const GymReservation= () => {
                             data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{item.id}</td>
+                                    <td>{item.userr.name}</td>
                                     <td>{item.fitnesId}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.reservationId)}>Delete</button>

@@ -50,6 +50,14 @@ const Reservation = () => {
             toast.error('Please fill in all required fields');
             return;
         }
+
+        // Validate reservation date/time
+        const now = new Date().toISOString();
+        if (reservationDatetime < now) {
+            toast.error('Cannot reserve table for past dates or times');
+            return;
+        }
+
         const specialRequestText = specialRequest.trim() === '' ? 'none' : specialRequest;
         // Fetch existing reservations for the specified table
         try {
@@ -107,16 +115,6 @@ const Reservation = () => {
             <h1 className='text-center' style={{ color: '#999f81' }}>Fill your table reservation</h1>
             <div className='d-flex justify-content-center align-items-center flex-column'>
                 <Form style={{ width: '35em', border: '1px solid black', borderRadius: '20px', padding: '20px', background: '#E4E2D6', fontFamily: 'Roboto Slab, serif', marginBottom: "3em" }}>
-                    {/* <Row>
-                        <Col>
-                            <Form.Group controlId="userId">
-                                <Form.Label>User ID</Form.Label>
-                                <Form.Control type="text" placeholder="Enter user ID" value={userId} onChange={(e) => setUserId(e.target.value)} />
-                            </Form.Group>
-                        </Col>
-                    </Row> */}
-
-
                     {cookieUtils.getUserRoleFromCookies() ? (
                         <>
                             <Row>

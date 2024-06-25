@@ -165,7 +165,6 @@ const ActivitiesCrud = () => {
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Location</th>
                             <th>Duration</th>
                             <th>Cost</th>
@@ -180,7 +179,6 @@ const ActivitiesCrud = () => {
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>{item.name}</td>
-                                            <td>{item.description}</td>
                                             <td>{item.location}</td>
                                             <td>{item.duration}</td>
                                             <td>{item.cost}</td>

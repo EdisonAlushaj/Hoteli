@@ -86,7 +86,7 @@ const ActivitiesReservationCrud= () => {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>User Id</th>
+                            <th>User Name</th>
                             <th>Activities Id</th>
              
                         </tr>
