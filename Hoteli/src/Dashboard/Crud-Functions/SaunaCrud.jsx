@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {SaunaEndPoint} from'../../endpoints';
+import { SaunaEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -78,8 +78,8 @@ const SaunaCrud = () => {
                 cost: editcost,
                 description: editDescription,
                 image: editImage,
-                hallId: editHallId, 
-                 duration: editDuration
+                hallId: editHallId,
+                duration: editDuration
             });
             toast.success('Sauna updated successfully');
             handleClose();
@@ -149,8 +149,8 @@ const SaunaCrud = () => {
         <>
             <Fragment>
                 <ToastContainer />
-                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Sauna</b></p>
+                <div className='d-flex justify-content-evenly ' style={{ width: "20em", height: "3em", alignItems: "center" }}>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Sauna</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 
@@ -179,9 +179,9 @@ const SaunaCrud = () => {
                                             <td>{item.cost}</td>
                                             <td>{item.description}</td>
                                             <td>
-    <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
-</td>
-                   
+                                                <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                            </td>
+
                                             <td>{item.hallId}</td>
                                             <td>{item.duration}</td>
 
@@ -217,7 +217,7 @@ const SaunaCrud = () => {
                                     value={cost} onChange={(e) => setcost(e.target.value)}
                                 />
                             </Col>
-                         
+
                         </Row>
                         <br />
                         <Row>
@@ -269,7 +269,7 @@ const SaunaCrud = () => {
                                     value={editcost} onChange={(e) => setEditcost(e.target.value)}
                                 />
                             </Col>
-                        
+
                         </Row>
                         <br />
                         <Row>

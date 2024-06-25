@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {MenuDrinkEndPoint} from'../../endpoints';
+import { MenuDrinkEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -134,8 +134,8 @@ const MenuCafeCrud = () => {
         <>
             <Fragment>
                 <ToastContainer />
-                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Drink Table</b></p>
+                <div className='d-flex justify-content-evenly ' style={{ width: "20em", height: "3em", alignItems: "center" }}>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Drink Table</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 
@@ -162,8 +162,8 @@ const MenuCafeCrud = () => {
                                             <td>{item.drinkDescription}</td>
                                             <td>{item.drinkPrice}</td>
                                             <td>
-    <img src={item.drinkImage} style={{ maxWidth: "100px", maxHeight: "100px" }} />
-</td>
+                                                <img src={item.drinkImage} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                            </td>
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editMenuDrink(item)}>Edit</button>
 

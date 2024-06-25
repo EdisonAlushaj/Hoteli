@@ -223,7 +223,10 @@ const RoomCrud2 = () => {
                                             <td>{item.size}</td>
                                             <td>{item.description}</td>
                                             <td>{item.price}</td>
-                                            <td>{item.image}</td>
+                                            {/* <td>{item.image}</td> */}
+                                            <td>
+                                                <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                            </td>
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editStudent(item)}>Edit</button>
 

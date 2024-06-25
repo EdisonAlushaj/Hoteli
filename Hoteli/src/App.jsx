@@ -57,7 +57,7 @@ export const MainLayout = () => {
                 <li><NavLink to="/orderSummary"><i className="lni lni-user"></i></NavLink></li>
               )}
             </ul>
-            <button id="booking-btn" ><NavLink to="/booking" style={{ color: "#fff" }}>BOOK NOW</NavLink></button>
+            <NavLink to="/booking" style={{ color: "#fff" }}><button id="booking-btn" >BOOK NOW</button></NavLink>
           </div>
         </div>
       </header>

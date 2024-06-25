@@ -161,7 +161,10 @@ const MenuCafeCrud = () => {
                                             <td>{item.cafeName}</td>
                                             <td>{item.cafeDescription}</td>
                                             <td>{item.cafePrice}</td>
-                                            <td>{item.cafeImage}</td>
+                                            {/* <td>{item.cafeImage}</td> */}
+                                            <td>
+                                                <img src={item.cafeImage} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                            </td>
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editMenuCafe(item)}>Edit</button>
 

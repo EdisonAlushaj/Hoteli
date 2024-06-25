@@ -176,7 +176,10 @@ const Fitnes = () => {
                                             <td>{item.fitnesName}</td>
                                             <td>{item.description}</td>
                                             <td>{item.price}</td>
-                                            <td>{item.image}</td>
+                                            {/* <td>{item.image}</td> */}
+                                            <td>
+                                                <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                            </td>
                                             <td>{item.hallId}</td>
 
                                             <td className='d-flex flex-row justify-content-evenly'>

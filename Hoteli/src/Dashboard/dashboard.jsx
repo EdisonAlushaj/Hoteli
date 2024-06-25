@@ -166,7 +166,7 @@ const Dashboard = () => {
                 <span className="fw-normal">Fitness</span>
               </NavLink>
             </li>
-            <li className="sidebar-item">
+            {/* <li className="sidebar-item">
               <NavLink
                 to="#"
                 className="sidebar-link"
@@ -175,7 +175,7 @@ const Dashboard = () => {
                 <i className="lni lni-car"></i>
                 <span className="fw-normal">Fitness Equipments</span>
               </NavLink>
-            </li>
+            </li> */}
             <li className="sidebar-item">
               <NavLink
                 to="#"
