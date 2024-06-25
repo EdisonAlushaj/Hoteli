@@ -182,7 +182,10 @@ const ActivitiesCrud = () => {
                                             <td>{item.location}</td>
                                             <td>{item.duration}</td>
                                             <td>{item.cost}</td>
-                                            <td>{item.image}</td>
+                                            {/* <td>{item.image}</td> */}
+                                            <td>
+                                                <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                            </td>
                                            
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editActivities(item)}>Edit</button>

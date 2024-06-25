@@ -167,7 +167,10 @@ const FitnesEquipments = () => {
                                             <td>{index + 1}</td>
                                             <td>{item.gymEqName}</td>
                                             <td>{item.description}</td>
-                                            <td>{item.image}</td>
+                                            {/* <td>{item.image}</td> */}
+                                            <td>
+                                                <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                            </td>
                                             <td>{item.fitnesId}</td>
 
                                             <td className='d-flex flex-row justify-content-evenly'>
