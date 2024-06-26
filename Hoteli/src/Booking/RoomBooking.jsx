@@ -31,16 +31,26 @@ function RoomBooking() {
 
     const fetchAvailableRooms = async (checkInDate2, checkOutDate2) => {
         if (!checkInDate2 || !checkOutDate2) {
-            return; // Do not fetch if either date is not set
+          return; // Do not fetch if either date is not set
         }
+      
+        const today = new Date();
+        const checkInDateObj = new Date(checkInDate2);
+        const checkOutDateObj = new Date(checkOutDate2);
+      
+        if (checkInDateObj < today || checkOutDateObj < today) {
+          toast.error('Cannot book a room in the past. Please select a future date.');
+          return;
+        }
+      
         try {
-            const response = await axios.get(`${RoomBookingEndPoint}/available?checkInDate=${checkInDate2}&checkOutDate=${checkOutDate2}`);
-            setAvailableRooms(response.data); // Assuming response.data contains the list of available rooms
+          const response = await axios.get(`${RoomBookingEndPoint}/available?checkInDate=${checkInDate2}&checkOutDate=${checkOutDate2}`);
+          setAvailableRooms(response.data); // Assuming response.data contains the list of available rooms
         } catch (error) {
-            toast.error('Error fetching available rooms.');
-            console.log(error);
+          toast.error('Error fetching available rooms.');
+          console.log(error);
         }
-    };
+      };
 
     const fetchRoomItems = async () => {
         try {
@@ -252,6 +262,7 @@ function RoomBooking() {
                                     <Form.Control
                                         type="number"
                                         min="1"
+                                        max="6"
                                         value={quantity}
                                         onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
                                     />
@@ -306,6 +317,7 @@ function RoomBooking() {
                                         <Form.Control
                                             type="number"
                                             min="1"
+                                            max="6"
                                             value={item.quantity}
                                             onChange={(e) => handleQuantityChange(e.target.value, index)}
                                         />

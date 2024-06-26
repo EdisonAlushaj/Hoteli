@@ -44,11 +44,54 @@ namespace HotelBackend.Controllers
                 .ThenInclude(odi => odi.MenuDrink)
                 .ToList();
 
+            var shezlongReservations = _context.ShezlongReservations
+                .Where(sr => sr.Id == userId)
+                .Include(sr => sr.Shezlong)
+                .ToList();
+
+            var orderCoffees = _context.OrderCoffees
+               .Where(oc => oc.Id == userId)
+                .Include(oc => oc.OrderCoffeeItems)
+                .ThenInclude(oci => oci.MenuCoffee)
+                .ToList();
+
+            var activitiesReservations = _context.ActivitiesReservations
+                .Where(ar => ar.UserId == userId)
+                .Include(ar => ar.Activities)
+                .ToList();
+
+            var saunaReservations = _context.SaunaReservations
+                .Where(sr => sr.UserId == userId)
+                .Include(sr => sr.Sauna)
+                .ToList();
+
+            var spaReservations = _context.SpaReservations
+                .Where(sr => sr.Id == userId)
+                .Include(sr => sr.Spa)
+                .ToList();
+
+            var tableReservations = _context.TableReservations
+                .Where(tr => tr.Id == userId)
+                .Include(tr => tr.Table)
+                .ToList();
+
+            var fitnesApplies = _context.FitnesApplys
+                .Where(fa => fa.Id == userId)
+                .Include(fa => fa.Fitnes)
+                .ToList();
+
             var summary = new OrderSummaryDto
             {
                 RoomBookings = roomBookings.Select(MapRoomBookingDto).ToList(),
                 Orders = orders.Select(MapOrderToDto).ToList(),
-                OrderDrinks = orderDrinks.Select(MapOrderDrinkToDto).ToList()
+                OrderDrinks = orderDrinks.Select(MapOrderDrinkToDto).ToList(),
+                ShezlongReservations = shezlongReservations.Select(MapShezlongReservationToDto).ToList(),
+                OrderCoffees = orderCoffees.Select(MapOrderCoffeeToDto).ToList(),
+                ActivitiesReservations = activitiesReservations.Select(MapActivitiesReservationToDto).ToList(),
+                SaunaReservations = saunaReservations.Select(MapSaunaReservationToDto).ToList(),
+                SpaReservations = spaReservations.Select(MapSpaReservationToDto).ToList(),
+                TableReservations = tableReservations.Select(MapTableReservationToDto).ToList(),
+                FitnesApplies = fitnesApplies.Select(MapFitnesApplyToDto).ToList()
             };
 
             return Ok(summary);
@@ -164,12 +207,192 @@ namespace HotelBackend.Controllers
                 }).ToArray()
             };
         }
+        private ShezlongReservationDto MapShezlongReservationToDto(ShezlongReservation shezlongReservation)
+        {
+            var user = _context.Users.Find(shezlongReservation.Id);
+            return new ShezlongReservationDto
+            {
+                ReservationId = shezlongReservation.ReservationId,
+                User = new UserDto
+                {
+                    UserId = user.Id,
+                    Name = user.Name
+                },
+                ShezlongId = shezlongReservation.ShezlongId,
+                ReservationDate = shezlongReservation.ReservationDate
+            };
+        }
+        private OrderCoffeeDto MapOrderCoffeeToDto(OrderCoffee orderCoffee)
+        {
+            var user = _context.Users.Find(orderCoffee.Id);
+            return new OrderCoffeeDto
+            {
+                OrderCoffeeId = orderCoffee.OrderCoffeeId,
+                User = new UseriiDto
+                {
+                    Id = user.Id,
+                    Name = user.Name
+                },
+                DeliveryLocation = orderCoffee.DeliveryLocation,
+                DeliveryNumber = orderCoffee.DeliveryNumber,
+                PaymentMethod = orderCoffee.PaymentMethod,
+                TotalOrderPrice = orderCoffee.TotalOrderCoffeePrice,
+                OrderCoffeeItems = orderCoffee.OrderCoffeeItems.Select(oi => new OrderCoffeeItemDto
+                {
+                    MenuCoffeeId = oi.MenuCoffeeId,
+                    CafeName = oi.CafeName,
+                    Price = oi.Price,
+                    Quantity = oi.Quantity
+                }).ToArray()
+            };
+        }
+        private ActivitiesReservationDto MapActivitiesReservationToDto(ActivitiesReservation activitiesReservation)
+        {
+            var user = _context.Users.Find(activitiesReservation.UserId);
+            return new ActivitiesReservationDto
+            {
+                ReservationId = activitiesReservation.ReservationId,
+                User = new UserDto
+                {
+                    UserId = user.Id,
+                    Name = user.Name
+                },
+                ActivitiesId = activitiesReservation.ActivitiesId,
+                ActivitiesName = activitiesReservation.Activities.Name
+            };
+        }
+        private SaunaReservationDto MapSaunaReservationToDto(SaunaReservation saunaReservation)
+        {
+            var user = _context.Users.Find(saunaReservation.UserId);
+            return new SaunaReservationDto
+            {
+                ReservationId = saunaReservation.ReservationId,
+                User = new UserDto
+                {
+                    UserId = user.Id,
+                    Name = user.Name
+                },
+                SaunaId = saunaReservation.SaunaId,
+                SaunaName = saunaReservation.Sauna.Name,
+                ReservationDate = saunaReservation.ReservationDate
+            };
+        }
+
+        private SpaReservationDto MapSpaReservationToDto(SpaReservation spaReservation)
+        {
+            var user = _context.Users.Find(spaReservation.Id);
+            return new SpaReservationDto
+            {
+                ReservationId = spaReservation.ReservationId,
+                User = new UserDto
+                {
+                    UserId = user.Id,
+                    Name = user.Name
+                },
+                SpaId = spaReservation.SpaId,
+                SpaName = spaReservation.Spa.Name,
+                ReservationDate = spaReservation.ReservationDate
+            };
+        }
+
+        private TableReservationDto MapTableReservationToDto(TableReservation tableReservation)
+        {
+            var user = _context.Users.Find(tableReservation.Id);
+            return new TableReservationDto
+            {
+                ReservationId = tableReservation.ReservationId,
+                User = new UserDto
+                {
+                    UserId = user.Id,
+                    Name = user.Name
+                },
+                TableId = tableReservation.TableId,
+                ReservationDate = tableReservation.ReservationDate,
+                MaxGuests = tableReservation.MaxGuests,
+                SpecialRequests = tableReservation.SpecialRequests,
+                Establishment = tableReservation.Establishment
+            };
+        }
+
+        private FitnesApplyDto MapFitnesApplyToDto(FitnesApply fitnesApply)
+        {
+            var user = _context.Users.Find(fitnesApply.Id);
+            return new FitnesApplyDto
+            {
+                ReservationId = fitnesApply.ReservationId,
+                User = new UserDto
+                {
+                    UserId = user.Id,
+                    Name = user.Name
+                },
+                FitnesId = fitnesApply.FitnesId,
+            };
+        }
+
+        public class ShezlongReservationDto
+        {
+            public int ReservationId { get; set; }
+            public UserDto User { get; set; }
+            public int ShezlongId { get; set; }
+            public DateTime ReservationDate { get; set; }
+        }
 
         public class OrderSummaryDto
         {
             public List<RoomBookingDto> RoomBookings { get; set; }
             public List<OrderDto> Orders { get; set; }
             public List<OrderDrinkDto> OrderDrinks { get; set; }
+            public List<ShezlongReservationDto> ShezlongReservations { get; set; }
+            public List<OrderCoffeeDto> OrderCoffees { get; set; }
+            public List<ActivitiesReservationDto> ActivitiesReservations { get; set; }
+            public List<SaunaReservationDto> SaunaReservations { get; set; }
+            public List<SpaReservationDto> SpaReservations { get; set; }
+            public List<TableReservationDto> TableReservations { get; set; }
+            public List<FitnesApplyDto> FitnesApplies { get; set; }
+        }
+
+        public class ActivitiesReservationDto
+        {
+            public int ReservationId { get; set; }
+            public UserDto User { get; set; }
+            public int ActivitiesId { get; set; }
+            public string ActivitiesName { get; set; }
+        }
+
+        public class SaunaReservationDto
+        {
+            public int ReservationId { get; set; }
+            public UserDto User { get; set; }
+            public int SaunaId { get; set; }
+            public string SaunaName { get; set; }
+            public DateTime ReservationDate { get; set; }
+        }
+
+        public class SpaReservationDto
+        {
+            public int ReservationId { get; set; }
+            public UserDto User { get; set; }
+            public int SpaId { get; set; }
+            public string SpaName { get; set; }
+            public DateTime ReservationDate { get; set; }
+        }
+
+        public class TableReservationDto
+        {
+            public int ReservationId { get; set; }
+            public UserDto User { get; set; }
+            public int TableId { get; set; }
+            public DateTime ReservationDate { get; set; }
+            public int MaxGuests { get; set; }
+            public string SpecialRequests { get; set; }
+            public EstablishmentType Establishment { get; set; }
+        }
+
+        public class FitnesApplyDto
+        {
+            public int ReservationId { get; set; }
+            public UserDto User { get; set; }
+            public int FitnesId { get; set; }
         }
     }
 }
