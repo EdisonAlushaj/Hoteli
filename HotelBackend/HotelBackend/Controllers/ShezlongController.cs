@@ -16,8 +16,13 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-
         [HttpGet]
+        public async Task<ActionResult<IEnumerable<Shezlong>>> GetAllShezlongs()
+        {
+            var spa = await _context.Shezlongs.ToListAsync();
+            return Ok(spa);
+        }
+        [HttpGet("byPool")]
         public async Task<ActionResult<IEnumerable<Shezlong>>> GetShezlongs([FromQuery] int poolId)
         {
             return await _context.Shezlongs.Where(s => s.PoolId == poolId).ToListAsync();

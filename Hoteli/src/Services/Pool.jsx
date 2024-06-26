@@ -34,7 +34,7 @@ const Pool = () => {
     const fetchShezlongs = async () => {
       if (selectedPool) {
         try {
-          const response = await axios.get(`https://localhost:7189/api/Shezlong`, {
+          const response = await axios.get(`https://localhost:7189/api/Shezlong/byPool`, {
             params: { poolId: selectedPool.id }
           });
           setShezlongs(response.data);

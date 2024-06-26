@@ -107,7 +107,7 @@ const TableReservation = () => {
                     <thead>
                         <tr>
                             <th>ReservationId</th>
-                            <th>UserId</th>
+                            <th>User Name</th>
                             <th>TableId</th>
                             <th>Reservation Date</th>
                             <th>Max Guests</th>
@@ -122,7 +122,7 @@ const TableReservation = () => {
                                 data.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.reservationId}</td>
-                                        <td>{item.id}</td>
+                                        <td>{item.user.name}</td>
                                         <td>{item.tableId}</td>
                                         <td>{new Date(item.reservationDate).toLocaleString()}</td>
                                         <td>{item.maxGuests}</td>

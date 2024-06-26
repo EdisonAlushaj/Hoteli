@@ -44,286 +44,283 @@ const Dashboard = () => {
     <>
       <div className="wrapper">
         <aside id="sidebar" className={isSidebarExpanded ? "expand" : ""}>
-          <div className="d-flex">
-            <button
-              className="toggle-btn"
-              type="button"
-              onClick={toggleSidebar}
-            >
-              <i className="lni lni-grid-alt"></i>
-            </button>
-            <div className="sidebar-logo">
-              <a href="javascript:void(0)">Dashboard</a>
-            </div>
-          </div>
-          <ul className="sidebar-nav">
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("userInformation")}
-              >
-                <i className="lni lni-user"></i>
-                <span className="fw-normal">Users</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("contact")}
-              >
-                <i className="lni lni-cog"></i>
-                <span className="fw-normal">Contact</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("rooms")}
-              >
-                <i className="lni lni-agenda"></i>
-                <span className="fw-normal">Rooms</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("foodMenu")}
-              >
-                <i className="lni lni-coffee-cup"></i>
-                <span className="fw-normal">Food Menu</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("cafeMenu")}
-              >
-                <i className="lni lni-coffee-cup"></i>
-                <span className="fw-normal">Cafe Menu</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("drinkMenu")}
-              >
-                <i className="lni lni-coffee-cup"></i>
-                <span className="fw-normal">Drink Menu</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("tables")}
-              >
-                <i className="lni lni-dinner"></i>
-                <span className="fw-normal">Tables</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("tableReservation")}
-              >
-                <i className="lni lni-dinner"></i>
-                <span className="fw-normal">Table Reservation</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("hall")}
-              >
-                <i className="lni lni-calendar"></i>
-                <span className="fw-normal">Hall</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("pool")}
-              >
-                <i className="lni lni-calendar"></i>
-                <span className="fw-normal">Pool</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("fitnes")}
-              >
-                <i className="lni lni-car"></i>
-                <span className="fw-normal">Fitness</span>
-              </NavLink>
-            </li>
-            {/* <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("fitnesEquipments")}
-              >
-                <i className="lni lni-car"></i>
-                <span className="fw-normal">Fitness Equipments</span>
-              </NavLink>
-            </li> */}
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("gymReservation")}
-              >
-                <i className="lni lni-steam"></i>
-                <span className="fw-normal">Gym Reservation</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("spa")}
-              >
-                <i className="lni lni-steam"></i>
-                <span className="fw-normal">Spa</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("spaReservation")}
-              >
-                <i className="lni lni-steam"></i>
-                <span className="fw-normal">Spa Reservation</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("sauna")}
-              >
-                <i className="lni lni-steam"></i>
-                <span className="fw-normal">Sauna</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("saunaReservation")}
-              >
-                <i className="lni lni-steam"></i>
-                <span className="fw-normal">Sauna Reservation</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("shezlong")}
-              >
-                <i className="lni lni-checkmark-circle"></i>
-                <span className="fw-normal">Shezlong</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("shezlongReservation")}
-              >
-                <i className="lni lni-checkmark-circle"></i>
-                <span className="fw-normal">Shezlong Reservation</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("activities")}
-              >
-                <i className="lni lni-checkmark-circle"></i>
-                <span className="fw-normal">Activities</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("activitiesReservation")}
-              >
-                <i className="lni lni-checkmark-circle"></i>
-                <span className="fw-normal">Activities Reservation</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("roomBooking")}
-              >
-                <i className="lni lni-calendar"></i>
-                <span className="fw-normal">Room Booking</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("about")}
-              >
-                <i className="lni lni-calendar"></i>
-                <span className="fw-normal">About</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("order")}
-              >
-                <i className="lni lni-cart"></i>
-                <span className="fw-normal">Order Food</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("orderdrink")}
-              >
-                <i className="lni lni-cart"></i>
-                <span className="fw-normal">Order Drink</span>
-              </NavLink>
-            </li>
-            <li className="sidebar-item">
-              <NavLink
-                to="#"
-                className="sidebar-link"
-                onClick={() => toggleTable("ordercoffee")}
-              >
-                <i className="lni lni-cart"></i>
-                <span className="fw-normal">Order Coffee</span>
-              </NavLink>
-            </li>
-          </ul>
-          <div className="sidebar-footer">
-            <NavLink to="/home" className="sidebar-link">
-              <i className="lni lni-exit"></i>
-              <span className="fw-normal">Logout</span>
-            </NavLink>
-          </div>
+        <div className="d-flex">
+  <button className="toggle-btn" type="button" onClick={toggleSidebar}>
+    <i className="lni lni-grid-alt"></i>
+  </button>
+  <div className="sidebar-logo">
+    <a href="javascript:void(0)">Dashboard</a>
+  </div>
+</div>
+<ul className="sidebar-nav">
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("about")}
+    >
+      <i className="lni lni-calendar"></i>
+      <span className="fw-normal">About</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("activities")}
+    >
+      <i className="lni lni-checkmark-circle"></i>
+      <span className="fw-normal">Activities</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("activitiesReservation")}
+    >
+      <i className="lni lni-checkmark-circle"></i>
+      <span className="fw-normal">Activities Reservation</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("cafeMenu")}
+    >
+      <i className="lni lni-coffee-cup"></i>
+      <span className="fw-normal">Cafe Menu</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("contact")}
+    >
+      <i className="lni lni-cog"></i>
+      <span className="fw-normal">Contact</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("drinkMenu")}
+    >
+      <i className="lni lni-coffee-cup"></i>
+      <span className="fw-normal">Drink Menu</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("fitnes")}
+    >
+      <i className="lni lni-car"></i>
+      <span className="fw-normal">Fitness</span>
+    </NavLink>
+  </li>
+  {/* <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("fitnesEquipments")}
+    >
+      <i className="lni lni-car"></i>
+      <span className="fw-normal">Fitness Equipments</span>
+    </NavLink>
+  </li> */}
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("foodMenu")}
+    >
+      <i className="lni lni-coffee-cup"></i>
+      <span className="fw-normal">Food Menu</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("gymReservation")}
+    >
+      <i className="lni lni-steam"></i>
+      <span className="fw-normal">Gym Reservation</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("hall")}
+    >
+      <i className="lni lni-calendar"></i>
+      <span className="fw-normal">Hall</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("order")}
+    >
+      <i className="lni lni-cart"></i>
+      <span className="fw-normal">Order Food</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("ordercoffee")}
+    >
+      <i className="lni lni-cart"></i>
+      <span className="fw-normal">Order Coffee</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("orderdrink")}
+    >
+      <i className="lni lni-cart"></i>
+      <span className="fw-normal">Order Drink</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("pool")}
+    >
+      <i className="lni lni-calendar"></i>
+      <span className="fw-normal">Pool</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("roomBooking")}
+    >
+      <i className="lni lni-calendar"></i>
+      <span className="fw-normal">Room Booking</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("rooms")}
+    >
+      <i className="lni lni-agenda"></i>
+      <span className="fw-normal">Rooms</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("sauna")}
+    >
+      <i className="lni lni-steam"></i>
+      <span className="fw-normal">Sauna</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("saunaReservation")}
+    >
+      <i className="lni lni-steam"></i>
+      <span className="fw-normal">Sauna Reservation</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("shezlong")}
+    >
+      <i className="lni lni-checkmark-circle"></i>
+      <span className="fw-normal">Shezlong</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("shezlongReservation")}
+    >
+      <i className="lni lni-checkmark-circle"></i>
+      <span className="fw-normal">Shezlong Reservation</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("spa")}
+    >
+      <i className="lni lni-steam"></i>
+      <span className="fw-normal">Spa</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("spaReservation")}
+    >
+      <i className="lni lni-steam"></i>
+      <span className="fw-normal">Spa Reservation</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("tableReservation")}
+    >
+      <i className="lni lni-dinner"></i>
+      <span className="fw-normal">Table Reservation</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("tables")}
+    >
+      <i className="lni lni-dinner"></i>
+      <span className="fw-normal">Tables</span>
+    </NavLink>
+  </li>
+  <li className="sidebar-item">
+    <NavLink
+      to="#"
+      className="sidebar-link"
+      onClick={() => toggleTable("userInformation")}
+    >
+      <i className="lni lni-user"></i>
+      <span className="fw-normal">Users</span>
+    </NavLink>
+  </li>
+</ul>
+<div className="sidebar-footer">
+  <NavLink to="/home" className="sidebar-link">
+    <i className="lni lni-exit"></i>
+    <span className="fw-normal">Logout</span>
+  </NavLink>
+</div>
+
         </aside>
         <div className="main">
           <main className="content px-3 py-4">

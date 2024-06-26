@@ -97,14 +97,22 @@ const TableCrud = () => {
     }
 
     const handleSave = () => {
-        handleShowAdd();
+        // Check if the form data is set correctly
+        if (!tableNumber || !maxGuests || !establishment) {
+            toast.error("All fields are required");
+            return;
+        }
+
+        console.log('Table Number:', tableNumber);
+        console.log('Max Guests:', maxGuests);
+        console.log('Establishment:', establishment);
+
         const url = TableEndPoint;
         const data = {
             "tableNumber": tableNumber,
             "maxGuests": maxGuests,
             "establishment": establishment,
-
-        }
+        };
 
         axios.post(url, data)
             .then((result) => {
@@ -113,7 +121,11 @@ const TableCrud = () => {
                 toast.success('Table has been added.');
                 handleCloseAdd();
             })
-    }
+            .catch((error) => {
+                console.error("Error adding Table:", error);
+                toast.error("Error adding Table. Please try again.");
+            });
+    };
 
     const clear = () => {
         setTableNumber('');
@@ -234,9 +246,6 @@ const TableCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                {/* <input type="text" className='form-control' placeholder='Enter Establishment'
-                                    value={editEstablishment} onChange={(e) => setEditEstablishment(e.target.value)}
-                                /> */}
                                 <select className='form-control' value={editEstablishment} onChange={(e) => setEditEstablishment(e.target.value)}>
                                     <option value="Restaurant">Restaurant</option>
                                     <option value="Bar">Bar</option>

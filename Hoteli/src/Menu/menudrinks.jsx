@@ -88,7 +88,7 @@ const MenuDrinks = () => {
                 orderDrinkItems: selectedItems.map(item => ({
                     menuDrinkId: parseInt(item.id),
                     quantity: parseInt(item.quantity),
-                    drinkName: item.drinkName
+                    drinkkName: item.drinkName
                 })),
                 totalOrderPrice: calculateTotalPrice()
             };

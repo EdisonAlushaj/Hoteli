@@ -15,7 +15,6 @@ const Activities = () => {
       try {
         const response = await axios.get('https://localhost:7189/api/Activities');
         setActivities(response.data);
-        // Fetch applied activities for the current user
         const appliedResponse = await axios.get(`https://localhost:7189/api/UserActivities/${userId}`);
         const appliedIds = new Set(appliedResponse.data.map(item => item.activityId));
         setAppliedActivities(appliedIds);
@@ -36,7 +35,6 @@ const Activities = () => {
     try {
       await axios.post(`https://localhost:7189/api/ActivitiesReservation?userId=${userId}&activitiesId=${activityId}`);
       toast.success('Applied successfully!');
-      // Update locally applied activities
       setAppliedActivities(prev => new Set([...prev, activityId]));
     } catch (error) {
       console.error('Error applying for activity:', error);

@@ -84,7 +84,7 @@ const ShezlongReservation= () => {
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>User Id</th>
+                            <th>User Name</th>
                             <th>Shezlong Id</th>
                             <th>Date</th>
                         </tr>
@@ -94,7 +94,7 @@ const ShezlongReservation= () => {
                             data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
-                                    <td>{item.id}</td>
+                                    <td>{item.userr.name}</td>
                                     <td>{item.shezlongId}</td>
                                     <td>{item.reservationDate}</td>
                                     <td className='d-flex flex-row justify-content-evenly'>

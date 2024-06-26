@@ -173,7 +173,7 @@ const AboutCrud = () => {
 
                 <Modal show={showAdd} onHide={handleCloseAdd}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add About Conten</Modal.Title>
+                        <Modal.Title>Add About Content</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
