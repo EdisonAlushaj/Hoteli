@@ -57,6 +57,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddAuthorization();
+
 // Configure CORS
 builder.Services.AddCors(options =>
 {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {SpaEndPoint} from'../../endpoints';
+import { SpaEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const SpaCrud = () => {
 
@@ -35,15 +36,22 @@ const SpaCrud = () => {
     const [editDuration, setEditDuration] = useState('')
     const [editHallId, setEditHallId] = useState('')
 
-
     const [data, setData] = useState([]);
+
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
 
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(SpaEndPoint)
+        axios.get(SpaEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -60,7 +68,7 @@ const SpaCrud = () => {
         setEditDescription(cafes.description);
         setEditDuration(cafes.durationInMinutes);
         setEditHallId(cafes.hallId);
-     
+
         setId(cafes.id);
     }
     async function Load() {
@@ -79,6 +87,10 @@ const SpaCrud = () => {
                 description: editDescription,
                 durationInMinutes: editDuration,
                 hallId: editHallId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('Spa updated successfully');
             handleClose();
@@ -92,7 +104,11 @@ const SpaCrud = () => {
 
     const handelDelete = (id) => {
         if (window, confirm("Are you sure to delete this spa.") == true) {
-            axios.delete(`${SpaEndPoint}/${id}`)
+            axios.delete(`${SpaEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('Spa has been deleted');
@@ -116,7 +132,11 @@ const SpaCrud = () => {
             "hallId": hallId
         }
 
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
@@ -131,12 +151,12 @@ const SpaCrud = () => {
         setDescription('');
         setDuration('');
         setHallId('');
-      
+
         setEditName('');
         setEditPrice('');
         setEditDuration('');
         setEditHallId('');
-     
+
         setEditId('');
     }
 
@@ -144,8 +164,8 @@ const SpaCrud = () => {
         <>
             <Fragment>
                 <ToastContainer />
-                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Spa Table</b></p>
+                <div className='d-flex justify-content-evenly ' style={{ width: "20em", height: "3em", alignItems: "center" }}>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Spa Table</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 
@@ -174,7 +194,7 @@ const SpaCrud = () => {
                                             <td>{item.description}</td>
                                             <td>{item.durationInMinutes}</td>
                                             <td>{item.hallId}</td>
-                                            
+
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editSpa(item)}>Edit</button>
 
@@ -207,7 +227,7 @@ const SpaCrud = () => {
                                     value={price} onChange={(e) => setPrice(e.target.value)}
                                 />
                             </Col>
-                         
+
                         </Row>
                         <br />
                         <Row>
@@ -226,7 +246,7 @@ const SpaCrud = () => {
                                     value={hallId} onChange={(e) => setHallId(e.target.value)}
                                 />
                             </Col>
-                      
+
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
@@ -255,7 +275,7 @@ const SpaCrud = () => {
                                     value={editPrice} onChange={(e) => setEditPrice(e.target.value)}
                                 />
                             </Col>
-                        
+
                         </Row>
                         <br />
                         <Row>
@@ -274,7 +294,7 @@ const SpaCrud = () => {
                                     value={editHallId} onChange={(e) => setEditHallId(e.target.value)}
                                 />
                             </Col>
-                        
+
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>

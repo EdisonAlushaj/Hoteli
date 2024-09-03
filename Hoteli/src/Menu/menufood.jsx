@@ -20,13 +20,21 @@ const MenuFood = () => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [foodItems, setFoodItems] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies();
+    }
+
     useEffect(() => {
         fetchFoodItems();
     }, []);
 
     const fetchFoodItems = async () => {
         try {
-            const response = await axios.get('https://localhost:7189/api/MenuFood');
+            const response = await axios.get('https://localhost:7189/api/MenuFood', {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            });
 
             console.log('Fetched Food Items:', response.data);
 
@@ -97,6 +105,7 @@ const MenuFood = () => {
 
             const response = await axios.post('https://localhost:7189/api/Order', orderData, {
                 headers: {
+                    Authorization: `Bearer ${getToken()}`,
                     'Content-Type': 'application/json'
                 }
             });

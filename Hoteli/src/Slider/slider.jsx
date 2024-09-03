@@ -4,9 +4,11 @@ import foto1 from './foto-1.jpg';
 import foto2 from './foto-2.jpg';
 import foto3 from './foto-3.jpg';
 import foto4 from './foto-4.jpg';
+import foto5 from './foto-5.jpg';
+import foto6 from './foto-6.jpg';
 
 const Slider = () => {
-  const images = [foto1, foto2, foto3, foto4];
+  const images = [foto5, foto2, foto3, foto6];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {

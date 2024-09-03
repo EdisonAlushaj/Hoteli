@@ -15,10 +15,18 @@ const Reservation = () => {
     const [establishment, setEstablishment] = useState('');
     const [tables, setTables] = useState([]); // State for tables
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         if (establishment) {
             // Fetch tables based on establishment
-            axios.get(`https://localhost:7189/api/Table/by-establishment/${establishment}`)
+            axios.get(`https://localhost:7189/api/Table/by-establishment/${establishment}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then(response => {
                     setTables(response.data);
                 })
@@ -33,7 +41,11 @@ const Reservation = () => {
     useEffect(() => {
         if (tableId) {
             // Fetch the selected table details
-            axios.get(`https://localhost:7189/api/Table/${tableId}`)
+            axios.get(`https://localhost:7189/api/Table/${tableId}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then(response => {
                     setMaxGuests(response.data.maxGuests);
                 })
@@ -61,7 +73,11 @@ const Reservation = () => {
         const specialRequestText = specialRequest.trim() === '' ? 'none' : specialRequest;
         // Fetch existing reservations for the specified table
         try {
-            const existingReservations = await axios.get(`https://localhost:7189/api/TableReservations`);
+            const existingReservations = await axios.get(`https://localhost:7189/api/TableReservations`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            });
 
             // Check for overlapping reservations
             const reservationTime = new Date(reservationDatetime).getTime();
@@ -88,7 +104,11 @@ const Reservation = () => {
         // Create the reservation
         const url = `https://localhost:7189/api/TableReservations?userId=${userId}&tableId=${tableId}&reservationDate=${reservationDatetime}&maxGuests=${maxGuests}&specialRequests=${specialRequestText}&establishment=${establishment}`;
 
-        axios.post(url)
+        axios.post(url, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 if (result.status === 201) {
                     toast.success('Table reservation has been added.');
@@ -170,7 +190,7 @@ const Reservation = () => {
                             <Row>
                                 <Col>
                                     <Form.Group className='d-flex justify-content-center'>
-                                        <p style={{marginBottom: '0'}}>Please Log In or Sign Up</p>
+                                        <p style={{ marginBottom: '0' }}>Please Log In or Sign Up</p>
                                     </Form.Group>
                                 </Col>
                             </Row>

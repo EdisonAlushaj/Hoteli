@@ -24,3 +24,16 @@ C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\
 C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\refint\SharedClassLibrary.dll
 C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.pdb
 C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\ref\SharedClassLibrary.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\bin\Debug\net8.0\SharedClassLibrary.deps.json
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\bin\Debug\net8.0\SharedClassLibrary.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\bin\Debug\net8.0\SharedClassLibrary.pdb
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.csproj.AssemblyReference.cache
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.AssemblyInfoInputs.cache
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.AssemblyInfo.cs
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.sourcelink.json
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\refint\SharedClassLibrary.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\SharedClassLibrary.pdb
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\obj\Debug\net8.0\ref\SharedClassLibrary.dll

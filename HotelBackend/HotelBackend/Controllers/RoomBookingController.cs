@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<IActionResult> CreateBooking([FromBody] RoomBookingCreationDto roomBookingDto)
         {
             if (roomBookingDto == null || roomBookingDto.RoomBookingItems == null || roomBookingDto.RoomBookingItems.Length == 0)
@@ -99,7 +100,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetRoomBookingById), new { id = roomBooking.RoomBookingId }, responseDto);
         }
 
-        [HttpGet("available")]
+        [HttpGet("available"), Authorize]
         public async Task<IActionResult> GetAvailableRooms(DateTime checkInDate, DateTime checkOutDate)
         {
             if (checkInDate > checkOutDate)
@@ -131,7 +132,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public IActionResult GetAllOrders()
         {
             var roomBookings = _context.RoomBookings
@@ -149,7 +150,7 @@ namespace HotelBackend.Controllers
             return Ok(roomDtos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public IActionResult GetRoomBookingById(int id)
         {
             var roomBooking = _context.RoomBookings
@@ -213,7 +214,7 @@ namespace HotelBackend.Controllers
             };
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public IActionResult DeleteRoomBooking(int id)
         {
             var roomBooking = _context.RoomBookings.Find(id);

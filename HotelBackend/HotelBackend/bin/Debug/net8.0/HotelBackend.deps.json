@@ -12,6 +12,7 @@
           "Microsoft.AspNetCore.Cors": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.4",
           "Microsoft.EntityFrameworkCore": "8.0.4",
+          "Microsoft.EntityFrameworkCore.Design": "8.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.4",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.4",
           "SharedClassLibrary": "1.0.0",
@@ -1050,7 +1051,10 @@
           "Swashbuckle.AspNetCore.Filters": "8.0.2"
         },
         "runtime": {
-          "SharedClassLibrary.dll": {}
+          "SharedClassLibrary.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

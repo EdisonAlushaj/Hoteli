@@ -10,12 +10,26 @@ const Activities = () => {
   const [appliedActivities, setAppliedActivities] = useState(new Set());
   const userId = cookieUtils.getUserIdFromCookies();
 
+  const getToken = () => {
+    return cookieUtils.getTokenFromCookies();
+  }
+
   useEffect(() => {
     const fetchActivities = async () => {
+      const token = getToken();
       try {
-        const response = await axios.get('https://localhost:7189/api/Activities');
+        const response = await axios.get('https://localhost:7189/api/Activities', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setActivities(response.data);
-        const appliedResponse = await axios.get(`https://localhost:7189/api/UserActivities/${userId}`);
+
+        const appliedResponse = await axios.get(`https://localhost:7189/api/UserActivities/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const appliedIds = new Set(appliedResponse.data.map(item => item.activityId));
         setAppliedActivities(appliedIds);
       } catch (error) {
@@ -32,8 +46,13 @@ const Activities = () => {
       return;
     }
 
+    const token = getToken();
     try {
-      await axios.post(`https://localhost:7189/api/ActivitiesReservation?userId=${userId}&activitiesId=${activityId}`);
+      await axios.post(`https://localhost:7189/api/ActivitiesReservation?userId=${userId}&activitiesId=${activityId}`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success('Applied successfully!');
       setAppliedActivities(prev => new Set([...prev, activityId]));
     } catch (error) {

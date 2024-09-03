@@ -92,3 +92,37 @@ Header{
     width: 100%;
   
   }
+
+/* Add this media query for responsiveness */
+@media only screen and (max-width: 600px) {
+  Header {
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #logo {
+    height: 5em; /* Adjust height for smaller screens */
+  }
+
+  Header ul {
+    flex-direction: column;
+    width: auto;
+    margin-left: 0;
+  }
+
+  Header li {
+    margin: 1em 0; /* Adjust margin for smaller screens */
+  }
+
+  #booking-btn {
+    width: 100%; /* Make button full width */
+    margin-top: 1em; /* Add some space above the button */
+  }
+
+  .dropdown-content {
+    min-width: 120px; /* Adjust dropdown width for smaller screens */
+  }
+
+  /* Add any other responsive styles as needed */
+}

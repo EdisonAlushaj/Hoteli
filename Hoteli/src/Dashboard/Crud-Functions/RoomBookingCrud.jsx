@@ -20,12 +20,20 @@ const RoomBooking = () => {
     const [roomBookingItems, setRoomBookingItems] = useState([{ roomId: '', quantity: '' }]);
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies();
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(RoomBookingEndPoint)
+        axios.get(RoomBookingEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -42,7 +50,11 @@ const RoomBooking = () => {
             setData(data.filter(item => item.roomBookingId !== id));
 
             // Send request to delete order from the server
-            axios.delete(`${RoomBookingEndPoint}/${id}`)
+            axios.delete(`${RoomBookingEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Room booking has been deleted');
@@ -75,7 +87,11 @@ const RoomBooking = () => {
             }))
         };
 
-        axios.post(RoomBookingEndPoint, RoomBookingDto)
+        axios.post(RoomBookingEndPoint, RoomBookingDto, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();

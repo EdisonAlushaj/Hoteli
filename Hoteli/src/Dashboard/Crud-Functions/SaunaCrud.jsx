@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const SaunaCrud = () => {
 
@@ -38,12 +39,20 @@ const SaunaCrud = () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(SaunaEndPoint)
+        axios.get(SaunaEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -80,6 +89,10 @@ const SaunaCrud = () => {
                 image: editImage,
                 hallId: editHallId,
                 duration: editDuration
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('Sauna updated successfully');
             handleClose();
@@ -93,7 +106,11 @@ const SaunaCrud = () => {
 
     const handelDelete = (id) => {
         if (window, confirm("Are you sure to delete this Sauna.") == true) {
-            axios.delete(`${SaunaEndPoint}/${id}`)
+            axios.delete(`${SaunaEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('Sauna has been deleted');
@@ -118,7 +135,11 @@ const SaunaCrud = () => {
             "duration": duration
         }
 
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();

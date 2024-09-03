@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<IEnumerable<ShezlongReservation>>> GetShezlongReservation()
         {
             var shezlongreservation = await _context.ShezlongReservations
@@ -31,7 +32,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<ShezlongReservation>> GetShezlongReservationById(int id)
         {
             var ShezlongReservation = await _context.ShezlongReservations.FindAsync(id);
@@ -41,7 +42,7 @@ namespace HotelBackend.Controllers
             return Ok(ShezlongReservation);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<ShezlongReservation>> AddShezlongReservation([FromQuery] string userId, [FromQuery] int shezlongId, [FromQuery] DateTime reservationDate)
         {
             // Check if the shezlong is already reserved on the selected date
@@ -75,7 +76,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<ShezlongReservation>> DeleteShezlongReservation(int id)
         {
             var shezlongReservation = await _context.ShezlongReservations.FindAsync(id);

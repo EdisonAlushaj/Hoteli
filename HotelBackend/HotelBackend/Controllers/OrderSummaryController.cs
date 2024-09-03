@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet("summary/{userId}")]
+        [HttpGet("summary/{userId}"), Authorize]
         public IActionResult GetOrderSummary(string userId)
         {
             var user = _context.Users.Find(userId);

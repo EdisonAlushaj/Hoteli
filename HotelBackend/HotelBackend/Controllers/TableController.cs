@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,14 +21,14 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<Table>>> GetAllTables()
         {
             var tables = await _context.Tables.ToListAsync();
             return Ok(tables);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<Table>> GetTable(int id)
         {
             var table = await _context.Tables.FindAsync(id);
@@ -36,7 +37,7 @@ namespace HotelBackend.Controllers
             return Ok(table);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<List<Table>>> AddTable(Table table)
         {
             _context.Tables.Add(table);
@@ -44,7 +45,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Tables.ToListAsync());
         }
 
-        [HttpPatch("UpdateTable/{id}")]
+        [HttpPatch("UpdateTable/{id}"), Authorize]
         public async Task<Table> UpdateTable(Table objTable)
         {
             _context.Entry(objTable).State = EntityState.Modified;
@@ -52,7 +53,7 @@ namespace HotelBackend.Controllers
             return objTable;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<Table>>> DeleteTable(int id)
         {
             var dbTable = await _context.Tables.FindAsync(id);
@@ -65,7 +66,7 @@ namespace HotelBackend.Controllers
         }
 
         // New endpoint to get tables by establishment type
-        [HttpGet("by-establishment/{establishment}")]
+        [HttpGet("by-establishment/{establishment}"), Authorize]
         public async Task<ActionResult<List<Table>>> GetTablesByEstablishment(EstablishmentType establishment)
         {
             var tables = await _context.Tables

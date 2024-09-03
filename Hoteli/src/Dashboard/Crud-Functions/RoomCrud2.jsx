@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {RoomEndPoint} from'../../endpoints';
+import { RoomEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const RoomCrud2 = () => {
 
@@ -39,12 +40,20 @@ const RoomCrud2 = () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(RoomEndPoint)
+        axios.get(RoomEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -82,6 +91,10 @@ const RoomCrud2 = () => {
                 description: editDescription,
                 price: editPrice,
                 image: editImage,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('Room updated successfully');
             handleClose();
@@ -94,7 +107,11 @@ const RoomCrud2 = () => {
 
     const handelDelete = (id) => {
         if (window, confirm("Are you sure to delete this room.") == true) {
-            axios.delete(`${RoomEndPoint}/${id}`)
+            axios.delete(`${RoomEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('Room has been deleted');
@@ -119,7 +136,11 @@ const RoomCrud2 = () => {
             "image": image
         }
 
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
@@ -192,8 +213,8 @@ const RoomCrud2 = () => {
                     </Row>
                 </Container> */}
 
-                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Room Table</b></p>
+                <div className='d-flex justify-content-evenly ' style={{ width: "20em", height: "3em", alignItems: "center" }}>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Room Table</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 

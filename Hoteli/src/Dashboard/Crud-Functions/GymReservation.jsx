@@ -9,19 +9,27 @@ import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import cookieUtils from '../../cookieUtils.jsx';
 
-const GymReservation= () => {
+const GymReservation = () => {
     const [showAdd, setShowAdd] = useState(false);
 
     const userId = cookieUtils.getUserIdFromCookies();
     const [fitnesId, setfitnesId] = useState('');
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(GymReservationEndPoint)
+        axios.get(GymReservationEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -33,7 +41,11 @@ const GymReservation= () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure to delete this Fitnes Apply?")) {
-            axios.delete(`${GymReservationEndPoint}/${id}`)
+            axios.delete(`${GymReservationEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Fitnes Apply has been deleted');
@@ -48,12 +60,16 @@ const GymReservation= () => {
                 });
         }
     };
-    
+
 
     const handleSave = () => {
         const url = `${GymReservationEndPoint}?userId=${userId}&fitnesId=${fitnesId}`;
 
-        axios.post(url)
+        axios.post(url, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
@@ -122,7 +138,7 @@ const GymReservation= () => {
                                     value={fitnesId} onChange={(e) => setfitnesId(e.target.value)}
                                 />
                             </Col>
-                            
+
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>

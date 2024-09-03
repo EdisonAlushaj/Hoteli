@@ -20,12 +20,20 @@ const OrderDrinks = () => {
     const [orderDrinkItems, setOrderDrinkItems] = useState([{ menuDrinkId: '', quantity: '' }]);
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies();
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(OrderDrinkEndPoints)
+        axios.get(OrderDrinkEndPoints, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -40,9 +48,13 @@ const OrderDrinks = () => {
         if (window.confirm("Are you sure to delete this drink Order?")) {
             // Update UI immediately
             setData(data.filter(item => item.orderDrinkId !== id));
-            
+
             // Send request to delete order from the server
-            axios.delete(`${OrderDrinkEndPoints}/${id}`)
+            axios.delete(`${OrderDrinkEndPoints}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Order has been deleted');
@@ -55,8 +67,8 @@ const OrderDrinks = () => {
                 });
         }
     };
-    
-    
+
+
     const handleSave = () => {
         const orderDto = {
             userId: userId,
@@ -64,13 +76,17 @@ const OrderDrinks = () => {
             deliveryNumber: deliveryNumber,
             paymentMethod: paymentMethod,
             orderDrinkItems: orderDrinkItems.map(item => ({
-                menuDrinkId: parseInt(item.menuDrinkId,10),
-                quantity: parseInt(item.quantity,10),
+                menuDrinkId: parseInt(item.menuDrinkId, 10),
+                quantity: parseInt(item.quantity, 10),
                 drinkkName: 'k'
             }))
         };
 
-        axios.post(OrderDrinkEndPoints, orderDto)
+        axios.post(OrderDrinkEndPoints, orderDto, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
@@ -136,18 +152,18 @@ const OrderDrinks = () => {
                                     <td>{item.paymentMethod}</td>
                                     <strong><td>${item.totalOrderDrinkPrice}$</td></strong>
                                     <td>
-    {item.orderDrinkItems.map((orderDrinkItem, idx) => (
-        <div key={idx} className="card mb-2" style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
-            <div className="card-body">
-                <p className="card-text"><strong>Drink ID:</strong> {orderDrinkItem.menuDrinkId}</p>
-                <p className="card-text"><strong>Drink Name:</strong> {orderDrinkItem.drinkkName}</p>
-                <p className="card-text"><strong>Price:</strong> ${orderDrinkItem.price / orderDrinkItem.quantity} </p>
-                <p className="card-text"><strong>Quantity: </strong> {orderDrinkItem.quantity} </p>
-                <p className="card-text"><strong>Price * Quantity:</strong>  ${orderDrinkItem.price}</p>
-            </div>
-        </div>
-    ))}
-</td>
+                                        {item.orderDrinkItems.map((orderDrinkItem, idx) => (
+                                            <div key={idx} className="card mb-2" style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
+                                                <div className="card-body">
+                                                    <p className="card-text"><strong>Drink ID:</strong> {orderDrinkItem.menuDrinkId}</p>
+                                                    <p className="card-text"><strong>Drink Name:</strong> {orderDrinkItem.drinkkName}</p>
+                                                    <p className="card-text"><strong>Price:</strong> ${orderDrinkItem.price / orderDrinkItem.quantity} </p>
+                                                    <p className="card-text"><strong>Quantity: </strong> {orderDrinkItem.quantity} </p>
+                                                    <p className="card-text"><strong>Price * Quantity:</strong>  ${orderDrinkItem.price}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </td>
                                     <td className='d-flex flex-row justify-content-evenly'>
                                         <button className="btn btn-rounded btn-danger" onClick={() => handleDelete(item.orderDrinkId)}>Delete</button>
                                     </td>

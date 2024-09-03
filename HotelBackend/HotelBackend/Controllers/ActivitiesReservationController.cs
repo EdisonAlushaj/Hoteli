@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<IEnumerable<ActivitiesReservation>>> GetActivitiesReservation()
         {
             var ActivitiesReservation = await _context.ActivitiesReservations
@@ -32,7 +33,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<ActivitiesReservation>> GetActivitiesReservationById(int id)
         {
             var ActivitiesReservation = await _context.ActivitiesReservations.FindAsync(id);
@@ -42,7 +43,7 @@ namespace HotelBackend.Controllers
             return Ok(ActivitiesReservation);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<ActivitiesReservation>> AddActivitiesReservation([FromQuery] string userId, [FromQuery] int activitiesId)
         {
             var activitie = await _context.Activities.FindAsync(activitiesId);
@@ -64,7 +65,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<ActivitiesReservation>> DeleteActivitiesReservation(int id)
         {
             var ActivitiesReservation = await _context.ActivitiesReservations.FindAsync(id);

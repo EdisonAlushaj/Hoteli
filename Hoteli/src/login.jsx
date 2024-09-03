@@ -34,7 +34,10 @@ function Login() {
       console.log("User Name:", name);
 
       cookieUtils.setUserIdInCookies(userId);
+
       cookieUtils.setUserRoleInCookies(role);
+      
+      cookieUtils.setTokenInCookies(token);
   
       // Set the refresh token in cookies
       const refreshToken = response.data.refreshToken;
@@ -82,7 +85,7 @@ function Login() {
   };
 
   return (
-    <section style={{ backgroundColor: '#b07256' }}>
+    <section style={{ backgroundColor: '#b07256', height: "60em" }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">

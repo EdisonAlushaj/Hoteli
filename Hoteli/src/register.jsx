@@ -3,6 +3,7 @@ import fotoRegister from './fotoRegister.jpg';
 import MeGusta from './MeGusta-Horizontal-removebg-preview.png';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Register() {
   const [errorMessage, setErrorMessage] = useState('');
@@ -40,7 +41,7 @@ function Register() {
     axios.post(url, data)
       .then((result) => {
         clear();
-        alert('User has been registered.');
+        toast.success('User has been registered.');
       })
       .catch((error) => {
         if (error.response) {

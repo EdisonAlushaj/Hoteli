@@ -17,10 +17,18 @@ const Pool = () => {
   const [showModal, setShowModal] = useState(false);
   const userId = cookieUtils.getUserIdFromCookies();
 
+  const getToken = () => {
+    return cookieUtils.getTokenFromCookies();
+  }
+
   useEffect(() => {
     const fetchPools = async () => {
       try {
-        const response = await axios.get(`https://localhost:7189/api/Pool`);
+        const response = await axios.get(`https://localhost:7189/api/Pool`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        });
         setPools(response.data);
       } catch (error) {
         console.error('Error fetching pools:', error);
@@ -36,6 +44,10 @@ const Pool = () => {
         try {
           const response = await axios.get(`https://localhost:7189/api/Shezlong/byPool`, {
             params: { poolId: selectedPool.id }
+          }, {
+            headers: {
+              Authorization: `Bearer ${getToken()}`,
+            },
           });
           setShezlongs(response.data);
         } catch (error) {
@@ -51,23 +63,23 @@ const Pool = () => {
 
   const handleReservationSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Check if reservation date is before today
     const today = new Date().toISOString().split('T')[0];
     if (reservationDate < today) {
       toast.error('Cannot reserve shezlong for past dates');
       return;
     }
-  
+
     if (!selectedShezlong || !selectedPool || !userId || !reservationDate) {
       console.error('Please fill out all fields');
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        `https://localhost:7189/api/ShezlongReservation`, 
-        null, 
+        `https://localhost:7189/api/ShezlongReservation`,
+        null,
         {
           params: {
             userId: userId,
@@ -75,26 +87,31 @@ const Pool = () => {
             reservationDate: reservationDate
           },
           headers: {
+            Authorization: `Bearer ${getToken()}`,
             'Content-Type': 'application/json'
           }
         }
       );
       console.log('Shezlong reserved successfully:', response.data);
-  
+
       // Fetch updated reservations
-      const updatedReservations = await axios.get(`https://localhost:7189/api/ShezlongReservation`);
+      const updatedReservations = await axios.get(`https://localhost:7189/api/ShezlongReservation`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
       console.log('Updated reservations:', updatedReservations.data);
-  
+
       // Check if updatedReservations.data is valid
       if (Array.isArray(updatedReservations.data)) {
         setShezlongReservations(updatedReservations.data);
       } else {
         console.error('Invalid data structure for reservations:', updatedReservations.data);
       }
-  
+
       // Close the modal
       setShowModal(false);
-  
+
       // Show toast notification
       toast.success('Shezlong reserved successfully!');
     } catch (error) {
@@ -105,7 +122,7 @@ const Pool = () => {
       }
     }
   };
-  
+
 
   const handleCloseModal = () => {
     setShowModal(false);

@@ -25,12 +25,20 @@ const TableReservation = () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(TableReservationsEndPoint)
+        axios.get(TableReservationsEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -42,11 +50,15 @@ const TableReservation = () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure to delete this table reservation?")) {
-            axios.delete(`${TableReservationsEndPoint}/${id}`)
+            axios.delete(`${TableReservationsEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 204 || result.status === 200) {
                         toast.success('Reservation has been deleted');
-                        setData(data.filter(item => item.reservationId !== id)); 
+                        setData(data.filter(item => item.reservationId !== id));
                     }
                 })
                 .catch((error) => {
@@ -58,17 +70,21 @@ const TableReservation = () => {
     const handleSave = () => {
         // Check if there's an existing reservation for the same table and datetime
         const existingReservation = data.find(item => item.id === parseInt(tableId, 10) && new Date(item.reservationDate).getTime() === new Date(reservationDatetime).getTime());
-        
+
         if (existingReservation) {
             // Show toast message that the table is already reserved at that time
             toast.error('The table is already reserved at the selected time.');
             return; // Exit function to prevent further execution
         }
-    
+
         // Proceed with adding the new reservation
         const url = `${TableReservationsEndPoint}?userId=${userId}&tableId=${tableId}&reservationDate=${reservationDatetime}&maxGuests=${maxGuests}&specialRequests=${specialRequest}&establishment=${establishment}`;
-    
-        axios.post(url)
+
+        axios.post(url, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 if (result.status === 201) {
                     toast.success('Table reservation has been added.');
@@ -81,9 +97,9 @@ const TableReservation = () => {
                 toast.error(error.message);
             });
     };
-    
-    
-    
+
+
+
 
     const clear = () => {
         //setUserId('');

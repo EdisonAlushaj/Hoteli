@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const ShezlongForm = () => {
 
@@ -28,12 +29,20 @@ const ShezlongForm = () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(ShezlongEndPoints)
+        axios.get(ShezlongEndPoints, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -64,6 +73,10 @@ const ShezlongForm = () => {
                 poolId: editPoolId,
                 
               
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('Shezlong updated successfully');
             handleClose();
@@ -76,7 +89,11 @@ const ShezlongForm = () => {
 
     const handelDelete = (id) => {
         if (window.confirm("Are you sure to delete this Shezlong.") == true) {
-            axios.delete(`${ShezlongEndPoints}/${id}`)
+            axios.delete(`${ShezlongEndPoints}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('Shezlong has been deleted');
@@ -96,7 +113,11 @@ const ShezlongForm = () => {
             "poolId": poolId,
         }
     
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();

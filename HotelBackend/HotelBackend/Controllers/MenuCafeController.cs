@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<MenuCafe>>> GetAllCafe()
         {
             var cafes = await _context.MenuCafes.ToListAsync();
@@ -27,7 +28,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<MenuCafe>>> GetCafe(int id)
         {
             var cafe = await _context.MenuCafes.FindAsync(id);
@@ -36,7 +37,7 @@ namespace HotelBackend.Controllers
             return Ok(cafe);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<List<MenuCafe>>> AddFood(MenuCafe cafe)
         {
             _context.MenuCafes.Add(cafe);
@@ -45,7 +46,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.MenuCafes.ToListAsync()); ;
         }
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateCafe/{id}")]
         public async Task<MenuCafe> UpdateCafe(MenuCafe objCafe)
         {
@@ -54,7 +55,7 @@ namespace HotelBackend.Controllers
             return objCafe;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<MenuCafe>>> DeleteCafe(int id)
         {
             var dbCafe = await _context.MenuCafes.FindAsync(id);

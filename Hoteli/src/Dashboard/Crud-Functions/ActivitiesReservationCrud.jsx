@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import cookieUtils from '../../cookieUtils.jsx';
 
 
-const ActivitiesReservationCrud= () => {
+const ActivitiesReservationCrud = () => {
     const [showAdd, setShowAdd] = useState(false);
 
     const userId = cookieUtils.getUserIdFromCookies();
@@ -19,12 +19,20 @@ const ActivitiesReservationCrud= () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(ActivitiesReservationEndPoint)
+        axios.get(ActivitiesReservationEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -36,7 +44,11 @@ const ActivitiesReservationCrud= () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure to delete this Activity Reservation?")) {
-            axios.delete(`${ActivitiesReservationEndPoint}/${id}`)
+            axios.delete(`${ActivitiesReservationEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Activity Reservation has been deleted');
@@ -52,7 +64,11 @@ const ActivitiesReservationCrud= () => {
     const handleSave = () => {
         const url = `${ActivitiesReservationEndPoint}?userId=${userId}&activitiesId=${activitiesId}`;
 
-        axios.post(url)
+        axios.post(url, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
@@ -67,7 +83,7 @@ const ActivitiesReservationCrud= () => {
     const clear = () => {
         // setUserId('');
         setactivitiesId('');
-      
+
     };
 
     const handleCloseAdd = () => setShowAdd(false);
@@ -88,7 +104,7 @@ const ActivitiesReservationCrud= () => {
                             <th>Id</th>
                             <th>User Name</th>
                             <th>Activities Id</th>
-             
+
                         </tr>
                     </thead>
                     <tbody>
@@ -123,8 +139,8 @@ const ActivitiesReservationCrud= () => {
                                     value={activitiesId} onChange={(e) => setactivitiesId(e.target.value)}
                                 />
                             </Col>
-                          
-                      
+
+
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>

@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,14 +22,14 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<IEnumerable<ContactRequest>>> GetAllContactRequests()
         {
             var contactRequests = await _context.ContactRequests.ToListAsync();
             return Ok(contactRequests);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<ContactRequest>> Contact([FromBody] ContactRequest contactRequest)
         {
             Console.WriteLine("Received contact request for Name: " + contactRequest.Name);

@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<Fitnes>>> GetAllFitness()
         {
             var Fitness = await _context.Fitness.ToListAsync();
@@ -25,7 +26,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<Fitnes>>> GetFitnes(int id)
         {
             var Fitnes = await _context.Fitness.FindAsync(id);
@@ -34,7 +35,7 @@ namespace HotelBackend.Controllers
             return Ok(Fitnes);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<Fitnes>> AddFitness(Fitnes fitnes)
         {
             _context.Fitness.Add(fitnes);
@@ -43,7 +44,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetFitnes), new { id = fitnes.Id }, fitnes);
         }
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateFitnes/{id}")]
         public async Task<Fitnes> UpdateFitnes(Fitnes objFitnes)
         {
@@ -52,7 +53,7 @@ namespace HotelBackend.Controllers
             return objFitnes;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<Fitnes>>> DeleteFitnes(int id)
         {
             var dbFitnes = await _context.Fitness.FindAsync(id);

@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<IEnumerable<SpaReservation>>> GetSpaReservation()
         {
             var SpaReservation = await _context.SpaReservations
@@ -30,8 +31,7 @@ namespace HotelBackend.Controllers
             return Ok(SpaReservation);
         }
 
-
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<SpaReservation>> GetSpaReservationById(int id)
         {
             var SpaReservation = await _context.SpaReservations.FindAsync(id);
@@ -40,7 +40,8 @@ namespace HotelBackend.Controllers
                 return NotFound("SpaReservation not found");
             return Ok(SpaReservation);
         }
-        [HttpPost]
+
+        [HttpPost, Authorize]
         public async Task<ActionResult<SpaReservation>> AddSpaReservation([FromQuery] string userId, [FromQuery] int spaId, [FromQuery] DateTime reservationStart)
         {
             var spa = await _context.Spas.FindAsync(spaId);
@@ -77,7 +78,7 @@ namespace HotelBackend.Controllers
         }
     
 
-                [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<SpaReservation>> DeleteSpaReservation(int id)
         {
             var SpaReservation = await _context.SpaReservations.FindAsync(id);

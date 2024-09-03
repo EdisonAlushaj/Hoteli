@@ -8,10 +8,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const ActivitiesCrud = () => {
-
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -20,22 +20,21 @@ const ActivitiesCrud = () => {
     const handleCloseAdd = () => setShowAdd(false);
     const handleShowAdd = () => setShowAdd(true);
 
-    const [id, setId] = useState('')
-    const [name, setname] = useState('')
-    const [description, setdescription] = useState('')
-    const [location, setlocation] = useState('')
-    const [duration, setduration] = useState('')
-    const [cost, setcost] = useState('')
-    const [image, setimage] = useState('')
+    const [id, setId] = useState('');
+    const [name, setname] = useState('');
+    const [description, setdescription] = useState('');
+    const [location, setlocation] = useState('');
+    const [duration, setduration] = useState('');
+    const [cost, setcost] = useState('');
+    const [image, setimage] = useState('');
 
-
-    const [editId, setEditId] = useState('')
-    const [editname, setEditname] = useState('')
-    const [editdescription, setEditdescription] = useState('')
-    const [editlocation, setEditlocation] = useState('')
-    const [editduration, setEditduration] = useState('')
-    const [editcost, setEditcost] = useState('')
-    const [editimage, setEditimage] = useState('')
+    const [editId, setEditId] = useState('');
+    const [editname, setEditname] = useState('');
+    const [editdescription, setEditdescription] = useState('');
+    const [editlocation, setEditlocation] = useState('');
+    const [editduration, setEditduration] = useState('');
+    const [editcost, setEditcost] = useState('');
+    const [editimage, setEditimage] = useState('');
 
     const [data, setData] = useState([]);
 
@@ -43,33 +42,34 @@ const ActivitiesCrud = () => {
         getData();
     }, []);
 
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     const getData = () => {
-        axios.get(ActivitiesEndPoint)
+        axios.get(ActivitiesEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
-                setData(response.data)
+                setData(response.data);
             })
             .catch((error) => {
-                console.log(error)
-            })
-    }
+                console.log(error);
+            });
+    };
 
     async function editActivities(activity) {
         handleShow();
-
         setEditname(activity.name);
         setEditdescription(activity.description);
         setEditlocation(activity.location);
         setEditduration(activity.duration);
         setEditcost(activity.cost);
         setEditimage(activity.image);
-       
         setId(activity.id);
-    }
-    async function Load() {
-        const result = await axios.get(ActivitiesEndPoint);
-        setEditname(result.data);
-        console.log(result.data);
     }
 
     async function update(event) {
@@ -83,7 +83,10 @@ const ActivitiesCrud = () => {
                 duration: editduration,
                 cost: editcost,
                 image: editimage
-              
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('Activity updated successfully');
             handleClose();
@@ -94,21 +97,24 @@ const ActivitiesCrud = () => {
         }
     }
 
-
     const handelDelete = (id) => {
-        if (window.confirm("Are you sure to delete this Activity.") == true) {
-            axios.delete(`${ActivitiesEndPoint}/${id}`)
+        if (window.confirm("Are you sure to delete this Activity.") === true) {
+            axios.delete(`${ActivitiesEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
-                    if (result.status == 200) {
+                    if (result.status === 200) {
                         toast.success('Activity has been deleted');
                         getData();
                     }
                 })
                 .catch((error) => {
-                    toast.error(error);
-                })
+                    toast.error(error.message);
+                });
         }
-    }
+    };
 
     const handleSave = () => {
         handleShowAdd();
@@ -120,16 +126,24 @@ const ActivitiesCrud = () => {
             "duration": duration,
             "cost": cost,
             "image": image
-        }
+        };
 
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
                 toast.success('Activity has been added.');
                 handleCloseAdd();
             })
-    }
+            .catch((error) => {
+                console.error("Error adding Activity:", error);
+                toast.error("Failed to add Activity");
+            });
+    };
 
     const clear = () => {
         setname('');
@@ -147,7 +161,7 @@ const ActivitiesCrud = () => {
         setEditimage('');
 
         setEditId('');
-    }
+    };
 
     return (
         <>
@@ -157,7 +171,7 @@ const ActivitiesCrud = () => {
                     <p style={{ fontSize: "2em", margin: "0" }}><b>Activities</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
-
+                
                 <br />
 
                 <Table striped bordered hover>
@@ -182,11 +196,10 @@ const ActivitiesCrud = () => {
                                             <td>{item.location}</td>
                                             <td>{item.duration}</td>
                                             <td>{item.cost}</td>
-                                            {/* <td>{item.image}</td> */}
                                             <td>
-                                                <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} />
+                                                <img src={item.image} style={{ maxWidth: "100px", maxHeight: "100px" }} alt="Activity" />
                                             </td>
-                                           
+
                                             <td className='d-flex flex-row justify-content-evenly'>
                                                 <button className="btn btn-rounded btn-primary" onClick={() => editActivities(item)}>Edit</button>
 
@@ -194,7 +207,7 @@ const ActivitiesCrud = () => {
 
                                             </td>
                                         </tr>
-                                    )
+                                    );
                                 })
                                 :
                                 'Loading...'
@@ -223,7 +236,7 @@ const ActivitiesCrud = () => {
                         <br />
                         <Row>
                             <Col>
-                                <input type="text"  className='form-control' placeholder='Enter location'
+                                <input type="text" className='form-control' placeholder='Enter location'
                                     value={location} onChange={(e) => setlocation(e.target.value)}
                                 />
                             </Col>
@@ -245,10 +258,10 @@ const ActivitiesCrud = () => {
                                     value={image} onChange={(e) => setimage(e.target.value)}
                                 />
                             </Col>
-                       
+
                         </Row>
                         <br />
-                       
+
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleCloseAdd}>
@@ -296,18 +309,16 @@ const ActivitiesCrud = () => {
                                 <input type="number" className='form-control' placeholder='Enter cost'
                                     value={editcost} onChange={(e) => setEditcost(e.target.value)}
                                 />
-                         
                             </Col>
                             <Col>
                                 <input type="text" className='form-control' placeholder='Enter image'
                                     value={editimage} onChange={(e) => setEditimage(e.target.value)}
                                 />
-                         
                             </Col>
-                         
+
                         </Row>
                         <br />
-             
+
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
@@ -320,7 +331,7 @@ const ActivitiesCrud = () => {
                 </Modal>
             </Fragment>
         </>
-    );
+    )
 };
 
 export default ActivitiesCrud;

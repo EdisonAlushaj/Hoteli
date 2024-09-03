@@ -20,13 +20,21 @@ const MenuDrinks = () => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [drinkItems, setDrinkItems] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies();
+    }
+
     useEffect(() => {
         fetchDrinkItems();
     }, []);
 
     const fetchDrinkItems = async () => {
         try {
-            const response = await axios.get('https://localhost:7189/api/MenuDrink');
+            const response = await axios.get('https://localhost:7189/api/MenuDrink', {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            });
 
             console.log('Fetched Drink Items:', response.data);
 
@@ -97,6 +105,7 @@ const MenuDrinks = () => {
 
             const response = await axios.post('https://localhost:7189/api/OrderDrinks', orderData, {
                 headers: {
+                    Authorization: `Bearer ${getToken()}`,
                     'Content-Type': 'application/json'
                 }
             });

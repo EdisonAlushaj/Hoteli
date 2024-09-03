@@ -9,20 +9,28 @@ import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import cookieUtils from '../../cookieUtils.jsx';
 
-const ShezlongReservation= () => {
+const ShezlongReservation = () => {
     const [showAdd, setShowAdd] = useState(false);
 
     const userId = cookieUtils.getUserIdFromCookies();
     const [shelzongId, setShelzongId] = useState('');
-    const[reservationDate,setReservationDate] =useState('');
+    const [reservationDate, setReservationDate] = useState('');
     const [data, setData] = useState([]);
+
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
 
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(ShezlongReservationEndPoints)
+        axios.get(ShezlongReservationEndPoints, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -34,7 +42,11 @@ const ShezlongReservation= () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure to delete this Shezlong Reservation?")) {
-            axios.delete(`${ShezlongReservationEndPoints}/${id}`)
+            axios.delete(`${ShezlongReservationEndPoints}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Shezlong Reservation has been deleted');
@@ -50,7 +62,11 @@ const ShezlongReservation= () => {
     const handleSave = () => {
         const url = `${ShezlongReservationEndPoints}?userId=${userId}&shezlongId=${shelzongId}&reservationDate=${reservationDate}`;
 
-        axios.post(url)
+        axios.post(url, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();

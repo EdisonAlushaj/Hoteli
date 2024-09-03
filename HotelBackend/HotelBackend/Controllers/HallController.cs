@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<Hall>>> GetAllHalls()
         {
             var halls = await _context.Halls.ToListAsync();
@@ -25,7 +26,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<Hall>>> GetHall(int id)
         {
             var hall = await _context.Halls.FindAsync(id);
@@ -34,7 +35,7 @@ namespace HotelBackend.Controllers
             return Ok(hall);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<Hall>> PostHall(Hall hall)
         {
             _context.Halls.Add(hall);
@@ -43,7 +44,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetHall), new { id = hall.Id }, hall);
         }
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateHall/{id}")]
         public async Task<Hall> UpdateHall(Hall objHall)
         {
@@ -52,7 +53,7 @@ namespace HotelBackend.Controllers
             return objHall;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<Hall>>> DeleteHall(int id)
         {
             var dbHall = await _context.Halls.FindAsync(id);

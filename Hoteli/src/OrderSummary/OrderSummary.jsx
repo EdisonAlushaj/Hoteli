@@ -5,6 +5,11 @@ import cookieUtils from '../cookieUtils.jsx';
 
 const OrderSummary = () => {
   const userId = cookieUtils.getUserIdFromCookies();
+
+  const getToken = () => {
+    return cookieUtils.getTokenFromCookies();
+  }
+
   const [data, setData] = useState({
     roomBookings: [],
     orders: [],
@@ -26,7 +31,11 @@ const OrderSummary = () => {
 
   const fetchData = () => {
     setLoading(true);
-    axios.get(`${OrderSummaryCrud}/summary/${userId}`)
+    axios.get(`${OrderSummaryCrud}/summary/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    })
       .then(response => {
         console.log(response.data);
         setData(response.data);
@@ -190,7 +199,7 @@ const OrderSummary = () => {
           ) : <p>No reservation found.</p>}
         </div>
       </div>
-      
+
       <div>
         <p className="cover-title" style={{ fontSize: '1.4em' }}>Activities Reservations</p>
         <div className="activities-list">

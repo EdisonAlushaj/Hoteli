@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import cookieUtils from '../../cookieUtils.jsx';
 
-const SpaReservationCrud= () => {
+const SpaReservationCrud = () => {
     const [showAdd, setShowAdd] = useState(false);
 
     const userId = cookieUtils.getUserIdFromCookies();
@@ -18,12 +18,20 @@ const SpaReservationCrud= () => {
     const [reservationDate, setReservationDate] = useState('');
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(SpaReservationEndPoint)
+        axios.get(SpaReservationEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 setData(response.data);
             })
@@ -35,7 +43,11 @@ const SpaReservationCrud= () => {
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this Spa Reservation?")) {
-            axios.delete(`${SpaReservationEndPoint}/${id}`)
+            axios.delete(`${SpaReservationEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Spa Reservation has been deleted');
@@ -51,7 +63,11 @@ const SpaReservationCrud= () => {
     const handleSave = () => {
         const url = `${SpaReservationEndPoint}?userId=${userId}&spaId=${spaId}&reservationStart=${reservationDate}`;
 
-        axios.post(url)
+        axios.post(url, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();

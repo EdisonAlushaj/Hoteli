@@ -321,6 +321,109 @@
     ]
   },
   {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesReservationController",
+    "Method": "GetActivitiesReservation",
+    "RelativePath": "api/ActivitiesReservation",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HotelBackend.Entities.ActivitiesReservation, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesReservationController",
+    "Method": "AddActivitiesReservation",
+    "RelativePath": "api/ActivitiesReservation",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "activitiesId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.ActivitiesReservation",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesReservationController",
+    "Method": "GetActivitiesReservationById",
+    "RelativePath": "api/ActivitiesReservation/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.ActivitiesReservation",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ActivitiesReservationController",
+    "Method": "DeleteActivitiesReservation",
+    "RelativePath": "api/ActivitiesReservation/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.ActivitiesReservation",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.ContactUsController",
     "Method": "GetAllContactRequests",
     "RelativePath": "api/ContactUs",
@@ -486,6 +589,109 @@
     "ReturnTypes": [
       {
         "Type": "HotelBackend.Entities.Fitnes",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.FitnesApplyController",
+    "Method": "GetFitnesApply",
+    "RelativePath": "api/FitnesApply",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HotelBackend.Entities.FitnesApply, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.FitnesApplyController",
+    "Method": "AddFitnesApply",
+    "RelativePath": "api/FitnesApply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "fitnesId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.FitnesApply",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.FitnesApplyController",
+    "Method": "GetFitnesApplyById",
+    "RelativePath": "api/FitnesApply/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.FitnesApply",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.FitnesApplyController",
+    "Method": "DeleteFitnesApply",
+    "RelativePath": "api/FitnesApply/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HotelBackend.Entities.FitnesApply",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1225,8 +1431,66 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HotelBackend.Controllers.OrderCoffeeController",
+    "Method": "CreateOrderCoffee",
+    "RelativePath": "api/OrderCoffee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderDto",
+        "Type": "HotelBackend.Controllers.OrderCoffeeCreationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderCoffeeController",
+    "Method": "GetAllOrderCoffees",
+    "RelativePath": "api/OrderCoffee",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderCoffeeController",
+    "Method": "GetOrderCoffeeById",
+    "RelativePath": "api/OrderCoffee/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderCoffeeController",
+    "Method": "DeleteOrderCoffee",
+    "RelativePath": "api/OrderCoffee/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HotelBackend.Controllers.OrderDrinksController",
-    "Method": "CreateOrderDrink",
+    "Method": "CreateOrder",
     "RelativePath": "api/OrderDrinks",
     "HttpMethod": "POST",
     "IsController": true,
@@ -1234,7 +1498,7 @@
     "Parameters": [
       {
         "Name": "orderDto",
-        "Type": "HotelBackend.Controllers.OrderDrinkCreationDto",
+        "Type": "HotelBackend.Controllers.OrderDrinksCreationDto",
         "IsRequired": true
       }
     ],
@@ -1268,7 +1532,7 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.OrderDrinksController",
-    "Method": "DeleteOrderDrink",
+    "Method": "DeleteOrder",
     "RelativePath": "api/OrderDrinks/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -1277,6 +1541,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.OrderSummaryController",
+    "Method": "GetOrderSummary",
+    "RelativePath": "api/OrderSummary/summary/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -1344,7 +1624,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Pool, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "HotelBackend.Entities.Pool",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1353,6 +1633,27 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.PoolController",
+    "Method": "UpdatePool",
+    "RelativePath": "api/Pool/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pool",
+        "Type": "HotelBackend.Entities.Pool",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "HotelBackend.Controllers.PoolController",
@@ -1368,48 +1669,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Pool, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "HotelBackend.Controllers.PoolController",
-    "Method": "UpdatePool",
-    "RelativePath": "api/Pool/UpdatePool/{id}",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "objPool",
-        "Type": "HotelBackend.Entities.Pool",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "HotelBackend.Entities.Pool",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "HotelBackend.Controllers.RoliController",
@@ -1907,7 +2167,7 @@
     "Parameters": [
       {
         "Name": "userId",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -1995,7 +2255,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[HotelBackend.Entities.Shezlong, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HotelBackend.Entities.Shezlong, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2085,6 +2345,32 @@
   },
   {
     "ContainingType": "HotelBackend.Controllers.ShezlongController",
+    "Method": "GetShezlongs",
+    "RelativePath": "api/Shezlong/byPool",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "poolId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HotelBackend.Entities.Shezlong, HotelBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HotelBackend.Controllers.ShezlongController",
     "Method": "UpdateShezlong",
     "RelativePath": "api/Shezlong/UpdateShezlong/{id}",
     "HttpMethod": "PATCH",
@@ -2134,7 +2420,7 @@
     "Parameters": [
       {
         "Name": "userId",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -2371,7 +2657,7 @@
     "Parameters": [
       {
         "Name": "userId",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -2758,7 +3044,7 @@
     "Parameters": [
       {
         "Name": "userId",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
@@ -3091,6 +3377,7 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "EndpointName": "GetWeatherForecast"
   }
 ]

@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<Sauna>>> GetAllSaunas()
         {
             var saunas = await _context.Saunas.ToListAsync();
@@ -26,7 +27,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<Sauna>>> GetSauna(int id)
         {
             var saunas = await _context.Saunas.FindAsync(id);
@@ -35,7 +36,7 @@ namespace HotelBackend.Controllers
             return Ok(saunas);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<Sauna>> AddSauna(Sauna saunas)
         {
             _context.Saunas.Add(saunas);
@@ -45,7 +46,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateSauna/{id}")]
         public async Task<Sauna> UpdateSauna(Sauna objSauna)
         {
@@ -54,7 +55,7 @@ namespace HotelBackend.Controllers
             return objSauna;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<Sauna>>> DeleteSauna(int id)
         {
             var dbSauna = await _context.Saunas.FindAsync(id);

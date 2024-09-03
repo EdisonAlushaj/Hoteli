@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult CreateOrderCoffee([FromBody] OrderCoffeeCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderCoffeeItems == null || orderDto.OrderCoffeeItems.Length == 0)
@@ -76,7 +77,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetOrderCoffeeById), new { id = order.OrderCoffeeId }, responseDto);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public IActionResult GetAllOrderCoffees()
         {
             var orders = _context.OrderCoffees
@@ -94,7 +95,7 @@ namespace HotelBackend.Controllers
             return Ok(orderDtos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public IActionResult GetOrderCoffeeById(int id)
         {
             var order = _context.OrderCoffees
@@ -136,7 +137,7 @@ namespace HotelBackend.Controllers
                 }).ToArray()
             };
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public IActionResult DeleteOrderCoffee(int id)
         {
             var order = _context.OrderCoffees.Find(id);

@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<MenuFood>>> GetAllFood()
         {
             var foods = await _context.MenuFoods.ToListAsync();
@@ -25,7 +26,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<MenuFood>>> GetFood(int id)
         {
             var food = await _context.MenuFoods.FindAsync(id);
@@ -34,7 +35,7 @@ namespace HotelBackend.Controllers
             return Ok(food);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<List<MenuFood>>> AddFood(MenuFood food)
         {
             _context.MenuFoods.Add(food);
@@ -43,7 +44,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.MenuFoods.ToListAsync()); ;
         }
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateFood/{id}")]
         public async Task<MenuFood> UpdateFood(MenuFood objFood)
         {
@@ -52,7 +53,7 @@ namespace HotelBackend.Controllers
             return objFood;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<MenuFood>>> DeleteFood(int id)
         {
             var dbFood = await _context.MenuFoods.FindAsync(id);

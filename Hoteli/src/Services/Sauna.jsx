@@ -15,10 +15,18 @@ const Sauna = () => {
 
   const userId = cookieUtils.getUserIdFromCookies();
 
+  const getToken = () => {
+    return cookieUtils.getTokenFromCookies();
+  }
+
   useEffect(() => {
     const fetchSaunas = async () => {
       try {
-        const response = await axios.get('https://localhost:7189/api/Sauna');
+        const response = await axios.get('https://localhost:7189/api/Sauna', {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        });
         setSaunas(response.data);
       } catch (error) {
         console.error('Error fetching saunas:', error);
@@ -35,7 +43,11 @@ const Sauna = () => {
     }
 
     try {
-      const response = await axios.post(`https://localhost:7189/api/SaunaReservation?userId=${userId}&saunaId=${selectedSauna.id}&reservationStart=${reservationDate}`);
+      const response = await axios.post(`https://localhost:7189/api/SaunaReservation?userId=${userId}&saunaId=${selectedSauna.id}&reservationStart=${reservationDate}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
       toast.success('Sauna Reservation has been added.');
       console.log('Reservation added successfully:', response.data);
       setReservationDate('');
@@ -53,26 +65,26 @@ const Sauna = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSelectedSauna(null); 
+    setSelectedSauna(null);
   };
 
   return (
     <div>
       <div className="cover-photooooo"></div>
       <Container className="mt-5">
-        <h1 className="mb-4"  style={{textAlign: 'center'}}>Saunas</h1>
+        <h1 className="mb-4" style={{ textAlign: 'center' }}>Saunas</h1>
         <Row>
           {saunas.map(sauna => (
             <Col md={4} key={sauna.id}>
               <Button
                 variant="light"
                 className={`list-group-item list-group-item-action ${selectedSauna && selectedSauna.id === sauna.id ? 'success' : ''}`}
-                onClick={() => handleShowModal(sauna)} 
+                onClick={() => handleShowModal(sauna)}
               >
                 <Card className="sauna-card">
                   <Card.Body>
                     <Card.Title>Sauna {sauna.id}</Card.Title>
-                    <Card.Img src={sauna.image} style={{maxWidth: '100%', height: '200px', objectFit: 'cover'}}/>
+                    <Card.Img src={sauna.image} style={{ maxWidth: '100%', height: '200px', objectFit: 'cover' }} />
                     <Card.Text>Hall nr: {sauna.hallId}</Card.Text>
                     <Card.Text>Cost: {sauna.cost}$</Card.Text>
                     <Card.Text>Description: {sauna.description}</Card.Text>

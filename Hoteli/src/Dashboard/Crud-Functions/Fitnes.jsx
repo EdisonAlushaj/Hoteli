@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const Fitnes = () => {
 
@@ -35,15 +36,22 @@ const Fitnes = () => {
     const [editImage, setEditImage] = useState('')
     const [editHallId, setEditHallId] = useState('')
 
-
     const [data, setData] = useState([]);
+
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
 
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(FitnesEndPoints)
+        axios.get(FitnesEndPoints, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -65,7 +73,11 @@ const Fitnes = () => {
         setId(roles.id);
     }
     async function Load() {
-        const result = await axios.get(FitnesEndPoints);
+        const result = await axios.get(FitnesEndPoints, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        });
         setEditFitnesName(result.data);
         console.log(result.data);
     }
@@ -80,6 +92,10 @@ const Fitnes = () => {
                 price: editPrice,
                 image: editImage,
                 hallId: editHallId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('Fitnes updated successfully');
             handleClose();
@@ -90,10 +106,13 @@ const Fitnes = () => {
         }
     }
 
-
     const handelDelete = (id) => {
         if (window.confirm("Are you sure to delete this Fitnes.") == true) {
-            axios.delete(`${FitnesEndPoints}/${id}`)
+            axios.delete(`${FitnesEndPoints}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('Fitnes has been deleted');
@@ -117,7 +136,11 @@ const Fitnes = () => {
             "hallId": hallId
         }
 
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
@@ -217,7 +240,7 @@ const Fitnes = () => {
                         </Row>
                         <br />
                         <Row>
-                            
+
                             <Col>
                                 <input type="number" className='form-control' placeholder='Enter Price'
                                     value={price} onChange={(e) => setPrice(e.target.value)}

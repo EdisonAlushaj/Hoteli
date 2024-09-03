@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const MenuFoodCrud = () => {
 
@@ -34,12 +35,20 @@ const MenuFoodCrud = () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(MenuFoodEndPoint)
+        axios.get(MenuFoodEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -72,6 +81,10 @@ const MenuFoodCrud = () => {
                 foodDescription: editFoodDescription,
                 foodPrice: editFoodPrice,
                 foodImage: editFoodImage,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('MenuFood updated successfully');
             handleClose();
@@ -85,7 +98,11 @@ const MenuFoodCrud = () => {
 
     const handelDelete = (id) => {
         if (window, confirm("Are you sure to delete this room.") == true) {
-            axios.delete(`${MenuFoodEndPoint}/${id}`)
+            axios.delete(`${MenuFoodEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('MenuFood has been deleted');
@@ -108,7 +125,11 @@ const MenuFoodCrud = () => {
             "foodImage": foodImage
         }
 
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();

@@ -577,3 +577,8 @@ C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Swashb
 C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
 C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.dll
 C:\Users\LENOVO\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.pdb
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Scrutor.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.dll
+C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\HotelBackend\bin\Debug\net8.0\SharedClassLibrary.pdb

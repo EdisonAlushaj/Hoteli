@@ -20,12 +20,20 @@ const OrderCoffee = () => {
     const [orderCoffeeItems, setorderCoffeeItems] = useState([{ menuCoffeeId: '', quantity: '' }]);
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies();
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(OrderCoffeeEndPoints)
+        axios.get(OrderCoffeeEndPoints, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -39,7 +47,11 @@ const OrderCoffee = () => {
         console.log("Deleting order with ID:", id);
         if (window.confirm("Are you sure to delete this Order?")) {
             setData(data.filter(item => item.orderCoffeeId !== id));
-            axios.delete(`${OrderCoffeeEndPoints}/${id}`)
+            axios.delete(`${OrderCoffeeEndPoints}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Order has been deleted');
@@ -47,7 +59,7 @@ const OrderCoffee = () => {
                 })
                 .catch((error) => {
                     toast.error(error);
-                    getData(); 
+                    getData();
                 });
         }
     };
@@ -57,7 +69,7 @@ const OrderCoffee = () => {
             toast.error('Please fill all the required fields.');
             return;
         }
-    
+
         const orderData = {
             Id: Id,
             deliveryLocation: deliveryLocation,
@@ -69,16 +81,20 @@ const OrderCoffee = () => {
                 cafeName: 'Sample Cafe Name'
             }))
         };
-    
+
         console.log("Order Data being sent:", JSON.stringify(orderData, null, 2));
-    
-        axios.post(OrderCoffeeEndPoints, orderData)
+
+        axios.post(OrderCoffeeEndPoints, orderData, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 if (response.status === 201) {
                     toast.success('Order has been created successfully');
                     setShowAdd(false);
-                    clear(); 
-                    getData(); 
+                    clear();
+                    getData();
                 }
             })
             .catch((error) => {
@@ -86,7 +102,7 @@ const OrderCoffee = () => {
                     console.log(error.response.data);
                     console.log(error.response.status);
                     console.log(error.response.headers);
-                    
+
                     if (error.response.status === 400 && error.response.data.errors) {
                         const validationErrors = error.response.data.errors;
                         const errorMessages = Object.values(validationErrors).flat();
@@ -105,7 +121,7 @@ const OrderCoffee = () => {
                 }
             });
     };
-    
+
     const clear = () => {
         setDeliveryLocation('');
         setDeliveryNumber('');
@@ -165,7 +181,7 @@ const OrderCoffee = () => {
                                                 <div className="card-body">
                                                     <p className="card-text"><strong>Coffee ID:</strong> {orderItem.menuCoffeeId}</p>
                                                     <p className="card-text"><strong>Coffee Name:</strong> {orderItem.cafeName}</p>
-                                                    <p className="card-text"><strong>Price:</strong> ${orderItem.price } </p>
+                                                    <p className="card-text"><strong>Price:</strong> ${orderItem.price} </p>
                                                     <p className="card-text"><strong>Quantity: </strong> {orderItem.quantity} </p>
                                                     <p className="card-text"><strong>Price * Quantity:</strong>  ${orderItem.price * orderItem.quantity}</p>
                                                 </div>

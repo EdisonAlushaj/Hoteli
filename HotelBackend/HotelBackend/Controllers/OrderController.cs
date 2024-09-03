@@ -1,6 +1,7 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
 using HotelBackend.Migrations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ using System.Linq;
             {
                 _context = context;
             }
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult CreateOrder([FromBody] OrderCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderItems == null || orderDto.OrderItems.Length == 0)
@@ -83,7 +84,7 @@ using System.Linq;
 
             return CreatedAtAction(nameof(GetOrderById), new { id = order.OrderId }, responseDto);
         }
-        [HttpGet]
+        [HttpGet, Authorize]
         public IActionResult GetAllOrders()
         {
             var orders = _context.Orders
@@ -102,7 +103,7 @@ using System.Linq;
             return Ok(orderDtos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public IActionResult GetOrderById(int id)
         {
             var order = _context.Orders
@@ -148,7 +149,7 @@ using System.Linq;
                 }).ToArray()
             };
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public IActionResult DeleteOrder(int id)
         {
             var order = _context.Orders.Find(id);

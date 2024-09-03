@@ -4,6 +4,7 @@ import CoverImg from "./RoomIMG/room-cover.jpg";
 import { RoomEndPoint } from '../endpoints';
 import Booking from '../Booking/RoomBooking.jsx';
 import { Routes, Route, Navigate, NavLink } from "react-router-dom";
+import Cookies from '../cookieUtils';
 
 import foto1 from "./RoomIMG/Room1-1.jpg";
 import foto2 from "./RoomIMG/Room1-2.jpg";
@@ -36,7 +37,7 @@ import foto24 from "./RoomIMG/Room5-4.jpg";
 import foto25 from "./RoomIMG/Room5-5.jpg";
 import "./Rooms.css";
 
-const RoomMain = ({row, roomId, imageUrls, title, description, capacity, size }) => {
+const RoomMain = ({ row, roomId, imageUrls, title, description, capacity, size }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -105,7 +106,7 @@ const LayoutOne = ({ title, capacity, size, description, imageUrls, currentIndex
         <p className="text-xl-start">{description}</p>
 
         <button type="button" className="btn">
-          <NavLink style={{color: "black"}} to="/booking">View More</NavLink>
+          <NavLink style={{ color: "black" }} to="/booking">View More</NavLink>
         </button>
       </div>
     </div>
@@ -148,9 +149,17 @@ const Rooms = () => {
 
   const [roomsItems, setRooms] = useState([]);
 
+  const getToken = () => {
+    return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+  }
+
   const fetchRooms = async () => {
     try {
-      const response = await fetch('https://localhost:7189/api/Room');
+      const response = await fetch('https://localhost:7189/api/Room', {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -177,7 +186,7 @@ const Rooms = () => {
         roomsItems.map((roomItem, index) => (
           <RoomMain
             key={index}
-            row = {index+1}
+            row={index + 1}
             roomId={roomItem.Id}
             title={roomItem.roomName}
             description={roomItem.description}

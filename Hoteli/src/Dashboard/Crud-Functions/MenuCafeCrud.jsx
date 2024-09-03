@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {MenuCafeEndPoint} from'../../endpoints';
+import { MenuCafeEndPoint } from '../../endpoints';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const MenuCafeCrud = () => {
 
@@ -34,12 +35,20 @@ const MenuCafeCrud = () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(MenuCafeEndPoint)
+        axios.get(MenuCafeEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data)
@@ -72,6 +81,10 @@ const MenuCafeCrud = () => {
                 cafeDescription: editCafeDescription,
                 cafePrice: editCafePrice,
                 cafeImage: editCafeImage,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('MenuCafe updated successfully');
             handleClose();
@@ -85,7 +98,11 @@ const MenuCafeCrud = () => {
 
     const handelDelete = (id) => {
         if (window, confirm("Are you sure to delete this coffee.") == true) {
-            axios.delete(`${MenuCafeEndPoint}/${id}`)
+            axios.delete(`${MenuCafeEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status == 200) {
                         toast.success('MenuCafe has been deleted');
@@ -108,7 +125,11 @@ const MenuCafeCrud = () => {
             "cafeImage": cafeImage
         }
 
-        axios.post(url, data)
+        axios.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((result) => {
                 getData();
                 clear();
@@ -134,8 +155,8 @@ const MenuCafeCrud = () => {
         <>
             <Fragment>
                 <ToastContainer />
-                <div className='d-flex justify-content-evenly ' style={{width: "20em", height: "3em", alignItems: "center"}}>
-                    <p style={{fontSize: "2em", margin: "0"}}><b>Coffee&Sweets Table</b></p>
+                <div className='d-flex justify-content-evenly ' style={{ width: "20em", height: "3em", alignItems: "center" }}>
+                    <p style={{ fontSize: "2em", margin: "0" }}><b>Coffee&Sweets Table</b></p>
                     <button className="btn btn-rounded btn-primary" style={{}} onClick={() => handleShowAdd()}>Add</button>
                 </div>
 

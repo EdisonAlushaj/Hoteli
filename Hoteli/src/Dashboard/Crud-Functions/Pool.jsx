@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from '../../cookieUtils';
 
 const Pool = () => {
     const [show, setShow] = useState(false);
@@ -35,12 +36,20 @@ const Pool = () => {
 
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return Cookies.getTokenFromCookies(); // Assuming you stored the JWT in a cookie named 'token'
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(PoolEndPoint)
+        axios.get(PoolEndPoint, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 setData(response.data);
             })
@@ -69,6 +78,10 @@ const Pool = () => {
                 poolArea: editPoolArea,
                 numberofGuests: editNumberofGuests,
                 hallId: editHallId,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
             });
             toast.success('Pool updated successfully');
             handleClose();
@@ -81,7 +94,11 @@ const Pool = () => {
 
     const handelDelete = (id) => {
         if (window.confirm("Are you sure to delete this Pool.") === true) {
-            axios.delete(`${PoolEndPoint}/${id}`)
+            axios.delete(`${PoolEndPoint}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Pool has been deleted');
@@ -103,7 +120,11 @@ const Pool = () => {
             hallId: hallId,
         }
 
-        axios.post(PoolEndPoint, data)
+        axios.post(PoolEndPoint, data, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then(() => {
                 getData();
                 clear();

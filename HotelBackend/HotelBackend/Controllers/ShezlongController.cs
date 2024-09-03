@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,20 +17,20 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<IEnumerable<Shezlong>>> GetAllShezlongs()
         {
             var spa = await _context.Shezlongs.ToListAsync();
             return Ok(spa);
         }
-        [HttpGet("byPool")]
+        [HttpGet("byPool"), Authorize]
         public async Task<ActionResult<IEnumerable<Shezlong>>> GetShezlongs([FromQuery] int poolId)
         {
             return await _context.Shezlongs.Where(s => s.PoolId == poolId).ToListAsync();
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<Shezlong>>> GetShezlong(int id)
         {
             var Shezlong = await _context.Shezlongs.FindAsync(id);
@@ -38,7 +39,7 @@ namespace HotelBackend.Controllers
             return Ok(Shezlong);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<Shezlong>> AddShezlong(Shezlong shezlong)
         {
             _context.Shezlongs.Add(shezlong);
@@ -47,7 +48,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetShezlong), new { id = shezlong.Id }, shezlong);
         }
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateShezlong/{id}")]
         public async Task<IActionResult> UpdateShezlong(int id, Shezlong updatedShezlong)
         {
@@ -89,7 +90,7 @@ namespace HotelBackend.Controllers
 
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
 
         public async Task<ActionResult<List<Shezlong>>> DeleteShezlong(int id)
         {

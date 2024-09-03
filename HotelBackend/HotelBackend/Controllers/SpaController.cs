@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<Spa>>> GetAllSpas()
         {
             var spa = await _context.Spas.ToListAsync();
@@ -26,7 +27,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<Spa>>> GetSpa(int id)
         {
             var spa = await _context.Spas.FindAsync(id);
@@ -35,7 +36,7 @@ namespace HotelBackend.Controllers
             return Ok(spa);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<List<Spa>>> AddSpa(Spa spa)
         {
             _context.Spas.Add(spa);
@@ -44,7 +45,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Spas.ToListAsync()); ;
         }
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateSpa/{id}")]
         public async Task<Spa> UpdateSpa(Spa objSpa)
         {
@@ -53,7 +54,7 @@ namespace HotelBackend.Controllers
             return objSpa;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<Spa>>> DeleteSpa(int id)
         {
             var dbSpa = await _context.Spas.FindAsync(id);

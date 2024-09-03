@@ -20,12 +20,20 @@ const OrderFood = () => {
     const [orderItems, setOrderItems] = useState([{ menuFoodId: '', quantity: '' }]);
     const [data, setData] = useState([]);
 
+    const getToken = () => {
+        return cookieUtils.getTokenFromCookies();
+    }
+
     useEffect(() => {
         getData();
     }, []);
 
     const getData = () => {
-        axios.get(OrderFoodEndPoints)
+        axios.get(OrderFoodEndPoints, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 console.log(response);
                 setData(response.data);
@@ -42,7 +50,11 @@ const OrderFood = () => {
             setData(data.filter(item => item.orderId !== id));
             
             // Send request to delete order from the server
-            axios.delete(`${OrderFoodEndPoints}/${id}`)
+            axios.delete(`${OrderFoodEndPoints}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            })
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success('Order has been deleted');
@@ -80,7 +92,11 @@ const OrderFood = () => {
         console.log("Order Data being sent:", JSON.stringify(orderData, null, 2));
     
         // Send POST request to create a new order
-        axios.post(OrderFoodEndPoints, orderData)
+        axios.post(OrderFoodEndPoints, orderData, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        })
             .then((response) => {
                 if (response.status === 201) {
                     toast.success('Order has been created successfully');

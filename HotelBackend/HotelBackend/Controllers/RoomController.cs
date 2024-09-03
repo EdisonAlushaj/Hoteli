@@ -1,5 +1,6 @@
 ﻿using HotelBackend.Data;
 using HotelBackend.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<List<Room>>> GetAllRooms()
         {
             var rooms = await _context.Rooms.ToListAsync();
@@ -25,7 +26,7 @@ namespace HotelBackend.Controllers
             return Ok(rooms);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<List<Room>>> GetRoom(int id)
         {
             var room = await _context.Rooms.FindAsync(id);
@@ -34,7 +35,7 @@ namespace HotelBackend.Controllers
             return Ok(room);
         }
         
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<List<Room>>> AddRoom(Room room)
         {
             _context.Rooms.Add(room);
@@ -43,7 +44,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Rooms.ToListAsync()); ;
         }
 
-        [HttpPatch]
+        [HttpPatch, Authorize]
         [Route("UpdateRoom/{id}")]
         public async Task<Room> UpdateRoom(Room objRoom)
         {
@@ -52,7 +53,7 @@ namespace HotelBackend.Controllers
             return objRoom;
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<List<Room>>> DeleteRoom(int id)
         {
             var dbRoom = await _context.Rooms.FindAsync(id);
