@@ -18,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<Activities>>> GetAllActivities()
         {
             var activities = await _context.Activities.ToListAsync();
@@ -27,7 +27,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<Activities>>> GetActivities(int id)
         {
             var Activities = await _context.Activities.FindAsync(id);
@@ -36,7 +36,7 @@ namespace HotelBackend.Controllers
             return Ok(Activities);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<Activities>>> AddActivities(Activities Activities)
         {
             _context.Activities.Add(Activities);
@@ -45,7 +45,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Activities.ToListAsync()); ;
         }
 
-        [HttpPatch, Authorize]
+        [HttpPatch, Authorize(Policy = "AdminPolicy")]
         [Route("UpdateActivities/{id}")]
         public async Task<Activities> UpdateActivities(Activities objActivities)
         {
@@ -54,7 +54,7 @@ namespace HotelBackend.Controllers
             return objActivities;
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<Activities>>> DeleteActivities(int id)
         {
             var dbActivities = await _context.Activities.FindAsync(id);

@@ -1,5 +1,4 @@
 using HotelBackend.Data;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +25,7 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
+
 builder.Services.AddScoped<IUserAccount, AccountRepository>();
 
 // Add DbContext
@@ -57,7 +57,17 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddAuthorization();
+// Add Authorization with policies for Admins and Users
+builder.Services.AddAuthorization(options =>
+{
+    // Admin-specific policy
+    options.AddPolicy("AdminPolicy", policy =>
+        policy.RequireRole("Admin"));
+
+    // User-specific policy, but also allows Admins
+    options.AddPolicy("UserPolicy", policy =>
+        policy.RequireRole("User", "Admin"));
+});
 
 // Configure CORS
 builder.Services.AddCors(options =>
