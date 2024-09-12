@@ -55,7 +55,7 @@ namespace HotelBackend.Controllers
             return objCafe;
         }
 
-        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")`]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<MenuCafe>>> DeleteCafe(int id)
         {
             var dbCafe = await _context.MenuCafes.FindAsync(id);

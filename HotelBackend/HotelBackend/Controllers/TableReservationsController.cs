@@ -20,7 +20,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<IEnumerable<TableReservation>>> GetTableReservations()
         {
             var tableReservations = await _context.TableReservations
@@ -36,7 +36,7 @@ namespace HotelBackend.Controllers
             return Ok(tableReservations);
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<TableReservation>> GetTableReservationById(int id)
         {
             var tableReservation = await _context.TableReservations
@@ -52,7 +52,7 @@ namespace HotelBackend.Controllers
             return Ok(tableReservation);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<TableReservation>> AddTableReservation([FromQuery] string userId, [FromQuery] int tableId, [FromQuery] DateTime reservationDate, [FromQuery] int maxGuests, [FromQuery] string specialRequests, [FromQuery] EstablishmentType establishment)
         {
             // Check if the user exists
@@ -101,7 +101,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> DeleteTableReservation(int id)
         {
             var tableReservation = await _context.TableReservations.FindAsync(id);
@@ -114,7 +114,7 @@ namespace HotelBackend.Controllers
             _context.TableReservations.Remove(tableReservation);
             await _context.SaveChangesAsync();
 
-            return NoContent(); // Ensure this returns 204 No Content
+            return NoContent(); 
         }
 
     }

@@ -18,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<Room>>> GetAllRooms()
         {
             var rooms = await _context.Rooms.ToListAsync();
@@ -26,7 +26,7 @@ namespace HotelBackend.Controllers
             return Ok(rooms);
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<Room>>> GetRoom(int id)
         {
             var room = await _context.Rooms.FindAsync(id);
@@ -35,7 +35,7 @@ namespace HotelBackend.Controllers
             return Ok(room);
         }
         
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<Room>>> AddRoom(Room room)
         {
             _context.Rooms.Add(room);
@@ -44,7 +44,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Rooms.ToListAsync()); ;
         }
 
-        [HttpPatch, Authorize]
+        [HttpPatch, Authorize(Policy = "AdminPolicy")]
         [Route("UpdateRoom/{id}")]
         public async Task<Room> UpdateRoom(Room objRoom)
         {
@@ -53,7 +53,7 @@ namespace HotelBackend.Controllers
             return objRoom;
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<Room>>> DeleteRoom(int id)
         {
             var dbRoom = await _context.Rooms.FindAsync(id);

@@ -17,7 +17,7 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<IEnumerable<ShezlongReservation>>> GetShezlongReservation()
         {
             var shezlongreservation = await _context.ShezlongReservations
@@ -32,7 +32,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<ShezlongReservation>> GetShezlongReservationById(int id)
         {
             var ShezlongReservation = await _context.ShezlongReservations.FindAsync(id);
@@ -42,7 +42,7 @@ namespace HotelBackend.Controllers
             return Ok(ShezlongReservation);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<ShezlongReservation>> AddShezlongReservation([FromQuery] string userId, [FromQuery] int shezlongId, [FromQuery] DateTime reservationDate)
         {
             // Check if the shezlong is already reserved on the selected date
@@ -76,7 +76,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<ShezlongReservation>> DeleteShezlongReservation(int id)
         {
             var shezlongReservation = await _context.ShezlongReservations.FindAsync(id);

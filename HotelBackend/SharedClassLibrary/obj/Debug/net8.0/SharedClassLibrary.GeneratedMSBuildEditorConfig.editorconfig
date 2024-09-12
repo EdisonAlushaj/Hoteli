@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SharedClassLibrary
-build_property.ProjectDir = C:\Users\ediso\OneDrive\Desktop\Hoteli\HotelBackend\SharedClassLibrary\
+build_property.ProjectDir = C:\Users\Hp\Desktop\Hoteli\HotelBackend\SharedClassLibrary\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

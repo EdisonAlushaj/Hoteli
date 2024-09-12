@@ -21,7 +21,7 @@ namespace HotelBackend.Controllers
         }
 
         // GET: api/Pool
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<Pool>>> GetAllPools()
         {
             var pools = await _context.Pools.ToListAsync();
@@ -29,7 +29,7 @@ namespace HotelBackend.Controllers
         }
 
         // GET: api/Pool/{id}
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<Pool>> GetPool(int id)
         {
             var pool = await _context.Pools.FindAsync(id);
@@ -39,7 +39,7 @@ namespace HotelBackend.Controllers
         }
 
         // POST: api/Pool
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<Pool>> AddPool(Pool pool)
         {
             _context.Pools.Add(pool);
@@ -48,7 +48,7 @@ namespace HotelBackend.Controllers
         }
 
         // PATCH: api/Pool/{id}
-        [HttpPatch("{id}"), Authorize]
+        [HttpPatch("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> UpdatePool(int id, Pool pool)
         {
             if (id != pool.Id)
@@ -72,7 +72,7 @@ namespace HotelBackend.Controllers
         }
 
         // DELETE: api/Pool/{id}
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> DeletePool(int id)
         {
             var pool = await _context.Pools.FindAsync(id);

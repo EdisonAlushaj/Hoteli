@@ -17,20 +17,20 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<IEnumerable<Shezlong>>> GetAllShezlongs()
         {
             var spa = await _context.Shezlongs.ToListAsync();
             return Ok(spa);
         }
-        [HttpGet("byPool"), Authorize]
+        [HttpGet("byPool"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<IEnumerable<Shezlong>>> GetShezlongs([FromQuery] int poolId)
         {
             return await _context.Shezlongs.Where(s => s.PoolId == poolId).ToListAsync();
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<Shezlong>>> GetShezlong(int id)
         {
             var Shezlong = await _context.Shezlongs.FindAsync(id);
@@ -39,7 +39,7 @@ namespace HotelBackend.Controllers
             return Ok(Shezlong);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<Shezlong>> AddShezlong(Shezlong shezlong)
         {
             _context.Shezlongs.Add(shezlong);
@@ -48,7 +48,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetShezlong), new { id = shezlong.Id }, shezlong);
         }
 
-        [HttpPatch, Authorize]
+        [HttpPatch, Authorize(Policy = "AdminPolicy")]
         [Route("UpdateShezlong/{id}")]
         public async Task<IActionResult> UpdateShezlong(int id, Shezlong updatedShezlong)
         {
@@ -90,7 +90,7 @@ namespace HotelBackend.Controllers
 
 
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
 
         public async Task<ActionResult<List<Shezlong>>> DeleteShezlong(int id)
         {

@@ -1051,10 +1051,7 @@
           "Swashbuckle.AspNetCore.Filters": "8.0.2"
         },
         "runtime": {
-          "SharedClassLibrary.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "SharedClassLibrary.dll": {}
         }
       }
     }

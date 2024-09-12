@@ -18,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "UserPolicy")]
         public async Task<IActionResult> CreateBooking([FromBody] RoomBookingCreationDto roomBookingDto)
         {
             if (roomBookingDto == null || roomBookingDto.RoomBookingItems == null || roomBookingDto.RoomBookingItems.Length == 0)
@@ -100,7 +100,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetRoomBookingById), new { id = roomBooking.RoomBookingId }, responseDto);
         }
 
-        [HttpGet("available"), Authorize]
+        [HttpGet("available"), Authorize(Policy = "UserPolicy")]
         public async Task<IActionResult> GetAvailableRooms(DateTime checkInDate, DateTime checkOutDate)
         {
             if (checkInDate > checkOutDate)
@@ -132,7 +132,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public IActionResult GetAllOrders()
         {
             var roomBookings = _context.RoomBookings
@@ -150,7 +150,7 @@ namespace HotelBackend.Controllers
             return Ok(roomDtos);
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public IActionResult GetRoomBookingById(int id)
         {
             var roomBooking = _context.RoomBookings
@@ -214,7 +214,7 @@ namespace HotelBackend.Controllers
             };
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public IActionResult DeleteRoomBooking(int id)
         {
             var roomBooking = _context.RoomBookings.Find(id);

@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "axUlw+TUI3vEb/MY7jFYxCPciryWBQk6ELxeSjH/0UI=",
+  "Hash": "qtCFNbt/lubQAvaHQJDQLNk3T80Yhlpq20DMQ62NnaM=",
   "Source": "HotelBackend",
   "BasePath": "_content/HotelBackend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "HotelBackend\\wwwroot",
+      "Source": "HotelBackend",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\Hoteli\\HotelBackend\\HotelBackend\\wwwroot\\",
+      "BasePath": "_content/HotelBackend",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

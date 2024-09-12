@@ -18,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<Spa>>> GetAllSpas()
         {
             var spa = await _context.Spas.ToListAsync();
@@ -27,7 +27,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<Spa>>> GetSpa(int id)
         {
             var spa = await _context.Spas.FindAsync(id);
@@ -36,7 +36,7 @@ namespace HotelBackend.Controllers
             return Ok(spa);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<Spa>>> AddSpa(Spa spa)
         {
             _context.Spas.Add(spa);
@@ -45,7 +45,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.Spas.ToListAsync()); ;
         }
 
-        [HttpPatch, Authorize]
+        [HttpPatch, Authorize(Policy = "AdminPolicy")]
         [Route("UpdateSpa/{id}")]
         public async Task<Spa> UpdateSpa(Spa objSpa)
         {
@@ -54,7 +54,7 @@ namespace HotelBackend.Controllers
             return objSpa;
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<Spa>>> DeleteSpa(int id)
         {
             var dbSpa = await _context.Spas.FindAsync(id);
