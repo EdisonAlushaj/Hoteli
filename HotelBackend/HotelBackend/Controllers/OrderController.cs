@@ -8,19 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 
-    namespace HotelBackend.Controllers
+namespace HotelBackend.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrderController : ControllerBase
     {
-        [Route("api/[controller]")]
-        [ApiController]
-        public class OrderController : ControllerBase
-        {
-            private readonly DataContext _context;
+        private readonly DataContext _context;
 
-            public OrderController(DataContext context)
-            {
-                _context = context;
-            }
-        [HttpPost, Authorize]
+        public OrderController(DataContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost, Authorize(Policy = "UserPolicy")]
         public IActionResult CreateOrder([FromBody] OrderCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderItems == null || orderDto.OrderItems.Length == 0)
@@ -84,7 +85,8 @@ using System.Linq;
 
             return CreatedAtAction(nameof(GetOrderById), new { id = order.OrderId }, responseDto);
         }
-        [HttpGet, Authorize]
+
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public IActionResult GetAllOrders()
         {
             var orders = _context.Orders
@@ -103,7 +105,7 @@ using System.Linq;
             return Ok(orderDtos);
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public IActionResult GetOrderById(int id)
         {
             var order = _context.Orders
@@ -149,7 +151,8 @@ using System.Linq;
                 }).ToArray()
             };
         }
-        [HttpDelete("{id}"), Authorize]
+
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public IActionResult DeleteOrder(int id)
         {
             var order = _context.Orders.Find(id);

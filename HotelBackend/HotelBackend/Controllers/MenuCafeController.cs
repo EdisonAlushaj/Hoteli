@@ -19,7 +19,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<MenuCafe>>> GetAllCafe()
         {
             var cafes = await _context.MenuCafes.ToListAsync();
@@ -28,7 +28,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<MenuCafe>>> GetCafe(int id)
         {
             var cafe = await _context.MenuCafes.FindAsync(id);
@@ -37,7 +37,7 @@ namespace HotelBackend.Controllers
             return Ok(cafe);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<MenuCafe>>> AddFood(MenuCafe cafe)
         {
             _context.MenuCafes.Add(cafe);
@@ -46,7 +46,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.MenuCafes.ToListAsync()); ;
         }
 
-        [HttpPatch, Authorize]
+        [HttpPatch, Authorize(Policy = "AdminPolicy")]
         [Route("UpdateCafe/{id}")]
         public async Task<MenuCafe> UpdateCafe(MenuCafe objCafe)
         {
@@ -55,7 +55,7 @@ namespace HotelBackend.Controllers
             return objCafe;
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")`]
         public async Task<ActionResult<List<MenuCafe>>> DeleteCafe(int id)
         {
             var dbCafe = await _context.MenuCafes.FindAsync(id);

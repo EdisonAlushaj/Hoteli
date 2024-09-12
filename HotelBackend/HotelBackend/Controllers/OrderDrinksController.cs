@@ -20,7 +20,8 @@ namespace HotelBackend.Controllers
         {
             _context = context;
         }
-        [HttpPost, Authorize]
+
+        [HttpPost, Authorize(Policy = "UserPolicy")]
         public IActionResult CreateOrder([FromBody] OrderDrinksCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderDrinkItems == null || orderDto.OrderDrinkItems.Length == 0)
@@ -79,7 +80,8 @@ namespace HotelBackend.Controllers
 
             return CreatedAtAction(nameof(GetOrderDrinkById), new { id = order.OrderDrinkId }, responseDto);
         }
-        [HttpGet, Authorize]
+
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public IActionResult GetAllOrderDrinks()
         {
             var orders = _context.OrderDrinks
@@ -97,7 +99,7 @@ namespace HotelBackend.Controllers
             return Ok(orderDtos);
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public IActionResult GetOrderDrinkById(int id)
         {
             var orderi = _context.OrderDrinks
@@ -141,7 +143,8 @@ namespace HotelBackend.Controllers
                 }).ToArray()
             };
         }
-        [HttpDelete("{id}"), Authorize]
+
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public IActionResult DeleteOrder(int id)
         {
             var order = _context.OrderDrinks.Find(id);

@@ -19,7 +19,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "UserPolicy")]
         public IActionResult CreateOrderCoffee([FromBody] OrderCoffeeCreationDto orderDto)
         {
             if (orderDto == null || orderDto.OrderCoffeeItems == null || orderDto.OrderCoffeeItems.Length == 0)
@@ -77,7 +77,7 @@ namespace HotelBackend.Controllers
             return CreatedAtAction(nameof(GetOrderCoffeeById), new { id = order.OrderCoffeeId }, responseDto);
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public IActionResult GetAllOrderCoffees()
         {
             var orders = _context.OrderCoffees
@@ -95,7 +95,7 @@ namespace HotelBackend.Controllers
             return Ok(orderDtos);
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public IActionResult GetOrderCoffeeById(int id)
         {
             var order = _context.OrderCoffees
@@ -137,7 +137,7 @@ namespace HotelBackend.Controllers
                 }).ToArray()
             };
         }
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public IActionResult DeleteOrderCoffee(int id)
         {
             var order = _context.OrderCoffees.Find(id);

@@ -18,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<IEnumerable<ActivitiesReservation>>> GetActivitiesReservation()
         {
             var ActivitiesReservation = await _context.ActivitiesReservations
@@ -33,7 +33,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<ActivitiesReservation>> GetActivitiesReservationById(int id)
         {
             var ActivitiesReservation = await _context.ActivitiesReservations.FindAsync(id);
@@ -43,7 +43,7 @@ namespace HotelBackend.Controllers
             return Ok(ActivitiesReservation);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<ActivitiesReservation>> AddActivitiesReservation([FromQuery] string userId, [FromQuery] int activitiesId)
         {
             var activitie = await _context.Activities.FindAsync(activitiesId);
@@ -65,7 +65,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<ActivitiesReservation>> DeleteActivitiesReservation(int id)
         {
             var ActivitiesReservation = await _context.ActivitiesReservations.FindAsync(id);

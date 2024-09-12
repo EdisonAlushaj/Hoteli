@@ -18,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet("summary/{userId}"), Authorize]
+        [HttpGet("summary/{userId}"), Authorize(Policy = "UserPolicy")]
         public IActionResult GetOrderSummary(string userId)
         {
             var user = _context.Users.Find(userId);

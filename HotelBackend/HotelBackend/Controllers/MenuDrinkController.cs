@@ -18,7 +18,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<MenuDrink>>> GetAllDrink()
         {
             var drinks = await _context.MenuDrinks.ToListAsync();
@@ -27,7 +27,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<MenuDrink>>> GetDrink(int id)
         {
             var drink = await _context.MenuDrinks.FindAsync(id);
@@ -36,7 +36,7 @@ namespace HotelBackend.Controllers
             return Ok(drink);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<MenuDrink>>> AddDrink(MenuDrink drink)
         {
             _context.MenuDrinks.Add(drink);
@@ -45,7 +45,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.MenuDrinks.ToListAsync()); ;
         }
 
-        [HttpPatch, Authorize]
+        [HttpPatch, Authorize(Policy = "AdminPolicy")]
         [Route("UpdateDrink/{id}")]
         public async Task<MenuDrink> UpdateDrink(MenuDrink objDrink)
         {
@@ -54,7 +54,7 @@ namespace HotelBackend.Controllers
             return objDrink;
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<MenuDrink>>> DeleteDrink(int id)
         {
             var dbDrink = await _context.MenuDrinks.FindAsync(id);

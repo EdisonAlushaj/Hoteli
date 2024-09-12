@@ -17,7 +17,7 @@ namespace HotelBackend.Controllers
             _context = context;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<MenuFood>>> GetAllFood()
         {
             var foods = await _context.MenuFoods.ToListAsync();
@@ -26,7 +26,7 @@ namespace HotelBackend.Controllers
         }
 
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}"), Authorize(Policy = "UserPolicy")]
         public async Task<ActionResult<List<MenuFood>>> GetFood(int id)
         {
             var food = await _context.MenuFoods.FindAsync(id);
@@ -35,7 +35,7 @@ namespace HotelBackend.Controllers
             return Ok(food);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<MenuFood>>> AddFood(MenuFood food)
         {
             _context.MenuFoods.Add(food);
@@ -44,7 +44,7 @@ namespace HotelBackend.Controllers
             return Ok(await _context.MenuFoods.ToListAsync()); ;
         }
 
-        [HttpPatch, Authorize]
+        [HttpPatch, Authorize(Policy = "AdminPolicy")]
         [Route("UpdateFood/{id}")]
         public async Task<MenuFood> UpdateFood(MenuFood objFood)
         {
@@ -53,7 +53,7 @@ namespace HotelBackend.Controllers
             return objFood;
         }
 
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}"), Authorize(Policy = "AdminPolicy")]
         public async Task<ActionResult<List<MenuFood>>> DeleteFood(int id)
         {
             var dbFood = await _context.MenuFoods.FindAsync(id);
